@@ -1,0 +1,25 @@
+<phpunit bootstrap="./vendor/autoload.php">
+    <testsuite name="util">
+        <directory>./tests/Util</directory>
+    </testsuite>
+
+    <testsuite name="type">
+        <directory>./tests/Type</directory>
+    </testsuite>
+
+    <testsuite name="remote-api">
+        <directory>./tests/RemoteApi</directory>
+    </testsuite>
+
+    <testsuite name="client-api">
+        <directory>./tests/ClientApi</directory>
+    </testsuite>
+
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src/ClientApi</directory>
+            <directory suffix=".php">src/Validator</directory>
+            <directory suffix=".php">src/Type</directory>
+        </whitelist>
+    </filter>
+</phpunit>

@@ -1,0 +1,12 @@
+{
+  "name": "iota-php-js-keccak384",
+  "version": "1.0.0",
+  "description": "Node keccak384 server.",
+  "main": "index.js",
+  "author": "Benjamin Ansbach <benjaminansbach@gmail.com>",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "sha3": "^1.2.0"
+  }
+}

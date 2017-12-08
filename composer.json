@@ -1,0 +1,44 @@
+{
+    "name": "techworker/iota",
+    "authors": [
+        {
+            "name": "Benjamin Ansbach",
+            "email": "benjaminansbach@gmail.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "iotaledger/kerl",
+                "version": "master",
+                "source": {
+                    "url": "https://github.com/iotaledger/kerl.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "~6.0",
+        "psr/container": "^1.0"
+    },
+    "require-dev": {
+        "twig/twig": "^2.0",
+        "phpunit/phpunit": "^6.3",
+        "iotaledger/kerl": "dev-master as 1.0",
+        "nikic/php-parser": "^3.1",
+        "phpdocumentor/reflection-docblock": "^4.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Techworker\\IOTA\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Techworker\\IOTA\\Tests\\": "tests"
+        }
+    }
+}

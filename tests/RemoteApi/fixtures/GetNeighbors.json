@@ -1,0 +1,17 @@
+{
+  "duration": 37,
+  "neighbors": [
+    {
+      "address": "/8.8.8.8:14265",
+      "numberOfAllTransactions": 922,
+      "numberOfInvalidTransactions": 2,
+      "numberOfNewTransactions": 92
+    },
+    {
+      "address": "/8.8.8.8:5000",
+      "numberOfAllTransactions": 925,
+      "numberOfInvalidTransactions": 14,
+      "numberOfNewTransactions": 20
+    }
+  ]
+}
