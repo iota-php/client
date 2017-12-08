@@ -26,6 +26,7 @@ use Techworker\IOTA\ClientApi\Actions\IsReAttachable;
 use Techworker\IOTA\ClientApi\Actions\SendTransfer;
 use Techworker\IOTA\ClientApi\Actions\SendTrytes;
 use Techworker\IOTA\ClientApi\Actions\StoreAndBroadcast;
+use Techworker\IOTA\ClientApi\Actions\ReplayBundle;
 
 /**
  * Class ClientApi.
@@ -48,7 +49,8 @@ class ClientApi
         IsReAttachable\ActionTrait,
         SendTransfer\ActionTrait,
         SendTrytes\ActionTrait,
-        StoreAndBroadcast\ActionTrait
+        StoreAndBroadcast\ActionTrait,
+        ReplayBundle\ActionTrait
     {
         BroadcastBundle\ActionTrait::broadcastBundle as public;
         FindTransactionObjects\ActionTrait::findTransactionObjects as public;
@@ -65,6 +67,7 @@ class ClientApi
         SendTransfer\ActionTrait::sendTransfer as public;
         SendTrytes\ActionTrait::sendTrytes as public;
         StoreAndBroadcast\ActionTrait::storeAndBroadcast as public;
+        ReplayBundle\ActionTrait::replayBundle as public;
     }
 
     /**
@@ -85,6 +88,7 @@ class ClientApi
      * @param SendTransfer\ActionFactory            $sendTransferFactory
      * @param SendTrytes\ActionFactory              $sendTrytesFactory
      * @param StoreAndBroadcast\ActionFactory       $storeAndBroadcastFactory
+     * @param ReplayBundle\ActionFactory            $replayBundleFactory
      */
     public function __construct(
         BroadcastBundle\ActionFactory $broadcastBundleFactory,
@@ -101,7 +105,8 @@ class ClientApi
         IsReAttachable\ActionFactory $isReAttachableFactory,
         SendTransfer\ActionFactory $sendTransferFactory,
         SendTrytes\ActionFactory $sendTrytesFactory,
-        StoreAndBroadcast\ActionFactory $storeAndBroadcastFactory
+        StoreAndBroadcast\ActionFactory $storeAndBroadcastFactory,
+        ReplayBundle\ActionFactory $replayBundleFactory
     ) {
         $this->setBroadcastBundleFactory($broadcastBundleFactory);
         $this->setFindTransactionObjectsFactory($findTransactionObjectsFactory);
@@ -118,5 +123,6 @@ class ClientApi
         $this->setSendTransferFactory($sendTransferFactory);
         $this->setSendTrytesFactory($sendTrytesFactory);
         $this->setStoreAndBroadcastFactory($storeAndBroadcastFactory);
+        $this->setReplayBundleFactory($replayBundleFactory);
     }
 }

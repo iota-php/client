@@ -27,10 +27,10 @@ use Techworker\IOTA\ClientApi\Actions\IsReAttachable;
 use Techworker\IOTA\ClientApi\Actions\SendTransfer;
 use Techworker\IOTA\ClientApi\Actions\SendTrytes;
 use Techworker\IOTA\ClientApi\Actions\StoreAndBroadcast;
+use Techworker\IOTA\ClientApi\Actions\ReplayBundle;
 use Techworker\IOTA\ClientApi\ClientApi;
 use Techworker\IOTA\Cryptography\Hashing\Curl;
 use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
-use Techworker\IOTA\Cryptography\Hashing\Kerl;
 use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
 use Techworker\IOTA\Cryptography\HMAC;
 use Techworker\IOTA\Cryptography\Keccak384\Keccak384Interface;
@@ -101,6 +101,7 @@ class IOTAContainer implements ContainerInterface
             SendTransfer\ActionFactory::class,
             SendTrytes\ActionFactory::class,
             StoreAndBroadcast\ActionFactory::class,
+            ReplayBundle\ActionFactory::class,
         ];
 
         foreach ($factories as $factory) {
@@ -158,7 +159,8 @@ class IOTAContainer implements ContainerInterface
                 $this->get(IsReAttachable\ActionFactory::class),
                 $this->get(SendTransfer\ActionFactory::class),
                 $this->get(SendTrytes\ActionFactory::class),
-                $this->get(StoreAndBroadcast\ActionFactory::class)
+                $this->get(StoreAndBroadcast\ActionFactory::class),
+                $this->get(ReplayBundle\ActionFactory::class)
             );
         };
 

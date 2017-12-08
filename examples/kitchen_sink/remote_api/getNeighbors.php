@@ -67,6 +67,7 @@ if(isAjax())
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/storeAndBroadcast.php">storeAndBroadcast</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/sendTransfer.php">sendTransfer</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/getLatestInclusion.php">getLatestInclusion</a>
+                                                    <a class="dropdown-item" href="/kitchen_sink/client_api/replayBundle.php">replayBundle</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/broadcastBundle.php">broadcastBundle</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/getTransactionObjects.php">getTransactionObjects</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/getInputs.php">getInputs</a>

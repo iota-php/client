@@ -8,11 +8,12 @@ if(isAjax())
     try {
 
         $node = $iota->getNodes()[$_POST['node']];
-        $addresses = \Techworker\IOTA\Util\TrytesUtil::arrayToTrytes(array_map('trim', array_filter(explode("\n", $_POST['addresses']))), \Techworker\IOTA\Type\Address::class);
-        $threshold = (int)$_POST['threshold'];
+    $tailTransactionHash = new \Techworker\IOTA\Type\TransactionHash($_POST['tailTransactionHash']);
+    $depth = (int)$_POST['depth'];
+    $minWeightMagnitude = (int)$_POST['minWeightMagnitude'];
 
-        $result = $iota->getRemoteApi()->getBalances(
-            $node, $addresses, $threshold
+        $result = $iota->getClientApi()->replayBundle(
+            $node, $tailTransactionHash, $depth, $minWeightMagnitude
         );
         sendJson($result->serialize());
     } catch(\Exception $ex) {
@@ -99,16 +100,13 @@ if(isAjax())
     </nav>
 
     <div style="border: 1px solid #f0f0f0; padding: 10px; margin-bottom: 20px;">
-        <p>Similar to getInclusionStates. It returns the confirmed balance which a list
-of addresses have at the latest confirmed milestone. In addition to the
-balances, it also returns the milestone as well as the index with which the
-confirmed balance was determined. The balances is returned as a list in the
-same order as the addresses were provided as input.</p>
-        <p><pre>public function getBalances(
+        <p></p>
+        <p><pre>public function replayBundle(
     Techworker\IOTA\Node $node,
-    array $addresses,
-    int $threshold = 100
-) : \Techworker\IOTA\RemoteApi\Commands\GetBalances\Response</pre></p>
+    Techworker\IOTA\Type\TransactionHash $tailTransactionHash,
+    int $depth,
+    int $minWeightMagnitude
+) : \Techworker\IOTA\ClientApi\Actions\ReplayBundle\Result</pre></p>
     </div>
     <div class="form-group">
         <label for="node">Node</label>
@@ -120,14 +118,17 @@ same order as the addresses were provided as input.</p>
         <small class="form-text text-muted">Select a node where the remote requests (commands) will be executed on.</small>
     </div>
 
-        <div class="form-group">
-        <label for="addresses">addresses</label>
-        <textarea class="form-control" id="addresses" name="addresses" rows="3"></textarea>
-        <small class="form-text text-muted">new line for each</small>
+    <div class="form-group">
+        <label for="tailTransactionHash">tailTransactionHash</label>
+        <input type="text" class="form-control" id="tailTransactionHash" name="tailTransactionHash" aria-describedby="tailTransactionHash" placeholder="" value="">
     </div>
-        <div class="form-group">
-        <label for="threshold">threshold</label>
-        <input type="number" class="form-control" name="threshold" id="threshold" value="100">
+    <div class="form-group">
+        <label for="depth">depth</label>
+        <input type="number" class="form-control" name="depth" id="depth" value="">
+    </div>
+    <div class="form-group">
+        <label for="minWeightMagnitude">minWeightMagnitude</label>
+        <input type="number" class="form-control" name="minWeightMagnitude" id="minWeightMagnitude" value="">
     </div>
 <button id="submit" type="submit" class="btn btn-primary">Submit</button>
 
@@ -158,8 +159,8 @@ same order as the addresses were provided as input.</p>
     $('#submit').on('click', function(e) {
         $(".spinner").show();
         var data = {
-                        node: $("#node").val(),                                addresses: $("#addresses").val(),                                threshold: $("#threshold").val()                        };
-                                                        
+                        node: $("#node").val(),                                tailTransactionHash: $("#tailTransactionHash").val(),                                depth: $("#depth").val(),                                minWeightMagnitude: $("#minWeightMagnitude").val()                        };
+                                                                        
         $.post(window.location.href,data)
             .done(function(data) {
                 $(".spinner").hide();
