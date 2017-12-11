@@ -98,6 +98,7 @@ class TrytesUtil
         // If input length is odd, return null
         if (1 === $inputTrytes->count() % 2) {
             // TODO: we can do better than that
+            return '';
             throw new Exception('not even.');
         }
 

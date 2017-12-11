@@ -23,9 +23,17 @@ $options = [
     'ccurlPath' => __DIR__ . '/../../ccurl'
 ];
 
+$nodes = [
+    new Node('http://node01.iotatoken.nl:14265'),
+    new Node('http://node02.iotatoken.nl:14265'),
+    new Node('http://node03.iotatoken.nl:15265'),
+    new Node('http://node04.iotatoken.nl:14265'),
+    new Node('http://node05.iotatoken.nl:16265')
+];
+
 $iota = new IOTA(
     new IOTAContainer($options),
-    [new Node('http://service.iotasupport.com:14265')]
+    $nodes
 );
 
 $seed = '';
