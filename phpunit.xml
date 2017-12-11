@@ -17,9 +17,7 @@
 
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src/ClientApi</directory>
-            <directory suffix=".php">src/Validator</directory>
-            <directory suffix=".php">src/Type</directory>
+            <directory suffix=".php">src</directory>
         </whitelist>
     </filter>
 </phpunit>

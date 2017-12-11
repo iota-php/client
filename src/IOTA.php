@@ -78,7 +78,7 @@ class IOTA
     public function getRemoteApi(): RemoteApi
     {
         if (null === $this->remoteApi) {
-            $this->remoteApi = $this->get(RemoteApi::class);
+            $this->remoteApi = $this->container->get(RemoteApi::class);
         }
 
         return $this->remoteApi;
@@ -92,24 +92,10 @@ class IOTA
     public function getClientApi(): ClientApi
     {
         if (null === $this->clientApi) {
-            $this->clientApi = $this->get(ClientApi::class);
+            $this->clientApi = $this->container->get(ClientApi::class);
         }
 
         return $this->clientApi;
-    }
-
-    /**
-     * Gets a factory for the given container identifier.
-     *
-     * @param string $id
-     *
-     * @return mixed
-     *
-     * @throws
-     */
-    public function get(string $id)
-    {
-        return $this->container->get($id);
     }
 
     /**
@@ -122,7 +108,7 @@ class IOTA
     public function getNode($key = null): Node
     {
         if ($key === null) {
-            return $this->nodes[array_rand($this->nodes)];
+            $key = array_rand($this->nodes);
         }
 
         if (!isset($this->nodes[$key])) {
