@@ -36,7 +36,7 @@ class TritsUtil
         $trytes = '';
         $length = \count($trits);
         for ($i = 0; $i < $length; $i += 3) {
-            $trytes .= TryteUtil::createFromTrits($trits[$i], $trits[$i + 1], $trits[$i + 2]);
+            $trytes .= TryteUtil::fromTrits($trits[$i], $trits[$i + 1], $trits[$i + 2]);
         }
 
         return new Trytes($trytes);

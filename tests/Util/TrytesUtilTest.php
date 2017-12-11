@@ -83,8 +83,6 @@ class TrytesUtilTest extends TestCase
     {
         $trytesArray = [str_repeat('A', 81), str_repeat('A', 80) . 'B'];
 
-        $trytesInstances = [new Trytes(str_repeat('A', 81)), new Trytes(str_repeat('A', 80))];
-
         static::assertCount(2, TrytesUtil::arrayToTrytes($trytesArray));
         static::assertInstanceOf(Trytes::class, TrytesUtil::arrayToTrytes($trytesArray)[0]);
         static::assertInstanceOf(Trytes::class, TrytesUtil::arrayToTrytes($trytesArray)[1]);

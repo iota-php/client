@@ -5,7 +5,8 @@ declare(strict_types = 1);
 namespace Techworker\IOTA\Test\Util;
 
 use PHPUnit\Framework\TestCase;
-use Techworker\IOTA\Cryptography\Kerl;
+use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
+use Techworker\IOTA\Tests\Container;
 use Techworker\IOTA\Type\Address;
 use Techworker\IOTA\Type\SecurityLevel;
 use Techworker\IOTA\Type\Seed;
@@ -43,17 +44,21 @@ class AddressUtilTest extends TestCase
      */
     public function testGenerateAddress($seed, $index, $securityLevel, $expectedAddress, $checksum)
     {
-        $util = new AddressUtil($this->conta);
+        $container = new Container();
+        $util = new AddressUtil($container->get(KerlFactory::class));
         $address = $util->generateAddress($seed, $index, $securityLevel, false);
+        $addressWithChecksum = $util->generateAddress($seed, $index, $securityLevel, true);
         static::assertEquals($expectedAddress, (string)$address);
+        static::assertEquals($expectedAddress . $checksum, (string)$addressWithChecksum);
     }
 
     /**
-     * @dataProvider dataProviderTestGenerateAddress
+     * @dataProvider addressDataProvider
      */
     public function testGenerateChecksum($seed, $index, $securityLevel, $address, $checksum)
     {
-        $util = new AddressUtil(new Kerl());
+        $container = new Container();
+        $util = new AddressUtil($container->get(KerlFactory::class));
         $address = new Address($address);
         $checksum = $util->getChecksum($address);
         static::assertEquals($checksum, (string)$checksum);

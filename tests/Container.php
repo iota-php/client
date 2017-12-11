@@ -28,7 +28,8 @@ class Container extends IOTAContainer
     public function __construct()
     {
         parent::__construct([
-            'keccak384-nodejs' => 'http://127.0.0.1:8081'
+            'keccak384-nodejs' => 'http://127.0.0.1:8081',
+            'ccurlPath' => 'ABC'
         ]);
     }
 
@@ -36,5 +37,11 @@ class Container extends IOTAContainer
     {
         $this->entries[$class] = $callable;
         return $this;
+    }
+
+
+    public function all()
+    {
+        return $this->entries;
     }
 }

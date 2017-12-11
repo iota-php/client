@@ -74,18 +74,4 @@ class TryteUtil
     {
         return self::TRYTE_TO_TRITS_MAP[$tryte];
     }
-
-    /**
-     * Creates a new Tryte from the given 3 trits.
-     *
-     * @param int $t1
-     * @param int $t2
-     * @param int $t3
-     *
-     * @return string
-     */
-    public static function createFromTrits(int $t1, int $t2, int $t3) : string
-    {
-        return (string)array_search([$t1, $t2, $t3], self::TRYTE_TO_TRITS_MAP, true);
-    }
 }

@@ -139,7 +139,7 @@ class IOTAContainer implements ContainerInterface
 
         $this->entries[HMAC::class] = function () {
             return function (HMACKey $hmacKey) {
-                return new HMAC(27, $hmacKey, $this->get(Curl::class));
+                return new HMAC(27, $hmacKey, $this->get(CurlFactory::class));
             };
         };
 
