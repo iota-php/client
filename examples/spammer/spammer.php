@@ -46,7 +46,7 @@ function spam(IOTA $iota, $seed, $message, $tag)
                 ->setRecipientAddress(new Address($seed->getSeed()))
                 ->setValue(new \Techworker\IOTA\Type\Iota(0))
                 ->setObsoleteTag($tag)
-                ->setMessage(new Trytes(TrytesUtil::asciiToTrytes($message)))
+                ->setMessage(TrytesUtil::asciiToTrytes($message))
         ], 15, random_int(4, 12), true);
 
         echo "created spam-transaction:\n";

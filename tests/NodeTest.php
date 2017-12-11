@@ -14,6 +14,10 @@ namespace Techworker\IOTA\Tests;
 use PHPUnit\Framework\TestCase;
 use Techworker\IOTA\Node;
 
+/**
+ * Class NodeTest
+ * @package Techworker\IOTA\Tests
+ */
 class NodeTest extends TestCase
 {
     public function testCreateNodeDefaults()

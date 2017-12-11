@@ -55,9 +55,9 @@ class TrytesUtil
      * Converts a text to trytes.
      *
      * @param string $input
-     * @return null|string
+     * @return Trytes
      */
-    public static function asciiToTrytes(string $input): ?string
+    public static function asciiToTrytes(string $input): Trytes
     {
         $TRYTE_VALUES = '9ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $trytes = '';
@@ -68,10 +68,12 @@ class TrytesUtil
             $asciiValue = \ord($char);
 
             // If not recognizable ASCII character, return null
-            if ($asciiValue > 255) {
+            // this will not occur in php
+            // TODO: remove completely
+            //if ($asciiValue > 255) {
                 //asciiValue = 32
-                return null;
-            }
+            //    return null;
+            //}
 
             $firstValue = $asciiValue % 27;
             $secondValue = ($asciiValue - $firstValue) / 27;
@@ -81,7 +83,7 @@ class TrytesUtil
             $trytes .= $trytesValue;
         }
 
-        return $trytes;
+        return new Trytes($trytes);
     }
 
     /**
@@ -94,7 +96,7 @@ class TrytesUtil
     public static function asciiFromTrytes(Trytes $inputTrytes): string
     {
         // If input length is odd, return null
-        if (0 === $inputTrytes->count() % 2) {
+        if (1 === $inputTrytes->count() % 2) {
             // TODO: we can do better than that
             throw new Exception('not even.');
         }

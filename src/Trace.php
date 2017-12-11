@@ -104,14 +104,14 @@ class Trace implements SerializeInterface
     /**
      * Adds a child performance measurement.
      *
-     * @param Trace $trance
+     * @param Trace $trace
      *
      * @return Trace
      */
-    public function addChild(self $trance): self
+    public function addChild(self $trace): self
     {
-        $this->children[] = $trance;
-        $trance->parent = $this;
+        $this->children[] = $trace;
+        $trace->parent = $this;
 
         return $this;
     }
