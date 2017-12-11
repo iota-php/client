@@ -78,18 +78,6 @@ class Node implements SerializeInterface
     }
 
     /**
-     * Returns the URL to the commands endpoint.
-     *
-     * @param string $jobId
-     *
-     * @return string
-     */
-    public function getJobsEndpoint(string $jobId): string
-    {
-        return sprintf('%s/api/v%d/jobs/%s', $this->host, $this->apiVersion, $jobId);
-    }
-
-    /**
      * Gets the host of the node.
      *
      * @return string
