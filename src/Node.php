@@ -33,13 +33,6 @@ class Node implements SerializeInterface
     protected $apiVersion;
 
     /**
-     * A value indicating whether the node is used in sandbox mode.
-     *
-     * @var bool
-     */
-    protected $sandbox;
-
-    /**
      * The token.
      *
      * @var string|null
@@ -60,18 +53,15 @@ class Node implements SerializeInterface
      * @param string      $host
      * @param bool        $doesPOW
      * @param int         $apiVersion
-     * @param bool        $sandbox
      * @param string|null $token
      */
     public function __construct(
                                 string $host = 'http://localhost:14265',
                                 bool $doesPOW = false,
                                 int $apiVersion = 1,
-                                bool $sandbox = false,
                                 string $token = null
     ) {
         $this->host = $host;
-        $this->sandbox = $sandbox;
         $this->token = $token;
         $this->apiVersion = $apiVersion;
         $this->doesPOW = $doesPOW;
@@ -120,16 +110,6 @@ class Node implements SerializeInterface
     }
 
     /**
-     * Gets a value indicating whether we are talking with a sandbox.
-     *
-     * @return bool
-     */
-    public function isSandbox(): bool
-    {
-        return $this->sandbox;
-    }
-
-    /**
      * Gets the token.
      *
      * @return null|string
@@ -159,7 +139,6 @@ class Node implements SerializeInterface
         return [
             'host' => $this->host,
             'doesPOW' => $this->doesPOW(),
-            'sandbox' => $this->sandbox,
             'token' => $this->token,
             'apiVersion' => $this->apiVersion,
         ];

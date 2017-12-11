@@ -15,10 +15,10 @@ use Techworker\IOTA\ClientApi\AbstractAction;
 use Techworker\IOTA\ClientApi\AbstractResult;
 use Techworker\IOTA\ClientApi\Actions\StoreAndBroadcast;
 use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
-use Techworker\IOTA\Exception;
 use Techworker\IOTA\Node;
 use Techworker\IOTA\RemoteApi\Commands\AttachToTangle;
 use Techworker\IOTA\RemoteApi\Commands\GetTransactionsToApprove;
+use Techworker\IOTA\Type\Milestone;
 use Techworker\IOTA\Type\Transaction;
 use Techworker\IOTA\Type\Trytes;
 use Techworker\IOTA\Util\SerializeUtil;
@@ -54,6 +54,11 @@ class Action extends AbstractAction
      * @var bool
      */
     protected $ignoreSpamTransactions;
+
+    /**
+     * @var Milestone
+     */
+    protected $reference;
 
     /**
      * The factory to create a new curl instance.
@@ -133,6 +138,16 @@ class Action extends AbstractAction
     }
 
     /**
+     * @param Milestone $reference
+     * @return Action
+     */
+    public function setReference(Milestone $reference): Action
+    {
+        $this->reference = $reference;
+        return $this;
+    }
+
+    /**
      * Executes the action.
      *
      * @return Result|AbstractResult
@@ -141,25 +156,22 @@ class Action extends AbstractAction
     {
         $result = new Result($this);
         // fetch transactions to approve
-        $transactionsToApprove = $this->getTransactionsToApprove($this->node, $this->depth, $this->ignoreSpamTransactions);
+        $transactionsToApprove = $this->getTransactionsToApprove($this->node,
+            $this->depth, $this->ignoreSpamTransactions, null, $this->reference
+        );
         $result->addChildTrace($transactionsToApprove->getTrace());
-        $result->setTrunkTransactionHash($transactionsToApprove->getTrunkTransaction());
-        $result->setBranchTransactionHash($transactionsToApprove->getBranchTransaction());
+        $result->setTrunkTransactionHash($transactionsToApprove->getTrunkTransactionHash());
+        $result->setBranchTransactionHash($transactionsToApprove->getBranchTransactionHash());
 
         // attach them to the tangle
         $attachedResponse = $this->attachToTangle(
             $this->node,
             $this->transactions,
-            $transactionsToApprove->getTrunkTransaction(),
-            $transactionsToApprove->getBranchTransaction(),
+            $transactionsToApprove->getTrunkTransactionHash(),
+            $transactionsToApprove->getBranchTransactionHash(),
             $this->minWeightMagnitude
         );
         $result->addChildTrace($attachedResponse->getTrace());
-
-        // we will have to wait for the sandbox
-        if ($this->node->isSandbox()) {
-            $this->waitForJob($attachedResponse->getId());
-        }
 
         // store and broadcast the transaction.
         $storeAndBroadcastResponse = $this->storeAndBroadcast(
@@ -176,33 +188,14 @@ class Action extends AbstractAction
         return $result->finish();
     }
 
-    /**
-     * Int sandbox mode, the process is delayed and we'll have to wait for the
-     * attach job to complete.
-     *
-     * @param $jobId
-     *
-     * @throws \Exception
-     */
-    protected function waitForJob($jobId)
-    {
-        while (!($job = $this->remoteApi->getJob($jobId))->isFinished()) {
-            sleep(5); //js
-        }
-
-        // TODO: better exception handling
-        if ('FAILED' === $job->getStatus()) {
-            throw new Exception('Action was not fulfilled by sandbox.');
-        }
-    }
-
     public function serialize(): array
     {
         return array_merge(parent::serialize(), [
             'transactions' => SerializeUtil::serializeArray($this->transactions),
             'depth' => $this->depth,
             'minWeightMagnitude' => $this->minWeightMagnitude,
-            'ignoreSpamTransactions' => $this->ignoreSpamTransactions
+            'ignoreSpamTransactions' => $this->ignoreSpamTransactions,
+            'reference' => $this->reference->serialize()
         ]);
     }
 }

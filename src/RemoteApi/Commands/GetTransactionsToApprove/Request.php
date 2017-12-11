@@ -228,7 +228,7 @@ class Request extends AbstractRequest
         return $response->throwOnError();
     }
 
-    public function serialize()
+    public function serialize() : array
     {
         return array_merge(parent::serialize(), [
             'depth' => $this->depth,

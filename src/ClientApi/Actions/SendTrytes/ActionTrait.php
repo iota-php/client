@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Techworker\IOTA\ClientApi\Actions\SendTrytes;
 
 use Techworker\IOTA\Node;
+use Techworker\IOTA\Type\Milestone;
 
 /**
  * Replays a transfer by doing Proof of Work again.
@@ -43,8 +44,8 @@ trait ActionTrait
      * @param array $transactions
      * @param int $minWeightMagnitude
      * @param int $depth
+     * @param null|Milestone $reference
      * @param bool $ignoreSpamTransactions
-     *
      * @return Result
      */
     protected function sendTrytes(
@@ -52,13 +53,20 @@ trait ActionTrait
                                     array $transactions,
                                     int $minWeightMagnitude,
                                     int $depth,
+                                    Milestone $reference = null,
                                     bool $ignoreSpamTransactions = false
     ): Result {
         $action = $this->sendTrytesFactory->factory($node);
         $action->setTransactions($transactions);
         $action->setMinWeightMagnitude($minWeightMagnitude);
         $action->setDepth($depth);
+
+        if($reference !== null) {
+            $action->setReference($reference);
+        }
+
         $action->setIgnoreSpamTransactions($ignoreSpamTransactions);
+
         return $action->execute();
     }
 }

@@ -3,7 +3,6 @@
 namespace Techworker\IOTA\Type;
 
 use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
-use Techworker\IOTA\SerializeInterface;
 use Techworker\IOTA\Util\TritsUtil;
 use Techworker\IOTA\Util\TrytesUtil;
 
@@ -489,10 +488,8 @@ class Transaction extends Trytes
     }
 
     /**
-     * Sets the corresponding bundle hash.
-     *
      * @param BundleHash $bundleHash
-     * @return $this
+     * @return Transaction
      */
     public function setBundleHash(BundleHash $bundleHash) : Transaction
     {

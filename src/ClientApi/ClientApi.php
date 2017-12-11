@@ -23,6 +23,7 @@ use Techworker\IOTA\ClientApi\Actions\GetNewAddress;
 use Techworker\IOTA\ClientApi\Actions\GetTransactionObjects;
 use Techworker\IOTA\ClientApi\Actions\GetTransfers;
 use Techworker\IOTA\ClientApi\Actions\IsReAttachable;
+use Techworker\IOTA\ClientApi\Actions\PromoteTransaction;
 use Techworker\IOTA\ClientApi\Actions\SendTransfer;
 use Techworker\IOTA\ClientApi\Actions\SendTrytes;
 use Techworker\IOTA\ClientApi\Actions\StoreAndBroadcast;
@@ -47,6 +48,7 @@ class ClientApi
         GetTransactionObjects\ActionTrait,
         GetTransfers\ActionTrait,
         IsReAttachable\ActionTrait,
+        PromoteTransaction\ActionTrait,
         SendTransfer\ActionTrait,
         SendTrytes\ActionTrait,
         StoreAndBroadcast\ActionTrait,
@@ -64,6 +66,7 @@ class ClientApi
         GetTransactionObjects\ActionTrait::getTransactionObjects as public;
         GetTransfers\ActionTrait::getTransfers as public;
         IsReAttachable\ActionTrait::isReAttachable as public;
+        PromoteTransaction\ActionTrait::promoteTransaction as public;
         SendTransfer\ActionTrait::sendTransfer as public;
         SendTrytes\ActionTrait::sendTrytes as public;
         StoreAndBroadcast\ActionTrait::storeAndBroadcast as public;
@@ -85,6 +88,7 @@ class ClientApi
      * @param GetTransactionObjects\ActionFactory   $getTransactionObjectsFactory
      * @param GetTransfers\ActionFactory            $getTransfersFactory
      * @param IsReAttachable\ActionFactory          $isReAttachableFactory
+     * @param PromoteTransaction\ActionFactory      $promoteTransactionFactory
      * @param SendTransfer\ActionFactory            $sendTransferFactory
      * @param SendTrytes\ActionFactory              $sendTrytesFactory
      * @param StoreAndBroadcast\ActionFactory       $storeAndBroadcastFactory
@@ -103,6 +107,7 @@ class ClientApi
         GetTransactionObjects\ActionFactory $getTransactionObjectsFactory,
         GetTransfers\ActionFactory $getTransfersFactory,
         IsReAttachable\ActionFactory $isReAttachableFactory,
+        PromoteTransaction\ActionFactory $promoteTransactionFactory,
         SendTransfer\ActionFactory $sendTransferFactory,
         SendTrytes\ActionFactory $sendTrytesFactory,
         StoreAndBroadcast\ActionFactory $storeAndBroadcastFactory,
@@ -120,6 +125,7 @@ class ClientApi
         $this->setGetTransactionObjectsFactory($getTransactionObjectsFactory);
         $this->setGetTransfersFactory($getTransfersFactory);
         $this->setIsReAttachableFactory($isReAttachableFactory);
+        $this->setPromoteTransactionFactory($promoteTransactionFactory);
         $this->setSendTransferFactory($sendTransferFactory);
         $this->setSendTrytesFactory($sendTrytesFactory);
         $this->setStoreAndBroadcastFactory($storeAndBroadcastFactory);

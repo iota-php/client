@@ -11,9 +11,8 @@ declare(strict_types=1);
 
 namespace Techworker\IOTA\ClientApi;
 
-use Techworker\IOTA\Trace;
 use Techworker\IOTA\SerializeInterface;
-use Techworker\IOTA\Tests\ClientApi\Actions\AbstractActionTest;
+use Techworker\IOTA\Trace;
 
 /**
  * Class AbstractResult.
@@ -36,6 +35,7 @@ abstract class AbstractResult implements SerializeInterface
 
     /**
      * AbstractResult constructor.
+     * @param AbstractAction $action
      */
     public function __construct(AbstractAction $action)
     {

@@ -57,7 +57,7 @@ abstract class AbstractRequest implements RequestInterface
         return $this->node;
     }
 
-    public function serialize()
+    public function serialize() : array
     {
         return [
             'node' => $this->node->serialize()

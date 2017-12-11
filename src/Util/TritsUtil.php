@@ -198,7 +198,6 @@ class TritsUtil
      * @param string $bigInt
      * @param int    $base
      * @param int    $length
-     * @param bool   $returnEarly Ignores the given length and returns as soon as the remainder is "0"
      *
      * @return int[]
      */

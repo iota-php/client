@@ -11,14 +11,12 @@ declare(strict_types=1);
 
 namespace Techworker\IOTA\Type;
 
-use Techworker\IOTA\SerializeInterface;
-
 /**
  * Class Address.
  *
  * 81-trytes long address. In addition it might contain a checksum.
  */
-class Address extends Trytes implements SerializeInterface
+class Address extends Trytes
 {
     /**
      * The checksum of the address (9 Tryte).

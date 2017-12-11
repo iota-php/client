@@ -14,7 +14,6 @@ namespace Techworker\IOTA\ClientApi\Actions\StoreAndBroadcast;
 use Techworker\IOTA\ClientApi\VoidResult;
 use Techworker\IOTA\Node;
 use Techworker\IOTA\Type\Transaction;
-use Techworker\IOTA\Type\Trytes;
 
 /**
  * Replays a transfer by doing Proof of Work again.

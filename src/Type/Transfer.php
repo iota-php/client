@@ -145,8 +145,13 @@ class Transfer implements SerializeInterface
         return $this;
     }
 
-    public function serialize()
+    public function serialize() : array
     {
-        // TODO: Implement serialize() method.
+        return [
+            'message' => $this->message->serialize(),
+            'obsoleteTag' => $this->obsoleteTag->serialize(),
+            'value' => $this->value->serialize(),
+            'recipientAddress' => $this->recipientAddress->serialize()
+        ];
     }
 }

@@ -23,6 +23,7 @@ use Techworker\IOTA\RemoteApi\Commands\GetTips;
 use Techworker\IOTA\RemoteApi\Commands\GetTransactionsToApprove;
 use Techworker\IOTA\RemoteApi\Commands\GetTrytes;
 use Techworker\IOTA\RemoteApi\Commands\InterruptAttachingToTangle;
+use Techworker\IOTA\RemoteApi\Commands\IsTailConsistent;
 use Techworker\IOTA\RemoteApi\Commands\RemoveNeighbors;
 use Techworker\IOTA\RemoteApi\Commands\StoreTransactions;
 
@@ -45,6 +46,7 @@ class RemoteApi
         GetTransactionsToApprove\RequestTrait,
         GetTrytes\RequestTrait,
         InterruptAttachingToTangle\RequestTrait,
+        IsTailConsistent\RequestTrait,
         RemoveNeighbors\RequestTrait,
         StoreTransactions\RequestTrait
     {
@@ -60,6 +62,7 @@ class RemoteApi
         GetTransactionsToApprove\RequestTrait::getTransactionsToApprove as public;
         GetTrytes\RequestTrait::getTrytes as public;
         InterruptAttachingToTangle\RequestTrait::interruptAttachingToTangle as public;
+        IsTailConsistent\RequestTrait::isTailConsistent as public;
         RemoveNeighbors\RequestTrait::removeNeighbors as public;
         StoreTransactions\RequestTrait::storeTransactions as public;
     }
@@ -79,6 +82,7 @@ class RemoteApi
      * @param GetTransactionsToApprove\RequestFactory   $getTransactionsToApproveFactory
      * @param GetTrytes\RequestFactory                  $getTrytesFactory
      * @param InterruptAttachingToTangle\RequestFactory $interruptAttachingToTangleFactory
+     * @param IsTailConsistent\RequestFactory           $isTailConsistentFactory
      * @param RemoveNeighbors\RequestFactory            $removeNeighborsFactory
      * @param StoreTransactions\RequestFactory          $storeTransactionsFactory
      */
@@ -95,6 +99,7 @@ class RemoteApi
         GetTransactionsToApprove\RequestFactory $getTransactionsToApproveFactory,
         GetTrytes\RequestFactory $getTrytesFactory,
         InterruptAttachingToTangle\RequestFactory $interruptAttachingToTangleFactory,
+        IsTailConsistent\RequestFactory $isTailConsistentFactory,
         RemoveNeighbors\RequestFactory $removeNeighborsFactory,
         StoreTransactions\RequestFactory $storeTransactionsFactory
     ) {
@@ -110,6 +115,7 @@ class RemoteApi
         $this->setGetTransactionsToApproveFactory($getTransactionsToApproveFactory);
         $this->setGetTrytesFactory($getTrytesFactory);
         $this->setInterruptAttachingToTangleFactory($interruptAttachingToTangleFactory);
+        $this->setIsTailConsistentFactory($isTailConsistentFactory);
         $this->setRemoveNeighborsFactory($removeNeighborsFactory);
         $this->setStoreTransactionsFactory($storeTransactionsFactory);
     }

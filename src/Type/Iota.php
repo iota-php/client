@@ -361,7 +361,7 @@ class Iota implements SerializeInterface
      *
      * @return string
      */
-    public function serialize()
+    public function serialize() : string
     {
         return $this->__toString();
     }

@@ -65,9 +65,9 @@ class Trace implements SerializeInterface
     protected $root;
 
     /**
-     * Performance constructor.
-     *
+     * Trace constructor.
      * @param string $ident
+     * @param SerializeInterface|null $root
      */
     public function __construct(string $ident, SerializeInterface $root = null)
     {

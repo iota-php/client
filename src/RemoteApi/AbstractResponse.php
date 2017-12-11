@@ -102,6 +102,7 @@ abstract class AbstractResponse implements SerializeInterface
 
     /**
      * AbstractResponse constructor.
+     * @param RequestInterface $request
      */
     public function __construct(RequestInterface $request)
     {

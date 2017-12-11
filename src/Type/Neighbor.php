@@ -112,7 +112,7 @@ class Neighbor implements SerializeInterface
         return $this->numberOfNewTransactions;
     }
 
-    public function serialize()
+    public function serialize() : array
     {
         return [
             // TODO: !!

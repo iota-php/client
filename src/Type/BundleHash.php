@@ -26,7 +26,7 @@ class BundleHash extends Trytes
      *
      * @return int[]
      */
-    public function normalized()
+    public function normalized() :  array
     {
         $normalizedBundle = [];
 

@@ -15,7 +15,6 @@ use Techworker\IOTA\Cryptography\Adder;
 use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
 use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
 use Techworker\IOTA\SerializeInterface;
-use Techworker\IOTA\ToArrayInterface;
 use Techworker\IOTA\Util\TritsUtil;
 use Techworker\IOTA\Util\TrytesUtil;
 
@@ -163,9 +162,9 @@ class Bundle implements SerializeInterface
                 if (null === $transaction->getCurrentIndex()) {
                     $transaction->setCurrentIndex($i);
                 }
-                $currentIndexTrits = TritsUtil::fromInt((string) $transaction->getCurrentIndex(), 27, true);
+                $currentIndexTrits = TritsUtil::fromInt((string) $transaction->getCurrentIndex(), 27);
                 $transaction->setLastIndex(\count($this->getTransactions()) - 1);
-                $lastIndexTrits = TritsUtil::fromInt((string) $transaction->getLastIndex(), 27, true);
+                $lastIndexTrits = TritsUtil::fromInt((string) $transaction->getLastIndex(), 27);
 
                 $bundleEssence = TrytesUtil::toTrits(new Trytes(
                     (string) $transaction->getAddress().

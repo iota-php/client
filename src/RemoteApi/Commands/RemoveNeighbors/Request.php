@@ -110,7 +110,7 @@ class Request extends AbstractRequest
         return $response->finish()->throwOnError();
     }
 
-    public function serialize()
+    public function serialize() : array
     {
         return array_merge(parent::serialize(), [
             'neighborUris' => $this->neighborUris

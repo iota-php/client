@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace Techworker\IOTA\Util;
 
 use Techworker\IOTA\SerializeInterface;
-use Techworker\IOTA\Type\Trytes;
 
 /**
  * Class TritsUtil.

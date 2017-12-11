@@ -25,14 +25,4 @@ class Response extends AbstractResponse
     protected function mapResults(): void
     {
     }
-
-    /**
-     * Gets the array version of the response.
-     *
-     * @return array
-     */
-    public function jsonSerialize(): array
-    {
-        return array_merge([], parent::jsonSerialize());
-    }
 }

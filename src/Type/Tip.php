@@ -14,6 +14,6 @@ namespace Techworker\IOTA\Type;
 /**
  * Class Tip.
  */
-class Tip extends Trytes
+class Tip extends TransactionHash
 {
 }

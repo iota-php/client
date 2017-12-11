@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace Techworker\IOTA\Type;
 
 use Techworker\IOTA\SerializeInterface;
-use Techworker\IOTA\ToArrayInterface;
 
 /**
  * Class AccountData
@@ -190,10 +189,10 @@ class AccountData implements SerializeInterface
             'balance' => $this->balance->getAmount(),
             'latestUnusedAddress' => (string) $this->latestUnusedAddress,
             'bundles' => array_map(function (Bundle $bundle) {
-                return $bundle->jsonSerialize();
+                return $bundle->serialize();
             }, $this->bundles),
             'inputs' => array_map(function (Input $input) {
-                return $input->jsonSerialize();
+                return $input->serialize();
             }, $this->inputs),
         ];
     }

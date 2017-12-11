@@ -9,52 +9,44 @@
  */
 declare(strict_types=1);
 
-namespace Techworker\IOTA\RemoteApi\Commands\GetInclusionStates;
+namespace Techworker\IOTA\RemoteApi\Commands\IsTailConsistent;
 
 use Techworker\IOTA\RemoteApi\AbstractResponse;
 
 /**
  * Class Response.
  *
- * The inclusion states for the given transactions.
- *
- * @see https://iota.readme.io/docs/getinclusionstates
+ * TODO
  */
 class Response extends AbstractResponse
 {
     /**
-     * The list of states.
+     * The consistency state.
      *
-     * @var bool[]
+     * @var bool
      */
-    protected $states;
+    protected $state;
 
     /**
      * Maps the response result to the predefined props.
      *
      * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     protected function mapResults(): void
     {
-        $this->checkRequiredKeys(['states']);
-
-        $this->states = [];
-        /** @var Request $request */
-        $request = $this->request;
-        /** @noinspection ForeachSourceInspection */
-        foreach ($this->rawData['states'] as $idx => $state) {
-            $this->states[(string)$request->getTransactionHashes()[$idx]] = (bool) $state;
-        }
+        $this->checkRequiredKeys(['state']);
+        $this->state = $this->rawData['state'];
     }
 
     /**
-     * Gets the states.
+     * Gets the conssistency state.
      *
-     * @return bool[]
+     * @return bool
      */
-    public function getStates(): array
+    public function getState(): bool
     {
-        return $this->states;
+        return $this->state;
     }
 
     /**
@@ -65,7 +57,7 @@ class Response extends AbstractResponse
     public function serialize(): array
     {
         return array_merge([
-            'states' => $this->states
+            'state' => $this->state
         ], parent::serialize());
     }
 }

@@ -13,9 +13,10 @@ namespace Techworker\IOTA\ClientApi\Actions\SendTransfer;
 
 use Techworker\IOTA\Node;
 use Techworker\IOTA\Type\Address;
+use Techworker\IOTA\Type\HMACKey;
+use Techworker\IOTA\Type\Milestone;
 use Techworker\IOTA\Type\SecurityLevel;
 use Techworker\IOTA\Type\Seed;
-use Techworker\IOTA\Type\Trytes;
 
 /**
  * Replays a transfer by doing Proof of Work again.
@@ -51,8 +52,9 @@ trait ActionTrait
      * @param bool $ignoreSpamTransactions
      * @param Address|null $remainderAddress
      * @param array $inputs
-     * @param Trytes|null $hmacKey
+     * @param HMACKey|null $hmacKey
      * @param SecurityLevel|null $security
+     * @param Milestone|null $reference
      * @return Result
      */
     protected function sendTransfer(
@@ -64,8 +66,9 @@ trait ActionTrait
                                     bool $ignoreSpamTransactions = false,
                                     Address $remainderAddress = null,
                                     array $inputs = [],
-                                    Trytes $hmacKey = null,
-                                    SecurityLevel $security = null
+                                    HMACKey $hmacKey = null,
+                                    SecurityLevel $security = null,
+                                    Milestone $reference = null
     ): Result {
         $action = $this->sendTransferFactory->factory($node);
         $action->setSeed($seed);
@@ -85,6 +88,10 @@ trait ActionTrait
 
         if (null !== $security) {
             $action->setSecurity($security);
+        }
+
+        if (null !== $reference) {
+            $action->setReference($reference);
         }
 
         return $action->execute();

@@ -24,6 +24,7 @@ use Techworker\IOTA\ClientApi\Actions\GetNewAddress;
 use Techworker\IOTA\ClientApi\Actions\GetTransactionObjects;
 use Techworker\IOTA\ClientApi\Actions\GetTransfers;
 use Techworker\IOTA\ClientApi\Actions\IsReAttachable;
+use Techworker\IOTA\ClientApi\Actions\PromoteTransaction;
 use Techworker\IOTA\ClientApi\Actions\SendTransfer;
 use Techworker\IOTA\ClientApi\Actions\SendTrytes;
 use Techworker\IOTA\ClientApi\Actions\StoreAndBroadcast;
@@ -49,6 +50,7 @@ use Techworker\IOTA\RemoteApi\Commands\GetTips;
 use Techworker\IOTA\RemoteApi\Commands\GetTransactionsToApprove;
 use Techworker\IOTA\RemoteApi\Commands\GetTrytes;
 use Techworker\IOTA\RemoteApi\Commands\InterruptAttachingToTangle;
+use Techworker\IOTA\RemoteApi\Commands\IsTailConsistent;
 use Techworker\IOTA\RemoteApi\Commands\RemoveNeighbors;
 use Techworker\IOTA\RemoteApi\Commands\StoreTransactions;
 use Techworker\IOTA\RemoteApi\HttpClient\GuzzleClient;
@@ -84,6 +86,7 @@ class IOTAContainer implements ContainerInterface
             GetTransactionsToApprove\RequestFactory::class,
             GetTrytes\RequestFactory::class,
             InterruptAttachingToTangle\RequestFactory::class,
+            IsTailConsistent\RequestFactory::class,
             RemoveNeighbors\RequestFactory::class,
             StoreTransactions\RequestFactory::class,
             BroadcastBundle\ActionFactory::class,
@@ -98,6 +101,7 @@ class IOTAContainer implements ContainerInterface
             GetTransactionObjects\ActionFactory::class,
             GetTransfers\ActionFactory::class,
             IsReAttachable\ActionFactory::class,
+            PromoteTransaction\ActionFactory::class,
             SendTransfer\ActionFactory::class,
             SendTrytes\ActionFactory::class,
             StoreAndBroadcast\ActionFactory::class,
@@ -157,6 +161,7 @@ class IOTAContainer implements ContainerInterface
                 $this->get(GetTransactionObjects\ActionFactory::class),
                 $this->get(GetTransfers\ActionFactory::class),
                 $this->get(IsReAttachable\ActionFactory::class),
+                $this->get(PromoteTransaction\ActionFactory::class),
                 $this->get(SendTransfer\ActionFactory::class),
                 $this->get(SendTrytes\ActionFactory::class),
                 $this->get(StoreAndBroadcast\ActionFactory::class),
@@ -178,6 +183,7 @@ class IOTAContainer implements ContainerInterface
                 $this->get(GetTransactionsToApprove\RequestFactory::class),
                 $this->get(GetTrytes\RequestFactory::class),
                 $this->get(InterruptAttachingToTangle\RequestFactory::class),
+                $this->get(IsTailConsistent\RequestFactory::class),
                 $this->get(RemoveNeighbors\RequestFactory::class),
                 $this->get(StoreTransactions\RequestFactory::class)
             );

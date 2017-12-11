@@ -22,7 +22,7 @@ class Kerl implements SpongeInterface
     /**
      * The hash length.
      */
-    const HASH_LENGTH = 243;
+    public const HASH_LENGTH = 243;
 
     /**
      * An array that holds all generated hashes as byte arrays.

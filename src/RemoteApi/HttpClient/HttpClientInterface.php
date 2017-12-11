@@ -11,10 +11,7 @@ declare(strict_types=1);
 
 namespace Techworker\IOTA\RemoteApi\HttpClient;
 
-use Techworker\IOTA\Node;
 use Techworker\IOTA\RemoteApi\AbstractRequest;
-use Techworker\IOTA\RemoteApi\AbstractResponse;
-use Techworker\IOTA\RemoteApi\Jobs\Request as JobRequest;
 
 /**
  * Interface HttpClientInterface.
@@ -32,14 +29,4 @@ interface HttpClientInterface
      * @return array
      */
     public function commandRequest(AbstractRequest $request): array;
-
-    /**
-     * Executes the given job request on the given node and returns the response.
-     *
-     * @param JobRequest $jobRequest
-     * @param Node       $node
-     *
-     * @return AbstractResponse
-     */
-    public function jobRequest(JobRequest $jobRequest, Node $node): AbstractResponse;
 }

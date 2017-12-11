@@ -126,7 +126,7 @@ class SecurityLevel implements SerializeInterface
         return null;
     }
 
-    public function serialize()
+    public function serialize() : int
     {
         return $this->getLevel();
     }
