@@ -67,6 +67,46 @@ class AccountData implements SerializeInterface
     }
 
     /**
+     * @param Address[] $addresses
+     * @return AccountData
+     */
+    public function setAddresses(array $addresses): AccountData
+    {
+        $this->addresses = [];
+        foreach($addresses as $address) {
+            $this->addAddress($address);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Bundle[] $bundles
+     * @return AccountData
+     */
+    public function setBundles(array $bundles): AccountData
+    {
+        $this->bundles = [];
+        foreach($bundles as $bundle) {
+            $this->addBundle($bundle);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Input[] $inputs
+     * @return AccountData
+     */
+    public function setInputs(array $inputs): AccountData
+    {
+        $this->inputs = [];
+        foreach($inputs as $input) {
+            $this->addInput($input);
+        }
+        return $this;
+    }
+
+    /**
      * Adds an address to the list of addresses.
      *
      * @param Address $address
@@ -173,6 +213,14 @@ class AccountData implements SerializeInterface
         $this->inputs[] = $input;
 
         return $this;
+    }
+
+    /**
+     * @return Input[]
+     */
+    public function getInputs(): array
+    {
+        return $this->inputs;
     }
 
     /**

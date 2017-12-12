@@ -1,21 +1,22 @@
 <?php
 declare(strict_types = 1);
 
-namespace Techworker\IOTA\Test\RemoteApi;
+namespace Techworker\IOTA\Tests\RemoteApi;
 
+use Techworker\IOTA\Node;
 use Techworker\IOTA\RemoteApi\Commands\AddNeighbors\Request;
 use Techworker\IOTA\RemoteApi\Commands\AddNeighbors\Response;
-use Techworker\IOTA\RemoteApi\Node;
 
 class AddNeighborsTest extends AbstractApiTestCase
 {
     protected function initValidRequest()
     {
-        $this->request = new Request('udp://0.0.0.0:14265', 'udp://1.1.1.1:14265');
+        $this->request = new Request($this->httpClient, new Node());
     }
 
     public function testRequestSerialization()
     {
+        $this->request->setNeighborUris(['udp://0.0.0.0:14265', 'udp://1.1.1.1:14265']);
         $expected = [
             'command' => 'addNeighbors',
             'uris' => ['udp://0.0.0.0:14265', 'udp://1.1.1.1:14265']
@@ -29,17 +30,21 @@ class AddNeighborsTest extends AbstractApiTestCase
      */
     public function testRequestInvalidUri()
     {
-        $request = new Request('abc');
+        $request = new Request($this->httpClient, new Node);
+        $request->setNeighborUris(['abc']);
     }
 
 
     public function testResponse()
     {
         $fixture = $this->loadFixture(__DIR__ . '/fixtures/AddNeighbors.json');
-        $this->httpClient->setResponseFromFixture(200, $fixture['decoded']);
+        $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
-        $response = $this->httpClient->commandRequest(new Request('udp://0.0.0.0:14265'), new Node());
+        $request = new Request($this->httpClient, new Node);
+        $request->addNeighborUri('udp://0.0.0.0:14265');
+
+        $response = $request->execute();
 
         static::assertEquals(10, $response->getAddedNeighbors());
     }

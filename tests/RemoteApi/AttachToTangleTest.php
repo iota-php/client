@@ -1,11 +1,16 @@
 <?php
 declare(strict_types = 1);
 
-namespace Techworker\IOTA\Test\RemoteApi;
+namespace Techworker\IOTA\Tests\RemoteApi;
 
+use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
+use Techworker\IOTA\Cryptography\POW\PowInterface;
+use Techworker\IOTA\Node;
 use Techworker\IOTA\RemoteApi\Commands\AttachToTangle\Request;
 use Techworker\IOTA\RemoteApi\Commands\AttachToTangle\Response;
-use Techworker\IOTA\RemoteApi\Node;
+use Techworker\IOTA\Tests\Container;
+use Techworker\IOTA\Tests\DummyData;
+use Techworker\IOTA\Type\Transaction;
 use Techworker\IOTA\Type\TransactionHash;
 use Techworker\IOTA\Type\Trytes;
 
@@ -13,33 +18,40 @@ class AttachToTangleTest extends AbstractApiTestCase
 {
     protected function initValidRequest()
     {
+        DummyData::init();
+        $container = new Container();
         $this->request = new Request(
-            new TransactionHash($this->generateStaticTryte(81, 0)),
-            new TransactionHash($this->generateStaticTryte(81, 1)),
-            18,
-            new Trytes('GHI'), new Trytes('JKL')
+            $container->get(PowInterface::class),
+            $this->httpClient,
+            $container->get(CurlFactory::class),
+            new Node()
         );
+        $this->request->setTrunkTransactionHash(DummyData::getTransactionHash(0));
+        $this->request->setBranchTransactionHash(DummyData::getTransactionHash(1));
+        $this->request->setMinWeightMagnitude(18);
+        $this->request->setTransactions([
+            DummyData::getTransaction(0), DummyData::getTransaction(1)
+        ]);
     }
 
     public function testRequestSerialization()
     {
-        $expected = [
-            'command' => 'attachToTangle',
-            'trunkTransaction' => $this->generateStaticTryte(81, 0),
-            'branchTransaction' => $this->generateStaticTryte(81, 1),
-            'minWeightMagnitude' => 18,
-            'trytes' => ['GHI', 'JKL'],
-        ];
-        static::assertEquals($expected, $this->request->jsonSerialize());
+        $serialized =$this->request->jsonSerialize();
+        static::assertArrayHasKey('command', $serialized);
+        static::assertEquals('attachToTangle', $serialized['command']);
+        static::assertArrayHasKey('trunkTransaction', $serialized);
+        static::assertArrayHasKey('branchTransaction', $serialized);
+        static::assertArrayHasKey('minWeightMagnitude', $serialized);
+        static::assertArrayHasKey('transactions', $serialized);
     }
 
     public function testResponse()
     {
         $fixture = $this->loadFixture(__DIR__ . '/fixtures/AttachToTangle.json');
-        $this->httpClient->setResponseFromFixture(200, $fixture['decoded']);
+        $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
-        $response = $this->httpClient->commandRequest($this->request, new Node());
+        $response = $this->request->execute();
 
         static::assertCount(2, $response->getTransactions());
         static::assertInstanceOf(Trytes::class, $response->getTransactions()[0]);

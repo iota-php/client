@@ -1,11 +1,10 @@
 <?php
 declare(strict_types = 1);
 
-namespace Techworker\IOTA\Test\RemoteApi;
+namespace Techworker\IOTA\Tests\RemoteApi;
 
 use Techworker\IOTA\RemoteApi\Commands\GetInclusionStates\Request;
 use Techworker\IOTA\RemoteApi\Commands\GetInclusionStates\Response;
-use Techworker\IOTA\RemoteApi\Node;
 use Techworker\IOTA\Type\Tip;
 use Techworker\IOTA\Type\TransactionHash;
 
@@ -57,10 +56,10 @@ class GetInclusionStatesTest extends AbstractApiTestCase
     public function testResponse()
     {
         $fixture = $this->loadFixture(__DIR__ . '/fixtures/GetInclusionStates.json');
-        $this->httpClient->setResponseFromFixture(200, $fixture['decoded']);
+        $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
-        $response = $this->httpClient->commandRequest($this->request, new Node());
+        $response = $this->request->execute();
 
         static::assertTrue($response->getStates()[0]);
         static::assertFalse($response->getStates()[1]);

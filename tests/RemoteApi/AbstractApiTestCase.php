@@ -2,11 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace Techworker\IOTA\Test\RemoteApi;
+namespace Techworker\IOTA\Tests\RemoteApi;
 
 
 use PHPUnit\Framework\TestCase;
-use Techworker\IOTA\RemoteApi\Node;
 use Techworker\IOTA\RemoteApi\RequestInterface;
 
 abstract class AbstractApiTestCase extends TestCase
@@ -73,25 +72,4 @@ abstract class AbstractApiTestCase extends TestCase
     abstract public function testResponse();
     abstract public function provideResponseMissing();
 
-    /**
-     * @dataProvider provideResponseMissing
-     * @expectedException \RuntimeException
-     * @param string $fixture
-     * @param string $key
-     */
-    public function testResponseMissingKey(string $fixture, string $key)
-    {
-        $fixture = $this->loadFixture($fixture);
-        $keys = explode('.', $key);
-        array_unshift($keys, 'decoded');
-        $unsetKey = array_pop($keys);
-        $data = &$fixture;
-        foreach($keys as $subKey) {
-            $data = &$data[$subKey];
-        }
-        unset($data[$unsetKey]);
-
-        $this->httpClient->setResponseFromFixture(200, $fixture['decoded']);
-        $this->httpClient->commandRequest($this->request, new Node());
-    }
 }

@@ -1,11 +1,10 @@
 <?php
 declare(strict_types = 1);
 
-namespace Techworker\IOTA\Test\RemoteApi;
+namespace Techworker\IOTA\Tests\RemoteApi;
 
 use Techworker\IOTA\RemoteApi\Commands\GetTransactionsToApprove\Request;
 use Techworker\IOTA\RemoteApi\Commands\GetTransactionsToApprove\Response;
-use Techworker\IOTA\RemoteApi\Node;
 use Techworker\IOTA\Type\TransactionHash;
 
 class GetTransactionsToApproveTest extends AbstractApiTestCase
@@ -27,10 +26,10 @@ class GetTransactionsToApproveTest extends AbstractApiTestCase
     public function testResponse()
     {
         $fixture = $this->loadFixture(__DIR__ . '/fixtures/GetTransactionsToApprove.json');
-        $this->httpClient->setResponseFromFixture(200, $fixture['decoded']);
+        $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
-        $response = $this->httpClient->commandRequest($this->request, new Node());
+        $response = $this->request->execute();
 
         static::assertInstanceOf(TransactionHash::class, $response->getTrunkTransaction());
         static::assertInstanceOf(TransactionHash::class, $response->getBranchTransaction());

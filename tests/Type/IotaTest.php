@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types = 1);
-namespace Techworker\IOTA\Test\Type;
+namespace Techworker\IOTA\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
 use Techworker\IOTA\Type\Iota;
@@ -197,5 +197,48 @@ class IotaTest extends TestCase
         static::assertFalse($iota->eq($lower));
         static::assertFalse($iota->gteq($greater));
         static::assertFalse($iota->lteq($lower));
+    }
+
+    public function testZero()
+    {
+        $z = Iota::ZERO();
+        static::assertEquals('0', $z->getAmount());
+    }
+
+
+    public function testIsNeg()
+    {
+        $z = new Iota('-1');
+        static::assertTrue($z->isNeg());
+        $z = new Iota('1');
+        static::assertFalse($z->isNeg());
+    }
+
+    public function testIsPos()
+    {
+        $z = new Iota('-1');
+        static::assertFalse($z->isPos());
+        $z = new Iota('1');
+        static::assertTrue($z->isPos());
+    }
+
+    public function testIsZero()
+    {
+        $z = Iota::ZERO();
+        static::assertTrue($z->isZero());
+        $z = new Iota('1');
+        static::assertFalse($z->isZero());
+        $z = new Iota('-1');
+        static::assertFalse($z->isZero());
+    }
+
+    public function testSerialize()
+    {
+        $z = Iota::ZERO();
+        static::assertEquals('0', $z->serialize());
+        $z = new Iota('1');
+        static::assertEquals('1', $z->serialize());
+        $z = new Iota('-1');
+        static::assertEquals('-1', $z->serialize());
     }
 }

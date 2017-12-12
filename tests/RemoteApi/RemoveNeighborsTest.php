@@ -1,11 +1,10 @@
 <?php
 
 declare(strict_types = 1);
-namespace Techworker\IOTA\Test\RemoteApi;
+namespace Techworker\IOTA\Tests\RemoteApi;
 
 use Techworker\IOTA\RemoteApi\Commands\RemoveNeighbors\Request;
 use Techworker\IOTA\RemoteApi\Commands\RemoveNeighbors\Response;
-use Techworker\IOTA\RemoteApi\Node;
 
 class RemoveNeighborsTest extends AbstractApiTestCase
 {
@@ -36,10 +35,10 @@ class RemoveNeighborsTest extends AbstractApiTestCase
     public function testResponse()
     {
         $fixture = $this->loadFixture(__DIR__ . '/fixtures/RemoveNeighbors.json');
-        $this->httpClient->setResponseFromFixture(200, $fixture['decoded']);
+        $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
-        $response = $this->httpClient->commandRequest($this->request, new Node());
+        $response = $this->request->execute();
 
         static::assertEquals(10, $response->getRemovedNeighbors());
     }

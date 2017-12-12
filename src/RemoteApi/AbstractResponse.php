@@ -141,7 +141,7 @@ abstract class AbstractResponse implements SerializeInterface
      *
      * @return int
      */
-    public function getCode(): int
+    public function getCode(): ?int
     {
         return $this->code;
     }
@@ -151,7 +151,7 @@ abstract class AbstractResponse implements SerializeInterface
      *
      * @return string
      */
-    public function getBody(): string
+    public function getBody(): ?string
     {
         return $this->body;
     }
@@ -176,7 +176,7 @@ abstract class AbstractResponse implements SerializeInterface
      */
     public function isError(): bool
     {
-        return 200 !== $this->code;
+        return $this->code !== null && 200 !== $this->code;
     }
 
     /**

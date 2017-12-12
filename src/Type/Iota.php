@@ -45,7 +45,7 @@ class Iota implements SerializeInterface
      */
     public function __construct($amount)
     {
-        if (\gmp_cmp(self::IOTA_MAX, (string) $amount) < 0) {
+        if (\bccomp(self::IOTA_MAX, (string) $amount) < 0) {
             throw new \InvalidArgumentException(
                 'Impossible iota amount given. The maximum supply is '.self::IOTA_MAX
             );
@@ -75,7 +75,7 @@ class Iota implements SerializeInterface
      */
     public function plus(self $iota): self
     {
-        return new self(\gmp_add($this->amount, $iota->getAmount()));
+        return new self(\bcadd($this->amount, $iota->getAmount()));
     }
 
     /**
@@ -88,7 +88,7 @@ class Iota implements SerializeInterface
      */
     public function minus(self $iota): self
     {
-        return new self(\gmp_sub($this->amount, $iota->getAmount()));
+        return new self(\bcsub($this->amount, $iota->getAmount()));
     }
 
     /**
@@ -101,7 +101,7 @@ class Iota implements SerializeInterface
      */
     public function multiplyBy($multiplier): self
     {
-        return new self(\gmp_mul($this->amount, (string) $multiplier));
+        return new self(\bcmul($this->amount, (string) $multiplier));
     }
 
     /**
@@ -114,7 +114,7 @@ class Iota implements SerializeInterface
      */
     public function divideBy($divisor): self
     {
-        return new self(\gmp_div($this->amount, (string) $divisor));
+        return new self(\bcdiv($this->amount, (string) $divisor));
     }
 
     /**
@@ -124,7 +124,7 @@ class Iota implements SerializeInterface
      */
     public function getKiloIota(): string
     {
-        return \gmp_strval(\gmp_div($this->amount, self::UNIT_KILO, 15));
+        return \bcdiv($this->amount, self::UNIT_KILO, 15);
     }
 
     /**
@@ -134,7 +134,7 @@ class Iota implements SerializeInterface
      */
     public function getMegaIota(): string
     {
-        return \gmp_strval(\gmp_div($this->amount, self::UNIT_MEGA, 15));
+        return \bcdiv($this->amount, self::UNIT_MEGA, 15);
     }
 
     /**
@@ -144,7 +144,7 @@ class Iota implements SerializeInterface
      */
     public function getGigaIota(): string
     {
-        return \gmp_strval(\gmp_div($this->amount, self::UNIT_GIGA, 15));
+        return \bcdiv($this->amount, self::UNIT_GIGA, 15);
     }
 
     /**
@@ -154,7 +154,7 @@ class Iota implements SerializeInterface
      */
     public function getTeraIota(): string
     {
-        return \gmp_strval(\gmp_div($this->amount, self::UNIT_TERA, 15));
+        return \bcdiv($this->amount, self::UNIT_TERA, 15);
     }
 
     /**
@@ -164,7 +164,7 @@ class Iota implements SerializeInterface
      */
     public function getPetaIota(): string
     {
-        return \gmp_strval(\gmp_div($this->amount, self::UNIT_PETA, 15));
+        return \bcdiv($this->amount, self::UNIT_PETA, 15);
     }
 
     /**
@@ -176,7 +176,7 @@ class Iota implements SerializeInterface
      */
     public static function fromPetaIota(string $petaIota): self
     {
-        return new self(\gmp_mul($petaIota, self::UNIT_PETA));
+        return new self(\bcmul($petaIota, self::UNIT_PETA));
     }
 
     /**
@@ -188,7 +188,7 @@ class Iota implements SerializeInterface
      */
     public static function fromTeraIota(string $teraIota): self
     {
-        return new self(\gmp_mul($teraIota, self::UNIT_TERA));
+        return new self(\bcmul($teraIota, self::UNIT_TERA));
     }
 
     /**
@@ -200,7 +200,7 @@ class Iota implements SerializeInterface
      */
     public static function fromGigaIota(string $gigaIota): self
     {
-        return new self(\gmp_mul($gigaIota, self::UNIT_GIGA));
+        return new self(\bcmul($gigaIota, self::UNIT_GIGA));
     }
 
     /**
@@ -212,7 +212,7 @@ class Iota implements SerializeInterface
      */
     public static function fromMegaIota(string $megaIota): self
     {
-        return new self(\gmp_mul($megaIota, self::UNIT_MEGA));
+        return new self(\bcmul($megaIota, self::UNIT_MEGA));
     }
 
     /**
@@ -224,7 +224,7 @@ class Iota implements SerializeInterface
      */
     public static function fromKiloIota(string $kiloIota): self
     {
-        return new self(\gmp_mul($kiloIota, self::UNIT_KILO));
+        return new self(\bcmul($kiloIota, self::UNIT_KILO));
     }
 
     /**
@@ -237,7 +237,7 @@ class Iota implements SerializeInterface
      */
     public function lt(self $value): bool
     {
-        return \gmp_cmp($this->getAmount(), $value->getAmount()) < 0;
+        return \bccomp($this->getAmount(), $value->getAmount()) < 0;
     }
 
     /**
@@ -250,7 +250,7 @@ class Iota implements SerializeInterface
      */
     public function gt(self $value): bool
     {
-        return \gmp_cmp($this->getAmount(), $value->getAmount()) > 0;
+        return \bccomp($this->getAmount(), $value->getAmount()) > 0;
     }
 
     /**
@@ -263,7 +263,7 @@ class Iota implements SerializeInterface
      */
     public function gteq(self $value): bool
     {
-        return \gmp_cmp($this->getAmount(), $value->getAmount()) >= 0;
+        return \bccomp($this->getAmount(), $value->getAmount()) >= 0;
     }
 
     /**
@@ -276,7 +276,7 @@ class Iota implements SerializeInterface
      */
     public function lteq(self $value): bool
     {
-        return \gmp_cmp($this->getAmount(), $value->getAmount()) <= 0;
+        return \bccomp($this->getAmount(), $value->getAmount()) <= 0;
     }
 
     /**
@@ -289,7 +289,7 @@ class Iota implements SerializeInterface
      */
     public function eq(self $value): bool
     {
-        return 0 === \gmp_cmp($this->getAmount(), $value->getAmount());
+        return 0 === \bccomp($this->getAmount(), $value->getAmount());
     }
 
     /**
@@ -302,7 +302,7 @@ class Iota implements SerializeInterface
      */
     public function neq(self $value): bool
     {
-        return 0 !== \gmp_cmp($this->getAmount(), $value->getAmount());
+        return 0 !== \bccomp($this->getAmount(), $value->getAmount());
     }
 
     /**

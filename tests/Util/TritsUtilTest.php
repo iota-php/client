@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Techworker\IOTA\Test\Util;
+namespace Techworker\IOTA\Tests\Util;
 
 use PHPUnit\Framework\TestCase;
 use Techworker\IOTA\Cryptography\Hashing\KerlFactory;

@@ -1,11 +1,10 @@
 <?php
 declare(strict_types = 1);
 
-namespace Techworker\IOTA\Test\RemoteApi;
+namespace Techworker\IOTA\Tests\RemoteApi;
 
 use Techworker\IOTA\RemoteApi\Commands\GetBalances\Request;
 use Techworker\IOTA\RemoteApi\Commands\GetBalances\Response;
-use Techworker\IOTA\RemoteApi\Node;
 use Techworker\IOTA\Type\Address;
 use Techworker\IOTA\Type\Milestone;
 
@@ -43,10 +42,10 @@ class GetBalancesTest extends AbstractApiTestCase
     public function testResponse()
     {
         $fixture = $this->loadFixture(__DIR__ . '/fixtures/GetBalances.json');
-        $this->httpClient->setResponseFromFixture(200, $fixture['decoded']);
+        $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
-        $response = $this->httpClient->commandRequest($this->request, new Node());
+        $response = $this->request->execute();
 
         static::assertEquals([114544444], $response->getBalances());
         static::assertInstanceOf(Milestone::class, $response->getMilestone());

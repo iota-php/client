@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Techworker\IOTA\Type;
 
+use Techworker\IOTA\Exception;
 use Techworker\IOTA\SerializeInterface;
 use Techworker\IOTA\Util\TryteUtil;
 
@@ -41,6 +42,10 @@ class Trytes implements \IteratorAggregate, \Countable, SerializeInterface
             return;
         }
 
+        if(preg_match('/[^A-Z9]/', $trytes) !== 0) {
+            throw new \InvalidArgumentException('Invalid trytes.');
+        }
+
         $this->trytes = $trytes;
     }
 
@@ -55,24 +60,6 @@ class Trytes implements \IteratorAggregate, \Countable, SerializeInterface
         $chars = str_split($this->trytes);
 
         return new \ArrayIterator($chars);
-    }
-
-    /**
-     * Gets all trits from all trytes.
-     *
-     * @return array
-     */
-    public function toTrits(): array
-    {
-        $trits = [];
-
-        foreach ($this->getIterator() as $tryte) {
-            foreach (TryteUtil::toTrits($tryte) as $trit) {
-                $trits[] = $trit;
-            }
-        }
-
-        return $trits;
     }
 
     /**
@@ -96,11 +83,22 @@ class Trytes implements \IteratorAggregate, \Countable, SerializeInterface
         return \strlen($this->trytes);
     }
 
+    /**
+     * Gets a value indicating whether the tryte equals other trytes.
+     *
+     * @param Trytes $trytes
+     * @return bool
+     */
     public function equals(self $trytes): bool
     {
         return $this->trytes === $trytes->trytes;
     }
 
+    /**
+     * Gets the serialized version of the trytes.
+     *
+     * @return array
+     */
     public function serialize()
     {
         return [

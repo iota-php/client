@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types = 1);
-namespace Techworker\IOTA\Test\Type;
+namespace Techworker\IOTA\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
 use Techworker\IOTA\Type\Seed;
@@ -17,7 +17,7 @@ class SeedTest extends TestCase
     public function testLength()
     {
         $seed = new Seed(str_repeat('A', 81));
-        static::assertEquals(81, $seed->length());
+        static::assertEquals(81, $seed->count());
     }
 
     /**

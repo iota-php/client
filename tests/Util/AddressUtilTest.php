@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Techworker\IOTA\Test\Util;
+namespace Techworker\IOTA\Tests\Util;
 
 use PHPUnit\Framework\TestCase;
 use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
@@ -15,7 +15,7 @@ use Techworker\IOTA\Util\AddressUtil;
 /**
  * Class AddressUtilTest
  *
- * @package Techworker\IOTA\Test\Util
+ * @package Techworker\IOTA\Tests\Util
  */
 class AddressUtilTest extends TestCase
 {

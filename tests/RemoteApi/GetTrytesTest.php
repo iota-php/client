@@ -1,11 +1,10 @@
 <?php
 declare(strict_types = 1);
 
-namespace Techworker\IOTA\Test\RemoteApi;
+namespace Techworker\IOTA\Tests\RemoteApi;
 
 use Techworker\IOTA\RemoteApi\Commands\GetTrytes\Request;
 use Techworker\IOTA\RemoteApi\Commands\GetTrytes\Response;
-use Techworker\IOTA\RemoteApi\Node;
 use Techworker\IOTA\Type\TransactionHash;
 use Techworker\IOTA\Type\Trytes;
 
@@ -34,10 +33,10 @@ class GetTrytesTest extends AbstractApiTestCase
     public function testResponse()
     {
         $fixture = $this->loadFixture(__DIR__ . '/fixtures/GetTrytes.json');
-        $this->httpClient->setResponseFromFixture(200, $fixture['decoded']);
+        $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
-        $response = $this->httpClient->commandRequest($this->request, new Node());
+        $response = $this->request->execute();
 
         static::assertCount(2, $response->getTransactions());
         static::assertInstanceOf(Trytes::class, $response->getTransactions()[0]);

@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types = 1);
-namespace Techworker\IOTA\Base\Types\Test;
+namespace Techworker\IOTA\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
 
@@ -46,4 +46,56 @@ class AddressTest extends TestCase
         new Address(str_repeat('A', 82));
     }
 
+    public function testIndex()
+    {
+        $address = new Address(str_repeat('A', 81), 5);
+        static::assertEquals(5, $address->getIndex());
+        static::assertTrue($address->hasIndex());
+
+        $address = new Address(str_repeat('A', 81));
+        static::assertFalse($address->hasIndex());
+    }
+
+    public function testChecksum()
+    {
+        $address = new Address(str_repeat('A', 81), 5);
+        static::assertFalse($address->hasChecksum());
+        $address->setChecksum(new Trytes('AAAAAAAAA'));
+        static::assertTrue($address->hasChecksum());
+
+        static::assertEquals(str_repeat('A', 90), (string)$address);
+        $address->removeChecksum();
+        static::assertEquals(str_repeat('A', 81), (string)$address);
+    }
+
+    public function testSerialize()
+    {
+        $address = new Address(str_repeat('A', 81));
+        $s = $address->serialize();
+        static::assertArrayHasKey('trytes', $s);
+        static::assertEquals(str_repeat('A', 81), $s['trytes']);
+        static::assertArrayHasKey('index', $s);
+        static::assertEquals(-1, $s['index']);
+        static::assertArrayHasKey('checksum', $s);
+        static::assertNull($s['checksum']);
+
+        $address = new Address(str_repeat('A', 90));
+        $s = $address->serialize();
+        static::assertArrayHasKey('trytes', $s);
+        static::assertEquals(str_repeat('A', 81), $s['trytes']);
+        static::assertArrayHasKey('index', $s);
+        static::assertEquals(-1,$s['index']);
+        static::assertArrayHasKey('checksum', $s);
+        static::assertEquals('AAAAAAAAA', $s['checksum']);
+
+        $address = new Address(str_repeat('A', 90), 5);
+        $s = $address->serialize();
+        static::assertArrayHasKey('trytes', $s);
+        static::assertEquals(str_repeat('A', 81), $s['trytes']);
+        static::assertArrayHasKey('index', $s);
+        static::assertEquals(5,$s['index']);
+        static::assertArrayHasKey('checksum', $s);
+        static::assertEquals('AAAAAAAAA', $s['checksum']);
+
+    }
 }

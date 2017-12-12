@@ -136,10 +136,9 @@ class Address extends Trytes
      */
     public function serialize(): array
     {
-        return [
-            'trytes' => $this->trytes,
+        return array_merge(parent::serialize(), [
             'checksum' => $this->hasChecksum() ? $this->checksum : null,
             'index' => $this->index
-        ];
+        ]);
     }
 }

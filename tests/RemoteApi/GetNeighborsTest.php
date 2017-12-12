@@ -1,18 +1,18 @@
 <?php
 declare(strict_types = 1);
 
-namespace Techworker\IOTA\Test\RemoteApi;
+namespace Techworker\IOTA\Tests\RemoteApi;
 
-use Techworker\IOTA\RemoteApi\Commands\GetNeighbors\Neighbor;
+use Techworker\IOTA\Node;
 use Techworker\IOTA\RemoteApi\Commands\GetNeighbors\Request;
 use Techworker\IOTA\RemoteApi\Commands\GetNeighbors\Response;
-use Techworker\IOTA\RemoteApi\Node;
+use Techworker\IOTA\Type\Neighbor;
 
 class GetNeighborsTest extends AbstractApiTestCase
 {
     protected function initValidRequest()
     {
-        $this->request = new Request();
+        $this->request = new Request($this->httpClient, new Node);
     }
 
     public function testRequestSerialization()
@@ -26,10 +26,10 @@ class GetNeighborsTest extends AbstractApiTestCase
     public function testResponse()
     {
         $fixture = $this->loadFixture(__DIR__ . '/fixtures/GetNeighbors.json');
-        $this->httpClient->setResponseFromFixture(200, $fixture['decoded']);
+        $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
-        $response = $this->httpClient->commandRequest($this->request, new Node());
+        $response = $this->request->execute();
 
         static::assertInstanceOf(Neighbor::class, $response->getNeighbors()[0]);
         static::assertInstanceOf(Neighbor::class, $response->getNeighbors()[1]);

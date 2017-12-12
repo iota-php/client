@@ -123,6 +123,7 @@ class SecurityLevel implements SerializeInterface
                 return self::LEVEL_3();
         }
 
+        // TODO: throw exception? this should not happen!
         return null;
     }
 

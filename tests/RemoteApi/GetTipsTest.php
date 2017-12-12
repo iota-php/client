@@ -1,18 +1,17 @@
 <?php
 declare(strict_types = 1);
 
-namespace Techworker\IOTA\Test\RemoteApi;
+namespace Techworker\IOTA\Tests\RemoteApi;
 
 use Techworker\IOTA\RemoteApi\Commands\GetTips\Request;
 use Techworker\IOTA\RemoteApi\Commands\GetTips\Response;
-use Techworker\IOTA\RemoteApi\Node;
 use Techworker\IOTA\Type\Tip;
 
 class GetTipsTest extends AbstractApiTestCase
 {
     protected function initValidRequest()
     {
-        $this->request = new Request();
+        $this->request = new Request($this->httpClient, new Node);
     }
 
     public function testRequestSerialization()
@@ -26,10 +25,10 @@ class GetTipsTest extends AbstractApiTestCase
     public function testResponse()
     {
         $fixture = $this->loadFixture(__DIR__ . '/fixtures/GetTips.json');
-        $this->httpClient->setResponseFromFixture(200, $fixture['decoded']);
+        $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
-        $response = $this->httpClient->commandRequest($this->request, new Node());
+        $response = $this->request->execute();
 
         static::assertCount(2, $response->getHashes());
         static::assertInstanceOf(Tip::class, $response->getHashes()[0]);

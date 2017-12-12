@@ -35,7 +35,7 @@ class Bundle implements SerializeInterface
      *
      * @var Transaction[]
      */
-    protected $transactions;
+    protected $transactions = [];
 
     /**
      * The factory to create a new Kerl instance.

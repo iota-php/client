@@ -1,36 +1,28 @@
 <?php
 declare(strict_types = 1);
 
-namespace Techworker\IOTA\Test\RemoteApi;
+namespace Techworker\IOTA\Tests\RemoteApi;
 
-use Techworker\IOTA\RemoteApi\AbstractResponse;
+use Techworker\IOTA\Node;
+use Techworker\IOTA\RemoteApi\AbstractRequest;
 use Techworker\IOTA\RemoteApi\HttpClient\HttpClientInterface;
-use Techworker\IOTA\RemoteApi\Jobs\Request as JobRequest;
-use Techworker\IOTA\RemoteApi\Node;
-use Techworker\IOTA\RemoteApi\RequestInterface;
 
 class FixtureHttpClient implements HttpClientInterface
 {
     protected $status;
     protected $body;
 
-    public function setResponseFromFixture(int $status, array $body)
+    public function setResponseFromFixture(int $status, string $body)
     {
         $this->status = $status;
         $this->body = $body;
     }
 
-    public function commandRequest(RequestInterface $request, Node $node): AbstractResponse
+    public function commandRequest(AbstractRequest $request): array
     {
-        $request->jsonSerialize();
-        $responseClass = $request->getResponseClass();
-        return new $responseClass($this->status, json_encode($this->body), $request, new Node());
+        return [
+            'code' => $this->status,
+            'raw' => $this->body
+        ];
     }
-
-    public function jobRequest(JobRequest $jobRequest, Node $node): AbstractResponse
-    {
-        // TODO: Implement jobRequest() method.
-    }
-
-
 }
