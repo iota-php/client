@@ -329,7 +329,7 @@ class Request extends AbstractRequest
     {
         return [
             'trunkTransactionHash' => $this->trunkTransactionHash->serialize(),
-            'branchTransactionHash' => (string) $this->branchTransactionHash->serialize(),
+            'branchTransactionHash' => $this->branchTransactionHash->serialize(),
             'minWeightMagnitude' => $this->minWeightMagnitude,
             'transactions' => SerializeUtil::serializeArray($this->transactions)
         ];

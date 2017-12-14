@@ -107,7 +107,7 @@ class Action extends AbstractAction
 
         $states = $inclusionStatesResponse->getStates();
         foreach ($this->transactionHashes as $idx => $transactionHash) {
-            $result->addState($transactionHash, $states[$idx]);
+            $result->addState($transactionHash, $states[(string)$transactionHash]);
         }
 
         return $result->finish();

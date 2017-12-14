@@ -10,7 +10,7 @@ if(isAjax())
         $node = $iota->getNodes()[$_POST['node']];
         $addresses = \Techworker\IOTA\Util\TrytesUtil::arrayToTrytes(array_map('trim', array_filter(explode("\n", $_POST['addresses']))), \Techworker\IOTA\Type\Address::class);
         $bundleHashes = \Techworker\IOTA\Util\TrytesUtil::arrayToTrytes(array_map('trim', array_filter(explode("\n", $_POST['bundleHashes']))), \Techworker\IOTA\Type\BundleHash::class);
-        $tags = \Techworker\IOTA\Util\TrytesUtil::arrayToTrytes(array_map('trim', array_filter(explode("\n", $_POST['tags']))), \Techworker\IOTA\Type\Tag::class);
+                $tags = \Techworker\IOTA\Util\TrytesUtil::arrayToTrytes(array_map('trim', array_filter(explode("\n", $_POST['tags']))), \Techworker\IOTA\Type\Tag::class);
         $approvees = \Techworker\IOTA\Util\TrytesUtil::arrayToTrytes(array_map('trim', array_filter(explode("\n", $_POST['approvees']))), \Techworker\IOTA\Type\Approvee::class);
     
         $result = $iota->getRemoteApi()->findTransactions(
@@ -66,6 +66,7 @@ if(isAjax())
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/findTransactionObjects.php">findTransactionObjects</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/getNewAddress.php">getNewAddress</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/isReAttachable.php">isReAttachable</a>
+                                                    <a class="dropdown-item" href="/kitchen_sink/client_api/promoteTransaction.php">promoteTransaction</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/getAddresses.php">getAddresses</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/getAccountData.php">getAccountData</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/storeAndBroadcast.php">storeAndBroadcast</a>
@@ -85,6 +86,7 @@ if(isAjax())
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/getTips.php">getTips</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/attachToTangle.php">attachToTangle</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/addNeighbors.php">addNeighbors</a>
+                                                    <a class="dropdown-item" href="/kitchen_sink/remote_api/isTailConsistent.php">isTailConsistent</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/getNodeInfo.php">getNodeInfo</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/broadcastTransactions.php">broadcastTransactions</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/getBalances.php">getBalances</a>
@@ -127,22 +129,22 @@ the intersection of the values.</p>
         <textarea class="form-control" id="addresses" name="addresses" rows="3"></textarea>
         <small class="form-text text-muted">new line for each</small>
     </div>
-            <div class="form-group">
+                <div class="form-group">
         <label for="bundleHashes">bundleHashes</label>
         <textarea class="form-control" id="bundleHashes" name="bundleHashes" rows="3"></textarea>
         <small class="form-text text-muted">new line for each</small>
     </div>
-            <div class="form-group">
+                <div class="form-group">
         <label for="tags">tags</label>
         <textarea class="form-control" id="tags" name="tags" rows="3"></textarea>
         <small class="form-text text-muted">new line for each</small>
     </div>
-            <div class="form-group">
+                <div class="form-group">
         <label for="approvees">approvees</label>
         <textarea class="form-control" id="approvees" name="approvees" rows="3"></textarea>
         <small class="form-text text-muted">new line for each</small>
     </div>
-    <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+        <button id="submit" type="submit" class="btn btn-primary">Submit</button>
 
 <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top: 30px;">
     <li class="nav-item">
@@ -171,7 +173,7 @@ the intersection of the values.</p>
     $('#submit').on('click', function(e) {
         $(".spinner").show();
         var data = {
-                        node: $("#node").val(),                                addresses: $("#addresses").val(),                                bundleHashes: $("#bundleHashes").val(),                                tags: $("#tags").val(),                                approvees: $("#approvees").val()                        };
+                                            node: $("#node").val(),                                                                addresses: $("#addresses").val(),                                                                bundleHashes: $("#bundleHashes").val(),                                                                tags: $("#tags").val(),                                                                approvees: $("#approvees").val()                                    };
                                                                                         
         $.post(window.location.href,data)
             .done(function(data) {

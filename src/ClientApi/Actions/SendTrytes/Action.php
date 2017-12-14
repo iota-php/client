@@ -195,7 +195,7 @@ class Action extends AbstractAction
             'depth' => $this->depth,
             'minWeightMagnitude' => $this->minWeightMagnitude,
             'ignoreSpamTransactions' => $this->ignoreSpamTransactions,
-            'reference' => $this->reference->serialize()
+            'reference' => $this->reference === null ? null : $this->reference->serialize()
         ]);
     }
 }

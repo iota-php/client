@@ -8,17 +8,37 @@ if(isAjax())
     try {
 
         $node = $iota->getNodes()[$_POST['node']];
-    $seed = new \Techworker\IOTA\Type\Seed($_POST['seed']);
-            Unknown: array - transfers
+        $seed = new \Techworker\IOTA\Type\Seed($_POST['seed']);
+            $transfers = [new \Techworker\IOTA\Type\Transfer()];
+        $transfers[0]->setValue(new \Techworker\IOTA\Type\Iota($_POST['transfers_value']));
+        $transfers[0]->setRecipientAddress(new \Techworker\IOTA\Type\Address($_POST['transfers_recipient']));
+        if($_POST['minWeightMagnitude'] !== '') {
         $minWeightMagnitude = (int)$_POST['minWeightMagnitude'];
-    $depth = (int)$_POST['depth'];
+    } else {
+        $minWeightMagnitude = null;
+    }
+    if($_POST['depth'] !== '') {
+        $depth = (int)$_POST['depth'];
+    } else {
+        $depth = null;
+    }
     $ignoreSpamTransactions = isset($_POST['ignoreSpamTransactions']);
-    $remainderAddress = new \Techworker\IOTA\Type\Address($_POST['remainderAddress']);
-            Unknown: array - inputs
-        $security = \Techworker\IOTA\Type\SecurityLevel::fromValue($_POST['security']);
+    if($_POST['remainderAddress'] !== '') {
+        $remainderAddress = new \Techworker\IOTA\Type\Address($_POST['remainderAddress']);
+    } else {
+        $remainderAddress = null;
+    }
+            $inputs = [];
+        $hmacKey = null;
+    $security = \Techworker\IOTA\Type\SecurityLevel::fromValue($_POST['security']);
+    if($_POST['reference'] !== '') {
+        $reference = new \Techworker\IOTA\Type\Tip($_POST['reference']);
+    } else {
+        $reference = null;//$iota->getRemoteApi()->getNodeInfo($node)->getLatestMilestone();
+    }
 
         $result = $iota->getClientApi()->sendTransfer(
-            $node, $seed, $transfers, $minWeightMagnitude, $depth, $ignoreSpamTransactions, $remainderAddress, $inputs, $hmacKey, $security
+            $node, $seed, $transfers, $minWeightMagnitude, $depth, $ignoreSpamTransactions, $remainderAddress, $inputs, $hmacKey, $security, $reference
         );
         sendJson($result->serialize());
     } catch(\Exception $ex) {
@@ -70,6 +90,7 @@ if(isAjax())
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/findTransactionObjects.php">findTransactionObjects</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/getNewAddress.php">getNewAddress</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/isReAttachable.php">isReAttachable</a>
+                                                    <a class="dropdown-item" href="/kitchen_sink/client_api/promoteTransaction.php">promoteTransaction</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/getAddresses.php">getAddresses</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/getAccountData.php">getAccountData</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/storeAndBroadcast.php">storeAndBroadcast</a>
@@ -89,6 +110,7 @@ if(isAjax())
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/getTips.php">getTips</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/attachToTangle.php">attachToTangle</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/addNeighbors.php">addNeighbors</a>
+                                                    <a class="dropdown-item" href="/kitchen_sink/remote_api/isTailConsistent.php">isTailConsistent</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/getNodeInfo.php">getNodeInfo</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/broadcastTransactions.php">broadcastTransactions</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/getBalances.php">getBalances</a>
@@ -115,8 +137,9 @@ if(isAjax())
     bool $ignoreSpamTransactions = ,
     Techworker\IOTA\Type\Address $remainderAddress = ,
     array $inputs = Array,
-    Techworker\IOTA\Type\Trytes $hmacKey = ,
-    Techworker\IOTA\Type\SecurityLevel $security = 
+    Techworker\IOTA\Type\HMACKey $hmacKey = ,
+    Techworker\IOTA\Type\SecurityLevel $security = ,
+    Techworker\IOTA\Type\Milestone $reference = 
 ) : \Techworker\IOTA\ClientApi\Actions\SendTransfer\Result</pre></p>
     </div>
     <div class="form-group">
@@ -133,6 +156,14 @@ if(isAjax())
         <label for="seed">Seed</label>
         <input type="text" class="form-control seed" id="seed" name="seed" aria-describedby="seed" placeholder="" value="THISISTHETESTINGWALLETFORTHEPHPIOTALIBRARY9YOUMIGHTWANTTOSTEALTHEMBUTHEY9WTF9WHY9">
         <small class="form-text text-muted">Online? This is just for local testing!</small>
+    </div>
+            <div class="form-group">
+        <label for="transfers_value">Transfer value (iota)</label>
+        <input type="number" class="form-control" id="transfers_value" name="transfers_value" aria-describedby="transfers_value" placeholder="" value="1">
+    </div>
+    <div class="form-group">
+        <label for="transfers_recipient">Transfer recipient</label>
+        <input type="text" class="form-control" id="transfers_recipient" name="transfers_recipient" aria-describedby="transfers_recipient" placeholder="" value="">
     </div>
         <div class="form-group">
         <label for="minWeightMagnitude">minWeightMagnitude</label>
@@ -152,7 +183,7 @@ if(isAjax())
         <label for="remainderAddress">remainderAddress</label>
         <input type="text" class="form-control" id="remainderAddress" name="remainderAddress" aria-describedby="remainderAddress" placeholder="" value="">
     </div>
-    Unknown: Techworker\IOTA\Type\Trytes - hmacKey
+        Unknown: Techworker\IOTA\Type\HMACKey - hmacKey
     <div class="form-group">
         <label for="security">Security Level</label>
         <select class="form-control" id="security" name="security">
@@ -160,6 +191,10 @@ if(isAjax())
             <option value="2" selected="selected">2</option>
             <option value="3">3</option>
         </select>
+    </div>
+    <div class="form-group">
+        <label for="reference">reference</label>
+        <input type="text" class="form-control" id="reference" name="reference" aria-describedby="reference" placeholder="" value="">
     </div>
 <button id="submit" type="submit" class="btn btn-primary">Submit</button>
 
@@ -190,11 +225,12 @@ if(isAjax())
     $('#submit').on('click', function(e) {
         $(".spinner").show();
         var data = {
-                        node: $("#node").val(),                                seed: $("#seed").val(),                                transfers: $("#transfers").val(),                                minWeightMagnitude: $("#minWeightMagnitude").val(),                                depth: $("#depth").val(),                                                remainderAddress: $("#remainderAddress").val(),                                inputs: $("#inputs").val(),                                hmacKey: $("#hmacKey").val(),                                security: $("#security").val()                        };
+                                            node: $("#node").val(),                                                                seed: $("#seed").val(),                                                                transfers_value: $("#transfers_value").val(),
+                transfers_recipient: $("#transfers_recipient").val(),                                                                minWeightMagnitude: $("#minWeightMagnitude").val(),                                                                depth: $("#depth").val(),                                                                                remainderAddress: $("#remainderAddress").val(),                                                                inputs: $("#inputs").val(),                                                                hmacKey: $("#hmacKey").val(),                                                                security: $("#security").val(),                                                                reference: $("#reference").val()                                    };
                                                                                                         if($("#ignoreSpamTransactions").is(':checked')) {
             data.ignoreSpamTransactions = true;
         }
-                                                                                
+                                                                                                
         $.post(window.location.href,data)
             .done(function(data) {
                 $(".spinner").hide();

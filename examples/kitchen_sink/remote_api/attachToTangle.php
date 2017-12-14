@@ -9,9 +9,21 @@ if(isAjax())
 
         $node = $iota->getNodes()[$_POST['node']];
     $transactions = \Techworker\IOTA\Util\TrytesUtil::arrayToTrytes(array_map('trim', array_filter(explode("\n", $_POST['transactions']))), \Techworker\IOTA\Type\Transaction::class);
+        if($_POST['trunkTransactionHash'] !== '') {
         $trunkTransactionHash = new \Techworker\IOTA\Type\TransactionHash($_POST['trunkTransactionHash']);
-    $branchTransactionHash = new \Techworker\IOTA\Type\TransactionHash($_POST['branchTransactionHash']);
-    $minWeightMagnitude = (int)$_POST['minWeightMagnitude'];
+    } else {
+        $trunkTransactionHash = null;
+    }
+    if($_POST['branchTransactionHash'] !== '') {
+        $branchTransactionHash = new \Techworker\IOTA\Type\TransactionHash($_POST['branchTransactionHash']);
+    } else {
+        $branchTransactionHash = null;
+    }
+    if($_POST['minWeightMagnitude'] !== '') {
+        $minWeightMagnitude = (int)$_POST['minWeightMagnitude'];
+    } else {
+        $minWeightMagnitude = null;
+    }
 
         $result = $iota->getRemoteApi()->attachToTangle(
             $node, $transactions, $trunkTransactionHash, $branchTransactionHash, $minWeightMagnitude
@@ -66,6 +78,7 @@ if(isAjax())
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/findTransactionObjects.php">findTransactionObjects</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/getNewAddress.php">getNewAddress</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/isReAttachable.php">isReAttachable</a>
+                                                    <a class="dropdown-item" href="/kitchen_sink/client_api/promoteTransaction.php">promoteTransaction</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/getAddresses.php">getAddresses</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/getAccountData.php">getAccountData</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/storeAndBroadcast.php">storeAndBroadcast</a>
@@ -85,6 +98,7 @@ if(isAjax())
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/getTips.php">getTips</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/attachToTangle.php">attachToTangle</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/addNeighbors.php">addNeighbors</a>
+                                                    <a class="dropdown-item" href="/kitchen_sink/remote_api/isTailConsistent.php">isTailConsistent</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/getNodeInfo.php">getNodeInfo</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/broadcastTransactions.php">broadcastTransactions</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/getBalances.php">getBalances</a>
@@ -130,7 +144,7 @@ POW will be performed locally by one of the PowInterface implementations.</p>
         <textarea class="form-control" id="transactions" name="transactions" rows="3"></textarea>
         <small class="form-text text-muted">new line for each</small>
     </div>
-        <div class="form-group">
+            <div class="form-group">
         <label for="trunkTransactionHash">trunkTransactionHash</label>
         <input type="text" class="form-control" id="trunkTransactionHash" name="trunkTransactionHash" aria-describedby="trunkTransactionHash" placeholder="" value="">
     </div>
@@ -171,7 +185,7 @@ POW will be performed locally by one of the PowInterface implementations.</p>
     $('#submit').on('click', function(e) {
         $(".spinner").show();
         var data = {
-                        node: $("#node").val(),                                transactions: $("#transactions").val(),                                trunkTransactionHash: $("#trunkTransactionHash").val(),                                branchTransactionHash: $("#branchTransactionHash").val(),                                minWeightMagnitude: $("#minWeightMagnitude").val()                        };
+                                            node: $("#node").val(),                                                                transactions: $("#transactions").val(),                                                                trunkTransactionHash: $("#trunkTransactionHash").val(),                                                                branchTransactionHash: $("#branchTransactionHash").val(),                                                                minWeightMagnitude: $("#minWeightMagnitude").val()                                    };
                                                                                         
         $.post(window.location.href,data)
             .done(function(data) {

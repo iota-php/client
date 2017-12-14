@@ -10,6 +10,10 @@ if(isAjax())
 {% for param in params %}
 {% if(param.type == 'Techworker\\IOTA\\Node') %}
         ${{ param.name }} = $iota->getNodes()[$_POST['{{ param.name }}']];
+{% elseif(param.type == 'Techworker\\IOTA\\Type\\Transfer') %}
+    ${{ param.name }} = new \Techworker\IOTA\Type\Transfer();
+    ${{ param.name }}->setValue(new \Techworker\IOTA\Type\Iota($_POST['transfers_value']));
+    ${{ param.name }}->setRecipientAddress(new \Techworker\IOTA\Type\Address($_POST['transfers_recipient']));
 {% elseif(param.type == 'array') %}
     {% if(param.name == 'transactionHashes') %}
 ${{ param.name }} = \Techworker\IOTA\Util\TrytesUtil::arrayToTrytes(array_map('trim', array_filter(explode("\n", $_POST['{{ param.name }}']))), \Techworker\IOTA\Type\TransactionHash::class);
@@ -23,45 +27,65 @@ ${{ param.name }} = \Techworker\IOTA\Util\TrytesUtil::arrayToTrytes(array_map('t
 if($_POST['{{ param.name }}'] !== '') {
     ${{ param.name }} = \Techworker\IOTA\Util\TrytesUtil::arrayToTrytes(array_map('trim', array_filter(explode("\n", $_POST['{{ param.name }}']))), \Techworker\IOTA\Type\Tip::class);
 } else {
-    ${{ param.name }} = [$iota->getRemoteApi()->getNodeInfo($node)->getLatestMilestone()];
+    ${{ param.name }} = null;//[$iota->getRemoteApi()->getNodeInfo($node)->getLatestMilestone()];
 }
     {% elseif(param.name == 'tags') %}
-${{ param.name }} = \Techworker\IOTA\Util\TrytesUtil::arrayToTrytes(array_map('trim', array_filter(explode("\n", $_POST['{{ param.name }}']))), \Techworker\IOTA\Type\Tag::class);
+        ${{ param.name }} = \Techworker\IOTA\Util\TrytesUtil::arrayToTrytes(array_map('trim', array_filter(explode("\n", $_POST['{{ param.name }}']))), \Techworker\IOTA\Type\Tag::class);
+    {% elseif(param.name == 'inputs') %}
+        ${{ param.name }} = [];
     {% elseif(param.name == 'approvees') %}
 ${{ param.name }} = \Techworker\IOTA\Util\TrytesUtil::arrayToTrytes(array_map('trim', array_filter(explode("\n", $_POST['{{ param.name }}']))), \Techworker\IOTA\Type\Approvee::class);
     {% elseif(param.name == 'neighborUris') %}
 ${{ param.name }} = array_map('trim', array_filter(explode("\n", $_POST['{{ param.name }}'])));
+    {% elseif(param.name == 'transfers') %}
+        ${{ param.name }} = [new \Techworker\IOTA\Type\Transfer()];
+        ${{ param.name }}[0]->setValue(new \Techworker\IOTA\Type\Iota($_POST['transfers_value']));
+        ${{ param.name }}[0]->setRecipientAddress(new \Techworker\IOTA\Type\Address($_POST['transfers_recipient']));
     {% else %}
         Unknown: {{ param.type }} - {{ param.name }}
     {% endif %}
 {% elseif(param.type == 'Techworker\\IOTA\\Type\\TransactionHash') %}
-    ${{ param.name }} = new \Techworker\IOTA\Type\TransactionHash($_POST['{{ param.name }}']);
+    if($_POST['{{ param.name }}'] !== '') {
+        ${{ param.name }} = new \Techworker\IOTA\Type\TransactionHash($_POST['{{ param.name }}']);
+    } else {
+        ${{ param.name }} = null;
+    }
 {% elseif(param.type == 'Techworker\\IOTA\\Type\\SecurityLevel') %}
     ${{ param.name }} = \Techworker\IOTA\Type\SecurityLevel::fromValue($_POST['{{ param.name }}']);
 {% elseif(param.type == 'Techworker\\IOTA\\Type\\Seed') %}
     ${{ param.name }} = new \Techworker\IOTA\Type\Seed($_POST['{{ param.name }}']);
+{% elseif(param.type == 'Techworker\\IOTA\\Type\\HMACKey') %}
+    ${{ param.name }} = null;
 {% elseif(param.type == 'Techworker\\IOTA\\Type\\Tip') %}
     if($_POST['{{ param.name }}'] !== '') {
         ${{ param.name }} = new \Techworker\IOTA\Type\Tip($_POST['{{ param.name }}']);
     } else {
-        ${{ param.name }} = $iota->getRemoteApi()->getNodeInfo()->getMilestone();
+        ${{ param.name }} = null;//$iota->getRemoteApi()->getNodeInfo($node)->getLatestMilestone();
     }
 {% elseif(param.type == 'Techworker\\IOTA\\Type\\Milestone') %}
     if($_POST['{{ param.name }}'] !== '') {
         ${{ param.name }} = new \Techworker\IOTA\Type\Tip($_POST['{{ param.name }}']);
     } else {
-        ${{ param.name }} = $iota->getRemoteApi()->getNodeInfo()->getMilestone();
+        ${{ param.name }} = null;//$iota->getRemoteApi()->getNodeInfo($node)->getLatestMilestone();
     }
 {% elseif(param.type == 'Techworker\\IOTA\\Type\\Transaction') %}
     ${{ param.name }} = new \Techworker\IOTA\Type\Transaction($_POST['{{ param.name }}']);
 {% elseif(param.type == 'Techworker\\IOTA\\Type\\BundleHash') %}
     ${{ param.name }} = new \Techworker\IOTA\Type\BundleHash($_POST['{{ param.name }}']);
 {% elseif(param.type == 'Techworker\\IOTA\\Type\\Address') %}
-    ${{ param.name }} = new \Techworker\IOTA\Type\Address($_POST['{{ param.name }}']);
+    if($_POST['{{ param.name }}'] !== '') {
+        ${{ param.name }} = new \Techworker\IOTA\Type\Address($_POST['{{ param.name }}']);
+    } else {
+        ${{ param.name }} = null;
+    }
 {% elseif(param.type == 'Techworker\\IOTA\\Type\\Iota') %}
     ${{ param.name }} = new \Techworker\IOTA\Type\Iota($_POST['{{ param.name }}']);
 {% elseif(param.type == 'int') %}
-    ${{ param.name }} = (int)$_POST['{{ param.name }}'];
+    if($_POST['{{ param.name }}'] !== '') {
+        ${{ param.name }} = (int)$_POST['{{ param.name }}'];
+    } else {
+        ${{ param.name }} = null;
+    }
 {% elseif(param.type == 'bool') %}
     ${{ param.name }} = isset($_POST['{{ param.name }}']);
 {% endif %}
@@ -167,6 +191,15 @@ param.type == 'Techworker\\IOTA\\Type\\Tip') %}
         <input type="text" class="form-control seed" id="{{ param.name }}" name="{{ param.name }}" aria-describedby="{{ param.name }}" placeholder="" value="THISISTHETESTINGWALLETFORTHEPHPIOTALIBRARY9YOUMIGHTWANTTOSTEALTHEMBUTHEY9WTF9WHY9">
         <small class="form-text text-muted">Online? This is just for local testing!</small>
     </div>
+{% elseif(param.type == 'Techworker\\IOTA\\Type\\Transfer') %}
+    <div class="form-group">
+        <label for="{{ param.name }}_value">Transfer value (iota)</label>
+        <input type="number" class="form-control" id="{{ param.name }}_value" name="{{ param.name }}_value" aria-describedby="{{ param.name }}_value" placeholder="" value="1">
+    </div>
+    <div class="form-group">
+        <label for="{{ param.name }}_recipient">Transfer recipient</label>
+        <input type="text" class="form-control" id="{{ param.name }}_recipient" name="{{ param.name }}_recipient" aria-describedby="{{ param.name }}_recipient" placeholder="" value="">
+    </div>
 {% elseif(param.type == 'Techworker\\IOTA\\Type\\SecurityLevel') %}
     <div class="form-group">
         <label for="security">Security Level</label>
@@ -182,6 +215,16 @@ param.type == 'Techworker\\IOTA\\Type\\Tip') %}
         <label for="{{ param.name }}">{{ param.name }}</label>
         <textarea class="form-control" id="{{ param.name }}" name="{{ param.name }}" rows="3"></textarea>
         <small class="form-text text-muted">new line for each</small>
+    </div>
+    {% endif %}
+    {% if(param.name == 'transfers') %}
+    <div class="form-group">
+        <label for="{{ param.name }}_value">Transfer value (iota)</label>
+        <input type="number" class="form-control" id="{{ param.name }}_value" name="{{ param.name }}_value" aria-describedby="{{ param.name }}_value" placeholder="" value="1">
+    </div>
+    <div class="form-group">
+        <label for="{{ param.name }}_recipient">Transfer recipient</label>
+        <input type="text" class="form-control" id="{{ param.name }}_recipient" name="{{ param.name }}_recipient" aria-describedby="{{ param.name }}_recipient" placeholder="" value="">
     </div>
     {% endif %}
 {% elseif(param.type == 'int' or param.type == 'Techworker\\IOTA\\Type\\Iota') %}
@@ -231,7 +274,12 @@ Unknown: {{ param.type }} - {{ param.name }}
         var data = {
         {% for param in params %}
         {% if(param.type != 'bool') %}
-        {{ param.name }}: $("#{{ param.name }}").val(){% if(not(loop.last)) %},{% endif %}
+            {% if(param.name == 'transfers') %}
+                {{ param.name }}_value: $("#{{ param.name }}_value").val(),
+                {{ param.name }}_recipient: $("#{{ param.name }}_recipient").val(){% if(not(loop.last)) %},{% endif %}
+            {%  else %}
+                {{ param.name }}: $("#{{ param.name }}").val(){% if(not(loop.last)) %},{% endif %}
+            {% endif %}
         {% endif %}
         {% endfor %}
         };

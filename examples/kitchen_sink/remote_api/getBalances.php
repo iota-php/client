@@ -9,7 +9,11 @@ if(isAjax())
 
         $node = $iota->getNodes()[$_POST['node']];
         $addresses = \Techworker\IOTA\Util\TrytesUtil::arrayToTrytes(array_map('trim', array_filter(explode("\n", $_POST['addresses']))), \Techworker\IOTA\Type\Address::class);
+        if($_POST['threshold'] !== '') {
         $threshold = (int)$_POST['threshold'];
+    } else {
+        $threshold = null;
+    }
 
         $result = $iota->getRemoteApi()->getBalances(
             $node, $addresses, $threshold
@@ -64,6 +68,7 @@ if(isAjax())
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/findTransactionObjects.php">findTransactionObjects</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/getNewAddress.php">getNewAddress</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/isReAttachable.php">isReAttachable</a>
+                                                    <a class="dropdown-item" href="/kitchen_sink/client_api/promoteTransaction.php">promoteTransaction</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/getAddresses.php">getAddresses</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/getAccountData.php">getAccountData</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/client_api/storeAndBroadcast.php">storeAndBroadcast</a>
@@ -83,6 +88,7 @@ if(isAjax())
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/getTips.php">getTips</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/attachToTangle.php">attachToTangle</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/addNeighbors.php">addNeighbors</a>
+                                                    <a class="dropdown-item" href="/kitchen_sink/remote_api/isTailConsistent.php">isTailConsistent</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/getNodeInfo.php">getNodeInfo</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/broadcastTransactions.php">broadcastTransactions</a>
                                                     <a class="dropdown-item" href="/kitchen_sink/remote_api/getBalances.php">getBalances</a>
@@ -125,7 +131,7 @@ same order as the addresses were provided as input.</p>
         <textarea class="form-control" id="addresses" name="addresses" rows="3"></textarea>
         <small class="form-text text-muted">new line for each</small>
     </div>
-        <div class="form-group">
+            <div class="form-group">
         <label for="threshold">threshold</label>
         <input type="number" class="form-control" name="threshold" id="threshold" value="100">
     </div>
@@ -158,7 +164,7 @@ same order as the addresses were provided as input.</p>
     $('#submit').on('click', function(e) {
         $(".spinner").show();
         var data = {
-                        node: $("#node").val(),                                addresses: $("#addresses").val(),                                threshold: $("#threshold").val()                        };
+                                            node: $("#node").val(),                                                                addresses: $("#addresses").val(),                                                                threshold: $("#threshold").val()                                    };
                                                         
         $.post(window.location.href,data)
             .done(function(data) {

@@ -232,7 +232,7 @@ class Request extends AbstractRequest
     {
         return array_merge(parent::serialize(), [
             'depth' => $this->depth,
-            'reference' => $this->reference->serialize(),
+            'reference' => $this->reference === null ? null : $this->reference->serialize(),
             'numWalks' => $this->numWalks,
             'ignoreSpamTransactions' => $this->ignoreSpamTransactions
         ]);

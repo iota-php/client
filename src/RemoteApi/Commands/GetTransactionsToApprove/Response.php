@@ -80,7 +80,7 @@ class Response extends AbstractResponse
     public function serialize(): array
     {
         return array_merge([
-            'trunkTransactionHash' => $this->serialize(),
+            'trunkTransactionHash' => $this->trunkTransactionHash->serialize(),
             'branchTransactionHash' => $this->branchTransactionHash->serialize()
         ], parent::serialize());
     }

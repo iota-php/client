@@ -193,7 +193,7 @@ class Action extends AbstractAction
         $thresholdReached = (null !== $this->threshold);
         $length = \count($addresses);
         for ($i = 0; $i < $length; ++$i) {
-            $balance = new Iota($balances->getBalances()[$i]);
+            $balance = new Iota($balances->getBalances()[(string)$addresses[$i]]);
             if ($balance->isPos()) {
                 $input = new Input($addresses[$i], $balance, $this->startIndex + $i, $this->security);
 
