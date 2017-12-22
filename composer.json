@@ -22,7 +22,8 @@
     ],
     "require": {
         "guzzlehttp/guzzle": "~6.0",
-        "psr/container": "^1.0"
+        "psr/container": "^1.0",
+        "kornrunner/keccak": "^1.0"
     },
     "require-dev": {
         "twig/twig": "^2.0",

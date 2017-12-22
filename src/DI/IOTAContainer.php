@@ -35,6 +35,7 @@ use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
 use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
 use Techworker\IOTA\Cryptography\HMAC;
 use Techworker\IOTA\Cryptography\Keccak384\Keccak384Interface;
+use Techworker\IOTA\Cryptography\Keccak384\Korn;
 use Techworker\IOTA\Cryptography\Keccak384\NodeJS;
 use Techworker\IOTA\Cryptography\POW\CCurl;
 use Techworker\IOTA\Cryptography\POW\PowInterface;
@@ -121,7 +122,8 @@ class IOTAContainer implements ContainerInterface
 
         // the keccak 384 implementation
         $this->entries[Keccak384Interface::class] = function () use ($options) {
-            return new NodeJS($options['keccak384-nodejs']);
+            //return new NodeJS($options['keccak384-nodejs']);
+            return new Korn();
         };
 
         // returns a kerl factory
