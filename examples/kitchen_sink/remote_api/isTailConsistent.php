@@ -8,25 +8,14 @@ if(isAjax())
     try {
 
         $node = $iota->getNodes()[$_POST['node']];
-    $transactions = \Techworker\IOTA\Util\TrytesUtil::arrayToTrytes(array_map('trim', array_filter(explode("\n", $_POST['transactions']))), \Techworker\IOTA\Type\Transaction::class);
-        if($_POST['minWeightMagnitude'] !== '') {
-        $minWeightMagnitude = (int)$_POST['minWeightMagnitude'];
+    if($_POST['tailTransactionHash'] !== '') {
+        $tailTransactionHash = new \Techworker\IOTA\Type\TransactionHash($_POST['tailTransactionHash']);
     } else {
-        $minWeightMagnitude = null;
-    }
-    if($_POST['depth'] !== '') {
-        $depth = (int)$_POST['depth'];
-    } else {
-        $depth = null;
-    }
-    if($_POST['reference'] !== '') {
-        $reference = new \Techworker\IOTA\Type\Tip($_POST['reference']);
-    } else {
-        $reference = null;//$iota->getRemoteApi()->getNodeInfo($node)->getLatestMilestone();
+        $tailTransactionHash = null;
     }
 
-        $result = $iota->getClientApi()->sendTrytes(
-            $node, $transactions, $minWeightMagnitude, $depth, $reference
+        $result = $iota->getRemoteApi()->isTailConsistent(
+            $node, $tailTransactionHash
         );
         sendJson($result->serialize());
     } catch(\Exception $ex) {
@@ -115,14 +104,11 @@ if(isAjax())
     </nav>
 
     <div style="border: 1px solid #f0f0f0; padding: 10px; margin-bottom: 20px;">
-        <p></p>
-        <p><pre>public function sendTrytes(
+        <p>TODO</p>
+        <p><pre>public function isTailConsistent(
     Techworker\IOTA\Node $node,
-    array $transactions,
-    int $minWeightMagnitude,
-    int $depth,
-    Techworker\IOTA\Type\Milestone $reference = 
-) : \Techworker\IOTA\ClientApi\Actions\SendTrytes\Result</pre></p>
+    Techworker\IOTA\Type\TransactionHash $tailTransactionHash
+) : \Techworker\IOTA\RemoteApi\Commands\IsTailConsistent\Response</pre></p>
     </div>
     <div class="form-group">
         <label for="node">Node</label>
@@ -134,22 +120,9 @@ if(isAjax())
         <small class="form-text text-muted">Select a node where the remote requests (commands) will be executed on.</small>
     </div>
 
-        <div class="form-group">
-        <label for="transactions">transactions</label>
-        <textarea class="form-control" id="transactions" name="transactions" rows="3"></textarea>
-        <small class="form-text text-muted">new line for each</small>
-    </div>
-            <div class="form-group">
-        <label for="minWeightMagnitude">minWeightMagnitude</label>
-        <input type="number" class="form-control" name="minWeightMagnitude" id="minWeightMagnitude" value="">
-    </div>
     <div class="form-group">
-        <label for="depth">depth</label>
-        <input type="number" class="form-control" name="depth" id="depth" value="">
-    </div>
-    <div class="form-group">
-        <label for="reference">reference</label>
-        <input type="text" class="form-control" id="reference" name="reference" aria-describedby="reference" placeholder="" value="">
+        <label for="tailTransactionHash">tailTransactionHash</label>
+        <input type="text" class="form-control" id="tailTransactionHash" name="tailTransactionHash" aria-describedby="tailTransactionHash" placeholder="" value="">
     </div>
 <button id="submit" type="submit" class="btn btn-primary">Submit</button>
 
@@ -180,8 +153,8 @@ if(isAjax())
     $('#submit').on('click', function(e) {
         $(".spinner").show();
         var data = {
-                                            node: $("#node").val(),                                                                transactions: $("#transactions").val(),                                                                minWeightMagnitude: $("#minWeightMagnitude").val(),                                                                depth: $("#depth").val(),                                                                reference: $("#reference").val()                                    };
-                                                                                        
+                                            node: $("#node").val(),                                                                tailTransactionHash: $("#tailTransactionHash").val()                                    };
+                                        
         $.post(window.location.href,data)
             .done(function(data) {
                 $(".spinner").hide();

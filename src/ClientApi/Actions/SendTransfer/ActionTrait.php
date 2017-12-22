@@ -49,7 +49,6 @@ trait ActionTrait
      * @param array $transfers
      * @param int $minWeightMagnitude
      * @param int $depth
-     * @param bool $ignoreSpamTransactions
      * @param Address|null $remainderAddress
      * @param array $inputs
      * @param HMACKey|null $hmacKey
@@ -63,7 +62,6 @@ trait ActionTrait
                                     array $transfers,
                                     int $minWeightMagnitude,
                                     int $depth,
-                                    bool $ignoreSpamTransactions = false,
                                     Address $remainderAddress = null,
                                     array $inputs = [],
                                     HMACKey $hmacKey = null,
@@ -76,7 +74,6 @@ trait ActionTrait
         $action->setTransfers($transfers);
         $action->setMinWeightMagnitude($minWeightMagnitude);
         $action->setDepth($depth);
-        $action->setIgnoreSpamTransactions($ignoreSpamTransactions);
 
         if (null !== $remainderAddress) {
             $action->setRemainderAddress($remainderAddress);

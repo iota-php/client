@@ -45,7 +45,6 @@ trait ActionTrait
      * @param int $minWeightMagnitude
      * @param int $depth
      * @param null|Milestone $reference
-     * @param bool $ignoreSpamTransactions
      * @return Result
      */
     protected function sendTrytes(
@@ -53,8 +52,7 @@ trait ActionTrait
                                     array $transactions,
                                     int $minWeightMagnitude,
                                     int $depth,
-                                    Milestone $reference = null,
-                                    bool $ignoreSpamTransactions = false
+                                    Milestone $reference = null
     ): Result {
         $action = $this->sendTrytesFactory->factory($node);
         $action->setTransactions($transactions);
@@ -64,8 +62,6 @@ trait ActionTrait
         if($reference !== null) {
             $action->setReference($reference);
         }
-
-        $action->setIgnoreSpamTransactions($ignoreSpamTransactions);
 
         return $action->execute();
     }

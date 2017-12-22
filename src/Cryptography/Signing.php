@@ -69,7 +69,7 @@ class Signing
      */
     public static function digests(KerlFactory $kerlFactory, array $key): array
     {
-        $digests = [];
+        $digests = new \SplFixedArray(\count($key) / 27);
         $buffer = [];
 
         $length = floor(\count($key) / 6561);
@@ -100,7 +100,7 @@ class Signing
             }
         }
 
-        return $digests;
+        return $digests->toArray();
     }
 
     /**

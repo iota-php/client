@@ -49,7 +49,6 @@ trait RequestTrait
      *
      * @param Node $node
      * @param int $depth
-     * @param bool $ignoreSpamTransactions
      * @param int|null $numWalks
      * @param Milestone|null $reference
      * @return Response|AbstractResponse
@@ -60,7 +59,6 @@ trait RequestTrait
     protected function getTransactionsToApprove(
         Node $node,
                                                 int $depth,
-                                                bool $ignoreSpamTransactions = false,
                                                 int $numWalks = null,
                                                 Milestone $reference = null
     ): Response {
@@ -73,8 +71,6 @@ trait RequestTrait
         if (null !== $reference) {
             $request->setReference($reference);
         }
-
-        $request->setIgnoreSpamTransactions($ignoreSpamTransactions);
 
         return $request->execute()->throwOnError();
     }

@@ -13,7 +13,6 @@ if(isAjax())
     } else {
         $depth = null;
     }
-    $ignoreSpamTransactions = isset($_POST['ignoreSpamTransactions']);
     if($_POST['numWalks'] !== '') {
         $numWalks = (int)$_POST['numWalks'];
     } else {
@@ -26,7 +25,7 @@ if(isAjax())
     }
 
         $result = $iota->getRemoteApi()->getTransactionsToApprove(
-            $node, $depth, $ignoreSpamTransactions, $numWalks, $reference
+            $node, $depth, $numWalks, $reference
         );
         sendJson($result->serialize());
     } catch(\Exception $ex) {
@@ -123,7 +122,6 @@ transactions).</p>
         <p><pre>public function getTransactionsToApprove(
     Techworker\IOTA\Node $node,
     int $depth,
-    bool $ignoreSpamTransactions = ,
     int $numWalks = ,
     Techworker\IOTA\Type\Milestone $reference = 
 ) : \Techworker\IOTA\RemoteApi\Commands\GetTransactionsToApprove\Response</pre></p>
@@ -141,12 +139,6 @@ transactions).</p>
     <div class="form-group">
         <label for="depth">depth</label>
         <input type="number" class="form-control" name="depth" id="depth" value="">
-    </div>
-    <div class="form-check">
-        <label class="form-check-label">
-            <input type="checkbox" id="ignoreSpamTransactions" name="ignoreSpamTransactions" value="1" class="form-check-input" checked="checked">
-            ignoreSpamTransactions
-        </label>
     </div>
     <div class="form-group">
         <label for="numWalks">numWalks</label>
@@ -185,11 +177,8 @@ transactions).</p>
     $('#submit').on('click', function(e) {
         $(".spinner").show();
         var data = {
-                                            node: $("#node").val(),                                                                depth: $("#depth").val(),                                                                                numWalks: $("#numWalks").val(),                                                                reference: $("#reference").val()                                    };
-                                                        if($("#ignoreSpamTransactions").is(':checked')) {
-            data.ignoreSpamTransactions = true;
-        }
-                                                
+                                            node: $("#node").val(),                                                                depth: $("#depth").val(),                                                                numWalks: $("#numWalks").val(),                                                                reference: $("#reference").val()                                    };
+                                                                        
         $.post(window.location.href,data)
             .done(function(data) {
                 $(".spinner").hide();

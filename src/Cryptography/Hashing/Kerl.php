@@ -110,7 +110,8 @@ class Kerl implements SpongeInterface
             throw new \InvalidArgumentException('Illegal length provided');
         }
 
-        while ($offset < $length) {
+        while ($offset < $length)
+        {
             // unpack from digest response
             $unsignedHash = array_values(unpack('C*', hex2bin($this->digest())));
 

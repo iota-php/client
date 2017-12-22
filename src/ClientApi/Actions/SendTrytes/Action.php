@@ -51,11 +51,6 @@ class Action extends AbstractAction
     protected $minWeightMagnitude;
 
     /**
-     * @var bool
-     */
-    protected $ignoreSpamTransactions;
-
-    /**
      * @var Milestone
      */
     protected $reference;
@@ -126,18 +121,6 @@ class Action extends AbstractAction
     }
 
     /**
-     * @param bool $ignoreSpamTransactions
-     *
-     * @return Action
-     */
-    public function setIgnoreSpamTransactions(bool $ignoreSpamTransactions): self
-    {
-        $this->ignoreSpamTransactions = $ignoreSpamTransactions;
-
-        return $this;
-    }
-
-    /**
      * @param Milestone $reference
      * @return Action
      */
@@ -154,11 +137,22 @@ class Action extends AbstractAction
      */
     public function execute(): Result
     {
+        $found = false;
         $result = new Result($this);
         // fetch transactions to approve
-        $transactionsToApprove = $this->getTransactionsToApprove($this->node,
-            $this->depth, $this->ignoreSpamTransactions, null, $this->reference
-        );
+        while(!$found) {
+            $transactionsToApprove = $this->getTransactionsToApprove($this->node,
+                $this->depth, null, $this->reference
+            );
+            if((string)$transactionsToApprove->getTrunkTransactionHash() === 'RQTXMRAFAWRBGP9FAZXCKVKTVWIEMXZNRSRUFFQDCMENGULKOQVLWTNVTNSVURNUCMCW9WMIFCVT99999' ||
+                (string)$transactionsToApprove->getBranchTransactionHash() === 'RQTXMRAFAWRBGP9FAZXCKVKTVWIEMXZNRSRUFFQDCMENGULKOQVLWTNVTNSVURNUCMCW9WMIFCVT99999') {
+                $found = true;
+                echo 'FOUND';
+            } else {
+                echo 'Skipping';
+            }
+        }
+
         $result->addChildTrace($transactionsToApprove->getTrace());
         $result->setTrunkTransactionHash($transactionsToApprove->getTrunkTransactionHash());
         $result->setBranchTransactionHash($transactionsToApprove->getBranchTransactionHash());
@@ -194,7 +188,6 @@ class Action extends AbstractAction
             'transactions' => SerializeUtil::serializeArray($this->transactions),
             'depth' => $this->depth,
             'minWeightMagnitude' => $this->minWeightMagnitude,
-            'ignoreSpamTransactions' => $this->ignoreSpamTransactions,
             'reference' => $this->reference === null ? null : $this->reference->serialize()
         ]);
     }

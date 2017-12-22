@@ -57,14 +57,6 @@ class Request extends AbstractRequest
     protected $numWalks;
 
     /**
-     * A flag indicating whether we want to ignore transactions which are
-     * considered spam.
-     *
-     * @var bool
-     */
-    protected $ignoreSpamTransactions = false;
-
-    /**
      * Request constructor.
      *
      * @param GetTransactionObjects\ActionFactory $getTransactionObjectsFactory
@@ -147,31 +139,6 @@ class Request extends AbstractRequest
     }
 
     /**
-     * Sets a flag indicating whether we want to ignore transactions which are
-     * considered spam.
-     *
-     * @param bool $ignoreSpamTransactions
-     *
-     * @return Request
-     */
-    public function setIgnoreSpamTransactions(bool $ignoreSpamTransactions): self
-    {
-        $this->ignoreSpamTransactions = $ignoreSpamTransactions;
-
-        return $this;
-    }
-
-    /**
-     * Gets a value indicating whether to ignore spam transactions.
-     *
-     * @return bool
-     */
-    public function getIgnoreSpamTransactions(): bool
-    {
-        return $this->ignoreSpamTransactions;
-    }
-
-    /**
      * Gets the data that should be sent to the nodes endpoint.
      *
      * @return array
@@ -207,24 +174,6 @@ class Request extends AbstractRequest
         $response->initialize($srvResponse['code'], $srvResponse['raw']);
 
         $response->finish();
-        if (!$this->ignoreSpamTransactions) {
-            return $response->throwOnError();
-        }
-
-        $transactionsResponse = $this->getTransactionObjects($this->node, [
-            $response->getTrunkTransactionHash(),
-            $response->getBranchTransactionHash(),
-        ]);
-
-        // check if the signature contains the word "spammer" for now
-        // TODO: talk to the community to find a common identification
-        foreach ($transactionsResponse->getTransactions() as $transaction) {
-            $signature = TrytesUtil::asciiFromTrytes($transaction->getSignatureMessageFragment());
-            if (substr_count(strtolower($signature), 'spammer') > 0) {
-                return $this->execute();
-            }
-        }
-
         return $response->throwOnError();
     }
 
@@ -233,8 +182,7 @@ class Request extends AbstractRequest
         return array_merge(parent::serialize(), [
             'depth' => $this->depth,
             'reference' => $this->reference === null ? null : $this->reference->serialize(),
-            'numWalks' => $this->numWalks,
-            'ignoreSpamTransactions' => $this->ignoreSpamTransactions
+            'numWalks' => $this->numWalks
         ]);
     }
 }

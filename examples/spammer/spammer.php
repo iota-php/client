@@ -55,7 +55,7 @@ function spam(IOTA $iota, $seed, $message, $tag)
                 ->setValue(new \Techworker\IOTA\Type\Iota(0))
                 ->setObsoleteTag($tag)
                 ->setMessage(TrytesUtil::asciiToTrytes($message))
-        ], 15, random_int(4, 12), true);
+        ], 15, random_int(4, 12));
 
         echo "created spam-transaction:\n";
         echo "Bundle: " . (string)$bundleResponse->getBundle()->getBundleHash() . "\n";

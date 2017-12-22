@@ -8,7 +8,7 @@ if(isAjax())
     try {
 
         $node = $iota->getNodes()[$_POST['node']];
-        $seed = new \Techworker\IOTA\Type\Seed($_POST['seed']);
+    $seed = new \Techworker\IOTA\Type\Seed($_POST['seed']);
             $transfers = [new \Techworker\IOTA\Type\Transfer()];
         $transfers[0]->setValue(new \Techworker\IOTA\Type\Iota($_POST['transfers_value']));
         $transfers[0]->setRecipientAddress(new \Techworker\IOTA\Type\Address($_POST['transfers_recipient']));
@@ -22,7 +22,6 @@ if(isAjax())
     } else {
         $depth = null;
     }
-    $ignoreSpamTransactions = isset($_POST['ignoreSpamTransactions']);
     if($_POST['remainderAddress'] !== '') {
         $remainderAddress = new \Techworker\IOTA\Type\Address($_POST['remainderAddress']);
     } else {
@@ -38,7 +37,7 @@ if(isAjax())
     }
 
         $result = $iota->getClientApi()->sendTransfer(
-            $node, $seed, $transfers, $minWeightMagnitude, $depth, $ignoreSpamTransactions, $remainderAddress, $inputs, $hmacKey, $security, $reference
+            $node, $seed, $transfers, $minWeightMagnitude, $depth, $remainderAddress, $inputs, $hmacKey, $security, $reference
         );
         sendJson($result->serialize());
     } catch(\Exception $ex) {
@@ -134,7 +133,6 @@ if(isAjax())
     array $transfers,
     int $minWeightMagnitude,
     int $depth,
-    bool $ignoreSpamTransactions = ,
     Techworker\IOTA\Type\Address $remainderAddress = ,
     array $inputs = Array,
     Techworker\IOTA\Type\HMACKey $hmacKey = ,
@@ -172,12 +170,6 @@ if(isAjax())
     <div class="form-group">
         <label for="depth">depth</label>
         <input type="number" class="form-control" name="depth" id="depth" value="">
-    </div>
-    <div class="form-check">
-        <label class="form-check-label">
-            <input type="checkbox" id="ignoreSpamTransactions" name="ignoreSpamTransactions" value="1" class="form-check-input" checked="checked">
-            ignoreSpamTransactions
-        </label>
     </div>
     <div class="form-group">
         <label for="remainderAddress">remainderAddress</label>
@@ -226,11 +218,8 @@ if(isAjax())
         $(".spinner").show();
         var data = {
                                             node: $("#node").val(),                                                                seed: $("#seed").val(),                                                                transfers_value: $("#transfers_value").val(),
-                transfers_recipient: $("#transfers_recipient").val(),                                                                minWeightMagnitude: $("#minWeightMagnitude").val(),                                                                depth: $("#depth").val(),                                                                                remainderAddress: $("#remainderAddress").val(),                                                                inputs: $("#inputs").val(),                                                                hmacKey: $("#hmacKey").val(),                                                                security: $("#security").val(),                                                                reference: $("#reference").val()                                    };
-                                                                                                        if($("#ignoreSpamTransactions").is(':checked')) {
-            data.ignoreSpamTransactions = true;
-        }
-                                                                                                
+                transfers_recipient: $("#transfers_recipient").val(),                                                                minWeightMagnitude: $("#minWeightMagnitude").val(),                                                                depth: $("#depth").val(),                                                                remainderAddress: $("#remainderAddress").val(),                                                                inputs: $("#inputs").val(),                                                                hmacKey: $("#hmacKey").val(),                                                                security: $("#security").val(),                                                                reference: $("#reference").val()                                    };
+                                                                                                                                                                        
         $.post(window.location.href,data)
             .done(function(data) {
                 $(".spinner").hide();
