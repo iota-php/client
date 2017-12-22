@@ -12,3 +12,9 @@ Apart from that, happy feeless money transferring and welcome to the future!
 
 
 See /docs folder for more information.
+
+Donation? To this address please:
+
+`9GLYYUNXPYPNPQWETARARMROATEXKC9PHEKHWIYWUUAWDNHBBBAIZMTCTUEYKCTZNRQCL9PFPR9LWTFSI`
+
+You like a working IOTA network? Go ahead and donate some iota to http://www.iotatoken.nl.
