@@ -2,23 +2,7 @@
 
 **Composer**
 
-The library is not on packagist yet until we tag the very first version, so 
-you'll have to manually add the repository.
-
-```json
-    {
-        "repositories": [
-            {
-                "type": "vcs",
-                "url": "https://github.com/techworker/iota-php"
-            }
-        ],
-        "require": {
-            "techworker/iota-php": "dev-master"
-        }
-    }
-```
-Then run `composer update` to install the dependency.
+https://packagist.org/packages/techworker/iota-php
 
 **Proof of work**
 
