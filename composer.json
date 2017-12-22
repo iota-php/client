@@ -1,5 +1,9 @@
 {
-    "name": "techworker/iota",
+    "name": "techworker/iota-php",
+    "type": "library",
+    "description": "IOTA client library implementation in PHP.",
+    "keywords": ["iota", "tangle", "ledger", "crypto"],
+    "homepage": "https://github.com/Techworker/iota-php",
     "authors": [
         {
             "name": "Benjamin Ansbach",
@@ -21,6 +25,9 @@
         }
     ],
     "require": {
+        "php": ">=7.1.0",
+        "ext-bcmath": "*",
+        "ext-gmp": "*",
         "guzzlehttp/guzzle": "~6.0",
         "psr/container": "^1.0",
         "kornrunner/keccak": "^1.0"
