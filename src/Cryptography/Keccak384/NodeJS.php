@@ -19,6 +19,9 @@ use GuzzleHttp\RequestOptions;
  *
  * A class that calls a node js service to retrieve a keccak384 hash from the
  * given hashes.
+ *
+ * see https://github.com/Techworker/iota-php/commit/592327021d4d2e91bc3ef38790437c8f32acd1fd
+ * to get an idea on what was used before.
  */
 class NodeJS implements Keccak384Interface
 {
