@@ -20,15 +20,6 @@ you'll have to manually add the repository.
 ```
 Then run `composer update` to install the dependency.
 
-**Node JS keccak384**
-
-The nodejs server to generate the keccak384 hashes can be found in the 
-`/node-keccak` folder. 
-
-Run `npm install` in this folder, followed by `node keccak384-srv.js` to start 
-the server. I did not put much effort in it and as said in the introduction, 
-this should only be a temporary solution until we have a proper implementation.
-
 **Proof of work**
 
 Proof of Work can be done locally if the node does not provide access to the 

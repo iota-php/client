@@ -17,7 +17,6 @@ use Techworker\IOTA\Node;
 use Techworker\IOTA\DI\IOTAContainer;
 
 $options = [
-    'keccak384-nodejs' => 'http://127.0.0.1:8081',
     'ccurlPath' => '/srv/ccurl'
 ];
 
@@ -55,7 +54,6 @@ implementation details, just keep using the `IOTAContainer`.
 
 The `IOTAContainer` needs the following options passed as array keys:
 
-- `keccak384-nodejs` The url of the keccak384 nodejs webservice.
 - `ccurlPath` The path to the ccurl executables.
 
 **Node**

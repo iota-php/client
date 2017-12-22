@@ -20,12 +20,6 @@ if you would handle other payment data like credit cards and so on.
 
 ## Caveats
 
-At the moment you'll need nodejs installed on your server as I was not able to 
-find a proper implementation of the keccak384 hashing algorithm in PHP. The 
-current workaround is a small nodejs server that can generate a proper keccak384 
-hash. It's acceptably fast, but I hope someone is willing to help me find or 
-develop a proper PHP only (extension, library) solution.
-
 Proof of work is done by ccurl, therefore you’ll need this tool too. I did not 
 put any effort in developing a port for this as it would never be as efficient 
 as when it’s done natively. You can, however, implement your own version or use 
@@ -50,9 +44,6 @@ The library is not on packagist yet until we tag the very first version, so you 
     }
 
 Then run `composer update` to install the dependency.
-
-**Node JS keccak384**
-The nodejs server to generate the keccak384 hashes can be found in the `node-keccak` folder. Run `npm install` in this folder, followed by `node keccak384-srv.js` to start the server. I did not put much effort in it and as said above, this should only be a temporary solution until we have a proper implementation.
 
 **Proof of work**
 Proof of Work can be done locally if the node does not provide access to the `attachToTangle` command endpoint (which would do the POW for you). Currently we are using the ccurl implementation but it is easy to switch to another implementation if you have one.
@@ -82,7 +73,6 @@ To initialize a new IOTA instance and start with your IOTA project you’ll have
     use Techworker\IOTA\DI\IOTAContainer;
     
     $options = [
-        'keccak384-nodejs' => 'http://127.0.0.1:8081',
         'ccurlPath' => '/srv/ccurl'
     ];
     
@@ -112,7 +102,6 @@ If you want to use your own container (e.g. Symfony or Pimple or..), it’s your
 The `IOTAContainer` needs the following options passed as array keys:
 
 
-- `keccak384-nodejs` The url of the keccak384 nodejs webservice.
 - `ccurlPath` The path to the ccurl executables.
 
 **Node**
