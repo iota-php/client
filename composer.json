@@ -4,6 +4,7 @@
     "description": "IOTA client library implementation in PHP.",
     "keywords": ["iota", "tangle", "ledger", "crypto"],
     "homepage": "https://github.com/Techworker/iota-php",
+    "license": "MIT",
     "authors": [
         {
             "name": "Benjamin Ansbach",
