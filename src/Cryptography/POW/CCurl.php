@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Techworker\IOTA\Cryptography\POW;
 
+use Techworker\IOTA\Exception;
 use Techworker\IOTA\Type\Transaction;
 
 /**
@@ -31,10 +32,29 @@ class CCurl implements PowInterface
      * C constructor.
      *
      * @param string $pathToCcurl
+     * @throws \Techworker\IOTA\Exception
      */
     public function __construct(string $pathToCcurl)
     {
         $this->pathToCcurl = $pathToCcurl;
+        $this->checkPath();
+    }
+
+    /**
+     * check if ccurl-cli exists and if it is executable
+     *
+     * @throws \Techworker\IOTA\Exception
+     */
+    protected function checkPath()
+    {
+        $path =  rtrim($this->pathToCcurl, '/').'/ccurl-cli';
+
+        if(!file_exists($path)){
+            throw new Exception($path.' not exists');
+        }
+        if(!is_executable($path)){
+           throw new Exception($path.' is not executable');
+        }
     }
 
     /**
