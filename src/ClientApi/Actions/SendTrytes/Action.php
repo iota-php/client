@@ -137,21 +137,11 @@ class Action extends AbstractAction
      */
     public function execute(): Result
     {
-        $found = false;
         $result = new Result($this);
         // fetch transactions to approve
-        while(!$found) {
-            $transactionsToApprove = $this->getTransactionsToApprove($this->node,
-                $this->depth, null, $this->reference
-            );
-            if((string)$transactionsToApprove->getTrunkTransactionHash() === 'RQTXMRAFAWRBGP9FAZXCKVKTVWIEMXZNRSRUFFQDCMENGULKOQVLWTNVTNSVURNUCMCW9WMIFCVT99999' ||
-                (string)$transactionsToApprove->getBranchTransactionHash() === 'RQTXMRAFAWRBGP9FAZXCKVKTVWIEMXZNRSRUFFQDCMENGULKOQVLWTNVTNSVURNUCMCW9WMIFCVT99999') {
-                $found = true;
-                echo 'FOUND';
-            } else {
-                echo 'Skipping';
-            }
-        }
+        $transactionsToApprove = $this->getTransactionsToApprove($this->node,
+            $this->depth, null, $this->reference
+        );
 
         $result->addChildTrace($transactionsToApprove->getTrace());
         $result->setTrunkTransactionHash($transactionsToApprove->getTrunkTransactionHash());
