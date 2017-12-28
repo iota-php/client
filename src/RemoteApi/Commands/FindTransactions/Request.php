@@ -239,8 +239,7 @@ class Request extends AbstractRequest
 
         if (\count($this->addresses) > 0) {
             $params['addresses'] = array_map(function (Address $address) {
-                $address->removeChecksum();
-                return (string)$address;
+                return (string)$address->removeChecksum();
             }, $this->addresses);
         }
 
