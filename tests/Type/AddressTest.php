@@ -14,7 +14,7 @@ class AddressTest extends TestCase
     {
         $address = new Address(str_repeat('A', 81));
         static::assertEquals(str_repeat('A', 81), (string)$address);
-        $address->setChecksum(new Trytes('AAAAAAAAA'));
+        $address = $address->setCheckSum(new Trytes('AAAAAAAAA'));
 
         static::assertEquals(str_repeat('A', 90), (string)$address);
         $address = new Address(str_repeat('A', 90));
@@ -60,12 +60,14 @@ class AddressTest extends TestCase
     {
         $address = new Address(str_repeat('A', 81), 5);
         static::assertFalse($address->hasChecksum());
-        $address->setChecksum(new Trytes('AAAAAAAAA'));
-        static::assertTrue($address->hasChecksum());
+        $newAddress = $address->setCheckSum(new Trytes('AAAAAAAAA'));
+        static::assertFalse($address->hasChecksum());
+        static::assertTrue($newAddress->hasChecksum());
 
-        static::assertEquals(str_repeat('A', 90), (string)$address);
-        $address->removeChecksum();
+        $remAddress = $address->removeChecksum();
+        static::assertEquals(str_repeat('A', 90), (string)$newAddress);
         static::assertEquals(str_repeat('A', 81), (string)$address);
+        static::assertEquals(str_repeat('A', 81), (string)$remAddress);
     }
 
     public function testSerialize()
@@ -76,8 +78,8 @@ class AddressTest extends TestCase
         static::assertEquals(str_repeat('A', 81), $s['trytes']);
         static::assertArrayHasKey('index', $s);
         static::assertEquals(-1, $s['index']);
-        static::assertArrayHasKey('checksum', $s);
-        static::assertNull($s['checksum']);
+        static::assertArrayHasKey('checkSum', $s);
+        static::assertNull($s['checkSum']);
 
         $address = new Address(str_repeat('A', 90));
         $s = $address->serialize();
@@ -85,8 +87,8 @@ class AddressTest extends TestCase
         static::assertEquals(str_repeat('A', 81), $s['trytes']);
         static::assertArrayHasKey('index', $s);
         static::assertEquals(-1,$s['index']);
-        static::assertArrayHasKey('checksum', $s);
-        static::assertEquals('AAAAAAAAA', $s['checksum']);
+        static::assertArrayHasKey('checkSum', $s);
+        static::assertEquals('AAAAAAAAA', $s['checkSum']);
 
         $address = new Address(str_repeat('A', 90), 5);
         $s = $address->serialize();
@@ -94,8 +96,7 @@ class AddressTest extends TestCase
         static::assertEquals(str_repeat('A', 81), $s['trytes']);
         static::assertArrayHasKey('index', $s);
         static::assertEquals(5,$s['index']);
-        static::assertArrayHasKey('checksum', $s);
-        static::assertEquals('AAAAAAAAA', $s['checksum']);
-
+        static::assertArrayHasKey('checkSum', $s);
+        static::assertEquals('AAAAAAAAA', $s['checkSum']);
     }
 }

@@ -59,6 +59,7 @@ use Techworker\IOTA\RemoteApi\HttpClient\HttpClientInterface;
 use Techworker\IOTA\RemoteApi\RemoteApi;
 use Techworker\IOTA\Type\HMACKey;
 use Techworker\IOTA\Util\AddressUtil;
+use Techworker\IOTA\Util\CheckSumUtil;
 
 /**
  * Class IOTAContainer
@@ -145,8 +146,15 @@ class IOTAContainer implements ContainerInterface
             };
         };
 
+        $this->entries[CheckSumUtil::class] = function () {
+            return new CheckSumUtil($this->get(KerlFactory::class));
+        };
+
         $this->entries[AddressUtil::class] = function () {
-            return new AddressUtil($this->get(KerlFactory::class));
+            return new AddressUtil(
+                $this->get(KerlFactory::class),
+                $this->get(CheckSumUtil::class)
+            );
         };
 
         $this->entries[ClientApi::class] = function () {

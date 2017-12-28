@@ -20,8 +20,10 @@ namespace Techworker\IOTA\Type;
  * Shootout to the https://github.com/paragonie/halite and their HiddenString
  * class.
  */
-class Seed extends Trytes
+class Seed extends Trytes implements CheckSummableInterface
 {
+    use CheckSummableTrait;
+
     /**
      * Creates a new Seed instance.
      *
@@ -31,10 +33,25 @@ class Seed extends Trytes
      */
     public function __construct(string $seed = null)
     {
-        if (null !== $seed && \strlen($seed) < 81) {
-            throw new \InvalidArgumentException('Seed length is 81');
+        if ($seed !== null) {
+            $length = \strlen($seed);
+            if (81 !== $length && 84 !== $length) {
+                throw new \InvalidArgumentException(sprintf(
+                    'A seed must be 81/84 (+checksum) trytes long: %s',
+                    $seed
+                ));
+            }
+
+            // extract the checksum and save separately
+            if (84 === $length) {
+                $checkSum = substr($seed, 81, 3);
+                /** @noinspection CallableParameterUseCaseInTypeContextInspection */
+                $seed = substr($seed, 0, 81);
+                $this->checkSum = new Trytes($checkSum);
+            }
         }
-        parent::__construct(substr($seed, 0, 81));
+
+        parent::__construct($seed);
     }
 
     /**

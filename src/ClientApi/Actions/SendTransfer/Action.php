@@ -513,7 +513,9 @@ class Action extends AbstractAction
             }
 
             // remove the checksum
-            $transfer->getRecipientAddress()->removeChecksum();
+            $transfer->setRecipientAddress(
+                $transfer->getRecipientAddress()->removeChecksum()
+            );
         }
     }
 
