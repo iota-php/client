@@ -69,8 +69,7 @@ class Request extends AbstractRequest
      */
     public function addAddress(Address $address) : Request
     {
-        $address->removeChecksum();
-        $this->addresses[] = $address;
+        $this->addresses[] = $address->removeChecksum();
 
         return $this;
     }

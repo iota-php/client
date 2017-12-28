@@ -61,12 +61,9 @@ class TrytesUtilTest extends TestCase
         static::assertEquals($string, TrytesUtil::asciiFromTrytes($trytes));
     }
 
-    /**
-     * @expectedException Exception
-     */
     public function testAsciiTrytesNotEven()
     {
-        TrytesUtil::asciiFromTrytes(new Trytes('9'));
+        static::assertEquals('', TrytesUtil::asciiFromTrytes(new Trytes('9')));
     }
 
     public function testStringToTrytes()

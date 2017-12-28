@@ -35,6 +35,12 @@ class SeedTest extends TestCase
         static::assertEmpty($seed->__toString());
     }
 
+    public function testSeedWithCheckSum()
+    {
+        $seed = new Seed(str_repeat('A', 84));
+        static::assertEquals('AAA', (string)$seed->getCheckSum());
+    }
+
     public function testSeedIsNotInDump()
     {
         $seed = new Seed(str_repeat('A', 81));

@@ -33,15 +33,24 @@ class AddressUtil
     protected $kerlFactory;
 
     /**
+     * Utility to calculate checksums.
+     *
+     * @var CheckSumUtil
+     */
+    protected $checkSumUtil;
+
+    /**
      * AddressUtil constructor.
      *
      * @param KerlFactory $kerlFactory
+     * @param CheckSumUtil $checkSumUtil
      */
-    public function __construct(KerlFactory $kerlFactory)
+    public function __construct(KerlFactory $kerlFactory, CheckSumUtil $checkSumUtil)
     {
         $this->kerlFactory = $kerlFactory;
+        $this->checkSumUtil = $checkSumUtil;
     }
-
+    
     /**
      * Calculates and returns the checksum of the given address.
      *
@@ -86,7 +95,9 @@ class AddressUtil
         $address = Signing::address($this->kerlFactory, $digests, $index);
 
         if ($addChecksum) {
-            $address->setChecksum($this->getChecksum($address));
+            $address = $address->setCheckSum(
+                $this->checkSumUtil->getChecksum($address)
+            );
         }
 
         return $address;

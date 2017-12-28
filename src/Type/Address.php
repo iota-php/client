@@ -16,14 +16,9 @@ namespace Techworker\IOTA\Type;
  *
  * 81-trytes long address. In addition it might contain a checksum.
  */
-class Address extends Trytes
+class Address extends Trytes implements CheckSummableInterface
 {
-    /**
-     * The checksum of the address (9 Tryte).
-     *
-     * @var Trytes
-     */
-    protected $checksum;
+    use CheckSummableTrait;
 
     /**
      * The index position of the address. -1 if not defined.
@@ -45,36 +40,22 @@ class Address extends Trytes
             $length = \strlen($address);
             if (81 !== $length && 90 !== $length) {
                 throw new \InvalidArgumentException(sprintf(
-                    'An address must be 81/90 chars long: %s',
+                    'An address must be 81/90 (+checksum) trytes long: %s',
                     $address
                 ));
             }
 
             // extract the checksum and save separately
             if (90 === $length) {
-                $checksum = substr($address, 81, 9);
+                $checkSum = substr($address, 81, 9);
                 /** @noinspection CallableParameterUseCaseInTypeContextInspection */
                 $address = substr($address, 0, 81);
-                $this->checksum = new Trytes($checksum);
+                $this->checkSum = new Trytes($checkSum);
             }
         }
 
         $this->index = $index;
         parent::__construct($address);
-    }
-
-    /**
-     * Sets the checksum of the address.
-     *
-     * @param Trytes $checksum
-     *
-     * @return Address
-     */
-    public function setChecksum(Trytes $checksum): self
-    {
-        $this->checksum = $checksum;
-
-        return $this;
     }
 
     /**
@@ -104,29 +85,11 @@ class Address extends Trytes
      */
     public function __toString(): string
     {
-        if (null === $this->checksum) {
+        if (null === $this->checkSum) {
             return parent::__toString();
         }
 
-        return parent::__toString().(string) $this->checksum;
-    }
-
-    /**
-     * Gets a value indicating whether the address has a checksum.
-     *
-     * @return bool
-     */
-    public function hasChecksum(): bool
-    {
-        return null !== $this->checksum;
-    }
-
-    /**
-     * Removes the checksum from the address.
-     */
-    public function removeChecksum()
-    {
-        $this->checksum = null;
+        return parent::__toString().(string) $this->checkSum;
     }
 
     /**
@@ -137,7 +100,7 @@ class Address extends Trytes
     public function serialize(): array
     {
         return array_merge(parent::serialize(), [
-            'checksum' => $this->hasChecksum() ? $this->checksum : null,
+            'checkSum' => $this->hasChecksum() ? (string)$this->checkSum : null,
             'index' => $this->index
         ]);
     }
