@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\ClientApi\Actions\PromoteTransaction;
 
@@ -15,15 +17,15 @@ use Techworker\IOTA\ClientApi\AbstractAction;
 use Techworker\IOTA\ClientApi\AbstractResult;
 use Techworker\IOTA\ClientApi\Actions\SendTransfer;
 use Techworker\IOTA\Exception;
-use Techworker\IOTA\RemoteApi\Commands\IsTailConsistent;
 use Techworker\IOTA\Node;
+use Techworker\IOTA\RemoteApi\Commands\IsTailConsistent;
 use Techworker\IOTA\Type\Milestone;
 use Techworker\IOTA\Type\Seed;
 use Techworker\IOTA\Type\TransactionHash;
 use Techworker\IOTA\Type\Transfer;
 
 /**
- * TODO
+ * TODO.
  */
 class Action extends AbstractAction
 {
@@ -67,9 +69,10 @@ class Action extends AbstractAction
 
     /**
      * Action constructor.
-     * @param Node $node
+     *
+     * @param Node                            $node
      * @param IsTailConsistent\RequestFactory $isTailConsistentFactory
-     * @param SendTransfer\ActionFactory $sendTransferFactory
+     * @param SendTransfer\ActionFactory      $sendTransferFactory
      */
     public function __construct(
         Node $node,
@@ -85,11 +88,13 @@ class Action extends AbstractAction
      * Sets the hash of the tail transaction.
      *
      * @param TransactionHash $tailTransactionHash
+     *
      * @return Action
      */
-    public function setTailTransactionHash(TransactionHash $tailTransactionHash): Action
+    public function setTailTransactionHash(TransactionHash $tailTransactionHash): self
     {
         $this->tailTransactionHash = $tailTransactionHash;
+
         return $this;
     }
 
@@ -123,29 +128,34 @@ class Action extends AbstractAction
 
     /**
      * @param Transfer $transfer
+     *
      * @return Action
      */
-    public function setTransfer(Transfer $transfer): Action
+    public function setTransfer(Transfer $transfer): self
     {
         $this->transfer = $transfer;
+
         return $this;
     }
 
     /**
      * @param Milestone $reference
+     *
      * @return Action
      */
-    public function setReference(Milestone $reference): Action
+    public function setReference(Milestone $reference): self
     {
         $this->reference = $reference;
+
         return $this;
     }
 
     /**
      * Executes the action.
      *
-     * @return Result|AbstractResult
      * @throws Exception
+     *
+     * @return AbstractResult|Result
      */
     public function execute(): Result
     {
@@ -153,21 +163,27 @@ class Action extends AbstractAction
 
         $isTailConsistentResult = $this->isTailConsistent($this->node, $this->reference);
         $result->addChildTrace($isTailConsistentResult->getTrace());
-        if($isTailConsistentResult->getState() === false) {
-            throw new Exception('Inconsistent subtangle: ' . $this->reference);
+        if (false === $isTailConsistentResult->getState()) {
+            throw new Exception('Inconsistent subtangle: '.$this->reference);
         }
 
-        $sendTransferResult = $this->sendTransfer($this->node,
-            new Seed((string)$this->transfer->getRecipientAddress()->removeChecksum()),
+        $sendTransferResult = $this->sendTransfer(
+            $this->node,
+            new Seed((string) $this->transfer->getRecipientAddress()->removeChecksum()),
             [$this->transfer],
             $this->minWeightMagnitude,
             $this->depth,
             true,
-            null, [], null, null, $this->reference
+            null,
+            [],
+            null,
+            null,
+            $this->reference
         ); // uah!
         $result->setSendTransferResult($sendTransferResult);
 
         $result->finish();
+
         return $result;
     }
 
@@ -178,7 +194,7 @@ class Action extends AbstractAction
             'depth' => $this->depth,
             'minWeightMagnitude' => $this->minWeightMagnitude,
             'transfer' => $this->transfer->serialize(),
-            'reference' => $this->reference->serialize()
+            'reference' => $this->reference->serialize(),
         ]);
     }
 }

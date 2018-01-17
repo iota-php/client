@@ -1,48 +1,56 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
+
+/*
+ * This file is part of the IOTA PHP package.
+ *
+ * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Techworker\IOTA\Base\Types\Test;
 
 use PHPUnit\Framework\TestCase;
-use Techworker\IOTA\Type\Trits;
-use Techworker\IOTA\Type\Tryte;
 use Techworker\IOTA\Type\Trytes;
 use Techworker\IOTA\Util\TryteUtil;
 
+/**
+ * @coversNothing
+ */
 class TrytesTest extends TestCase
 {
     public function testConstruct()
     {
         $trytes = new Trytes();
-        static::assertEmpty((string)$trytes);
+        static::assertEmpty((string) $trytes);
 
-        foreach(array_keys(TryteUtil::TRYTE_TO_TRITS_MAP) as $validTryte) {
-            $trytes = new Trytes((string)$validTryte);
-            static::assertEquals($validTryte, (string)$trytes);
+        foreach (array_keys(TryteUtil::TRYTE_TO_TRITS_MAP) as $validTryte) {
+            $trytes = new Trytes((string) $validTryte);
+            static::assertEquals($validTryte, (string) $trytes);
         }
 
-        for($i = 0; $i <= 255; $i++) {
+        for ($i = 0; $i <= 255; ++$i) {
             // skip A-Z / 9
-            if(($i >= 65 && $i <= 90) || $i === 57) {
+            if (($i >= 65 && $i <= 90) || 57 === $i) {
                 continue;
             }
 
-            try
-            {
-                new Trytes((string)chr($i));
+            try {
+                new Trytes((string) chr($i));
                 static::assertTrue(false);
-            }
-            catch(\InvalidArgumentException $ia) {
+            } catch (\InvalidArgumentException $ia) {
                 static::assertTrue(true);
             }
         }
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalid()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         new Trytes('abc');
     }
 
@@ -51,7 +59,7 @@ class TrytesTest extends TestCase
         $tryteArr = ['A', 'B', 'C'];
 
         $trytes = new Trytes('ABC');
-        foreach($trytes as $idx => $tryte) {
+        foreach ($trytes as $idx => $tryte) {
             static::assertEquals($tryteArr[$idx], $tryte);
         }
     }
@@ -59,9 +67,9 @@ class TrytesTest extends TestCase
     public function testCount()
     {
         $all = '';
-        foreach(array_keys(TryteUtil::TRYTE_TO_TRITS_MAP) as $validTryte) {
+        foreach (array_keys(TryteUtil::TRYTE_TO_TRITS_MAP) as $validTryte) {
             $all .= $validTryte;
-            $trytes = new Trytes((string)$all);
+            $trytes = new Trytes((string) $all);
             static::assertEquals(strlen($all), $trytes->count());
         }
     }

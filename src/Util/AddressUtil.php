@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\Util;
 
@@ -42,7 +44,7 @@ class AddressUtil
     /**
      * AddressUtil constructor.
      *
-     * @param KerlFactory $kerlFactory
+     * @param KerlFactory  $kerlFactory
      * @param CheckSumUtil $checkSumUtil
      */
     public function __construct(KerlFactory $kerlFactory, CheckSumUtil $checkSumUtil)
@@ -50,7 +52,7 @@ class AddressUtil
         $this->kerlFactory = $kerlFactory;
         $this->checkSumUtil = $checkSumUtil;
     }
-    
+
     /**
      * Calculates and returns the checksum of the given address.
      *

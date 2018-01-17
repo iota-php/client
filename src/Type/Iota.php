@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\Type;
 
@@ -39,7 +41,7 @@ class Iota implements SerializeInterface
     /**
      * Iota constructor.
      *
-     * @param string|int $amount
+     * @param int|string $amount
      *
      * @throws \InvalidArgumentException
      */
@@ -52,6 +54,16 @@ class Iota implements SerializeInterface
         }
 
         $this->amount = (string) $amount;
+    }
+
+    /**
+     * toString implementation.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->amount;
     }
 
     /**
@@ -70,8 +82,9 @@ class Iota implements SerializeInterface
      *
      * @param Iota $iota
      *
-     * @return Iota
      * @throws \InvalidArgumentException
+     *
+     * @return Iota
      */
     public function plus(self $iota): self
     {
@@ -83,8 +96,9 @@ class Iota implements SerializeInterface
      *
      * @param Iota $iota
      *
-     * @return Iota
      * @throws \InvalidArgumentException
+     *
+     * @return Iota
      */
     public function minus(self $iota): self
     {
@@ -96,8 +110,9 @@ class Iota implements SerializeInterface
      *
      * @param int|string $multiplier
      *
-     * @return Iota
      * @throws \InvalidArgumentException
+     *
+     * @return Iota
      */
     public function multiplyBy($multiplier): self
     {
@@ -109,8 +124,9 @@ class Iota implements SerializeInterface
      *
      * @param int|string $divisor
      *
-     * @return Iota
      * @throws \InvalidArgumentException
+     *
+     * @return Iota
      */
     public function divideBy($divisor): self
     {
@@ -170,9 +186,9 @@ class Iota implements SerializeInterface
     /**
      * @param string $petaIota
      *
-     * @return Iota
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return Iota
      */
     public static function fromPetaIota(string $petaIota): self
     {
@@ -182,9 +198,9 @@ class Iota implements SerializeInterface
     /**
      * @param string $teraIota
      *
-     * @return Iota
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return Iota
      */
     public static function fromTeraIota(string $teraIota): self
     {
@@ -194,9 +210,9 @@ class Iota implements SerializeInterface
     /**
      * @param string $gigaIota
      *
-     * @return Iota
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return Iota
      */
     public static function fromGigaIota(string $gigaIota): self
     {
@@ -206,9 +222,9 @@ class Iota implements SerializeInterface
     /**
      * @param string $megaIota
      *
-     * @return Iota
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return Iota
      */
     public static function fromMegaIota(string $megaIota): self
     {
@@ -218,9 +234,9 @@ class Iota implements SerializeInterface
     /**
      * @param string $kiloIota
      *
-     * @return Iota
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return Iota
      */
     public static function fromKiloIota(string $kiloIota): self
     {
@@ -306,20 +322,11 @@ class Iota implements SerializeInterface
     }
 
     /**
-     * toString implementation.
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->amount;
-    }
-
-    /**
      * Gets a 0 Iota instance.
      *
-     * @return Iota
      * @throws \InvalidArgumentException
+     *
+     * @return Iota
      */
     public static function ZERO(): self
     {
@@ -361,7 +368,7 @@ class Iota implements SerializeInterface
      *
      * @return string
      */
-    public function serialize() : string
+    public function serialize(): string
     {
         return $this->__toString();
     }

@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the IOTA PHP package.
+ *
+ * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Techworker\IOTA\Type;
 
 use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
@@ -137,29 +148,6 @@ class Transaction extends Trytes
      */
     protected $curlFactory;
 
-    /** @noinspection MoreThanThreeArgumentsInspection */
-    /**
-     * Creates a new transaction with the given values.
-     *
-     * @param CurlFactory $curlFactory
-     * @param Address $address
-     * @param Iota $value
-     * @param Tag $tag
-     * @param int $timestamp
-     * @return Transaction
-     */
-    public static function createTransaction(CurlFactory $curlFactory, Address $address, Iota $value, Tag $tag, int $timestamp) : Transaction
-    {
-        $instance = new self($curlFactory);
-        $instance->address = $address;
-        $instance->value = $value;
-        $instance->obsoleteTag = $tag;
-        $instance->tag = $tag;
-        $instance->timestamp = $timestamp;
-
-        return $instance;
-    }
-
     /**
      * Creates a new Transaction from the given trytes string.
      *
@@ -186,57 +174,6 @@ class Transaction extends Trytes
         }
 
         $this->parse();
-    }
-
-    /**
-     * Tries to parse the current trytes string.
-     */
-    protected function parse() : void
-    {
-        $trits = TrytesUtil::toTrits($this);
-        $curl = $this->curlFactory->factory();
-        $curl->initialize();
-        $curl->absorb($trits, 0, \count($trits));
-
-        $hash = [];
-        $curl->squeeze($hash, 0, 243);
-
-        $this->transactionHash = new TransactionHash(TritsUtil::toTrytes($hash));
-        $this->signatureMessageFragment = new SignatureMessageFragment(
-            substr($this->trytes, 0, 2187)
-        );
-
-        // Info: I kept the numbers from the iota.js lib so its simpler to
-        // compare any changes.
-        $this->address = new Address(substr($this->trytes, 2187, 2268 - 2187));
-        $this->value = new Iota(TritsUtil::toInt(\array_slice($trits, 6804, 6837 - 6804)));
-        $this->obsoleteTag = new Tag(substr($this->trytes, 2295, 2322 - 2295));
-        $this->timestamp = gmp_intval(TritsUtil::toInt(\array_slice($trits, 6966, 6993 - 6966)));
-        $this->currentIndex = gmp_intval(TritsUtil::toInt(\array_slice($trits, 6993, 7020 - 6993)));
-        $this->lastIndex = gmp_intval(TritsUtil::toInt(\array_slice($trits, 7020, 7047 - 7020)));
-
-        $this->bundleHash = new BundleHash(
-            substr($this->trytes, 2349, 2430 - 2349)
-        );
-
-        $this->trunkTransactionHash = new TransactionHash(
-            substr($this->trytes, 2430, 2511 - 2430)
-        );
-
-        $this->branchTransactionHash = new TransactionHash(
-            substr($this->trytes, 2511, 2592 - 2511)
-        );
-
-        $this->tag = new Tag(
-            substr($this->trytes, 2592, 2619 - 2592)
-        );
-        $this->attachmentTimestamp = gmp_intval(TritsUtil::toInt(\array_slice($trits, 7857, 7884 - 7857)));
-        $this->attachmentTimestampLowerBound = gmp_intval(TritsUtil::toInt(\array_slice($trits, 7884, 7911 - 7884)));
-        $this->attachmentTimestampUpperBound = gmp_intval(TritsUtil::toInt(\array_slice($trits, 7911, 7938 - 7911)));
-
-        $this->nonce = new Trytes(
-            substr($this->trytes, 2646, 2673 - 2646)
-        );
     }
 
     /**
@@ -299,6 +236,31 @@ class Transaction extends Trytes
             (string) TritsUtil::toTrytes($attachmentTimestampLowerBoundTrits).
             (string) TritsUtil::toTrytes($attachmentTimestampUpperBoundTrits).
             (string) $this->nonce;
+    }
+
+    /** @noinspection MoreThanThreeArgumentsInspection */
+
+    /**
+     * Creates a new transaction with the given values.
+     *
+     * @param CurlFactory $curlFactory
+     * @param Address     $address
+     * @param Iota        $value
+     * @param Tag         $tag
+     * @param int         $timestamp
+     *
+     * @return Transaction
+     */
+    public static function createTransaction(CurlFactory $curlFactory, Address $address, Iota $value, Tag $tag, int $timestamp): self
+    {
+        $instance = new self($curlFactory);
+        $instance->address = $address;
+        $instance->value = $value;
+        $instance->obsoleteTag = $tag;
+        $instance->tag = $tag;
+        $instance->timestamp = $timestamp;
+
+        return $instance;
     }
 
     /**
@@ -489,9 +451,10 @@ class Transaction extends Trytes
 
     /**
      * @param BundleHash $bundleHash
+     *
      * @return Transaction
      */
-    public function setBundleHash(BundleHash $bundleHash) : Transaction
+    public function setBundleHash(BundleHash $bundleHash): self
     {
         $this->bundleHash = $bundleHash;
 
@@ -582,6 +545,7 @@ class Transaction extends Trytes
 
     /**
      * Sets the attachment timestamp lower bound.
+     *
      * @param int $attachmentTimestampLowerBound
      *
      * @return Transaction
@@ -654,7 +618,7 @@ class Transaction extends Trytes
      *
      * @return array
      */
-    public function serialize() : array
+    public function serialize(): array
     {
         return [
             'hash' => $this->transactionHash->serialize(),
@@ -675,5 +639,56 @@ class Transaction extends Trytes
             'nonce' => $this->nonce->serialize(),
             'persistence' => $this->persistence,
         ];
+    }
+
+    /**
+     * Tries to parse the current trytes string.
+     */
+    protected function parse(): void
+    {
+        $trits = TrytesUtil::toTrits($this);
+        $curl = $this->curlFactory->factory();
+        $curl->initialize();
+        $curl->absorb($trits, 0, \count($trits));
+
+        $hash = [];
+        $curl->squeeze($hash, 0, 243);
+
+        $this->transactionHash = new TransactionHash(TritsUtil::toTrytes($hash));
+        $this->signatureMessageFragment = new SignatureMessageFragment(
+            substr($this->trytes, 0, 2187)
+        );
+
+        // Info: I kept the numbers from the iota.js lib so its simpler to
+        // compare any changes.
+        $this->address = new Address(substr($this->trytes, 2187, 2268 - 2187));
+        $this->value = new Iota(TritsUtil::toInt(\array_slice($trits, 6804, 6837 - 6804)));
+        $this->obsoleteTag = new Tag(substr($this->trytes, 2295, 2322 - 2295));
+        $this->timestamp = gmp_intval(TritsUtil::toInt(\array_slice($trits, 6966, 6993 - 6966)));
+        $this->currentIndex = gmp_intval(TritsUtil::toInt(\array_slice($trits, 6993, 7020 - 6993)));
+        $this->lastIndex = gmp_intval(TritsUtil::toInt(\array_slice($trits, 7020, 7047 - 7020)));
+
+        $this->bundleHash = new BundleHash(
+            substr($this->trytes, 2349, 2430 - 2349)
+        );
+
+        $this->trunkTransactionHash = new TransactionHash(
+            substr($this->trytes, 2430, 2511 - 2430)
+        );
+
+        $this->branchTransactionHash = new TransactionHash(
+            substr($this->trytes, 2511, 2592 - 2511)
+        );
+
+        $this->tag = new Tag(
+            substr($this->trytes, 2592, 2619 - 2592)
+        );
+        $this->attachmentTimestamp = gmp_intval(TritsUtil::toInt(\array_slice($trits, 7857, 7884 - 7857)));
+        $this->attachmentTimestampLowerBound = gmp_intval(TritsUtil::toInt(\array_slice($trits, 7884, 7911 - 7884)));
+        $this->attachmentTimestampUpperBound = gmp_intval(TritsUtil::toInt(\array_slice($trits, 7911, 7938 - 7911)));
+
+        $this->nonce = new Trytes(
+            substr($this->trytes, 2646, 2673 - 2646)
+        );
     }
 }

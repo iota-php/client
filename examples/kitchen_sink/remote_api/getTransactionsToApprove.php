@@ -1,34 +1,37 @@
 <?php
+
 namespace Techworker\IOTA\Apps\KitchenSink;
+
 /** @var \Techworker\IOTA\IOTA $iota */
-$iota = include __DIR__ . '/../bootstrap.php';
+$iota = include __DIR__.'/../bootstrap.php';
 
-if(isAjax())
-{
+if (isAjax()) {
     try {
-
         $node = $iota->getNodes()[$_POST['node']];
-    if($_POST['depth'] !== '') {
-        $depth = (int)$_POST['depth'];
-    } else {
-        $depth = null;
-    }
-    if($_POST['numWalks'] !== '') {
-        $numWalks = (int)$_POST['numWalks'];
-    } else {
-        $numWalks = null;
-    }
-    if($_POST['reference'] !== '') {
-        $reference = new \Techworker\IOTA\Type\Tip($_POST['reference']);
-    } else {
-        $reference = null;//$iota->getRemoteApi()->getNodeInfo($node)->getLatestMilestone();
-    }
+        if ('' !== $_POST['depth']) {
+            $depth = (int) $_POST['depth'];
+        } else {
+            $depth = null;
+        }
+        if ('' !== $_POST['numWalks']) {
+            $numWalks = (int) $_POST['numWalks'];
+        } else {
+            $numWalks = null;
+        }
+        if ('' !== $_POST['reference']) {
+            $reference = new \Techworker\IOTA\Type\Tip($_POST['reference']);
+        } else {
+            $reference = null; //$iota->getRemoteApi()->getNodeInfo($node)->getLatestMilestone();
+        }
 
         $result = $iota->getRemoteApi()->getTransactionsToApprove(
-            $node, $depth, $numWalks, $reference
+            $node,
+            $depth,
+            $numWalks,
+            $reference
         );
         sendJson($result->serialize());
-    } catch(\Exception $ex) {
+    } catch (\Exception $ex) {
         sendJson(['error' => $ex->getMessage()]);
     }
     exit;
@@ -129,8 +132,8 @@ transactions).</p>
     <div class="form-group">
         <label for="node">Node</label>
         <select class="form-control" id="node" name="node">
-            <?php foreach($iota->getNodes() as $k => $node) : ?>
-            <option value="<?= $k ?>"><?= $node->getHost() ?></option>
+            <?php foreach ($iota->getNodes() as $k => $node) : ?>
+            <option value="<?php echo $k; ?>"><?php echo $node->getHost(); ?></option>
             <?php endforeach; ?>
         </select>
         <small class="form-text text-muted">Select a node where the remote requests (commands) will be executed on.</small>

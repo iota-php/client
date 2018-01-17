@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,21 +10,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Techworker\IOTA\ClientApi\ClientApi;
-use Techworker\IOTA\Exception;
 use Techworker\IOTA\IOTA;
 use Techworker\IOTA\Node;
 use Techworker\IOTA\RemoteApi\RemoteApi;
 
 /**
- * Class IOTATest
+ * Class IOTATest.
  *
- * @package Techworker\IOTA\Tests
+ * @coversNothing
  */
 class IOTATest extends TestCase
 {
@@ -30,7 +31,7 @@ class IOTATest extends TestCase
         $nodes = [
             new Node('http://127.0.0.1:14265'),
             new Node('http://127.0.0.2:14265'),
-            'mynode' => new Node('http://myNode')
+            'mynode' => new Node('http://myNode'),
         ];
 
         $iota = new IOTA(new Container(), $nodes);
@@ -46,11 +47,10 @@ class IOTATest extends TestCase
         static::assertEquals($node->getHost(), 'http://myNode');
     }
 
-    /**
-     * @expectedException Exception
-     */
     public function testInvalidNode()
     {
+        $this->expectException(\Exception::class);
+
         $nodes = [];
         $iota = new IOTA(new Container(), $nodes);
         $iota->getNode('-1');

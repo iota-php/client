@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\RemoteApi\Commands\GetBalances;
 
@@ -26,7 +28,7 @@ use Techworker\IOTA\Util\SerializeUtil;
  * confirmed balance was determined. The balances is returned as a list in the
  * same order as the addresses were provided as input.
  *
- * @link https://iota.readme.io/docs/getbalances
+ * @see https://iota.readme.io/docs/getbalances
  */
 class Request extends AbstractRequest
 {
@@ -51,7 +53,7 @@ class Request extends AbstractRequest
      *
      * @return Request
      */
-    public function setAddresses(array $addresses): Request
+    public function setAddresses(array $addresses): self
     {
         $this->addresses = [];
         foreach ($addresses as $address) {
@@ -65,9 +67,10 @@ class Request extends AbstractRequest
      * Adds a single address.
      *
      * @param Address $address
+     *
      * @return Request
      */
-    public function addAddress(Address $address) : Request
+    public function addAddress(Address $address): self
     {
         $this->addresses[] = $address->removeChecksum();
 
@@ -91,7 +94,7 @@ class Request extends AbstractRequest
      *
      * @return Request
      */
-    public function setThreshold(int $threshold): Request
+    public function setThreshold(int $threshold): self
     {
         $this->threshold = $threshold;
 
@@ -125,8 +128,9 @@ class Request extends AbstractRequest
     /**
      * Executes the request.
      *
-     * @return AbstractResponse|Response
      * @throws Exception
+     *
+     * @return AbstractResponse|Response
      */
     public function execute(): Response
     {
@@ -137,11 +141,11 @@ class Request extends AbstractRequest
         return $response->finish()->throwOnError();
     }
 
-    public function serialize() : array
+    public function serialize(): array
     {
         return array_merge(parent::serialize(), [
             'addresses' => SerializeUtil::serializeArray($this->addresses),
-            'threshold' => $this->threshold
+            'threshold' => $this->threshold,
         ]);
     }
 }

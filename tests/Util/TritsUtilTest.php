@@ -1,25 +1,24 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
+
+/*
+ * This file is part of the IOTA PHP package.
+ *
+ * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Techworker\IOTA\Tests\Util;
 
 use PHPUnit\Framework\TestCase;
-use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
-use Techworker\IOTA\SerializeInterface;
-use Techworker\IOTA\Tests\Container;
-use Techworker\IOTA\Type\Address;
-use Techworker\IOTA\Type\SecurityLevel;
-use Techworker\IOTA\Type\Seed;
-use Techworker\IOTA\Util\AddressUtil;
-use Techworker\IOTA\Util\SerializeUtil;
-use Techworker\IOTA\Util\TritsUtil;
-use Techworker\IOTA\Util\TryteUtil;
 
 /**
- * Class TritUtilTest
+ * Class TritUtilTest.
  *
- * @package Techworker\IOTA\Tests\Util
+ * @coversNothing
  */
 class TritsUtilTest extends TestCase
 {

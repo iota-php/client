@@ -1,27 +1,31 @@
 <?php
+
 namespace Techworker\IOTA\Apps\KitchenSink;
+
 /** @var \Techworker\IOTA\IOTA $iota */
-$iota = include __DIR__ . '/../bootstrap.php';
+$iota = include __DIR__.'/../bootstrap.php';
 
-if(isAjax())
-{
+if (isAjax()) {
     try {
-
         $node = $iota->getNodes()[$_POST['node']];
-    $seed = new \Techworker\IOTA\Type\Seed($_POST['seed']);
-    if($_POST['startIndex'] !== '') {
-        $startIndex = (int)$_POST['startIndex'];
-    } else {
-        $startIndex = null;
-    }
-    $inclusionStates = isset($_POST['inclusionStates']);
-    $security = \Techworker\IOTA\Type\SecurityLevel::fromValue($_POST['security']);
+        $seed = new \Techworker\IOTA\Type\Seed($_POST['seed']);
+        if ('' !== $_POST['startIndex']) {
+            $startIndex = (int) $_POST['startIndex'];
+        } else {
+            $startIndex = null;
+        }
+        $inclusionStates = isset($_POST['inclusionStates']);
+        $security = \Techworker\IOTA\Type\SecurityLevel::fromValue($_POST['security']);
 
         $result = $iota->getClientApi()->getTransfers(
-            $node, $seed, $startIndex, $inclusionStates, $security
+            $node,
+            $seed,
+            $startIndex,
+            $inclusionStates,
+            $security
         );
         sendJson($result->serialize());
-    } catch(\Exception $ex) {
+    } catch (\Exception $ex) {
         sendJson(['error' => $ex->getMessage()]);
     }
     exit;
@@ -119,8 +123,8 @@ if(isAjax())
     <div class="form-group">
         <label for="node">Node</label>
         <select class="form-control" id="node" name="node">
-            <?php foreach($iota->getNodes() as $k => $node) : ?>
-            <option value="<?= $k ?>"><?= $node->getHost() ?></option>
+            <?php foreach ($iota->getNodes() as $k => $node) : ?>
+            <option value="<?php echo $k; ?>"><?php echo $node->getHost(); ?></option>
             <?php endforeach; ?>
         </select>
         <small class="form-text text-muted">Select a node where the remote requests (commands) will be executed on.</small>

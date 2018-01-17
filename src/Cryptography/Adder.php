@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,13 +10,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\Cryptography;
 
 class Adder
 {
-    public static function add(array $a, array $b) : array
+    public static function add(array $a, array $b): array
     {
         $length = max(\count($a), \count($b));
         $out = [];
@@ -30,19 +32,20 @@ class Adder
         return $out;
     }
 
-    protected static function any(int $a, int $b) : int
+    protected static function any(int $a, int $b): int
     {
         $s = $a + $b;
         if ($s > 0) {
             return 1;
-        } elseif ($s < 0) {
+        }
+        if ($s < 0) {
             return -1;
         }
 
         return 0;
     }
 
-    protected static function cons(int $a, int $b) : int
+    protected static function cons(int $a, int $b): int
     {
         if ($a === $b) {
             return $a;
@@ -59,7 +62,7 @@ class Adder
      *
      * @return int
      */
-    protected static function sum(int $a, int $b) : ?int
+    protected static function sum(int $a, int $b): ?int
     {
         $s = $a + $b;
 
@@ -70,7 +73,7 @@ class Adder
         }
     }
 
-    protected static function fullAdd(int $a, int $b, int $c) : array
+    protected static function fullAdd(int $a, int $b, int $c): array
     {
         $s_a = self::sum($a, $b);
         $c_a = self::cons($a, $b);

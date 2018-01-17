@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\RemoteApi\Commands\AddNeighbors;
 
@@ -17,7 +19,7 @@ use Techworker\IOTA\RemoteApi\Exception;
 use Techworker\IOTA\Util\ValidatorUtil;
 
 /**
- * Class Request
+ * Class Request.
  *
  * Adds one or more neighbors to the given node. This is only temporary for the
  * node, they will be removed from the set of neighbors after you relaunch IRI.
@@ -57,8 +59,9 @@ class Request extends AbstractRequest
      *
      * @param \string[] $neighborUris
      *
-     * @return Request
      * @throws \InvalidArgumentException
+     *
+     * @return Request
      */
     public function setNeighborUris(array $neighborUris): self
     {
@@ -74,6 +77,7 @@ class Request extends AbstractRequest
      * Adds a single neighbor uri.
      *
      * @param string $neighborUri
+     *
      * @throws \InvalidArgumentException
      */
     public function addNeighborUri(string $neighborUri)
@@ -103,8 +107,9 @@ class Request extends AbstractRequest
     /**
      * Executes the request.
      *
-     * @return AbstractResponse|Response
      * @throws Exception
+     *
+     * @return AbstractResponse|Response
      */
     public function execute(): Response
     {
@@ -123,7 +128,7 @@ class Request extends AbstractRequest
     public function serialize(): array
     {
         return array_merge(parent::serialize(), [
-            'neighborUris' => $this->neighborUris
+            'neighborUris' => $this->neighborUris,
         ]);
     }
 }

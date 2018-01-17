@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\RemoteApi\Commands\AttachToTangle;
 
@@ -23,7 +25,7 @@ use Techworker\IOTA\Type\TransactionHash;
 use Techworker\IOTA\Util\SerializeUtil;
 
 /**
- * Class Request
+ * Class Request.
  *
  * This method attaches the specified transactions to the Tangle by doing Proof
  * of Work together with the trunk- and branch-transaction and the given weight
@@ -32,7 +34,7 @@ use Techworker\IOTA\Util\SerializeUtil;
  * If the provided node blocks requests to attachToTangle (Node::doesPOW), the
  * POW will be performed locally by one of the PowInterface implementations.
  *
- * @link https://iota.readme.io/docs/attachtotangle
+ * @see https://iota.readme.io/docs/attachtotangle
  */
 class Request extends AbstractRequest
 {
@@ -51,7 +53,7 @@ class Request extends AbstractRequest
     protected $branchTransactionHash;
 
     /**
-     * Proof of Work intensity
+     * Proof of Work intensity.
      *
      * @var int
      */
@@ -88,10 +90,10 @@ class Request extends AbstractRequest
     /**
      * Request constructor.
      *
-     * @param PowInterface $pow
+     * @param PowInterface        $pow
      * @param HttpClientInterface $httpClient
-     * @param CurlFactory $curlFactory
-     * @param Node $node
+     * @param CurlFactory         $curlFactory
+     * @param Node                $node
      */
     public function __construct(PowInterface $pow, HttpClientInterface $httpClient, CurlFactory $curlFactory, Node $node)
     {
@@ -232,10 +234,11 @@ class Request extends AbstractRequest
     /**
      * Executes the request.
      *
-     * @return AbstractResponse|Response
      * @throws Exception
      * @throws \Techworker\IOTA\Exception
      * @throws \InvalidArgumentException
+     *
+     * @return AbstractResponse|Response
      */
     public function execute(): Response
     {
@@ -256,12 +259,28 @@ class Request extends AbstractRequest
     }
 
     /**
+     * Gets the array representation of the request.
+     *
+     * @return array
+     */
+    public function serialize(): array
+    {
+        return [
+            'trunkTransactionHash' => $this->trunkTransactionHash->serialize(),
+            'branchTransactionHash' => $this->branchTransactionHash->serialize(),
+            'minWeightMagnitude' => $this->minWeightMagnitude,
+            'transactions' => SerializeUtil::serializeArray($this->transactions),
+        ];
+    }
+
+    /**
      * Loops all transactions and does the pow and adjusts the nonce in each
      * transaction.
      *
-     * @return array
      * @throws \Techworker\IOTA\Exception
      * @throws \InvalidArgumentException
+     *
+     * @return array
      */
     protected function loopTransactions(): array
     {
@@ -280,10 +299,10 @@ class Request extends AbstractRequest
      *
      * @param Transaction $transaction
      *
-     * @return Transaction
-     *
      * @throws \Techworker\IOTA\Exception
      * @throws \InvalidArgumentException
+     *
+     * @return Transaction
      */
     protected function getBundleTrytes(Transaction $transaction): Transaction
     {
@@ -318,20 +337,5 @@ class Request extends AbstractRequest
         $this->previousTxHash = $transaction->getTransactionHash();
 
         return $transaction;
-    }
-
-    /**
-     * Gets the array representation of the request.
-     *
-     * @return array
-     */
-    public function serialize(): array
-    {
-        return [
-            'trunkTransactionHash' => $this->trunkTransactionHash->serialize(),
-            'branchTransactionHash' => $this->branchTransactionHash->serialize(),
-            'minWeightMagnitude' => $this->minWeightMagnitude,
-            'transactions' => SerializeUtil::serializeArray($this->transactions)
-        ];
     }
 }

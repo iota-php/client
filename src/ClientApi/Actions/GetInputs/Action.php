@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\ClientApi\Actions\GetInputs;
 
@@ -181,8 +183,19 @@ class Action extends AbstractAction
         return $result;
     }
 
+    public function serialize(): array
+    {
+        return array_merge(parent::serialize(), [
+            'seed' => $this->seed->serialize(),
+            'startIndex' => $this->startIndex,
+            'endIndex' => $this->endIndex,
+            'threshold' => $this->threshold->serialize(),
+            'security' => $this->security->serialize(),
+        ]);
+    }
+
     /**
-     * @param array $addresses
+     * @param array  $addresses
      * @param Result $result
      */
     protected function getBalanceAndFormat(array $addresses, Result $result): void
@@ -193,7 +206,7 @@ class Action extends AbstractAction
         $thresholdReached = (null !== $this->threshold);
         $length = \count($addresses);
         for ($i = 0; $i < $length; ++$i) {
-            $balance = new Iota($balances->getBalances()[(string)$addresses[$i]]);
+            $balance = new Iota($balances->getBalances()[(string) $addresses[$i]]);
             if ($balance->isPos()) {
                 $input = new Input($addresses[$i], $balance, $this->startIndex + $i, $this->security);
 
@@ -201,6 +214,7 @@ class Action extends AbstractAction
                 $result->setBalance($result->getBalance()->plus($balance));
                 if (null !== $this->threshold && $result->getBalance()->gteq($this->threshold)) {
                     $thresholdReached = true;
+
                     break;
                 }
             }
@@ -209,16 +223,5 @@ class Action extends AbstractAction
         if ($thresholdReached) {
             return;
         }
-    }
-
-    public function serialize(): array
-    {
-        return array_merge(parent::serialize(), [
-            'seed' => $this->seed->serialize(),
-            'startIndex' => $this->startIndex,
-            'endIndex' => $this->endIndex,
-            'threshold' => $this->threshold->serialize(),
-            'security' => $this->security->serialize()
-        ]);
     }
 }

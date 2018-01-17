@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA;
 
@@ -101,22 +103,23 @@ class IOTA
     /**
      * Gets a node to make a request to.
      *
-     * @param mixed|null $key
-     * @return Node
+     * @param null|mixed $key
+     *
      * @throws Exception
+     *
+     * @return Node
      */
     public function getNode($key = null): Node
     {
-        if ($key === null) {
+        if (null === $key) {
             $key = array_rand($this->nodes);
         }
 
         if (!isset($this->nodes[$key])) {
-            throw new Exception('Unable to locate node with key ' . $key);
+            throw new Exception('Unable to locate node with key '.$key);
         }
 
-
-        return ($this->lastUsedNode = $this->nodes[$key]);
+        return $this->lastUsedNode = $this->nodes[$key];
     }
 
     /**
@@ -124,7 +127,7 @@ class IOTA
      *
      * @return Node[]
      */
-    public function getNodes() : array
+    public function getNodes(): array
     {
         return $this->nodes;
     }
@@ -134,7 +137,7 @@ class IOTA
      *
      * @return Node
      */
-    public function getLastUsedNode() : Node
+    public function getLastUsedNode(): Node
     {
         return $this->lastUsedNode;
     }

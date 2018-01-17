@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\Type;
 
@@ -30,8 +32,9 @@ class Address extends Trytes implements CheckSummableInterface
     /**
      * Address constructor.
      *
-     * @param string|null $address
-     * @param int $index
+     * @param null|string $address
+     * @param int         $index
+     *
      * @throws \InvalidArgumentException
      */
     public function __construct(string $address = null, int $index = -1)
@@ -59,6 +62,20 @@ class Address extends Trytes implements CheckSummableInterface
     }
 
     /**
+     * Gets the address as string including the checksum if available.
+     *
+     * @return string
+     */
+    public function __toString(): string
+    {
+        if (null === $this->checkSum) {
+            return parent::__toString();
+        }
+
+        return parent::__toString().(string) $this->checkSum;
+    }
+
+    /**
      * Gets the index of the address.
      *
      * @return int
@@ -79,20 +96,6 @@ class Address extends Trytes implements CheckSummableInterface
     }
 
     /**
-     * Gets the address as string including the checksum if available.
-     *
-     * @return string
-     */
-    public function __toString(): string
-    {
-        if (null === $this->checkSum) {
-            return parent::__toString();
-        }
-
-        return parent::__toString().(string) $this->checkSum;
-    }
-
-    /**
      * Gets the array version of the object.
      *
      * @return array
@@ -100,8 +103,8 @@ class Address extends Trytes implements CheckSummableInterface
     public function serialize(): array
     {
         return array_merge(parent::serialize(), [
-            'checkSum' => $this->hasChecksum() ? (string)$this->checkSum : null,
-            'index' => $this->index
+            'checkSum' => $this->hasChecksum() ? (string) $this->checkSum : null,
+            'index' => $this->index,
         ]);
     }
 }

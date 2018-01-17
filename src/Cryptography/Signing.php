@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\Cryptography;
 
@@ -19,18 +21,18 @@ use Techworker\IOTA\Util\TritsUtil;
 use Techworker\IOTA\Util\TrytesUtil;
 
 /**
- * Class Signing
- *
+ * Class Signing.
  */
 class Signing
 {
     /**
      * Gets the key for the given data.
      *
-     * @param KerlFactory $kerlFactory
-     * @param Seed $seed
-     * @param int $index
+     * @param KerlFactory   $kerlFactory
+     * @param Seed          $seed
+     * @param int           $index
      * @param SecurityLevel $security
+     *
      * @return array
      */
     public static function key(KerlFactory $kerlFactory, Seed $seed, int $index, SecurityLevel $security): array
@@ -64,7 +66,8 @@ class Signing
      * Gets the digests for the key.
      *
      * @param KerlFactory $kerlFactory
-     * @param array $key
+     * @param array       $key
+     *
      * @return array
      */
     public static function digests(KerlFactory $kerlFactory, array $key): array
@@ -107,8 +110,9 @@ class Signing
      * Returns a new address based on the given digest.
      *
      * @param KerlFactory $kerlFactory
-     * @param array $digests
-     * @param int $index
+     * @param array       $digests
+     * @param int         $index
+     *
      * @return Address
      */
     public static function address(KerlFactory $kerlFactory, array $digests, int $index): Address
@@ -118,15 +122,16 @@ class Signing
         $kerl->absorb($digests, 0, \count($digests));
         $kerl->squeeze($address, 0, $kerl->hashLength());
 
-        return new Address((string)TritsUtil::toTrytes($address), $index);
+        return new Address((string) TritsUtil::toTrytes($address), $index);
     }
 
     /**
-     * Signs a fragment
+     * Signs a fragment.
      *
      * @param KerlFactory $kerlFactory
-     * @param array $normalizedBundleFragment
-     * @param array $keyFragment
+     * @param array       $normalizedBundleFragment
+     * @param array       $keyFragment
+     *
      * @return array
      */
     public static function signatureFragment(KerlFactory $kerlFactory, array $normalizedBundleFragment, array $keyFragment): array

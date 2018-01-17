@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,14 +10,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\Type;
 
 use Techworker\IOTA\SerializeInterface;
 
 /**
- * Class Input
+ * Class Input.
  *
  * Input informations.
  */
@@ -123,7 +125,7 @@ class Input implements SerializeInterface
      *
      * @return array
      */
-    public function serialize() : array
+    public function serialize(): array
     {
         return [
             'address' => $this->address->serialize(),

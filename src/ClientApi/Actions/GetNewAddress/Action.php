@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,15 +10,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\ClientApi\Actions\GetNewAddress;
 
 use Techworker\IOTA\ClientApi\AbstractAction;
 use Techworker\IOTA\ClientApi\AbstractResult;
 use Techworker\IOTA\Node;
-use Techworker\IOTA\Trace;
 use Techworker\IOTA\RemoteApi\Commands\FindTransactions;
+use Techworker\IOTA\Trace;
 use Techworker\IOTA\Type\Address;
 use Techworker\IOTA\Type\SecurityLevel;
 use Techworker\IOTA\Type\Seed;
@@ -157,8 +159,8 @@ class Action extends AbstractAction
         $address = $transactions = null;
         do {
             if (isset($address, $transactions)) {
-                /* @var Address $address */
-                /* @var FindTransactions\Response $transactions */
+                // @var Address $address
+                // @var FindTransactions\Response $transactions
                 $result->addPassedAddress($address, $index - 1);
                 $result->addTransactions($address, ...$transactions->getTransactionHashes());
             }
@@ -192,7 +194,7 @@ class Action extends AbstractAction
             'seed' => $this->seed->serialize(),
             'startIndex' => $this->startIndex,
             'security' => $this->security->serialize(),
-            'addChecksum' => $this->addChecksum
+            'addChecksum' => $this->addChecksum,
         ]);
     }
 }

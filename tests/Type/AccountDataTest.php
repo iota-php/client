@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\Tests;
 
@@ -22,6 +24,9 @@ use Techworker\IOTA\Type\Input;
 use Techworker\IOTA\Type\Iota;
 use Techworker\IOTA\Type\SecurityLevel;
 
+/**
+ * @coversNothing
+ */
 class AccountDataTest extends TestCase
 {
     public function testConstruct()
@@ -40,9 +45,9 @@ class AccountDataTest extends TestCase
         static::assertCount(1, $acc->getAddresses());
         $acc->setAddresses([]);
         static::assertCount(0, $acc->getAddresses());
-        $acc->setAddresses([new Address, new Address]);
+        $acc->setAddresses([new Address(), new Address()]);
         static::assertCount(2, $acc->getAddresses());
-        $acc->setAddresses([new Address]);
+        $acc->setAddresses([new Address()]);
         static::assertCount(1, $acc->getAddresses());
     }
 
@@ -67,7 +72,7 @@ class AccountDataTest extends TestCase
 
     public function testInputs()
     {
-        $input = new Input(new Address, Iota::ZERO(), 1, SecurityLevel::LEVEL_1());
+        $input = new Input(new Address(), Iota::ZERO(), 1, SecurityLevel::LEVEL_1());
         $acc = new AccountData();
         $acc->addInput($input);
         static::assertCount(1, $acc->getInputs());
@@ -81,7 +86,7 @@ class AccountDataTest extends TestCase
 
     public function testLastUnusedAddress()
     {
-        $add = new Address;
+        $add = new Address();
         $acc = new AccountData();
         $acc->setLatestUnusedAddress($add);
         static::assertEquals($add, $acc->getLatestUnusedAddress());
@@ -97,7 +102,7 @@ class AccountDataTest extends TestCase
     public function testSerialize()
     {
         $addr = new Address(str_repeat('A', 81));
-        $input = new Input(new Address, Iota::ZERO(), 1, SecurityLevel::LEVEL_1());
+        $input = new Input(new Address(), Iota::ZERO(), 1, SecurityLevel::LEVEL_1());
         $container = new Container();
         $bundle = new Bundle(
             $container->get(KerlFactory::class),
@@ -121,6 +126,5 @@ class AccountDataTest extends TestCase
         static::assertCount(4, $s['addresses']);
         static::assertCount(3, $s['bundles']);
         static::assertCount(2, $s['inputs']);
-
     }
 }

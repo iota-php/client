@@ -1,5 +1,15 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
+/*
+ * This file is part of the IOTA PHP package.
+ *
+ * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Techworker\IOTA\Tests\RemoteApi;
 
@@ -8,24 +18,22 @@ use Techworker\IOTA\RemoteApi\Commands\GetNeighbors\Request;
 use Techworker\IOTA\RemoteApi\Commands\GetNeighbors\Response;
 use Techworker\IOTA\Type\Neighbor;
 
+/**
+ * @coversNothing
+ */
 class GetNeighborsTest extends AbstractApiTestCase
 {
-    protected function initValidRequest()
-    {
-        $this->request = new Request($this->httpClient, new Node);
-    }
-
     public function testRequestSerialization()
     {
         $expected = [
-            'command' => 'getNeighbors'
+            'command' => 'getNeighbors',
         ];
         static::assertEquals($expected, $this->request->jsonSerialize());
     }
 
     public function testResponse()
     {
-        $fixture = $this->loadFixture(__DIR__ . '/fixtures/GetNeighbors.json');
+        $fixture = $this->loadFixture(__DIR__.'/fixtures/GetNeighbors.json');
         $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
@@ -48,15 +56,20 @@ class GetNeighborsTest extends AbstractApiTestCase
     public function provideResponseMissing()
     {
         return [
-            [__DIR__ . '/fixtures/GetNeighbors.json', 'neighbors'],
-            [__DIR__ . '/fixtures/GetNeighbors.json', 'neighbors.0.address'],
-            [__DIR__ . '/fixtures/GetNeighbors.json', 'neighbors.0.numberOfAllTransactions'],
-            [__DIR__ . '/fixtures/GetNeighbors.json', 'neighbors.0.numberOfInvalidTransactions'],
-            [__DIR__ . '/fixtures/GetNeighbors.json', 'neighbors.0.numberOfNewTransactions'],
-            [__DIR__ . '/fixtures/GetNeighbors.json', 'neighbors.1.address'],
-            [__DIR__ . '/fixtures/GetNeighbors.json', 'neighbors.1.numberOfAllTransactions'],
-            [__DIR__ . '/fixtures/GetNeighbors.json', 'neighbors.1.numberOfInvalidTransactions'],
-            [__DIR__ . '/fixtures/GetNeighbors.json', 'neighbors.1.numberOfNewTransactions'],
+            [__DIR__.'/fixtures/GetNeighbors.json', 'neighbors'],
+            [__DIR__.'/fixtures/GetNeighbors.json', 'neighbors.0.address'],
+            [__DIR__.'/fixtures/GetNeighbors.json', 'neighbors.0.numberOfAllTransactions'],
+            [__DIR__.'/fixtures/GetNeighbors.json', 'neighbors.0.numberOfInvalidTransactions'],
+            [__DIR__.'/fixtures/GetNeighbors.json', 'neighbors.0.numberOfNewTransactions'],
+            [__DIR__.'/fixtures/GetNeighbors.json', 'neighbors.1.address'],
+            [__DIR__.'/fixtures/GetNeighbors.json', 'neighbors.1.numberOfAllTransactions'],
+            [__DIR__.'/fixtures/GetNeighbors.json', 'neighbors.1.numberOfInvalidTransactions'],
+            [__DIR__.'/fixtures/GetNeighbors.json', 'neighbors.1.numberOfNewTransactions'],
         ];
+    }
+
+    protected function initValidRequest()
+    {
+        $this->request = new Request($this->httpClient, new Node());
     }
 }

@@ -1,46 +1,55 @@
 <?php
+
 namespace Techworker\IOTA\Apps\KitchenSink;
+
 /** @var \Techworker\IOTA\IOTA $iota */
-$iota = include __DIR__ . '/../bootstrap.php';
+$iota = include __DIR__.'/../bootstrap.php';
 
-if(isAjax())
-{
+if (isAjax()) {
     try {
-
         $node = $iota->getNodes()[$_POST['node']];
-    $seed = new \Techworker\IOTA\Type\Seed($_POST['seed']);
-            $transfers = [new \Techworker\IOTA\Type\Transfer()];
+        $seed = new \Techworker\IOTA\Type\Seed($_POST['seed']);
+        $transfers = [new \Techworker\IOTA\Type\Transfer()];
         $transfers[0]->setValue(new \Techworker\IOTA\Type\Iota($_POST['transfers_value']));
         $transfers[0]->setRecipientAddress(new \Techworker\IOTA\Type\Address($_POST['transfers_recipient']));
-        if($_POST['minWeightMagnitude'] !== '') {
-        $minWeightMagnitude = (int)$_POST['minWeightMagnitude'];
-    } else {
-        $minWeightMagnitude = null;
-    }
-    if($_POST['depth'] !== '') {
-        $depth = (int)$_POST['depth'];
-    } else {
-        $depth = null;
-    }
-    if($_POST['remainderAddress'] !== '') {
-        $remainderAddress = new \Techworker\IOTA\Type\Address($_POST['remainderAddress']);
-    } else {
-        $remainderAddress = null;
-    }
-            $inputs = [];
+        if ('' !== $_POST['minWeightMagnitude']) {
+            $minWeightMagnitude = (int) $_POST['minWeightMagnitude'];
+        } else {
+            $minWeightMagnitude = null;
+        }
+        if ('' !== $_POST['depth']) {
+            $depth = (int) $_POST['depth'];
+        } else {
+            $depth = null;
+        }
+        if ('' !== $_POST['remainderAddress']) {
+            $remainderAddress = new \Techworker\IOTA\Type\Address($_POST['remainderAddress']);
+        } else {
+            $remainderAddress = null;
+        }
+        $inputs = [];
         $hmacKey = null;
-    $security = \Techworker\IOTA\Type\SecurityLevel::fromValue($_POST['security']);
-    if($_POST['reference'] !== '') {
-        $reference = new \Techworker\IOTA\Type\Tip($_POST['reference']);
-    } else {
-        $reference = null;//$iota->getRemoteApi()->getNodeInfo($node)->getLatestMilestone();
-    }
+        $security = \Techworker\IOTA\Type\SecurityLevel::fromValue($_POST['security']);
+        if ('' !== $_POST['reference']) {
+            $reference = new \Techworker\IOTA\Type\Tip($_POST['reference']);
+        } else {
+            $reference = null; //$iota->getRemoteApi()->getNodeInfo($node)->getLatestMilestone();
+        }
 
         $result = $iota->getClientApi()->sendTransfer(
-            $node, $seed, $transfers, $minWeightMagnitude, $depth, $remainderAddress, $inputs, $hmacKey, $security, $reference
+            $node,
+            $seed,
+            $transfers,
+            $minWeightMagnitude,
+            $depth,
+            $remainderAddress,
+            $inputs,
+            $hmacKey,
+            $security,
+            $reference
         );
         sendJson($result->serialize());
-    } catch(\Exception $ex) {
+    } catch (\Exception $ex) {
         sendJson(['error' => $ex->getMessage()]);
     }
     exit;
@@ -143,8 +152,8 @@ if(isAjax())
     <div class="form-group">
         <label for="node">Node</label>
         <select class="form-control" id="node" name="node">
-            <?php foreach($iota->getNodes() as $k => $node) : ?>
-            <option value="<?= $k ?>"><?= $node->getHost() ?></option>
+            <?php foreach ($iota->getNodes() as $k => $node) : ?>
+            <option value="<?php echo $k; ?>"><?php echo $node->getHost(); ?></option>
             <?php endforeach; ?>
         </select>
         <small class="form-text text-muted">Select a node where the remote requests (commands) will be executed on.</small>

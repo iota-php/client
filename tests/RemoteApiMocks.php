@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,12 +10,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Techworker\IOTA\ClientApi\VoidResult;
 use Techworker\IOTA\RemoteApi\Commands\AddNeighbors;
 use Techworker\IOTA\RemoteApi\Commands\AttachToTangle;
 use Techworker\IOTA\RemoteApi\Commands\BroadcastTransactions;
@@ -30,7 +31,7 @@ use Techworker\IOTA\RemoteApi\Commands\StoreTransactions;
 use Techworker\IOTA\Type\TransactionHash;
 
 /**
- * Class ClientApiMocks
+ * Class ClientApiMocks.
  *
  * A collection of mocked client API actions and factories.
  */
@@ -55,7 +56,8 @@ class RemoteApiMocks
     }
 
     /**
-     * @param AddNeighbors\Response|null $executeResponse
+     * @param null|AddNeighbors\Response $executeResponse
+     *
      * @return AddNeighbors\Request|\PHPUnit_Framework_MockObject_MockObject
      */
     public function addNeighborsRequest(AddNeighbors\Response $executeResponse = null): AddNeighbors\Request
@@ -70,15 +72,16 @@ class RemoteApiMocks
 
         $request->method('execute')->willReturn($executeResponse);
 
-        /** @var $request AddNeighbors\Request */
+        // @var $request AddNeighbors\Request
         return $request;
     }
 
     /**
-     * @param AddNeighbors\Request|null $request
+     * @param null|AddNeighbors\Request $request
+     *
      * @return AddNeighbors\RequestFactory|\PHPUnit_Framework_MockObject_MockObject
      */
-    public function addNeighborsFactory(AddNeighbors\Request $request = null) : AddNeighbors\RequestFactory
+    public function addNeighborsFactory(AddNeighbors\Request $request = null): AddNeighbors\RequestFactory
     {
         $request = $request ?? $this->broadcastTransactionsRequest();
         $factory = $this->testCase->getMockBuilder(AddNeighbors\RequestFactory::class)
@@ -87,12 +90,13 @@ class RemoteApiMocks
             ->getMock();
         $factory->method('factory')->willReturn($request);
 
-        /** @var $factory AddNeighbors\RequestFactory */
+        // @var $factory AddNeighbors\RequestFactory
         return $factory;
     }
 
     /**
-     * @param AttachToTangle\Response|null $executeResponse
+     * @param null|AttachToTangle\Response $executeResponse
+     *
      * @return AttachToTangle\Request|\PHPUnit_Framework_MockObject_MockObject
      */
     public function attachToTangleRequest(AttachToTangle\Response $executeResponse = null): AttachToTangle\Request
@@ -107,15 +111,16 @@ class RemoteApiMocks
 
         $request->method('execute')->willReturn($executeResponse);
 
-        /** @var $request AttachToTangle\Request */
+        // @var $request AttachToTangle\Request
         return $request;
     }
 
     /**
-     * @param AttachToTangle\Request|null $request
+     * @param null|AttachToTangle\Request $request
+     *
      * @return AttachToTangle\RequestFactory|\PHPUnit_Framework_MockObject_MockObject
      */
-    public function attachToTangleFactory(AttachToTangle\Request $request = null) : AttachToTangle\RequestFactory
+    public function attachToTangleFactory(AttachToTangle\Request $request = null): AttachToTangle\RequestFactory
     {
         $request = $request ?? $this->broadcastTransactionsRequest();
         $factory = $this->testCase->getMockBuilder(AttachToTangle\RequestFactory::class)
@@ -124,12 +129,13 @@ class RemoteApiMocks
             ->getMock();
         $factory->method('factory')->willReturn($request);
 
-        /** @var $factory AttachToTangle\RequestFactory */
+        // @var $factory AttachToTangle\RequestFactory
         return $factory;
     }
 
     /**
-     * @param BroadcastTransactions\Response|null $executeResponse
+     * @param null|BroadcastTransactions\Response $executeResponse
+     *
      * @return BroadcastTransactions\Request|\PHPUnit_Framework_MockObject_MockObject
      */
     public function broadcastTransactionsRequest(BroadcastTransactions\Response $executeResponse = null): BroadcastTransactions\Request
@@ -144,15 +150,16 @@ class RemoteApiMocks
 
         $request->method('execute')->willReturn($executeResponse);
 
-        /** @var $request BroadcastTransactions\Request */
+        // @var $request BroadcastTransactions\Request
         return $request;
     }
 
     /**
-     * @param BroadcastTransactions\Request|null $request
+     * @param null|BroadcastTransactions\Request $request
+     *
      * @return BroadcastTransactions\RequestFactory|\PHPUnit_Framework_MockObject_MockObject
      */
-    public function broadcastTransactionsFactory(BroadcastTransactions\Request $request = null) : BroadcastTransactions\RequestFactory
+    public function broadcastTransactionsFactory(BroadcastTransactions\Request $request = null): BroadcastTransactions\RequestFactory
     {
         $request = $request ?? $this->broadcastTransactionsRequest();
         $factory = $this->testCase->getMockBuilder(BroadcastTransactions\RequestFactory::class)
@@ -161,12 +168,13 @@ class RemoteApiMocks
             ->getMock();
         $factory->method('factory')->willReturn($request);
 
-        /** @var $factory BroadcastTransactions\RequestFactory */
+        // @var $factory BroadcastTransactions\RequestFactory
         return $factory;
     }
 
     /**
-     * @param FindTransactions\Response|null $executeResponse
+     * @param null|FindTransactions\Response $executeResponse
+     *
      * @return FindTransactions\Request|\PHPUnit_Framework_MockObject_MockObject
      */
     public function findTransactionsRequest(FindTransactions\Response $executeResponse = null): FindTransactions\Request
@@ -181,26 +189,28 @@ class RemoteApiMocks
 
         $request->method('execute')->willReturn($executeResponse);
 
-        /** @var $request FindTransactions\Request */
+        // @var $request FindTransactions\Request
         return $request;
     }
 
     /**
      * @param TransactionHash[] $hashes
+     *
      * @return FindTransactions\Response
      */
     public function findTransactionsResponse(array $hashes): FindTransactions\Response
     {
-        return (new FindTransactions\Response)->initialize(200, json_encode([
-            'hashes' => array_map('strval', $hashes)
+        return (new FindTransactions\Response())->initialize(200, json_encode([
+            'hashes' => array_map('strval', $hashes),
         ]));
     }
 
     /**
-     * @param FindTransactions\Request|null $request
+     * @param null|FindTransactions\Request $request
+     *
      * @return FindTransactions\RequestFactory|\PHPUnit_Framework_MockObject_MockObject
      */
-    public function findTransactionsFactory(FindTransactions\Request $request = null) : FindTransactions\RequestFactory
+    public function findTransactionsFactory(FindTransactions\Request $request = null): FindTransactions\RequestFactory
     {
         $request = $request ?? $this->broadcastTransactionsRequest();
         $factory = $this->testCase->getMockBuilder(FindTransactions\RequestFactory::class)
@@ -209,12 +219,13 @@ class RemoteApiMocks
             ->getMock();
         $factory->method('factory')->willReturn($request);
 
-        /** @var $factory FindTransactions\RequestFactory */
+        // @var $factory FindTransactions\RequestFactory
         return $factory;
     }
 
     /**
-     * @param GetBalances\Response|null $executeResponse
+     * @param null|GetBalances\Response $executeResponse
+     *
      * @return GetBalances\Request|\PHPUnit_Framework_MockObject_MockObject
      */
     public function getBalancesRequest(GetBalances\Response $executeResponse = null): GetBalances\Request
@@ -229,15 +240,16 @@ class RemoteApiMocks
 
         $request->method('execute')->willReturn($executeResponse);
 
-        /** @var $request GetBalances\Request */
+        // @var $request GetBalances\Request
         return $request;
     }
 
     /**
-     * @param GetBalances\Request|null $request
+     * @param null|GetBalances\Request $request
+     *
      * @return GetBalances\RequestFactory|\PHPUnit_Framework_MockObject_MockObject
      */
-    public function getBalancesFactory(GetBalances\Request $request = null) : GetBalances\RequestFactory
+    public function getBalancesFactory(GetBalances\Request $request = null): GetBalances\RequestFactory
     {
         $request = $request ?? $this->broadcastTransactionsRequest();
         $factory = $this->testCase->getMockBuilder(GetBalances\RequestFactory::class)
@@ -246,12 +258,13 @@ class RemoteApiMocks
             ->getMock();
         $factory->method('factory')->willReturn($request);
 
-        /** @var $factory GetBalances\RequestFactory */
+        // @var $factory GetBalances\RequestFactory
         return $factory;
     }
 
     /**
-     * @param GetInclusionStates\Response|null $executeResponse
+     * @param null|GetInclusionStates\Response $executeResponse
+     *
      * @return GetInclusionStates\Request|\PHPUnit_Framework_MockObject_MockObject
      */
     public function getInclusionStatesRequest(GetInclusionStates\Response $executeResponse = null): GetInclusionStates\Request
@@ -266,15 +279,16 @@ class RemoteApiMocks
 
         $request->method('execute')->willReturn($executeResponse);
 
-        /** @var $request GetInclusionStates\Request */
+        // @var $request GetInclusionStates\Request
         return $request;
     }
 
     /**
-     * @param GetInclusionStates\Request|null $request
+     * @param null|GetInclusionStates\Request $request
+     *
      * @return GetInclusionStates\RequestFactory|\PHPUnit_Framework_MockObject_MockObject
      */
-    public function getInclusionStatesFactory(GetInclusionStates\Request $request = null) : GetInclusionStates\RequestFactory
+    public function getInclusionStatesFactory(GetInclusionStates\Request $request = null): GetInclusionStates\RequestFactory
     {
         $request = $request ?? $this->broadcastTransactionsRequest();
         $factory = $this->testCase->getMockBuilder(GetInclusionStates\RequestFactory::class)
@@ -283,12 +297,13 @@ class RemoteApiMocks
             ->getMock();
         $factory->method('factory')->willReturn($request);
 
-        /** @var $factory GetInclusionStates\RequestFactory */
+        // @var $factory GetInclusionStates\RequestFactory
         return $factory;
     }
 
     /**
-     * @param GetNeighbors\Response|null $executeResponse
+     * @param null|GetNeighbors\Response $executeResponse
+     *
      * @return GetNeighbors\Request|\PHPUnit_Framework_MockObject_MockObject
      */
     public function getNeighborsRequest(GetNeighbors\Response $executeResponse = null): GetNeighbors\Request
@@ -303,15 +318,16 @@ class RemoteApiMocks
 
         $request->method('execute')->willReturn($executeResponse);
 
-        /** @var $request GetNeighbors\Request */
+        // @var $request GetNeighbors\Request
         return $request;
     }
 
     /**
-     * @param GetNeighbors\Request|null $request
+     * @param null|GetNeighbors\Request $request
+     *
      * @return GetNeighbors\RequestFactory|\PHPUnit_Framework_MockObject_MockObject
      */
-    public function getNeighborsFactory(GetNeighbors\Request $request = null) : GetNeighbors\RequestFactory
+    public function getNeighborsFactory(GetNeighbors\Request $request = null): GetNeighbors\RequestFactory
     {
         $request = $request ?? $this->broadcastTransactionsRequest();
         $factory = $this->testCase->getMockBuilder(GetNeighbors\RequestFactory::class)
@@ -320,12 +336,13 @@ class RemoteApiMocks
             ->getMock();
         $factory->method('factory')->willReturn($request);
 
-        /** @var $factory GetNeighbors\RequestFactory */
+        // @var $factory GetNeighbors\RequestFactory
         return $factory;
     }
 
     /**
-     * @param GetNodeInfo\Response|null $executeResponse
+     * @param null|GetNodeInfo\Response $executeResponse
+     *
      * @return GetNodeInfo\Request|\PHPUnit_Framework_MockObject_MockObject
      */
     public function getNodeInfoRequest(GetNodeInfo\Response $executeResponse = null): GetNodeInfo\Request
@@ -340,15 +357,16 @@ class RemoteApiMocks
 
         $request->method('execute')->willReturn($executeResponse);
 
-        /** @var $request GetNodeInfo\Request */
+        // @var $request GetNodeInfo\Request
         return $request;
     }
 
     /**
-     * @param GetNodeInfo\Request|null $request
+     * @param null|GetNodeInfo\Request $request
+     *
      * @return GetNodeInfo\RequestFactory|\PHPUnit_Framework_MockObject_MockObject
      */
-    public function getNodeInfoFactory(GetNodeInfo\Request $request = null) : GetNodeInfo\RequestFactory
+    public function getNodeInfoFactory(GetNodeInfo\Request $request = null): GetNodeInfo\RequestFactory
     {
         $request = $request ?? $this->broadcastTransactionsRequest();
         $factory = $this->testCase->getMockBuilder(GetNodeInfo\RequestFactory::class)
@@ -357,12 +375,13 @@ class RemoteApiMocks
             ->getMock();
         $factory->method('factory')->willReturn($request);
 
-        /** @var $factory GetNodeInfo\RequestFactory */
+        // @var $factory GetNodeInfo\RequestFactory
         return $factory;
     }
 
     /**
-     * @param GetTips\Response|null $executeResponse
+     * @param null|GetTips\Response $executeResponse
+     *
      * @return GetTips\Request|\PHPUnit_Framework_MockObject_MockObject
      */
     public function getTipsRequest(GetTips\Response $executeResponse = null): GetTips\Request
@@ -377,15 +396,16 @@ class RemoteApiMocks
 
         $request->method('execute')->willReturn($executeResponse);
 
-        /** @var $request GetTips\Request */
+        // @var $request GetTips\Request
         return $request;
     }
 
     /**
-     * @param GetTips\Request|null $request
+     * @param null|GetTips\Request $request
+     *
      * @return GetTips\RequestFactory|\PHPUnit_Framework_MockObject_MockObject
      */
-    public function getTipsFactory(GetTips\Request $request = null) : GetTips\RequestFactory
+    public function getTipsFactory(GetTips\Request $request = null): GetTips\RequestFactory
     {
         $request = $request ?? $this->broadcastTransactionsRequest();
         $factory = $this->testCase->getMockBuilder(GetTips\RequestFactory::class)
@@ -394,12 +414,13 @@ class RemoteApiMocks
             ->getMock();
         $factory->method('factory')->willReturn($request);
 
-        /** @var $factory GetTips\RequestFactory */
+        // @var $factory GetTips\RequestFactory
         return $factory;
     }
 
     /**
-     * @param GetTransactionsToApprove\Response|null $executeResponse
+     * @param null|GetTransactionsToApprove\Response $executeResponse
+     *
      * @return GetTransactionsToApprove\Request|\PHPUnit_Framework_MockObject_MockObject
      */
     public function getTransactionsToApproveRequest(GetTransactionsToApprove\Response $executeResponse = null): GetTransactionsToApprove\Request
@@ -414,15 +435,16 @@ class RemoteApiMocks
 
         $request->method('execute')->willReturn($executeResponse);
 
-        /** @var $request GetTransactionsToApprove\Request */
+        // @var $request GetTransactionsToApprove\Request
         return $request;
     }
 
     /**
-     * @param GetTransactionsToApprove\Request|null $request
+     * @param null|GetTransactionsToApprove\Request $request
+     *
      * @return GetTransactionsToApprove\RequestFactory|\PHPUnit_Framework_MockObject_MockObject
      */
-    public function getTransactionsToApproveFactory(GetTransactionsToApprove\Request $request = null) : GetTransactionsToApprove\RequestFactory
+    public function getTransactionsToApproveFactory(GetTransactionsToApprove\Request $request = null): GetTransactionsToApprove\RequestFactory
     {
         $request = $request ?? $this->broadcastTransactionsRequest();
         $factory = $this->testCase->getMockBuilder(GetTransactionsToApprove\RequestFactory::class)
@@ -431,12 +453,13 @@ class RemoteApiMocks
             ->getMock();
         $factory->method('factory')->willReturn($request);
 
-        /** @var $factory GetTransactionsToApprove\RequestFactory */
+        // @var $factory GetTransactionsToApprove\RequestFactory
         return $factory;
     }
 
     /**
-     * @param GetTrytes\Response|null $executeResponse
+     * @param null|GetTrytes\Response $executeResponse
+     *
      * @return GetTrytes\Request|\PHPUnit_Framework_MockObject_MockObject
      */
     public function getTrytesRequest(GetTrytes\Response $executeResponse = null): GetTrytes\Request
@@ -451,15 +474,16 @@ class RemoteApiMocks
 
         $request->method('execute')->willReturn($executeResponse);
 
-        /** @var $request GetTrytes\Request */
+        // @var $request GetTrytes\Request
         return $request;
     }
 
     /**
-     * @param GetTrytes\Request|null $request
+     * @param null|GetTrytes\Request $request
+     *
      * @return GetTrytes\RequestFactory|\PHPUnit_Framework_MockObject_MockObject
      */
-    public function getTrytesToApproveFactory(GetTrytes\Request $request = null) : GetTrytes\RequestFactory
+    public function getTrytesToApproveFactory(GetTrytes\Request $request = null): GetTrytes\RequestFactory
     {
         $request = $request ?? $this->broadcastTransactionsRequest();
         $factory = $this->testCase->getMockBuilder(GetTrytes\RequestFactory::class)
@@ -468,12 +492,13 @@ class RemoteApiMocks
             ->getMock();
         $factory->method('factory')->willReturn($request);
 
-        /** @var $factory GetTrytes\RequestFactory */
+        // @var $factory GetTrytes\RequestFactory
         return $factory;
     }
 
     /**
-     * @param InterruptAttachingToTangle\Response|null $executeResponse
+     * @param null|InterruptAttachingToTangle\Response $executeResponse
+     *
      * @return InterruptAttachingToTangle\Request|\PHPUnit_Framework_MockObject_MockObject
      */
     public function interruptAttachingToTangleRequest(InterruptAttachingToTangle\Response $executeResponse = null): InterruptAttachingToTangle\Request
@@ -488,15 +513,16 @@ class RemoteApiMocks
 
         $request->method('execute')->willReturn($executeResponse);
 
-        /** @var $request InterruptAttachingToTangle\Request */
+        // @var $request InterruptAttachingToTangle\Request
         return $request;
     }
 
     /**
-     * @param InterruptAttachingToTangle\Request|null $request
+     * @param null|InterruptAttachingToTangle\Request $request
+     *
      * @return InterruptAttachingToTangle\RequestFactory|\PHPUnit_Framework_MockObject_MockObject
      */
-    public function interruptAttachingToTangleFactory(InterruptAttachingToTangle\Request $request = null) : InterruptAttachingToTangle\RequestFactory
+    public function interruptAttachingToTangleFactory(InterruptAttachingToTangle\Request $request = null): InterruptAttachingToTangle\RequestFactory
     {
         $request = $request ?? $this->broadcastTransactionsRequest();
         $factory = $this->testCase->getMockBuilder(InterruptAttachingToTangle\RequestFactory::class)
@@ -505,13 +531,14 @@ class RemoteApiMocks
             ->getMock();
         $factory->method('factory')->willReturn($request);
 
-        /** @var $factory InterruptAttachingToTangle\RequestFactory */
+        // @var $factory InterruptAttachingToTangle\RequestFactory
         return $factory;
     }
 
     /**
-     * @param RemoveNeighbors\Response|null $executeResponse
-     * @return RemoveNeighbors\Request|\PHPUnit_Framework_MockObject_MockObject
+     * @param null|RemoveNeighbors\Response $executeResponse
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|RemoveNeighbors\Request
      */
     public function removeNeighborsRequest(RemoveNeighbors\Response $executeResponse = null): RemoveNeighbors\Request
     {
@@ -525,15 +552,16 @@ class RemoteApiMocks
 
         $request->method('execute')->willReturn($executeResponse);
 
-        /** @var $request RemoveNeighbors\Request */
+        // @var $request RemoveNeighbors\Request
         return $request;
     }
 
     /**
-     * @param RemoveNeighbors\Request|null $request
-     * @return RemoveNeighbors\RequestFactory|\PHPUnit_Framework_MockObject_MockObject
+     * @param null|RemoveNeighbors\Request $request
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|RemoveNeighbors\RequestFactory
      */
-    public function removeNeighborsFactory(RemoveNeighbors\Request $request = null) : RemoveNeighbors\RequestFactory
+    public function removeNeighborsFactory(RemoveNeighbors\Request $request = null): RemoveNeighbors\RequestFactory
     {
         $request = $request ?? $this->broadcastTransactionsRequest();
         $factory = $this->testCase->getMockBuilder(RemoveNeighbors\RequestFactory::class)
@@ -542,13 +570,14 @@ class RemoteApiMocks
             ->getMock();
         $factory->method('factory')->willReturn($request);
 
-        /** @var $factory RemoveNeighbors\RequestFactory */
+        // @var $factory RemoveNeighbors\RequestFactory
         return $factory;
     }
 
     /**
-     * @param StoreTransactions\Response|null $executeResponse
-     * @return StoreTransactions\Request|\PHPUnit_Framework_MockObject_MockObject
+     * @param null|StoreTransactions\Response $executeResponse
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|StoreTransactions\Request
      */
     public function storeTransactionsRequest(StoreTransactions\Response $executeResponse = null): StoreTransactions\Request
     {
@@ -562,15 +591,16 @@ class RemoteApiMocks
 
         $request->method('execute')->willReturn($executeResponse);
 
-        /** @var $request StoreTransactions\Request */
+        // @var $request StoreTransactions\Request
         return $request;
     }
 
     /**
-     * @param StoreTransactions\Request|null $request
-     * @return StoreTransactions\RequestFactory|\PHPUnit_Framework_MockObject_MockObject
+     * @param null|StoreTransactions\Request $request
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|StoreTransactions\RequestFactory
      */
-    public function storeTransactionsFactory(StoreTransactions\Request $request = null) : StoreTransactions\RequestFactory
+    public function storeTransactionsFactory(StoreTransactions\Request $request = null): StoreTransactions\RequestFactory
     {
         $request = $request ?? $this->broadcastTransactionsRequest();
         $factory = $this->testCase->getMockBuilder(StoreTransactions\RequestFactory::class)
@@ -579,7 +609,7 @@ class RemoteApiMocks
             ->getMock();
         $factory->method('factory')->willReturn($request);
 
-        /** @var $factory StoreTransactions\RequestFactory */
+        // @var $factory StoreTransactions\RequestFactory
         return $factory;
     }
 }

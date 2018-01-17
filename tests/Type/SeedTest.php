@@ -1,11 +1,24 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
+
+/*
+ * This file is part of the IOTA PHP package.
+ *
+ * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Techworker\IOTA\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
 use Techworker\IOTA\Type\Seed;
 
+/**
+ * @coversNothing
+ */
 class SeedTest extends TestCase
 {
     public function testValidCreation()
@@ -20,25 +33,24 @@ class SeedTest extends TestCase
         static::assertEquals(81, $seed->count());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testSeedMinLength()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         new Seed(str_repeat('A', 80));
     }
 
     public function testSeedToStringEmpty()
     {
         $seed = new Seed(str_repeat('A', 81));
-        static::assertEmpty((string)$seed);
+        static::assertEmpty((string) $seed);
         static::assertEmpty($seed->__toString());
     }
 
     public function testSeedWithCheckSum()
     {
         $seed = new Seed(str_repeat('A', 84));
-        static::assertEquals('AAA', (string)$seed->getCheckSum());
+        static::assertEquals('AAA', (string) $seed->getCheckSum());
     }
 
     public function testSeedIsNotInDump()

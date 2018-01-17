@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\Util;
 
@@ -21,7 +23,8 @@ class TrytesUtil
      * to a Trytes bases instance of your choice specified by the $cls param.
      *
      * @param $trytes
-     * @param string|null $cls
+     * @param null|string $cls
+     *
      * @return Trytes
      */
     public static function stringToTrytes($trytes, string $cls = null): Trytes
@@ -37,8 +40,9 @@ class TrytesUtil
     }
 
     /**
-     * @param array $trytesArray
-     * @param string|null $cls
+     * @param array       $trytesArray
+     * @param null|string $cls
+     *
      * @return array
      */
     public static function arrayToTrytes(array $trytesArray, string $cls = null): array
@@ -55,6 +59,7 @@ class TrytesUtil
      * Converts a text to trytes.
      *
      * @param string $input
+     *
      * @return Trytes
      */
     public static function asciiToTrytes(string $input): Trytes
@@ -71,7 +76,7 @@ class TrytesUtil
             // this will not occur in php
             // TODO: remove completely
             //if ($asciiValue > 255) {
-                //asciiValue = 32
+            //asciiValue = 32
             //    return null;
             //}
 
@@ -90,8 +95,10 @@ class TrytesUtil
      * Converts trytes to text.
      *
      * @param Trytes $inputTrytes
-     * @return string
+     *
      * @throws \Exception
+     *
+     * @return string
      */
     public static function asciiFromTrytes(Trytes $inputTrytes): string
     {
@@ -99,6 +106,7 @@ class TrytesUtil
         if (1 === $inputTrytes->count() % 2) {
             // TODO: we can do better than that
             return '';
+
             throw new Exception('not even.');
         }
 
@@ -129,9 +137,10 @@ class TrytesUtil
      * Converts the given trytes to trits.
      *
      * @param Trytes $trytes
+     *
      * @return array
      */
-    public static function toTrits(Trytes $trytes) : array
+    public static function toTrits(Trytes $trytes): array
     {
         $trits = [];
 

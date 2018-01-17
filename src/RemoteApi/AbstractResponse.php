@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,12 +10,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\RemoteApi;
 
-use Techworker\IOTA\Trace;
 use Techworker\IOTA\SerializeInterface;
+use Techworker\IOTA\Trace;
 
 /**
  * Class AbstractResponse.
@@ -72,36 +74,8 @@ abstract class AbstractResponse implements SerializeInterface
     protected $request;
 
     /**
-     * Maps the results of $rawData to the extended response object props.
-     */
-    abstract protected function mapResults(): void;
-
-    /**
-     * A simple helper function that checks whether the current raw data array
-     * has all the given keys.
-     *
-     * @param string[]   $keys
-     * @param null|array $data
-     *
-     * @throws \RuntimeException
-     */
-    protected function checkRequiredKeys(array $keys, array $data = null): void
-    {
-        foreach ($keys as $key) {
-            if (null !== $data) {
-                if (!isset($data[$key])) {
-                    throw new \RuntimeException('Missing key '.$key.' in response.');
-                }
-            } else {
-                if (!isset($this->rawData[$key])) {
-                    throw new \RuntimeException('Missing key '.$key.' in response.');
-                }
-            }
-        }
-    }
-
-    /**
      * AbstractResponse constructor.
+     *
      * @param RequestInterface $request
      */
     public function __construct(RequestInterface $request)
@@ -176,7 +150,7 @@ abstract class AbstractResponse implements SerializeInterface
      */
     public function isError(): bool
     {
-        return $this->code !== null && 200 !== $this->code;
+        return null !== $this->code && 200 !== $this->code;
     }
 
     /**
@@ -233,8 +207,37 @@ abstract class AbstractResponse implements SerializeInterface
                 'code' => $this->code,
                 'rawData' => $this->rawData,
                 'unexpected' => $this->unexpected,
-                'body' => $this->body
-            ]
+                'body' => $this->body,
+            ],
         ];
+    }
+
+    /**
+     * Maps the results of $rawData to the extended response object props.
+     */
+    abstract protected function mapResults(): void;
+
+    /**
+     * A simple helper function that checks whether the current raw data array
+     * has all the given keys.
+     *
+     * @param string[]   $keys
+     * @param null|array $data
+     *
+     * @throws \RuntimeException
+     */
+    protected function checkRequiredKeys(array $keys, array $data = null): void
+    {
+        foreach ($keys as $key) {
+            if (null !== $data) {
+                if (!isset($data[$key])) {
+                    throw new \RuntimeException('Missing key '.$key.' in response.');
+                }
+            } else {
+                if (!isset($this->rawData[$key])) {
+                    throw new \RuntimeException('Missing key '.$key.' in response.');
+                }
+            }
+        }
     }
 }

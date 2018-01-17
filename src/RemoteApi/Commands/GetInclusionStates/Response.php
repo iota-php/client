@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\RemoteApi\Commands\GetInclusionStates;
 
@@ -30,24 +32,6 @@ class Response extends AbstractResponse
     protected $states;
 
     /**
-     * Maps the response result to the predefined props.
-     *
-     * @throws \RuntimeException
-     */
-    protected function mapResults(): void
-    {
-        $this->checkRequiredKeys(['states']);
-
-        $this->states = [];
-        /** @var Request $request */
-        $request = $this->request;
-        /** @noinspection ForeachSourceInspection */
-        foreach ($this->rawData['states'] as $idx => $state) {
-            $this->states[(string)$request->getTransactionHashes()[$idx]] = (bool) $state;
-        }
-    }
-
-    /**
      * Gets the states.
      *
      * @return bool[]
@@ -65,7 +49,25 @@ class Response extends AbstractResponse
     public function serialize(): array
     {
         return array_merge([
-            'states' => $this->states
+            'states' => $this->states,
         ], parent::serialize());
+    }
+
+    /**
+     * Maps the response result to the predefined props.
+     *
+     * @throws \RuntimeException
+     */
+    protected function mapResults(): void
+    {
+        $this->checkRequiredKeys(['states']);
+
+        $this->states = [];
+        /** @var Request $request */
+        $request = $this->request;
+        // @noinspection ForeachSourceInspection
+        foreach ($this->rawData['states'] as $idx => $state) {
+            $this->states[(string) $request->getTransactionHashes()[$idx]] = (bool) $state;
+        }
     }
 }
