@@ -1,14 +1,25 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
+
+/*
+ * This file is part of the IOTA PHP package.
+ *
+ * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Techworker\IOTA\Tests\ClientApi\Actions\FindTransactionObjects;
 
 use Techworker\IOTA\ClientApi\Actions\FindTransactionObjects;
-use Techworker\IOTA\RemoteApi\Commands\FindTransactions;
 use Techworker\IOTA\Tests\ClientApi\Actions\AbstractActionTest;
 use Techworker\IOTA\Tests\DummyData;
 
+/**
+ * @coversNothing
+ */
 class ActionTest extends AbstractActionTest
 {
     public function testSetter()
@@ -83,22 +94,22 @@ class ActionTest extends AbstractActionTest
         $action->addAddress(DummyData::getAddress());
         $serialized = $action->jsonSerialize();
         static::assertArrayHasKey('addresses', $serialized);
-        static::assertEquals([(string)DummyData::getAddress()], $serialized['addresses']);
+        static::assertEquals([(string) DummyData::getAddress()], $serialized['addresses']);
 
         $action->addBundleHash(DummyData::getBundleHash());
         $serialized = $action->jsonSerialize();
         static::assertArrayHasKey('bundleHashes', $serialized);
-        static::assertEquals([(string)DummyData::getBundleHash()], $serialized['bundleHashes']);
+        static::assertEquals([(string) DummyData::getBundleHash()], $serialized['bundleHashes']);
 
         $action->addApprovee(DummyData::getApprovee());
         $serialized = $action->jsonSerialize();
         static::assertArrayHasKey('approvees', $serialized);
-        static::assertEquals([(string)DummyData::getApprovee()], $serialized['approvees']);
+        static::assertEquals([(string) DummyData::getApprovee()], $serialized['approvees']);
 
         $action->addTag(DummyData::getTag());
         $serialized = $action->jsonSerialize();
         static::assertArrayHasKey('tags', $serialized);
-        static::assertEquals([(string)DummyData::getTag()], $serialized['tags']);
+        static::assertEquals([(string) DummyData::getTag()], $serialized['tags']);
 
         $this->assertSerializedActionHasNode($serialized, DummyData::getNode());
     }
@@ -107,7 +118,7 @@ class ActionTest extends AbstractActionTest
     {
         $ftResponse = $this->raMocks->findTransactionsResponse([
             DummyData::getTransactionHash(0),
-            DummyData::getTransactionHash(1)
+            DummyData::getTransactionHash(1),
         ]);
 
         $ftRequest = $this->raMocks->findTransactionsRequest($ftResponse);

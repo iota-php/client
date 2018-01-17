@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\RemoteApi\Commands\IsTailConsistent;
 
@@ -17,7 +19,7 @@ use Techworker\IOTA\RemoteApi\Exception;
 use Techworker\IOTA\Type\TransactionHash;
 
 /**
- * Trait RequestTrait
+ * Trait RequestTrait.
  *
  * Wrapper function to execute the request.
  */
@@ -32,6 +34,7 @@ trait RequestTrait
 
     /**
      * Sets the factory for the request.
+     *
      * @param RequestFactory $isTailConsistentFactory
      *
      * @return RequestTrait
@@ -45,13 +48,15 @@ trait RequestTrait
 
     /**
      * Executes the request.
-     * @param Node              $node
-     * @param TransactionHash   $tailTransactionHash
      *
-     * @return AbstractResponse|Response
+     * @param Node            $node
+     * @param TransactionHash $tailTransactionHash
+     *
      * @throws Exception
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
+     *
+     * @return AbstractResponse|Response
      */
     protected function isTailConsistent(Node $node, TransactionHash $tailTransactionHash): Response
     {

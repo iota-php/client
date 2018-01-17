@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\RemoteApi;
 
@@ -36,7 +38,7 @@ class Exception extends \DomainException
         $raw = $response->getRawData();
         $message = $raw['message'] ?? 'Unknown api error';
         if (isset($raw['error'])) {
-            $message = $this->code . ': ' . $raw['error'];
+            $message = $this->code.': '.$raw['error'];
         }
 
         parent::__construct($message);

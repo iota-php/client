@@ -2,12 +2,12 @@
 
 namespace Techworker\IOTA\Apps\Explorer;
 
-include __DIR__ . '/design/head.php';
+include __DIR__.'/design/head.php';
 
 use Techworker\IOTA\IOTA;
 
 /** @var IOTA $iota */
-$iota = include __DIR__ . '/bootstrap.php';
+$iota = include __DIR__.'/bootstrap.php';
 
 $nodeInfo = $iota->getRemoteApi()->getNodeInfo($iota->getNode());
 if ($nodeInfo->isError()) {
@@ -31,74 +31,74 @@ if ($transactionsToApprove->isError()) {
     <tbody>
     <tr>
         <td>Name</td>
-        <td><?= $nodeInfo->getAppName() ?></td>
+        <td><?php echo $nodeInfo->getAppName(); ?></td>
     </tr>
     <tr>
         <td>Version</td>
-        <td><?= $nodeInfo->getAppVersion() ?></td>
+        <td><?php echo $nodeInfo->getAppVersion(); ?></td>
     </tr>
     <tr>
         <td>Latest Milestone</td>
         <td>
-            <a href="transaction.php?t=<?= $nodeInfo->getLatestMilestone() ?>">
-                <?= $nodeInfo->getLatestMilestone() ?>
+            <a href="transaction.php?t=<?php echo $nodeInfo->getLatestMilestone(); ?>">
+                <?php echo $nodeInfo->getLatestMilestone(); ?>
             </a><br />
-            Index: <?= $nodeInfo->getLatestMilestone()->getIndex() ?>
+            Index: <?php echo $nodeInfo->getLatestMilestone()->getIndex(); ?>
         </td>
     </tr>
     <tr>
         <td>Lastest Solid Subtangle Milestone</td>
         <td>
-            <a href="transaction.php?t=<?= $nodeInfo->getLatestSolidSubtangleMilestone() ?>">
-                <?= $nodeInfo->getLatestSolidSubtangleMilestone() ?>
+            <a href="transaction.php?t=<?php echo $nodeInfo->getLatestSolidSubtangleMilestone(); ?>">
+                <?php echo $nodeInfo->getLatestSolidSubtangleMilestone(); ?>
             </a><br />
-            Index <?= $nodeInfo->getLatestSolidSubtangleMilestone()->getIndex() ?>
+            Index <?php echo $nodeInfo->getLatestSolidSubtangleMilestone()->getIndex(); ?>
         </td>
     </tr>
     <tr>
         <td>Neighbors</td>
-        <td><?= $nodeInfo->getNeighbors() ?></td>
+        <td><?php echo $nodeInfo->getNeighbors(); ?></td>
     </tr>
     <tr>
         <td>Time</td>
-        <td><?= $nodeInfo->getTime() ?></td>
+        <td><?php echo $nodeInfo->getTime(); ?></td>
     </tr>
     <tr>
         <td>Tips</td>
-        <td><?= $nodeInfo->getTips() ?></td>
+        <td><?php echo $nodeInfo->getTips(); ?></td>
     </tr>
     <tr>
         <td>Packet Queue Size</td>
-        <td><?= $nodeInfo->getPacketQueueSize() ?></td>
+        <td><?php echo $nodeInfo->getPacketQueueSize(); ?></td>
     </tr>
     <tr>
         <td>JRE Total Memory</td>
-        <td><?= $nodeInfo->getJreTotalMemory() ?></td>
+        <td><?php echo $nodeInfo->getJreTotalMemory(); ?></td>
     </tr>
     <tr>
         <td>JRE Max Memory</td>
-        <td><?= $nodeInfo->getJreMaxMemory() ?></td>
+        <td><?php echo $nodeInfo->getJreMaxMemory(); ?></td>
     </tr>
     <tr>
         <td>JRE Free Memory</td>
-        <td><?= $nodeInfo->getJreFreeMemory() ?></td>
+        <td><?php echo $nodeInfo->getJreFreeMemory(); ?></td>
     </tr>
     <tr>
         <td>JRE Avail. Processors</td>
-        <td><?= $nodeInfo->getJreAvailableProcessors() ?></td>
+        <td><?php echo $nodeInfo->getJreAvailableProcessors(); ?></td>
     </tr>
     <tr>
         <td>Transactions to request</td>
-        <td><?= $nodeInfo->getTransactionsToRequest() ?></td>
+        <td><?php echo $nodeInfo->getTransactionsToRequest(); ?></td>
     </tr>
     <tr>
         <td>Trunk Transaction</td>
-        <td><a href="transaction.php?t=<?= $transactionsToApprove->getTrunkTransaction() ?>"><?= $transactionsToApprove->getTrunkTransaction() ?></a></td>
+        <td><a href="transaction.php?t=<?php echo $transactionsToApprove->getTrunkTransaction(); ?>"><?php echo $transactionsToApprove->getTrunkTransaction(); ?></a></td>
     </tr>
     <tr>
         <td>Branch Transaction</td>
-        <td><a href="transaction.php?t=<?= $transactionsToApprove->getBranchTransaction() ?>"><?= $transactionsToApprove->getBranchTransaction() ?></a></td>
+        <td><a href="transaction.php?t=<?php echo $transactionsToApprove->getBranchTransaction(); ?>"><?php echo $transactionsToApprove->getBranchTransaction(); ?></a></td>
     </tr>
     </tbody>
 </table>
-<?php include __DIR__ . '/design/foot.php'; ?>
+<?php include __DIR__.'/design/foot.php'; ?>

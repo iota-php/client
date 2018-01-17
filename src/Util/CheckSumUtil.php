@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,17 +10,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\Util;
 
 use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
-use Techworker\IOTA\Cryptography\Signing;
 use Techworker\IOTA\Exception;
-use Techworker\IOTA\Type\Address;
 use Techworker\IOTA\Type\CheckSummableInterface;
-use Techworker\IOTA\Type\SecurityLevel;
-use Techworker\IOTA\Type\Seed;
 use Techworker\IOTA\Type\Trytes;
 
 /**
@@ -49,15 +47,15 @@ class CheckSumUtil
      * instance.
      *
      * @param CheckSummableInterface $trytes
-     * @param int $length
-     *
-     * @return Trytes
+     * @param int                    $length
      *
      * @throws Exception
+     *
+     * @return Trytes
      */
     public function getChecksum(CheckSummableInterface $trytes, int $length = 9): Trytes
     {
-        if(!$trytes instanceof Trytes) {
+        if (!$trytes instanceof Trytes) {
             throw new Exception('Checksum can only be calculated on a Trytes instance.');
         }
 
@@ -71,8 +69,12 @@ class CheckSumUtil
         $kerl->squeeze($checksumTrits, 0, $kerl->hashLength());
 
         // last $checkSumLength trytes (27 trits) as checksum
-        return TritsUtil::toTrytes(\array_slice(
-            $checksumTrits, 243 - ($length * 3), $length * 3)
+        return TritsUtil::toTrytes(
+            \array_slice(
+            $checksumTrits,
+            243 - ($length * 3),
+            $length * 3
+        )
         );
     }
 }

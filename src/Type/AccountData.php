@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,14 +10,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\Type;
 
 use Techworker\IOTA\SerializeInterface;
 
 /**
- * Class AccountData
+ * Class AccountData.
  *
  * Collection of data for an account.
  */
@@ -68,12 +70,13 @@ class AccountData implements SerializeInterface
 
     /**
      * @param Address[] $addresses
+     *
      * @return AccountData
      */
-    public function setAddresses(array $addresses): AccountData
+    public function setAddresses(array $addresses): self
     {
         $this->addresses = [];
-        foreach($addresses as $address) {
+        foreach ($addresses as $address) {
             $this->addAddress($address);
         }
 
@@ -82,27 +85,31 @@ class AccountData implements SerializeInterface
 
     /**
      * @param Bundle[] $bundles
+     *
      * @return AccountData
      */
-    public function setBundles(array $bundles): AccountData
+    public function setBundles(array $bundles): self
     {
         $this->bundles = [];
-        foreach($bundles as $bundle) {
+        foreach ($bundles as $bundle) {
             $this->addBundle($bundle);
         }
+
         return $this;
     }
 
     /**
      * @param Input[] $inputs
+     *
      * @return AccountData
      */
-    public function setInputs(array $inputs): AccountData
+    public function setInputs(array $inputs): self
     {
         $this->inputs = [];
-        foreach($inputs as $input) {
+        foreach ($inputs as $input) {
             $this->addInput($input);
         }
+
         return $this;
     }
 
@@ -206,9 +213,10 @@ class AccountData implements SerializeInterface
      * Adds a single input.
      *
      * @param Input $input
+     *
      * @return AccountData
      */
-    public function addInput(Input $input) : self
+    public function addInput(Input $input): self
     {
         $this->inputs[] = $input;
 
@@ -228,7 +236,7 @@ class AccountData implements SerializeInterface
      *
      * @return array
      */
-    public function serialize() : array
+    public function serialize(): array
     {
         return [
             'addresses' => array_map(function (Address $address) {

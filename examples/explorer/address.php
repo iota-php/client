@@ -3,12 +3,12 @@
 namespace Techworker\IOTA\Apps\Explorer;
 
 use Techworker\IOTA\IOTA;
-use Techworker\IOTA\RemoteApi\Commands\GetBalances;
 use Techworker\IOTA\RemoteApi\Commands\FindTransactions;
+use Techworker\IOTA\RemoteApi\Commands\GetBalances;
 use Techworker\IOTA\Type\Address;
 
 /** @var IOTA $iota */
-$iota = include __DIR__ . '/bootstrap.php';
+$iota = include __DIR__.'/bootstrap.php';
 
 /** @var GetBalances\Response $balanceInfos */
 $balanceInfos = $iota->getRemoteApi()->getBalances([new Address($_GET['a'])]);
@@ -26,12 +26,12 @@ $transactions = $api->findTransactions([], [new Address($_GET['a'])]);
 
 <h2>Address info</h2>
 <h3>Address</h3>
-<p><?= $_GET['a'] ?></p>
+<p><?php echo $_GET['a']; ?></p>
 <h3>Balance</h3>
-<p><?=$balance ?></p>
+<p><?php echo $balance; ?></p>
 <h3>Latest confirmed milestone</h3>
-<p><?= $balanceInfos->getMilestone() ?> (<?= $balanceInfos->getMilestone()->getIndex() ?>)</p>
+<p><?php echo $balanceInfos->getMilestone(); ?> (<?php echo $balanceInfos->getMilestone()->getIndex(); ?>)</p>
 <h3>Transactions</h3>
 <?php foreach ($transactions->getTransactionHashes() as $transaction) : ?>
-<p><a href="transaction.php?t=<?= $transaction ?>"><?= $transaction ?></a></p>
+<p><a href="transaction.php?t=<?php echo $transaction; ?>"><?php echo $transaction; ?></a></p>
 <?php endforeach; ?>

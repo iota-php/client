@@ -3,19 +3,16 @@
 namespace Techworker\IOTA\Apps\Explorer;
 
 use Techworker\IOTA\IOTA;
-use Techworker\IOTA\RemoteApi\RemoteApi;
-use Techworker\IOTA\RemoteApi\Commands\GetTrytes;
-use Techworker\IOTA\RemoteApi\Commands\GetNodeInfo;
 use Techworker\IOTA\RemoteApi\Commands\GetInclusionStates;
+use Techworker\IOTA\RemoteApi\Commands\GetNodeInfo;
+use Techworker\IOTA\RemoteApi\Commands\GetTrytes;
 use Techworker\IOTA\Type\Transaction;
-use Techworker\IOTA\Type\Tip;
 use Techworker\IOTA\Type\TransactionHash;
 
-
-include __DIR__ . '/design/head.php';
+include __DIR__.'/design/head.php';
 
 /** @var IOTA $iota */
-$iota = include __DIR__ . '/bootstrap.php';
+$iota = include __DIR__.'/bootstrap.php';
 
 /** @var GetTrytes\Response $transactionInfos */
 $transactionInfos = $iota->getRemoteApi()->getTrytes($iota->getNode(), [new TransactionHash($_GET['t'])]);
@@ -29,7 +26,8 @@ $transaction = new Transaction($transactionInfos->getTransactions()[0]);
 $nodeInfo = $iota->getRemoteApi()->getNodeInfo($iota->getNode());
 
 /** @var GetInclusionStates\Response $statesInfo */
-$statesInfo = $iota->getClientApi()->getLatestInclusion($iota->getNode(),
+$statesInfo = $iota->getClientApi()->getLatestInclusion(
+    $iota->getNode(),
     [$transaction->getTransactionHash()]
 )->getStates();
 
@@ -37,30 +35,30 @@ $statesInfo = $iota->getClientApi()->getLatestInclusion($iota->getNode(),
 
 <h2>Transaction Detils</h2>
 <h3>Transaction Hash</h3>
-<p><?= $transaction->getTransactionHash() ?></p>
+<p><?php echo $transaction->getTransactionHash(); ?></p>
 <h3>Confirmed</h3>
-<p><?=current($statesInfo) ? 'true' : 'false' ?></p>
+<p><?php echo current($statesInfo) ? 'true' : 'false'; ?></p>
 <h3>Address</h3>
-<p><a href="address.php?a=<?= $transaction->getAddress() ?>"><?= $transaction->getAddress() ?></a></p>
+<p><a href="address.php?a=<?php echo $transaction->getAddress(); ?>"><?php echo $transaction->getAddress(); ?></a></p>
 <h3>Value</h3>
-<p><?= $transaction->getValue()->getAmount() ?></p>
+<p><?php echo $transaction->getValue()->getAmount(); ?></p>
 <h3>Tag</h3>
-<p><?= $transaction->getTag() ?></p>
+<p><?php echo $transaction->getTag(); ?></p>
 <h3>Timestamp</h3>
-<p><?= $transaction->getTimestamp() ?></p>
+<p><?php echo $transaction->getTimestamp(); ?></p>
 <h3>Current Index in Bundle</h3>
-<p><?= $transaction->getCurrentIndex() ?></p>
+<p><?php echo $transaction->getCurrentIndex(); ?></p>
 <h3>Last Index of Bundle</h3>
-<p><?= $transaction->getLastIndex() ?></p>
+<p><?php echo $transaction->getLastIndex(); ?></p>
 <h3>Trunk Transaction Hash</h3>
-<p><a href="transaction.php?t=<?= $transaction->getAddress() ?>"><?= $transaction->getTrunkTransactionHash() ?></a></p>
+<p><a href="transaction.php?t=<?php echo $transaction->getAddress(); ?>"><?php echo $transaction->getTrunkTransactionHash(); ?></a></p>
 <h3>Branch Transaction Hash</h3>
-<p><a href="transaction.php?t=<?= $transaction->getAddress() ?>"><?= $transaction->getBranchTransactionHash() ?></a></p>
+<p><a href="transaction.php?t=<?php echo $transaction->getAddress(); ?>"><?php echo $transaction->getBranchTransactionHash(); ?></a></p>
 <h3>Bundle Hash</h3>
-<p><a href="bundle.php?b=<?= $transaction->getBundleHash() ?>"><?= $transaction->getBundleHash() ?></a></p>
+<p><a href="bundle.php?b=<?php echo $transaction->getBundleHash(); ?>"><?php echo $transaction->getBundleHash(); ?></a></p>
 <h3>Nonce</h3>
-<p><?= $transaction->getNonce() ?></p>
+<p><?php echo $transaction->getNonce(); ?></p>
 <h3>Message or Signature</h3>
-<p><?= $transaction->getSignatureMessageFragment() ?></p>
+<p><?php echo $transaction->getSignatureMessageFragment(); ?></p>
 <h3>Raw</h3>
-<p><?= $transaction ?></p>
+<p><?php echo $transaction; ?></p>

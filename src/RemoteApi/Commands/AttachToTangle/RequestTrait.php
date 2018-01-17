@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\RemoteApi\Commands\AttachToTangle;
 
@@ -18,7 +20,7 @@ use Techworker\IOTA\Type\Transaction;
 use Techworker\IOTA\Type\TransactionHash;
 
 /**
- * Trait RequestTrait
+ * Trait RequestTrait.
  *
  * Wrapper function to execute the request.
  */
@@ -33,6 +35,7 @@ trait RequestTrait
 
     /**
      * Sets the factory for the request.
+     *
      * @param RequestFactory $attachToTangleFactory
      *
      * @return RequestTrait
@@ -44,21 +47,24 @@ trait RequestTrait
         return $this;
     }
 
-    /* @noinspection MoreThanThreeArgumentsInspection */
+    // @noinspection MoreThanThreeArgumentsInspection
+
     /**
      * Executes the request.
+     *
      * @param Node            $node
      * @param Transaction[]   $transactions
      * @param TransactionHash $trunkTransactionHash
      * @param TransactionHash $branchTransactionHash
      * @param int             $minWeightMagnitude
      *
-     * @return AbstractResponse|Response
      * @throws \Techworker\IOTA\Exception
      * @throws Exception
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      * @throws \InvalidArgumentException
+     *
+     * @return AbstractResponse|Response
      */
     protected function attachToTangle(
         Node $node,

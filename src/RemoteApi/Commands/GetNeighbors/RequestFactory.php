@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\RemoteApi\Commands\GetNeighbors;
 
@@ -25,11 +27,13 @@ class RequestFactory extends AbstractFactory implements RequestFactoryInterface
 {
     /**
      * Creates the new request instance and returns it.
+     *
      * @param Node $node
      *
-     * @return Request
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
+     *
+     * @return Request
      */
     public function factory(Node $node): Request
     {

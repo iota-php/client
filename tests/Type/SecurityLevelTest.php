@@ -1,12 +1,24 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
+
+/*
+ * This file is part of the IOTA PHP package.
+ *
+ * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Techworker\IOTA\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
 use Techworker\IOTA\Type\SecurityLevel;
 
+/**
+ * @coversNothing
+ */
 class SecurityLevelTest extends TestCase
 {
     public function testInit()
@@ -16,19 +28,17 @@ class SecurityLevelTest extends TestCase
         static::assertEquals(3, SecurityLevel::LEVEL_3()->getLevel());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalid()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         new SecurityLevel(4);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalid2()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         new SecurityLevel(0);
     }
 

@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\Cryptography\Hashing;
 
@@ -19,14 +21,13 @@ use Techworker\IOTA\Exception;
 class Curl implements SpongeInterface
 {
     /**
-     * @var array
-     */
-    protected const TRUTH_TABLE = [1, 0, -1, 2, 1, -1, 0, 2, -1, 1, 0];
-
-    /**
      * The length of the hash.
      */
     public const HASH_LENGTH = 243;
+    /**
+     * @var array
+     */
+    protected const TRUTH_TABLE = [1, 0, -1, 2, 1, -1, 0, 2, -1, 1, 0];
 
     /**
      * The current state.
@@ -88,10 +89,10 @@ class Curl implements SpongeInterface
 
     /**
      * @param array $trits
-     * @param int $offset
-     * @param int $length
+     * @param int   $offset
+     * @param int   $length
      */
-    public function squeeze(array &$trits, int $offset, int $length) : void
+    public function squeeze(array &$trits, int $offset, int $length): void
     {
         do {
             $i = 0;
@@ -103,6 +104,19 @@ class Curl implements SpongeInterface
 
             $this->transform();
         } while (($length -= 243) > 0);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function reset(): void
+    {
+        throw new Exception('Not implemented');
+    }
+
+    public function hashLength(): int
+    {
+        return self::HASH_LENGTH;
     }
 
     /**
@@ -121,18 +135,5 @@ class Curl implements SpongeInterface
                     ] << 2) + 5];
             }
         }
-    }
-
-    /**
-     * @throws \Exception
-     */
-    public function reset(): void
-    {
-        throw new Exception('Not implemented');
-    }
-
-    public function hashLength(): int
-    {
-        return self::HASH_LENGTH;
     }
 }

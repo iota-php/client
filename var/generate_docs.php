@@ -1,7 +1,15 @@
 <?php
 
-// A UGLY BUT WORKING DOCs GENERATOR, eat that..
-require_once __DIR__ . '/../vendor/autoload.php';
+/*
+ * This file is part of the IOTA PHP package.
+ *
+ * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+require_once __DIR__.'/../vendor/autoload.php';
 
 use PhpParser\Error;
 use PhpParser\ParserFactory;
@@ -15,36 +23,39 @@ class P extends \PhpParser\NodeVisitorAbstract
     protected $structure = [];
     protected $valid = false;
 
-    public function enterNode(\PhpParser\Node $node) {
+    public function enterNode(\PhpParser\Node $node)
+    {
         if ($this->isTrait && count($this->structure) && $node instanceof \PhpParser\Node\Param) {
             $this->searchParams = true;
             $this->structure['params'] = $this->structure['params'] ?? [];
             $latest = [
                 'name' => $node->name,
-                'type' => is_string($node->type) ? $node->type : implode('\\', $node->type->parts)
+                'type' => is_string($node->type) ? $node->type : implode('\\', $node->type->parts),
             ];
 
-
             $a = 'B';
-            switch(get_class($node->default)) {
+            switch (get_class($node->default)) {
                 case \PhpParser\Node\Expr\ConstFetch::class:
                     $latest['default'] = $node->default->name->parts[0];
+
                     break;
                 case \PhpParser\Node\Expr\Array_::class:
                     $latest['default'] = '[]';
+
                     break;
                 case \PhpParser\Node\Scalar\LNumber::class:
                     $latest['default'] = $node->default->value;
+
                     break;
                 case \PhpParser\Node\Expr\UnaryMinus::class:
                     $latest['default'] = $node->default->expr->value * -1;
+
                     break;
                 default:
                     $latest['default'] = false;
-
             }
             $this->structure['params'][] = $latest;
-            echo $latest['name'] . ': ' . $latest['type'] . ' - ' . $latest['default'] . "\n";
+            echo $latest['name'].': '.$latest['type'].' - '.$latest['default']."\n";
         }
         if ($node instanceof \PhpParser\Node\Stmt\Namespace_) {
             $this->ns = strtolower($node->name->parts[count($node->name->parts) - 1]);
@@ -55,11 +66,10 @@ class P extends \PhpParser\NodeVisitorAbstract
         }
 
         if ($node instanceof \PhpParser\Node\Stmt\ClassMethod &&
-            substr($node->name,0,3) !== 'set' &&
-            strtolower($node->name) === $this->ns)
-        {
+            'set' !== substr($node->name, 0, 3) &&
+            strtolower($node->name) === $this->ns) {
             $this->valid = $this->isTrait();
-            echo $node->name . "\n" . str_repeat('-', 50) . "\n\n";
+            echo $node->name."\n".str_repeat('-', 50)."\n\n";
             $this->structure['name'] = $node->name;
         }
     }
@@ -111,32 +121,30 @@ class P extends \PhpParser\NodeVisitorAbstract
     {
         return $this->valid;
     }
-
-
 }
 
-$directory = __DIR__ . '/../src';
+$directory = __DIR__.'/../src';
 
 $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory));
 
-
 $loader = new Twig_Loader_Filesystem(__DIR__);
-$twig = new Twig_Environment($loader, array(
-));
+$twig = new Twig_Environment($loader, [
+]);
 
 $it->rewind();
 $ps = [];
-while($it->valid()) {
+while ($it->valid()) {
     /** @var $it SplFileInfo */
-
     $file = $it->key();
     $code = file_get_contents($file);
 
-    $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
+    $parser = (new ParserFactory())->create(ParserFactory::PREFER_PHP7);
+
     try {
         $ast = $parser->parse($code);
     } catch (Error $error) {
         echo "Parse error: {$error->getMessage()}\n";
+
         return;
     }
 
@@ -147,14 +155,14 @@ while($it->valid()) {
 
     $it->next();
 
-    if($p->isValid()) {
+    if ($p->isValid()) {
         $ps[] = $p;
     }
 }
 
 $clientApiMethods = [];
 $remoteApiMethods = [];
-foreach($ps as $p) {
+foreach ($ps as $p) {
     if (in_array('RemoteApi', $p->getNsFull(), true)) {
         $remoteApiMethods[] = $p->getStructure()['name'];
     }
@@ -163,11 +171,11 @@ foreach($ps as $p) {
     }
 }
 
-foreach($ps as $p) {
-    $path = __DIR__ . '/../examples/kitchen_sink';
-    if(in_array('RemoteApi', $p->getNsFull(), true)) {
+foreach ($ps as $p) {
+    $path = __DIR__.'/../examples/kitchen_sink';
+    if (in_array('RemoteApi', $p->getNsFull(), true)) {
         $path .= '/remote_api';
-    } else if(in_array('ClientApi', $p->getNsFull(), true)) {
+    } elseif (in_array('ClientApi', $p->getNsFull(), true)) {
         $path .= '/client_api';
     }
 
@@ -175,8 +183,9 @@ foreach($ps as $p) {
         throw new \RuntimeException(sprintf('Directory "%s" was not created', $path));
     }
 
-    $file = $path . '/' . $p->getStructure()['name'] . '.php';
-    file_put_contents($file,
+    $file = $path.'/'.$p->getStructure()['name'].'.php';
+    file_put_contents(
+        $file,
         $twig->render('generate_kitchensink.html.twig', [
             'params' => $p->getStructure()['params'],
             'method' => $p->getStructure()['name'],

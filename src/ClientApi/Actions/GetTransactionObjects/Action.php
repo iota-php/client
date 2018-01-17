@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\ClientApi\Actions\GetTransactionObjects;
 
@@ -43,9 +45,10 @@ class Action extends AbstractAction
 
     /**
      * Action constructor.
-     * @param Node $node
+     *
+     * @param Node                     $node
      * @param GetTrytes\RequestFactory $getTrytesFactory
-     * @param CurlFactory $curlFactory
+     * @param CurlFactory              $curlFactory
      */
     public function __construct(Node $node, GetTrytes\RequestFactory $getTrytesFactory, CurlFactory $curlFactory)
     {
@@ -107,7 +110,7 @@ class Action extends AbstractAction
     public function serialize(): array
     {
         return array_merge(parent::serialize(), [
-            'transactionHashes' => SerializeUtil::serializeArray($this->transactionHashes)
+            'transactionHashes' => SerializeUtil::serializeArray($this->transactionHashes),
         ]);
     }
 }

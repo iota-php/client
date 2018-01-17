@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\DI;
 
@@ -25,12 +27,11 @@ use Techworker\IOTA\ClientApi\Actions\GetTransactionObjects;
 use Techworker\IOTA\ClientApi\Actions\GetTransfers;
 use Techworker\IOTA\ClientApi\Actions\IsReAttachable;
 use Techworker\IOTA\ClientApi\Actions\PromoteTransaction;
+use Techworker\IOTA\ClientApi\Actions\ReplayBundle;
 use Techworker\IOTA\ClientApi\Actions\SendTransfer;
 use Techworker\IOTA\ClientApi\Actions\SendTrytes;
 use Techworker\IOTA\ClientApi\Actions\StoreAndBroadcast;
-use Techworker\IOTA\ClientApi\Actions\ReplayBundle;
 use Techworker\IOTA\ClientApi\ClientApi;
-use Techworker\IOTA\Cryptography\Hashing\Curl;
 use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
 use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
 use Techworker\IOTA\Cryptography\HMAC;
@@ -62,12 +63,19 @@ use Techworker\IOTA\Util\AddressUtil;
 use Techworker\IOTA\Util\CheckSumUtil;
 
 /**
- * Class IOTAContainer
+ * Class IOTAContainer.
  *
  * A simple PSR-11 container implementation.
  */
 class IOTAContainer implements ContainerInterface
 {
+    /**
+     * The list of entries in the container.
+     *
+     * @var array
+     */
+    protected $entries;
+
     /**
      * IOTAContainer constructor.
      *
@@ -203,13 +211,6 @@ class IOTAContainer implements ContainerInterface
             return new BroadcastBundle\ActionFactory($this);
         };
     }
-
-    /**
-     * The list of entries in the container.
-     *
-     * @var array
-     */
-    protected $entries;
 
     /**
      * {@inheritdoc}

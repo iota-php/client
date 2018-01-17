@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\Type;
 
@@ -53,9 +55,10 @@ class Bundle implements SerializeInterface
 
     /**
      * Bundle constructor.
-     * @param KerlFactory $kerlFactory
-     * @param CurlFactory $curlFactory
-     * @param BundleHash|null $hash
+     *
+     * @param KerlFactory     $kerlFactory
+     * @param CurlFactory     $curlFactory
+     * @param null|BundleHash $hash
      */
     public function __construct(KerlFactory $kerlFactory, CurlFactory $curlFactory, BundleHash $hash = null)
     {
@@ -113,15 +116,16 @@ class Bundle implements SerializeInterface
     }
 
     /** @noinspection MoreThanThreeArgumentsInspection */
+
     /**
      * Adds a transaction by creating a new transaction instance with the given
      * parameters.
      *
-     * @param int $signatureMessageLength
+     * @param int     $signatureMessageLength
      * @param Address $address
-     * @param Iota $value
-     * @param Tag $tag
-     * @param int $timestamp
+     * @param Iota    $value
+     * @param Tag     $tag
+     * @param int     $timestamp
      */
     public function addNewTransaction(
         int $signatureMessageLength,
@@ -179,7 +183,7 @@ class Bundle implements SerializeInterface
 
             $hash = [];
             $kerl->squeeze($hash, 0, $kerl->hashLength());
-            $this->bundleHash = new BundleHash((string)TritsUtil::toTrytes($hash));
+            $this->bundleHash = new BundleHash((string) TritsUtil::toTrytes($hash));
 
             foreach ($this->transactions as $transaction) {
                 $transaction->setBundleHash($this->bundleHash);
@@ -203,6 +207,7 @@ class Bundle implements SerializeInterface
      * Adds the given signature message fragments to the transactions.
      *
      * @param SignatureMessageFragment[] $signatureFragments
+     *
      * @throws \InvalidArgumentException
      */
     public function addSignatureMessageFragments(array $signatureFragments)

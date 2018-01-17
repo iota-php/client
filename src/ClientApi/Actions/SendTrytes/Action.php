@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\ClientApi\Actions\SendTrytes;
 
@@ -64,11 +66,12 @@ class Action extends AbstractAction
 
     /**
      * Action constructor.
-     * @param Node $node
+     *
+     * @param Node                                    $node
      * @param GetTransactionsToApprove\RequestFactory $getTransactionsToApproveFactory
-     * @param AttachToTangle\RequestFactory $attachToTangleFactory
-     * @param StoreAndBroadcast\ActionFactory $storeAndBroadcastFactory
-     * @param CurlFactory $curlFactory
+     * @param AttachToTangle\RequestFactory           $attachToTangleFactory
+     * @param StoreAndBroadcast\ActionFactory         $storeAndBroadcastFactory
+     * @param CurlFactory                             $curlFactory
      */
     public function __construct(
         Node $node,
@@ -122,25 +125,30 @@ class Action extends AbstractAction
 
     /**
      * @param Milestone $reference
+     *
      * @return Action
      */
-    public function setReference(Milestone $reference): Action
+    public function setReference(Milestone $reference): self
     {
         $this->reference = $reference;
+
         return $this;
     }
 
     /**
      * Executes the action.
      *
-     * @return Result|AbstractResult
+     * @return AbstractResult|Result
      */
     public function execute(): Result
     {
         $result = new Result($this);
         // fetch transactions to approve
-        $transactionsToApprove = $this->getTransactionsToApprove($this->node,
-            $this->depth, null, $this->reference
+        $transactionsToApprove = $this->getTransactionsToApprove(
+            $this->node,
+            $this->depth,
+            null,
+            $this->reference
         );
 
         $result->addChildTrace($transactionsToApprove->getTrace());
@@ -178,7 +186,7 @@ class Action extends AbstractAction
             'transactions' => SerializeUtil::serializeArray($this->transactions),
             'depth' => $this->depth,
             'minWeightMagnitude' => $this->minWeightMagnitude,
-            'reference' => $this->reference === null ? null : $this->reference->serialize()
+            'reference' => null === $this->reference ? null : $this->reference->serialize(),
         ]);
     }
 }

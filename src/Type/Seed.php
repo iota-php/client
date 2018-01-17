@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\Type;
 
@@ -33,7 +35,7 @@ class Seed extends Trytes implements CheckSummableInterface
      */
     public function __construct(string $seed = null)
     {
-        if ($seed !== null) {
+        if (null !== $seed) {
             $length = \strlen($seed);
             if (81 !== $length && 84 !== $length) {
                 throw new \InvalidArgumentException(sprintf(
@@ -68,16 +70,6 @@ class Seed extends Trytes implements CheckSummableInterface
     }
 
     /**
-     * Gets the seed as a string.
-     *
-     * @return string
-     */
-    public function getSeed(): string
-    {
-        return parent::__toString();
-    }
-
-    /**
      * Will always return an empty string.
      *
      * @return string
@@ -95,5 +87,15 @@ class Seed extends Trytes implements CheckSummableInterface
     public function __sleep(): array
     {
         return [];
+    }
+
+    /**
+     * Gets the seed as a string.
+     *
+     * @return string
+     */
+    public function getSeed(): string
+    {
+        return parent::__toString();
     }
 }

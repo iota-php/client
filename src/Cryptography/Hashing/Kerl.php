@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\Cryptography\Hashing;
 
@@ -44,7 +46,7 @@ class Kerl implements SpongeInterface
     }
 
     /**
-     * @param int[]|null $state
+     * @param null|int[] $state
      *
      * @throws \Exception
      */
@@ -65,7 +67,7 @@ class Kerl implements SpongeInterface
      *
      * @param int[]    $trits
      * @param int      $offset
-     * @param int|null $length
+     * @param null|int $length
      */
     public function absorb(array $trits, int $offset, int $length = null): void
     {
@@ -110,8 +112,7 @@ class Kerl implements SpongeInterface
             throw new \InvalidArgumentException('Illegal length provided');
         }
 
-        while ($offset < $length)
-        {
+        while ($offset < $length) {
             // unpack from digest response
             $unsignedHash = array_values(unpack('C*', hex2bin($this->digest())));
 
@@ -136,6 +137,11 @@ class Kerl implements SpongeInterface
         }
     }
 
+    public function hashLength(): int
+    {
+        return self::HASH_LENGTH;
+    }
+
     /**
      * This method returns the digest of the collected hashes. There is no
      * official keccak-384 implementation, so we are using a small python script
@@ -143,7 +149,7 @@ class Kerl implements SpongeInterface
      *
      * @return string
      */
-    protected function digest() : string
+    protected function digest(): string
     {
         return $this->keccak->digest($this->hashes);
     }
@@ -155,19 +161,15 @@ class Kerl implements SpongeInterface
      *
      * @return int
      */
-    protected function convertSign($byte) : ?int
+    protected function convertSign($byte): ?int
     {
         if ($byte < 0) {
             return 256 + $byte;
-        } elseif ($byte > 127) {
-            return -256 + $byte;
-        } else {
-            return $byte;
         }
-    }
+        if ($byte > 127) {
+            return -256 + $byte;
+        }
 
-    public function hashLength(): int
-    {
-        return self::HASH_LENGTH;
+        return $byte;
     }
 }

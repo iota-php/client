@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\RemoteApi\Commands\GetTransactionsToApprove;
 
@@ -18,7 +20,6 @@ use Techworker\IOTA\RemoteApi\AbstractResponse;
 use Techworker\IOTA\RemoteApi\Exception;
 use Techworker\IOTA\RemoteApi\HttpClient\HttpClientInterface;
 use Techworker\IOTA\Type\Milestone;
-use Techworker\IOTA\Util\TrytesUtil;
 
 /**
  * Class Action.
@@ -164,8 +165,9 @@ class Request extends AbstractRequest
     /**
      * Executes the request.
      *
-     * @return AbstractResponse|Response
      * @throws Exception
+     *
+     * @return AbstractResponse|Response
      */
     public function execute(): Response
     {
@@ -174,15 +176,16 @@ class Request extends AbstractRequest
         $response->initialize($srvResponse['code'], $srvResponse['raw']);
 
         $response->finish();
+
         return $response->throwOnError();
     }
 
-    public function serialize() : array
+    public function serialize(): array
     {
         return array_merge(parent::serialize(), [
             'depth' => $this->depth,
-            'reference' => $this->reference === null ? null : $this->reference->serialize(),
-            'numWalks' => $this->numWalks
+            'reference' => null === $this->reference ? null : $this->reference->serialize(),
+            'numWalks' => $this->numWalks,
         ]);
     }
 }

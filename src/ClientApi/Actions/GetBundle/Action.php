@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\ClientApi\Actions\GetBundle;
 
@@ -58,10 +60,11 @@ class Action extends AbstractAction
 
     /**
      * Action constructor.
-     * @param Node $node
+     *
+     * @param Node                     $node
      * @param GetTrytes\RequestFactory $getTrytesFactory
-     * @param KerlFactory $kerlFactory
-     * @param CurlFactory $curlFactory
+     * @param KerlFactory              $kerlFactory
+     * @param CurlFactory              $curlFactory
      */
     public function __construct(Node $node, GetTrytes\RequestFactory $getTrytesFactory, KerlFactory $kerlFactory, CurlFactory $curlFactory)
     {
@@ -104,12 +107,12 @@ class Action extends AbstractAction
      * transaction hash is not a tail, we return an error.
      *
      * @param TransactionHash $trunkTx
-     * @param BundleHash|null $bundleHash
+     * @param null|BundleHash $bundleHash
      * @param Bundle          $bundle
      *
-     * @return Bundle
-     *
      * @throws \Exception
+     *
+     * @return Bundle
      */
     public function traverseBundle(
         TransactionHash $trunkTx,
@@ -167,7 +170,7 @@ class Action extends AbstractAction
     public function serialize(): array
     {
         return array_merge(parent::serialize(), [
-            'transactionHash' => $this->transactionHash->serialize()
+            'transactionHash' => $this->transactionHash->serialize(),
         ]);
     }
 }

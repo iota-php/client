@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\RemoteApi\Commands\GetTransactionsToApprove;
 
@@ -39,20 +41,6 @@ class Response extends AbstractResponse
     protected $branchTransactionHash;
 
     /**
-     * Maps the response result to the predefined props.
-     *
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    protected function mapResults(): void
-    {
-        $this->checkRequiredKeys(['trunkTransaction', 'branchTransaction']);
-
-        $this->trunkTransactionHash = new TransactionHash($this->rawData['trunkTransaction']);
-        $this->branchTransactionHash = new TransactionHash($this->rawData['branchTransaction']);
-    }
-
-    /**
      * Gets the trunk transaction.
      *
      * @return TransactionHash
@@ -81,7 +69,21 @@ class Response extends AbstractResponse
     {
         return array_merge([
             'trunkTransactionHash' => $this->trunkTransactionHash->serialize(),
-            'branchTransactionHash' => $this->branchTransactionHash->serialize()
+            'branchTransactionHash' => $this->branchTransactionHash->serialize(),
         ], parent::serialize());
+    }
+
+    /**
+     * Maps the response result to the predefined props.
+     *
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    protected function mapResults(): void
+    {
+        $this->checkRequiredKeys(['trunkTransaction', 'branchTransaction']);
+
+        $this->trunkTransactionHash = new TransactionHash($this->rawData['trunkTransaction']);
+        $this->branchTransactionHash = new TransactionHash($this->rawData['branchTransaction']);
     }
 }

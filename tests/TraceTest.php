@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\Tests;
 
@@ -16,9 +18,9 @@ use Techworker\IOTA\SerializeInterface;
 use Techworker\IOTA\Trace;
 
 /**
- * Class TraceTest
+ * Class TraceTest.
  *
- * @package Techworker\IOTA\Tests
+ * @coversNothing
  */
 class TraceTest extends TestCase
 {
@@ -38,7 +40,7 @@ class TraceTest extends TestCase
 
     public function testTraceExtended()
     {
-        $parent = new class implements SerializeInterface {
+        $parent = new class() implements SerializeInterface {
             public function serialize()
             {
                 return [];
@@ -61,6 +63,5 @@ class TraceTest extends TestCase
         static::assertArrayHasKey('root', $s);
         static::assertArrayHasKey('children', $s);
         static::assertCount(2, $s['children']);
-
     }
 }

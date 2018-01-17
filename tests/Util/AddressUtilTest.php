@@ -1,6 +1,15 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
+
+/*
+ * This file is part of the IOTA PHP package.
+ *
+ * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Techworker\IOTA\Tests\Util;
 
@@ -14,9 +23,9 @@ use Techworker\IOTA\Util\AddressUtil;
 use Techworker\IOTA\Util\CheckSumUtil;
 
 /**
- * Class AddressUtilTest
+ * Class AddressUtilTest.
  *
- * @package Techworker\IOTA\Tests\Util
+ * @coversNothing
  */
 class AddressUtilTest extends TestCase
 {
@@ -28,6 +37,7 @@ class AddressUtilTest extends TestCase
     public function addressDataProvider()
     {
         $seed = new Seed('ABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJA');
+
         return [
             //[seed, index, security, address, checksum]
             [$seed, 0, SecurityLevel::LEVEL_1(), 'YWDQRAFPKLAUDNKRHGJBCYNXRYLCTYJJLKUOOQYHFBRFRVLEQEEMPSZJTGLAVNYEIRJMBWNEAHKKUVTLW', 'LECYTGCYB'],
@@ -40,8 +50,13 @@ class AddressUtilTest extends TestCase
     }
 
     /**
-     *
      * @dataProvider addressDataProvider
+     *
+     * @param mixed $seed
+     * @param mixed $index
+     * @param mixed $securityLevel
+     * @param mixed $expectedAddress
+     * @param mixed $checksum
      */
     public function testGenerateAddress($seed, $index, $securityLevel, $expectedAddress, $checksum)
     {
@@ -49,12 +64,18 @@ class AddressUtilTest extends TestCase
         $util = new AddressUtil($container->get(KerlFactory::class), $container->get(CheckSumUtil::class));
         $address = $util->generateAddress($seed, $index, $securityLevel, false);
         $addressWithChecksum = $util->generateAddress($seed, $index, $securityLevel, true);
-        static::assertEquals($expectedAddress, (string)$address);
-        static::assertEquals($expectedAddress . $checksum, (string)$addressWithChecksum);
+        static::assertEquals($expectedAddress, (string) $address);
+        static::assertEquals($expectedAddress.$checksum, (string) $addressWithChecksum);
     }
 
     /**
      * @dataProvider addressDataProvider
+     *
+     * @param mixed $seed
+     * @param mixed $index
+     * @param mixed $securityLevel
+     * @param mixed $address
+     * @param mixed $checksum
      */
     public function testGenerateChecksum($seed, $index, $securityLevel, $address, $checksum)
     {
@@ -62,6 +83,6 @@ class AddressUtilTest extends TestCase
         $util = new AddressUtil($container->get(KerlFactory::class), $container->get(CheckSumUtil::class));
         $address = new Address($address);
         $checksum = $util->getChecksum($address);
-        static::assertEquals($checksum, (string)$checksum);
+        static::assertEquals($checksum, (string) $checksum);
     }
 }

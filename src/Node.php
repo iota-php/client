@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA;
 
@@ -35,7 +37,7 @@ class Node implements SerializeInterface
     /**
      * The token.
      *
-     * @var string|null
+     * @var null|string
      */
     protected $token;
 
@@ -53,7 +55,7 @@ class Node implements SerializeInterface
      * @param string      $host
      * @param bool        $doesPOW
      * @param int         $apiVersion
-     * @param string|null $token
+     * @param null|string $token
      */
     public function __construct(
                                 string $host = 'http://localhost:14265',

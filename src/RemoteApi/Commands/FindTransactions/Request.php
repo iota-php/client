@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\RemoteApi\Commands\FindTransactions;
 
@@ -27,7 +29,7 @@ use Techworker\IOTA\Util\SerializeUtil;
  * addresses, tags or approvees. Using multiple of these parameters returns
  * the intersection of the values.
  *
- * @link https://iota.readme.io/docs/findtransactions
+ * @see https://iota.readme.io/docs/findtransactions
  */
 class Request extends AbstractRequest
 {
@@ -203,6 +205,7 @@ class Request extends AbstractRequest
      * Adds a single approvee.
      *
      * @param Approvee $approvee
+     *
      * @return Request
      */
     public function addApprovee(Approvee $approvee): self
@@ -239,7 +242,7 @@ class Request extends AbstractRequest
 
         if (\count($this->addresses) > 0) {
             $params['addresses'] = array_map(function (Address $address) {
-                return (string)$address->removeChecksum();
+                return (string) $address->removeChecksum();
             }, $this->addresses);
         }
 
@@ -257,8 +260,9 @@ class Request extends AbstractRequest
     /**
      * Executes the request.
      *
-     * @return AbstractResponse|Response
      * @throws Exception
+     *
+     * @return AbstractResponse|Response
      */
     public function execute(): Response
     {
@@ -269,7 +273,7 @@ class Request extends AbstractRequest
         return $response->finish()->throwOnError();
     }
 
-    public function serialize() : array
+    public function serialize(): array
     {
         return array_merge(parent::serialize(), [
             'bundleHashes' => SerializeUtil::serializeArray($this->bundleHashes),

@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\ClientApi\Actions\ReplayBundle;
 
@@ -50,8 +52,8 @@ class Action extends AbstractAction
     /**
      * Action constructor.
      *
-     * @param Node $node
-     * @param GetBundle\ActionFactory $getBundleFactory
+     * @param Node                     $node
+     * @param GetBundle\ActionFactory  $getBundleFactory
      * @param SendTrytes\ActionFactory $sendTrytesFactory
      */
     public function __construct(
@@ -68,11 +70,13 @@ class Action extends AbstractAction
      * Sets the hash of the tail transaction.
      *
      * @param TransactionHash $tailTransactionHash
+     *
      * @return Action
      */
-    public function setTailTransactionHash(TransactionHash $tailTransactionHash): Action
+    public function setTailTransactionHash(TransactionHash $tailTransactionHash): self
     {
         $this->tailTransactionHash = $tailTransactionHash;
+
         return $this;
     }
 
@@ -107,7 +111,7 @@ class Action extends AbstractAction
     /**
      * Executes the action.
      *
-     * @return Result|AbstractResult
+     * @return AbstractResult|Result
      */
     public function execute(): Result
     {
@@ -136,7 +140,7 @@ class Action extends AbstractAction
         return array_merge(parent::serialize(), [
             'tailTransactionHash' => $this->tailTransactionHash->serialize(),
             'depth' => $this->depth,
-            'minWeightMagnitude' => $this->minWeightMagnitude
+            'minWeightMagnitude' => $this->minWeightMagnitude,
         ]);
     }
 }

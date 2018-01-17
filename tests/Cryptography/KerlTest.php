@@ -1,28 +1,41 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
+
+/*
+ * This file is part of the IOTA PHP package.
+ *
+ * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Techworker\IOTA\Base\Types\Test;
 
 use PHPUnit\Framework\TestCase;
 use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
 use Techworker\IOTA\Cryptography\Kerl;
 use Techworker\IOTA\Tests\Container;
-use Techworker\IOTA\Type\Trits;
 use Techworker\IOTA\Type\Trytes;
 use Techworker\IOTA\Util\TritsUtil;
 use Techworker\IOTA\Util\TrytesUtil;
 
+/**
+ * @coversNothing
+ */
 class KerlTest extends TestCase
 {
     public function dataGenerateTrytesAndHashes()
     {
         $data = [];
-        $file = __DIR__ . '/../../vendor/iotaledger/kerl/test_vectors/generateTrytesAndHashes';
+        $file = __DIR__.'/../../vendor/iotaledger/kerl/test_vectors/generateTrytesAndHashes';
         $handle = fopen($file, 'r');
         $f = true;
-        while (($line = fgetcsv($handle, 10000, ',')) !== false) {
+        while (false !== ($line = fgetcsv($handle, 10000, ','))) {
             if ($f) {
                 $f = false;
+
                 continue;
             }
             $data[] = $line;
@@ -33,6 +46,9 @@ class KerlTest extends TestCase
 
     /**
      * @dataProvider dataGenerateTrytesAndHashes
+     *
+     * @param mixed $trytes
+     * @param mixed $kerlHash
      */
     public function testGenerateTrytesAndHashes($trytes, $kerlHash)
     {
@@ -46,18 +62,19 @@ class KerlTest extends TestCase
         $kerl->squeeze($hashTrits, 0, 243);
         $tryte = TritsUtil::toTrytes($hashTrits);
 
-        static::assertEquals($kerlHash, (string)$tryte);
+        static::assertEquals($kerlHash, (string) $tryte);
     }
 
     public function dataGenerateTrytesAndMultiSqueeze()
     {
         $data = [];
-        $file = __DIR__ . '/../../vendor/iotaledger/kerl/test_vectors/generateTrytesAndMultiSqueeze';
+        $file = __DIR__.'/../../vendor/iotaledger/kerl/test_vectors/generateTrytesAndMultiSqueeze';
         $handle = fopen($file, 'r');
         $f = true;
-        while (($line = fgetcsv($handle, 10000, ',')) !== false) {
+        while (false !== ($line = fgetcsv($handle, 10000, ','))) {
             if ($f) {
                 $f = false;
+
                 continue;
             }
             $data[] = $line;
@@ -68,6 +85,9 @@ class KerlTest extends TestCase
 
     /**
      * @dataProvider dataGenerateTrytesAndMultiSqueeze
+     *
+     * @param mixed $trytes
+     * @param mixed $kerlHash
      */
     public function testGenerateTrytesAndMultiSqueeze($trytes, $kerlHash)
     {
@@ -81,18 +101,19 @@ class KerlTest extends TestCase
         $kerl->squeeze($hashTrits, 0, 243);
         $tryte = TritsUtil::toTrytes($hashTrits);
 
-        static::assertEquals($kerlHash, (string)$tryte);
+        static::assertEquals($kerlHash, (string) $tryte);
     }
 
     public function dataGenerateMultiTrytesAndHashes()
     {
         $data = [];
-        $file = __DIR__ . '/../../vendor/iotaledger/kerl/test_vectors/generateMultiTrytesAndHash';
+        $file = __DIR__.'/../../vendor/iotaledger/kerl/test_vectors/generateMultiTrytesAndHash';
         $handle = fopen($file, 'r');
         $f = true;
-        while (($line = fgetcsv($handle, 10000, ',')) !== false) {
+        while (false !== ($line = fgetcsv($handle, 10000, ','))) {
             if ($f) {
                 $f = false;
+
                 continue;
             }
             $data[] = $line;
@@ -103,6 +124,9 @@ class KerlTest extends TestCase
 
     /**
      * @dataProvider dataGenerateMultiTrytesAndHashes
+     *
+     * @param mixed $trytes
+     * @param mixed $kerlHash
      */
     public function testGenerateMultiTrytesAndHashes($trytes, $kerlHash)
     {
@@ -117,7 +141,6 @@ class KerlTest extends TestCase
         $kerl->squeeze($hashTrits, 0, 243);
         $tryte = TritsUtil::toTrytes($hashTrits);
 
-        static::assertEquals($kerlHash, (string)$tryte);
+        static::assertEquals($kerlHash, (string) $tryte);
     }
-
 }

@@ -1,23 +1,31 @@
 <?php
+
 namespace Techworker\IOTA\Apps\KitchenSink;
+
 /** @var \Techworker\IOTA\IOTA $iota */
-$iota = include __DIR__ . '/../bootstrap.php';
+$iota = include __DIR__.'/../bootstrap.php';
 
-if(isAjax())
-{
+if (isAjax()) {
     try {
-
         $node = $iota->getNodes()[$_POST['node']];
         $addresses = \Techworker\IOTA\Util\TrytesUtil::arrayToTrytes(array_map('trim', array_filter(explode("\n", $_POST['addresses']))), \Techworker\IOTA\Type\Address::class);
         $bundleHashes = \Techworker\IOTA\Util\TrytesUtil::arrayToTrytes(array_map('trim', array_filter(explode("\n", $_POST['bundleHashes']))), \Techworker\IOTA\Type\BundleHash::class);
-                $tags = \Techworker\IOTA\Util\TrytesUtil::arrayToTrytes(array_map('trim', array_filter(explode("\n", $_POST['tags']))), \Techworker\IOTA\Type\Tag::class);
+        $tags = \Techworker\IOTA\Util\TrytesUtil::arrayToTrytes(array_map('trim', array_filter(explode("\n", $_POST['tags']))), \Techworker\IOTA\Type\Tag::class);
         $approvees = \Techworker\IOTA\Util\TrytesUtil::arrayToTrytes(array_map('trim', array_filter(explode("\n", $_POST['approvees']))), \Techworker\IOTA\Type\Approvee::class);
-    
+
         $result = $iota->getClientApi()->findTransactionObjects(
-            $node, $addresses, $bundleHashes, $tags, $approvees
+            $node,
+
+            $addresses,
+
+            $bundleHashes,
+
+            $tags,
+
+            $approvees
         );
         sendJson($result->serialize());
-    } catch(\Exception $ex) {
+    } catch (\Exception $ex) {
         sendJson(['error' => $ex->getMessage()]);
     }
     exit;
@@ -115,8 +123,8 @@ if(isAjax())
     <div class="form-group">
         <label for="node">Node</label>
         <select class="form-control" id="node" name="node">
-            <?php foreach($iota->getNodes() as $k => $node) : ?>
-            <option value="<?= $k ?>"><?= $node->getHost() ?></option>
+            <?php foreach ($iota->getNodes() as $k => $node) : ?>
+            <option value="<?php echo $k; ?>"><?php echo $node->getHost(); ?></option>
             <?php endforeach; ?>
         </select>
         <small class="form-text text-muted">Select a node where the remote requests (commands) will be executed on.</small>

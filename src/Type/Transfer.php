@@ -1,11 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the IOTA PHP package.
+ *
+ * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Techworker\IOTA\Type;
 
 use Techworker\IOTA\SerializeInterface;
 
 /**
- * Class Transfer
+ * Class Transfer.
  *
  * Contains data for a transfer.
  */
@@ -145,13 +156,13 @@ class Transfer implements SerializeInterface
         return $this;
     }
 
-    public function serialize() : array
+    public function serialize(): array
     {
         return [
             'message' => $this->message->serialize(),
             'obsoleteTag' => $this->obsoleteTag->serialize(),
             'value' => $this->value->serialize(),
-            'recipientAddress' => $this->recipientAddress->serialize()
+            'recipientAddress' => $this->recipientAddress->serialize(),
         ];
     }
 }

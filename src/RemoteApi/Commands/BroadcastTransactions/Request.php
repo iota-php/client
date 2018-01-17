@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\RemoteApi\Commands\BroadcastTransactions;
 
@@ -24,7 +26,7 @@ use Techworker\IOTA\Util\SerializeUtil;
  * Broadcasts a list of transactions to all neighbors. The transactions for this
  * call are provided by the `attachToTangle` endpoint.
  *
- * @link https://iota.readme.io/docs/broadcasttransactions
+ * @see https://iota.readme.io/docs/broadcasttransactions
  */
 class Request extends AbstractRequest
 {
@@ -92,8 +94,9 @@ class Request extends AbstractRequest
     /**
      * Executes the request.
      *
-     * @return AbstractResponse|Response
      * @throws Exception
+     *
+     * @return AbstractResponse|Response
      */
     public function execute(): Response
     {
@@ -112,7 +115,7 @@ class Request extends AbstractRequest
     public function serialize(): array
     {
         return array_merge(parent::serialize(), [
-            'transactions' => SerializeUtil::serializeArray($this->transactions)
+            'transactions' => SerializeUtil::serializeArray($this->transactions),
         ]);
     }
 }

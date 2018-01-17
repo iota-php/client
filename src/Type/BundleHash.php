@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\Type;
 
@@ -26,7 +28,7 @@ class BundleHash extends Trytes
      *
      * @return int[]
      */
-    public function normalized() :  array
+    public function normalized(): array
     {
         $normalizedBundle = [];
 
@@ -44,6 +46,7 @@ class BundleHash extends Trytes
                     for ($j = 0; $j < 27; ++$j) {
                         if ($normalizedBundle[$i * 27 + $j] > -13) {
                             --$normalizedBundle[$i * 27 + $j];
+
                             break;
                         }
                     }
@@ -53,6 +56,7 @@ class BundleHash extends Trytes
                     for ($j = 0; $j < 27; ++$j) {
                         if ($normalizedBundle[$i * 27 + $j] < 13) {
                             ++$normalizedBundle[$i * 27 + $j];
+
                             break;
                         }
                     }

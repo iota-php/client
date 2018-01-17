@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\RemoteApi\Commands\IsTailConsistent;
 
@@ -34,11 +36,13 @@ class Request extends AbstractRequest
      * Sets the transaction hash.
      *
      * @param TransactionHash $tailTransactionHash
+     *
      * @return Request
      */
     public function setTailTransactionHash(TransactionHash $tailTransactionHash): self
     {
         $this->tailTransactionHash = $tailTransactionHash;
+
         return $this;
     }
 
@@ -46,6 +50,7 @@ class Request extends AbstractRequest
      * Gets the list of transaction hashes.
      *
      * @return TransactionHash
+     *
      * @todo allow null?
      */
     public function getTailTransactionHash(): TransactionHash
@@ -62,15 +67,16 @@ class Request extends AbstractRequest
     {
         return [
             'command' => 'isTailConsistent',
-            'tail' => (string)$this->tailTransactionHash
+            'tail' => (string) $this->tailTransactionHash,
         ];
     }
 
     /**
      * Executes the request.
      *
-     * @return AbstractResponse|Response
      * @throws Exception
+     *
+     * @return AbstractResponse|Response
      */
     public function execute(): Response
     {
@@ -81,10 +87,10 @@ class Request extends AbstractRequest
         return $response->finish()->throwOnError();
     }
 
-    public function serialize() : array
+    public function serialize(): array
     {
         return array_merge(parent::serialize(), [
-            'tailTransactionHash' => $this->tailTransactionHash->serialize()
+            'tailTransactionHash' => $this->tailTransactionHash->serialize(),
         ]);
     }
 }

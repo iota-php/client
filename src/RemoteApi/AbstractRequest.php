@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\RemoteApi;
 
@@ -39,7 +41,7 @@ abstract class AbstractRequest implements RequestInterface
      * AbstractRequest constructor.
      *
      * @param HttpClientInterface $httpClient
-     * @param Node $node
+     * @param Node                $node
      */
     public function __construct(HttpClientInterface $httpClient, Node $node)
     {
@@ -57,10 +59,10 @@ abstract class AbstractRequest implements RequestInterface
         return $this->node;
     }
 
-    public function serialize() : array
+    public function serialize(): array
     {
         return [
-            'node' => $this->node->serialize()
+            'node' => $this->node->serialize(),
         ];
     }
 }

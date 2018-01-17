@@ -1,13 +1,89 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
+
+/*
+ * This file is part of the IOTA PHP package.
+ *
+ * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Techworker\IOTA\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
 use Techworker\IOTA\Type\Iota;
 
+/**
+ * @coversNothing
+ */
 class IotaTest extends TestCase
 {
+    protected $testData = [
+        Iota::UNIT_PETA => [
+            ['1', '1000000000000000'],
+            ['1.2', '1200000000000000'],
+            ['1.23', '1230000000000000'],
+            ['1.234', '1234000000000000'],
+            ['1.2345', '1234500000000000'],
+            ['1.23456', '1234560000000000'],
+            ['1.234567', '1234567000000000'],
+            ['1.2345678', '1234567800000000'],
+            ['1.23456789', '1234567890000000'],
+            ['1.234567891', '1234567891000000'],
+            ['1.2345678912', '1234567891200000'],
+            ['1.23456789123', '1234567891230000'],
+            ['1.234567891234', '1234567891234000'],
+            ['1.2345678912345', '1234567891234500'],
+            ['1.23456789123456', '1234567891234560'],
+            ['1.234567891234567', '1234567891234567'],
+        ],
+        Iota::UNIT_TERA => [
+            ['1', '1000000000000'],
+            ['1.2', '1200000000000'],
+            ['1.23', '1230000000000'],
+            ['1.234', '1234000000000'],
+            ['1.2345', '1234500000000'],
+            ['1.23456', '1234560000000'],
+            ['1.234567', '1234567000000'],
+            ['1.2345678', '1234567800000'],
+            ['1.23456789', '1234567890000'],
+            ['1.234567891', '1234567891000'],
+            ['1.2345678912', '1234567891200'],
+            ['1.23456789123', '1234567891230'],
+            ['1.234567891234', '1234567891234'],
+        ],
+        Iota::UNIT_GIGA => [
+            ['1', '1000000000'],
+            ['1.2', '1200000000'],
+            ['1.23', '1230000000'],
+            ['1.234', '1234000000'],
+            ['1.2345', '1234500000'],
+            ['1.23456', '1234560000'],
+            ['1.234567', '1234567000'],
+            ['1.2345678', '1234567800'],
+            ['1.23456789', '1234567890'],
+            ['1.234567891', '1234567891'],
+        ],
+        Iota::UNIT_MEGA => [
+            ['1', '1000000'],
+            ['1.2', '1200000'],
+            ['1.23', '1230000'],
+            ['1.234', '1234000'],
+            ['1.2345', '1234500'],
+            ['1.23456', '1234560'],
+            ['1.234567', '1234567'],
+        ],
+        Iota::UNIT_KILO => [
+            ['1', '1000'],
+            ['1.2', '1200'],
+            ['1.23', '1230'],
+            ['1.234', '1234'],
+        ],
+    ];
+
     public function testPlus()
     {
         $iota1 = new Iota('10');
@@ -33,69 +109,6 @@ class IotaTest extends TestCase
         $iota1 = new Iota('50');
         static::assertEquals((new Iota('500'))->getAmount(), $iota1->multiplyBy(10)->getAmount());
     }
-
-    protected $testData = [
-        Iota::UNIT_PETA => [
-            ['1', '1000000000000000'],
-            ['1.2','1200000000000000'],
-            ['1.23','1230000000000000'],
-            ['1.234','1234000000000000'],
-            ['1.2345','1234500000000000'],
-            ['1.23456','1234560000000000'],
-            ['1.234567','1234567000000000'],
-            ['1.2345678','1234567800000000'],
-            ['1.23456789','1234567890000000'],
-            ['1.234567891','1234567891000000'],
-            ['1.2345678912','1234567891200000'],
-            ['1.23456789123','1234567891230000'],
-            ['1.234567891234','1234567891234000'],
-            ['1.2345678912345','1234567891234500'],
-            ['1.23456789123456','1234567891234560'],
-            ['1.234567891234567','1234567891234567'],
-        ],
-        Iota::UNIT_TERA => [
-            ['1','1000000000000'],
-            ['1.2','1200000000000'],
-            ['1.23','1230000000000'],
-            ['1.234','1234000000000'],
-            ['1.2345','1234500000000'],
-            ['1.23456','1234560000000'],
-            ['1.234567','1234567000000'],
-            ['1.2345678','1234567800000'],
-            ['1.23456789','1234567890000'],
-            ['1.234567891','1234567891000'],
-            ['1.2345678912','1234567891200'],
-            ['1.23456789123','1234567891230'],
-            ['1.234567891234','1234567891234'],
-        ],
-        Iota::UNIT_GIGA => [
-            ['1','1000000000'],
-            ['1.2','1200000000'],
-            ['1.23','1230000000'],
-            ['1.234','1234000000'],
-            ['1.2345','1234500000'],
-            ['1.23456','1234560000'],
-            ['1.234567','1234567000'],
-            ['1.2345678','1234567800'],
-            ['1.23456789','1234567890'],
-            ['1.234567891','1234567891'],
-        ],
-        Iota::UNIT_MEGA => [
-            ['1','1000000'],
-            ['1.2','1200000'],
-            ['1.23','1230000'],
-            ['1.234','1234000'],
-            ['1.2345','1234500'],
-            ['1.23456','1234560'],
-            ['1.234567','1234567'],
-        ],
-        Iota::UNIT_KILO => [
-            ['1','1000'],
-            ['1.2','1200'],
-            ['1.23','1230'],
-            ['1.234','1234'],
-        ]
-    ];
 
     public function provideTestFromPetaIota()
     {
@@ -124,6 +137,9 @@ class IotaTest extends TestCase
 
     /**
      * @dataProvider provideTestFromPetaIota
+     *
+     * @param mixed $peta
+     * @param mixed $iota
      */
     public function testFromToPetaIota($peta, $iota)
     {
@@ -133,6 +149,9 @@ class IotaTest extends TestCase
 
     /**
      * @dataProvider provideTestFromTeraIota
+     *
+     * @param mixed $tera
+     * @param mixed $iota
      */
     public function testFromToTeraIota($tera, $iota)
     {
@@ -142,6 +161,9 @@ class IotaTest extends TestCase
 
     /**
      * @dataProvider provideTestFromGigaIota
+     *
+     * @param mixed $giga
+     * @param mixed $iota
      */
     public function testFromToGigaIota($giga, $iota)
     {
@@ -151,6 +173,9 @@ class IotaTest extends TestCase
 
     /**
      * @dataProvider provideTestFromMegaIota
+     *
+     * @param mixed $mega
+     * @param mixed $iota
      */
     public function testFromToMegaIota($mega, $iota)
     {
@@ -160,6 +185,9 @@ class IotaTest extends TestCase
 
     /**
      * @dataProvider provideTestFromKiloIota
+     *
+     * @param mixed $kilo
+     * @param mixed $iota
      */
     public function testFromToKiloIota($kilo, $iota)
     {
@@ -167,11 +195,10 @@ class IotaTest extends TestCase
         static::assertEquals((new Iota($iota))->getKiloIota(), $kilo);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalidAmount()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         new Iota('2779530283277762');
     }
 
@@ -204,7 +231,6 @@ class IotaTest extends TestCase
         $z = Iota::ZERO();
         static::assertEquals('0', $z->getAmount());
     }
-
 
     public function testIsNeg()
     {

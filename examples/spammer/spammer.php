@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the IOTA PHP package.
+ *
+ * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Techworker\IOTA\Examples\Spammer;
 
 use Techworker\IOTA\DI\IOTAContainer;
@@ -9,10 +18,9 @@ use Techworker\IOTA\Type\Address;
 use Techworker\IOTA\Type\Seed;
 use Techworker\IOTA\Type\Tag;
 use Techworker\IOTA\Type\Transfer;
-use Techworker\IOTA\Type\Trytes;
 use Techworker\IOTA\Util\TrytesUtil;
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__.'/../../vendor/autoload.php';
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -20,7 +28,7 @@ set_time_limit(0);
 
 $options = [
     'keccak384-nodejs' => 'http://127.0.0.1:8081',
-    'ccurlPath' => __DIR__ . '/../../ccurl'
+    'ccurlPath' => __DIR__.'/../../ccurl',
 ];
 
 $nodes = [
@@ -28,7 +36,7 @@ $nodes = [
     new Node('http://node02.iotatoken.nl:14265'),
     new Node('http://node03.iotatoken.nl:15265'),
     new Node('http://node04.iotatoken.nl:14265'),
-    new Node('http://node05.iotatoken.nl:16265')
+    new Node('http://node05.iotatoken.nl:16265'),
 ];
 
 $iota = new IOTA(
@@ -37,7 +45,7 @@ $iota = new IOTA(
 );
 
 $seed = '';
-for($i = 0; $i <81; $i++) {
+for ($i = 0; $i < 81; ++$i) {
     $seed .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ9'[random_int(0, 26)];
 }
 $seed = new Seed('YE9FAWKVRZQDFDBTZKEWSR9QKYXOKATDQKYJRLXEEIDGWHJJ9ZI9DCJHEDXRBADGMMBHJUOPWRWXCMZGEE');
@@ -48,28 +56,28 @@ function spam(IOTA $iota, $seed, $message, $tag)
 {
     $node = $iota->getNode();
     echo "creating spam-transaction...\n";
+
     try {
         $bundleResponse = $iota->getClientApi()->sendTransfer($node, $seed, [
-            (new Transfer)
+            (new Transfer())
                 ->setRecipientAddress(new Address($seed->getSeed()))
                 ->setValue(new \Techworker\IOTA\Type\Iota(0))
                 ->setObsoleteTag($tag)
-                ->setMessage(TrytesUtil::asciiToTrytes($message))
+                ->setMessage(TrytesUtil::asciiToTrytes($message)),
         ], 15, random_int(4, 12));
 
         echo "created spam-transaction:\n";
-        echo "Bundle: " . (string)$bundleResponse->getBundle()->getBundleHash() . "\n";
+        echo 'Bundle: '.(string) $bundleResponse->getBundle()->getBundleHash()."\n";
         foreach ($bundleResponse->getBundle()->getTransactions() as $transaction) {
-            echo "   Transaction: " . (string)$transaction->getTransactionHash() . "\n";
+            echo '   Transaction: '.(string) $transaction->getTransactionHash()."\n";
         }
-        echo "Confirmed trunk:  " . (string)$bundleResponse->getTrunkTransactionHash() . "\n";
-        echo "Confirmed branch: " . (string)$bundleResponse->getBranchTransactionHash() . "\n";
-        echo str_repeat('-', 80) . "\n\n";
-        echo "Bundle: " . (string)$bundleResponse->getBundle()->getBundleHash() . "\n";
-        echo (string)$bundleResponse->getBundle()->getBundleHash() . "\n";
-    }
-    catch(\Exception $ex) {
-        echo 'ERROR: ' . $ex->getMessage() . "\n";
+        echo 'Confirmed trunk:  '.(string) $bundleResponse->getTrunkTransactionHash()."\n";
+        echo 'Confirmed branch: '.(string) $bundleResponse->getBranchTransactionHash()."\n";
+        echo str_repeat('-', 80)."\n\n";
+        echo 'Bundle: '.(string) $bundleResponse->getBundle()->getBundleHash()."\n";
+        echo (string) $bundleResponse->getBundle()->getBundleHash()."\n";
+    } catch (\Exception $ex) {
+        echo 'ERROR: '.$ex->getMessage()."\n";
     }
 
     sleep(3);

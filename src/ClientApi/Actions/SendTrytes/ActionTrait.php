@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\ClientApi\Actions\SendTrytes;
 
@@ -39,12 +41,14 @@ trait ActionTrait
     }
 
     /** @noinspection MoreThanThreeArgumentsInspection */
+
     /**
-     * @param Node $node
-     * @param array $transactions
-     * @param int $minWeightMagnitude
-     * @param int $depth
+     * @param Node           $node
+     * @param array          $transactions
+     * @param int            $minWeightMagnitude
+     * @param int            $depth
      * @param null|Milestone $reference
+     *
      * @return Result
      */
     protected function sendTrytes(
@@ -59,7 +63,7 @@ trait ActionTrait
         $action->setMinWeightMagnitude($minWeightMagnitude);
         $action->setDepth($depth);
 
-        if($reference !== null) {
+        if (null !== $reference) {
             $action->setReference($reference);
         }
 

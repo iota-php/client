@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\RemoteApi\Commands\GetNodeInfo;
 
@@ -118,60 +120,6 @@ class Response extends AbstractResponse
      * @var int
      */
     protected $transactionsToRequest;
-
-    /**
-     * Maps the response result to the predefined props.
-     *
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    protected function mapResults(): void
-    {
-        $this->checkRequiredKeys([
-            'appName',
-            'appVersion',
-            'jreAvailableProcessors',
-            'jreFreeMemory',
-            'jreMaxMemory',
-            'jreTotalMemory',
-            'latestMilestone',
-            'latestMilestoneIndex',
-            'latestSolidSubtangleMilestone',
-            'latestSolidSubtangleMilestoneIndex',
-            'neighbors',
-            'time',
-            'tips',
-            'transactionsToRequest',
-        ]);
-
-        // quirk in doc and implementation
-        if (!isset($this->rawData['packetQueueSize']) &&
-            !isset($this->rawData['packetsQueueSize'])) {
-            // trigger error
-            $this->checkRequiredKeys(['packetQueueSize']);
-        }
-
-        $this->appName = (string) $this->rawData['appName'];
-        $this->appVersion = (string) $this->rawData['appVersion'];
-        $this->jreAvailableProcessors = (int) $this->rawData['jreAvailableProcessors'];
-        $this->jreFreeMemory = (int) $this->rawData['jreFreeMemory'];
-        $this->jreMaxMemory = (int) $this->rawData['jreMaxMemory'];
-        $this->jreTotalMemory = (int) $this->rawData['jreTotalMemory'];
-        $this->latestMilestone = new Milestone(
-            (string) $this->rawData['latestMilestone'],
-            (int) $this->rawData['latestMilestoneIndex']
-        );
-        $this->latestSolidSubtangleMilestone = new Milestone(
-            (string) $this->rawData['latestSolidSubtangleMilestone'],
-            (int) $this->rawData['latestSolidSubtangleMilestoneIndex']
-        );
-
-        $this->neighbors = (int) $this->rawData['neighbors'];
-        $this->packetQueueSize = (int) ($this->rawData['packetQueueSize'] ?? $this->rawData['packetsQueueSize']);
-        $this->time = (int) $this->rawData['time'];
-        $this->tips = (int) $this->rawData['tips'];
-        $this->transactionsToRequest = (int) $this->rawData['transactionsToRequest'];
-    }
 
     /**
      * Gets the name of the IOTA software you're currently using (IRI stands
@@ -319,7 +267,6 @@ class Response extends AbstractResponse
             $this->latestMilestone->getIndex();
     }
 
-
     /**
      * Gets the serialized version of the result.
      *
@@ -341,5 +288,59 @@ class Response extends AbstractResponse
             'tips' => $this->getTips(),
             'transactionsToRequest' => $this->transactionsToRequest,
         ], parent::serialize());
+    }
+
+    /**
+     * Maps the response result to the predefined props.
+     *
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    protected function mapResults(): void
+    {
+        $this->checkRequiredKeys([
+            'appName',
+            'appVersion',
+            'jreAvailableProcessors',
+            'jreFreeMemory',
+            'jreMaxMemory',
+            'jreTotalMemory',
+            'latestMilestone',
+            'latestMilestoneIndex',
+            'latestSolidSubtangleMilestone',
+            'latestSolidSubtangleMilestoneIndex',
+            'neighbors',
+            'time',
+            'tips',
+            'transactionsToRequest',
+        ]);
+
+        // quirk in doc and implementation
+        if (!isset($this->rawData['packetQueueSize']) &&
+            !isset($this->rawData['packetsQueueSize'])) {
+            // trigger error
+            $this->checkRequiredKeys(['packetQueueSize']);
+        }
+
+        $this->appName = (string) $this->rawData['appName'];
+        $this->appVersion = (string) $this->rawData['appVersion'];
+        $this->jreAvailableProcessors = (int) $this->rawData['jreAvailableProcessors'];
+        $this->jreFreeMemory = (int) $this->rawData['jreFreeMemory'];
+        $this->jreMaxMemory = (int) $this->rawData['jreMaxMemory'];
+        $this->jreTotalMemory = (int) $this->rawData['jreTotalMemory'];
+        $this->latestMilestone = new Milestone(
+            (string) $this->rawData['latestMilestone'],
+            (int) $this->rawData['latestMilestoneIndex']
+        );
+        $this->latestSolidSubtangleMilestone = new Milestone(
+            (string) $this->rawData['latestSolidSubtangleMilestone'],
+            (int) $this->rawData['latestSolidSubtangleMilestoneIndex']
+        );
+
+        $this->neighbors = (int) $this->rawData['neighbors'];
+        $this->packetQueueSize = (int) ($this->rawData['packetQueueSize'] ?? $this->rawData['packetsQueueSize']);
+        $this->time = (int) $this->rawData['time'];
+        $this->tips = (int) $this->rawData['tips'];
+        $this->transactionsToRequest = (int) $this->rawData['transactionsToRequest'];
     }
 }

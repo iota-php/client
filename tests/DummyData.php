@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\Tests;
 
@@ -23,10 +25,9 @@ use Techworker\IOTA\Type\Tag;
 use Techworker\IOTA\Type\Transaction;
 use Techworker\IOTA\Type\TransactionHash;
 use Techworker\IOTA\Type\Trytes;
-use Techworker\IOTA\Util\AddressUtil;
 
 /**
- * Class DummyData
+ * Class DummyData.
  *
  * Some reliable dummy data.
  */
@@ -120,32 +121,33 @@ class DummyData
         self::$trytes = [];
         self::$transactions = [];
         self::$bundles = [];
-        for($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 5; ++$i) {
             self::$transactionHashes[] = new TransactionHash(
-                self::generateTrytes('TRANSACTIONHASH' . self::CHRS[$i], 81)
+                self::generateTrytes('TRANSACTIONHASH'.self::CHRS[$i], 81)
             );
             self::$bundleHashes[] = new BundleHash(
-                self::generateTrytes('BUNDLEHASH' . self::CHRS[$i], 81)
+                self::generateTrytes('BUNDLEHASH'.self::CHRS[$i], 81)
             );
             self::$addresses[] = new Address(
-                self::generateTrytes('ADDRESS' . self::CHRS[$i], 81)
+                self::generateTrytes('ADDRESS'.self::CHRS[$i], 81)
             );
             self::$approvees[] = new Approvee(
-                self::generateTrytes('APPROVEE' . self::CHRS[$i], 81)
+                self::generateTrytes('APPROVEE'.self::CHRS[$i], 81)
             );
             self::$seeds[] = new Seed(
-                self::generateTrytes('SEED' . self::CHRS[$i], 81)
+                self::generateTrytes('SEED'.self::CHRS[$i], 81)
             );
             self::$tags[] = new Tag(
-                self::generateTrytes('TAG' . self::CHRS[$i], 27)
+                self::generateTrytes('TAG'.self::CHRS[$i], 27)
             );
-            self::$nodes[] = new Node('https://phpunitnode:1234' . $i);
+            self::$nodes[] = new Node('https://phpunitnode:1234'.$i);
             self::$trytes[] = new Trytes(self::generateTrytes('', 81));
 
             self::$transactions[] = new Transaction($container->get(CurlFactory::class), 'E9KERWN9XNHRPXLIVLXOGMTQLQCTARVHXNIKGRHMCPKHFWZFBODHDLJLCYKSWEETPKYZCMSOJVNBRBRFSKBBJPWLYUWVZWUFRCVYICAGWEALBTOLZILVZIFWSHOAVDHPDCQJQJHZPPKXITULYURGQDQJPMKEZY9XLXMQPJFISJRTUEKRLJVFQXIXJDRGQFGGSFHAUOBCAR9IWDKHLNROZQDNZMXJJMILVGXFMZJZBRRZLGHQFXJKHKMGKNLKTUINXZASURRKGFCMCXRBOOWUFYJTVDKCJHU99CVTCZKXQEB9GOEHZFMPICDCQORRKVUUHVJGCAJS9FXMONXOKOCSNADFTY9FETUADBOHNHFUAHRTBXXMOTKKOFDTZDGEDGXSDOGBRYEYGNXAOVLDWKY9QRATIMYAGTDXUVXEANZRLCHNQZNFUWQ9ORZNYXHGOOMEIHUKPQUSEIOYKLZPGNVOMXJVCKBNOJPUXNSISPNINNUSKRVMEVMUHLPUIBPBVRZHFYARQSFA9OKNEFTLDTSOHCR9YYXIXZ9HLMT9UMSHY9IJRZDZNCNQD9TXMSNRDSFMJUVPNGCWQTZARNWQVDOPUJNVHHBCUELQDDFTDKZ9SNJKFNAA9HNFYY9NOWNFZUEOG9LVL9FOLJJWEZEUXQSRFDSXIYIJITEYEDHFLKYDDXOMBPWIXPVIFYWNYVFSEHSXQMNCWICYNITFVPVOWFFA9LJ9LFWDKMPAX9OMAWTIBRSENFWBXNELQWHXAYNUWHGOHHMCXGESH9YNFZZYHKRRHIINXGLIOMDAJUHBFYWVAXK9DIZPQK9OQURLSBFTXEPRPIWOTHFO9XFPYAXJVSWKDLMJXZMHKPPZYQDIIBWD9EFYKOPUGSANCREYMOJQLIQRHWBRW9LCQSPUJAFZEQABCUCOCKZYJIPXCWZTPYHXZ9YQ9RHNAZMLLSFLREKPBASXHHSRNIXMAWDHOCLUKJOWFRMQFITMQPQSUAQY9KIAZNKARQLCBGIBFWAZDAQTHUQKXUNJOXGLFKGQUMGJVJDIFF9OX9GQSWQSCLGPYYYR9PNNTEITLAEXZDHXSKEQNJTEPSSDRTHALJDDFSGUETZQHEYUKY9HPZWIWSQIQNCBXLYIYYZOSHTPMACUTPFQINPCSKLUJCPNNQBTYFJJVMDUATBARJKRGNKJLQIZCVDCXXDHKXMAXGLLXGTPDKIZGLCXDXNNTGZPLHBZAJTL9KIJTERFVWSMWFJXSNKFWNPSXXLHQN99LHKUVFJWMHBMFQVGMMGVPSYZHTTTIEVVFFHSW9WQSDSHJVMJUXVXJPYRBOIQZJYYVKKQDLPGBUZDBOETYQDGTBNTPPMQYRLTDXUYRMHUOVWPZSUOVAIUNGPZSDXORHHCIGENZ9PBHRYZFBVGCTSITIZKFIQAGCAZJ9GXNDABGCCXILGAF9KKHWBVHM9VLHITEH9XELJM9VYPOSFNVMGNCBBNIPXZZUUCKIE9CBBUYLHSDXSFGJWLPVDDHBEITEAUBDUMZGFGOIYHGLHAO9LWVLEV9AGAVHMJMMQKKDNOC9ALWSHHSOWQK9EVIELCJFWYSNLAIKVXXSFSB9IGRCUENAWQWFLHIXKFXBVSEKTUHVATPOINP9AKLVKPYVPNPTLXSEMLDNGPYL9EBGISLCNQUQOJUMBYNDJRLJDHBFFRHDROZDRIYX9ECWCC9ZKOCYVHHQRSPQWWASHECEPDFTGMNHQYGTY9UXU9AASPZXUYZNYNGHV9UXAHMLEJHDPXOHDL9UYZWBF9DJGDYKS9YCSHLSYYNGPBNIR9ECZZGUOTFZZVQEJLLMPM9TVKOSVRFXFNQDSEBRTETBARLHKFVWGOMURYVVMIVYIFFWP9OIVJWXJDZGBGN9AMFUKHXJXUJPIIAEZCGVHXBJDUCHPMGFVHHTFZOT9JQ9EEWKQJAGBNXFSUSQGW9XKGHLGTLQDZMZZKVSXEPI9EYKYNLNEMMLVCPHFKHRSMHHIKVPRGCGIBGQMUEXCPHHZTNPICSNU9GEDCJNHHIJPNBCIFO9CEOKLVKWONJRRBALRVBQHDG9VGDJRZJWTZHXOZQXLCUXNCPFHMC9RNKXWMMT9AJDDNTDID9ZJWDYXGU9QUQRIXUKGZXDLEIEIHAYROJNADHNDAAUBLOFZOSQWFOAUTZOXDKNNBMHVN9MOKPWCHICGJZXKE9GSUDXZYUAPLHAKAHYHDXNPHENTERYMMBQOPSQIDENXKLKCEYCPVTZQLEEJVYJZV9BWU999999999999999999999999999NYJJ99999999999999999999999NZYOYXD99999999999A99999999NCAVHDAXXGRKJGNQSDKWGMSXPNWYDEQUGS9PNCN9WGIERXCPDFAENLL9JCPDXAKYWUGL9DNIHEKOLOUVZXNNKVSEGANEJXHEGYVPLBMKYMVFBDYPQFSNUPFNQAUKDMPCMOWMAFAOSOCNPWVYLBBLRBXPRJGMO99999PYWODXPIBRUMXTSPQBZCFZHCRDMLS9NDJGKPJNFLOWXTDHOGOHALWTQJZPGOXRYIHQLGYKDINRNT99999VLCXAQHGNNLFXEDLJKOGUJ9YZMPLJAVIZ9OFUGCQNKLKSBRSXHAPX9TBCVVRCQSANFHQXPBNEPZLHR9UC');
             self::$bundles[] = (new Bundle(
                 $container->get(KerlFactory::class),
-                $container->get(CurlFactory::class)))
+                $container->get(CurlFactory::class)
+            ))
                 ->setBundleHash(self::$bundleHashes[$i])
                 ->addTransaction(self::$transactions[$i]);
         }
@@ -155,6 +157,7 @@ class DummyData
      * Gets a transaction hash at the given position.
      *
      * @param int $index
+     *
      * @return TransactionHash
      */
     public static function getTransactionHash(int $index = 0): TransactionHash
@@ -164,6 +167,7 @@ class DummyData
 
     /**
      * @param int $index
+     *
      * @return Address
      */
     public static function getAddress(int $index = 0): Address
@@ -173,6 +177,7 @@ class DummyData
 
     /**
      * @param int $index
+     *
      * @return Node
      */
     public static function getNode(int $index = 0): Node
@@ -182,6 +187,7 @@ class DummyData
 
     /**
      * @param int $index
+     *
      * @return Trytes
      */
     public static function getTrytes(int $index = 0): Trytes
@@ -191,6 +197,7 @@ class DummyData
 
     /**
      * @param int $index
+     *
      * @return BundleHash
      */
     public static function getBundleHash(int $index = 0): BundleHash
@@ -200,6 +207,7 @@ class DummyData
 
     /**
      * @param int $index
+     *
      * @return Tag
      */
     public static function getTag(int $index = 0): Tag
@@ -209,6 +217,7 @@ class DummyData
 
     /**
      * @param int $index
+     *
      * @return Approvee
      */
     public static function getApprovee(int $index = 0): Approvee
@@ -218,6 +227,7 @@ class DummyData
 
     /**
      * @param int $index
+     *
      * @return Bundle
      */
     public static function getBundle(int $index = 0): Bundle
@@ -227,31 +237,34 @@ class DummyData
 
     /**
      * @param int $index
+     *
      * @return Transaction
      */
-    public static function getTransaction(int $index = 0) : Transaction
+    public static function getTransaction(int $index = 0): Transaction
     {
         return self::$transactions[$index];
     }
 
     /**
      * @param int $index
+     *
      * @return Seed
      */
-    public static function getSeed(int $index = 0) : Seed
+    public static function getSeed(int $index = 0): Seed
     {
         return self::$seeds[$index];
     }
 
     /**
      * @param string $prefix
-     * @param int $length
+     * @param int    $length
+     *
      * @return string
      */
-    private static function generateTrytes(string $prefix, int $length) {
-
+    private static function generateTrytes(string $prefix, int $length)
+    {
         $trytes = $prefix;
-        for ($i = 0; $i < $length - strlen($prefix); $i++) {
+        for ($i = 0; $i < $length - strlen($prefix); ++$i) {
             $trytes .= self::CHRS[random_int(0, 26)];
         }
 

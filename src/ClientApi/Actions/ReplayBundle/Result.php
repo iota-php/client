@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\ClientApi\Actions\ReplayBundle;
 
@@ -21,6 +23,7 @@ class Result extends AbstractResult
      *
      * @todo not sure about that, but cross extending isn't better, in this case extending from \Techworker\IOTA\ClientApi\Actions\SendTrytes\Result
      *       did that before somewhere..
+     *
      * @var \Techworker\IOTA\ClientApi\Actions\SendTrytes\Result
      */
     protected $sendTrytesResult;
@@ -42,11 +45,13 @@ class Result extends AbstractResult
 
     /**
      * @param \Techworker\IOTA\ClientApi\Actions\SendTrytes\Result $sendTrytesResult
+     *
      * @return Result
      */
-    public function setSendTrytesResult(\Techworker\IOTA\ClientApi\Actions\SendTrytes\Result $sendTrytesResult): Result
+    public function setSendTrytesResult(\Techworker\IOTA\ClientApi\Actions\SendTrytes\Result $sendTrytesResult): self
     {
         $this->sendTrytesResult = $sendTrytesResult;
+
         return $this;
     }
 
@@ -60,11 +65,13 @@ class Result extends AbstractResult
 
     /**
      * @param Bundle $bundle
+     *
      * @return Result
      */
-    public function setBundle(Bundle $bundle): Result
+    public function setBundle(Bundle $bundle): self
     {
         $this->bundle = $bundle;
+
         return $this;
     }
 
@@ -77,7 +84,7 @@ class Result extends AbstractResult
     {
         return array_merge([
             'sendTrytesResult' => $this->sendTrytesResult->serialize(),
-            'bundle' => $this->bundle->serialize()
+            'bundle' => $this->bundle->serialize(),
         ], parent::serialize());
     }
 }

@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\ClientApi\Actions\GetAddresses;
 
@@ -40,13 +42,14 @@ trait ActionTrait
     }
 
     /** @noinspection MoreThanThreeArgumentsInspection */
+
     /**
      * @param Node               $node
      * @param Seed               $seed
      * @param int                $startIndex
      * @param int                $amount
      * @param bool               $addChecksum
-     * @param SecurityLevel|null $security
+     * @param null|SecurityLevel $security
      *
      * @return Result
      */

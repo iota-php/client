@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\RemoteApi\Commands\GetInclusionStates;
 
@@ -30,7 +32,7 @@ use Techworker\IOTA\Util\SerializeUtil;
  * the transaction list you submitted, thus you get a true/false whether a
  * transaction is confirmed or not.
  *
- * @link https://iota.readme.io/docs/getinclusionstates
+ * @see https://iota.readme.io/docs/getinclusionstates
  */
 class Request extends AbstractRequest
 {
@@ -70,6 +72,7 @@ class Request extends AbstractRequest
      * Adds a single transaction hash.
      *
      * @param TransactionHash $transactionHash
+     *
      * @return $this
      */
     public function addTransactionHash(TransactionHash $transactionHash)
@@ -110,9 +113,10 @@ class Request extends AbstractRequest
      * Adds a single tip.
      *
      * @param Tip $tip
+     *
      * @return Request
      */
-    public function addTip(Tip $tip) : Request
+    public function addTip(Tip $tip): self
     {
         $this->tips[] = $tip;
 
@@ -146,8 +150,9 @@ class Request extends AbstractRequest
     /**
      * Executes the request.
      *
-     * @return AbstractResponse|Response
      * @throws Exception
+     *
+     * @return AbstractResponse|Response
      */
     public function execute(): Response
     {
@@ -158,11 +163,11 @@ class Request extends AbstractRequest
         return $response->finish()->throwOnError();
     }
 
-    public function serialize() : array
+    public function serialize(): array
     {
         return array_merge(parent::serialize(), [
             'transactions' => SerializeUtil::serializeArray($this->transactionHashes),
-            'tips' => SerializeUtil::serializeArray($this->tips)
+            'tips' => SerializeUtil::serializeArray($this->tips),
         ]);
     }
 }

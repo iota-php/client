@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\Cryptography\Hashing;
 
@@ -17,8 +19,7 @@ use Techworker\IOTA\Util\TritsUtil;
 use Techworker\IOTA\Util\TrytesUtil;
 
 /**
- * Class MultiSigAddress
- * @package Techworker\IOTA\Cryptography\Hashing
+ * Class MultiSigAddress.
  */
 class MultiSigAddress
 {
@@ -31,6 +32,7 @@ class MultiSigAddress
 
     /**
      * MultiSigAddress constructor.
+     *
      * @param KerlFactory $kerlFactory
      */
     public function __construct(KerlFactory $kerlFactory)
@@ -43,7 +45,7 @@ class MultiSigAddress
      */
     public function absorb(array $addressDigests): void
     {
-        foreach($addressDigests as $digest) {
+        foreach ($addressDigests as $digest) {
             $this->kerl->absorb(TrytesUtil::toTrits($digest), 0);
         }
     }
@@ -53,13 +55,13 @@ class MultiSigAddress
      *
      * @return Address
      */
-    public function finalize() : Address
+    public function finalize(): Address
     {
         // Squeeze the address trits
         $addressTrits = [];
         $this->kerl->squeeze($addressTrits, 0, Curl::HASH_LENGTH);
 
         // TODO: totrytes -> tostring -> toAddress()? Same in Signing::address()
-        return new Address((string)TritsUtil::toTrytes($addressTrits));
+        return new Address((string) TritsUtil::toTrytes($addressTrits));
     }
 }

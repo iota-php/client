@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\RemoteApi\HttpClient;
 
@@ -49,7 +51,7 @@ class GuzzleClient implements HttpClientInterface
         try {
             $response = $client->request('POST', $request->getNode()->getCommandsEndpoint(), [
                 RequestOptions::HEADERS => $headers,
-                RequestOptions::BODY => $json
+                RequestOptions::BODY => $json,
             ]);
 
             return [
@@ -58,15 +60,16 @@ class GuzzleClient implements HttpClientInterface
             ];
         } catch (RequestException $rEx) {
             $response = $rEx->getResponse();
-            if ($response !== null) {
+            if (null !== $response) {
                 return [
                     'code' => $response->getStatusCode(),
                     'raw' => json_encode([
-                        'raw' => (string)$response->getBody(),
-                        'message' => $rEx->getMessage()
-                    ])
+                        'raw' => (string) $response->getBody(),
+                        'message' => $rEx->getMessage(),
+                    ]),
                 ];
             }
+
             return [
                 'code' => -1,
                 'raw' => 'An unknown error occurred, unable to fetch response body.',

@@ -1,5 +1,8 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
  * This file is part of the IOTA PHP package.
  *
  * (c) Benjamin Ansbach <benjaminansbach@gmail.com>
@@ -7,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Techworker\IOTA\RemoteApi\Commands\GetTrytes;
 
@@ -47,9 +49,10 @@ class Request extends AbstractRequest
 
     /**
      * Request constructor.
+     *
      * @param HttpClientInterface $httpClient
-     * @param CurlFactory $curlFactory
-     * @param Node $node
+     * @param CurlFactory         $curlFactory
+     * @param Node                $node
      */
     public function __construct(HttpClientInterface $httpClient, CurlFactory $curlFactory, Node $node)
     {
@@ -57,11 +60,11 @@ class Request extends AbstractRequest
         parent::__construct($httpClient, $node);
     }
 
-
     /**
      * Sets the transaction hashes.
      *
      * @param array $transactionHashes
+     *
      * @return Request
      */
     public function setTransactionHashes(array $transactionHashes): self
@@ -78,6 +81,7 @@ class Request extends AbstractRequest
      * Adds a single transaction hash.
      *
      * @param TransactionHash $transactionHash
+     *
      * @return Request
      */
     public function addTransactionHash(TransactionHash $transactionHash): self
@@ -113,8 +117,9 @@ class Request extends AbstractRequest
     /**
      * Executes the request.
      *
-     * @return AbstractResponse|Response
      * @throws Exception
+     *
+     * @return AbstractResponse|Response
      */
     public function execute(): Response
     {
@@ -125,10 +130,10 @@ class Request extends AbstractRequest
         return $response->finish()->throwOnError();
     }
 
-    public function serialize() : array
+    public function serialize(): array
     {
         return array_merge(parent::serialize(), [
-            'transactionHashes' => SerializeUtil::serializeArray($this->transactionHashes)
+            'transactionHashes' => SerializeUtil::serializeArray($this->transactionHashes),
         ]);
     }
 }
