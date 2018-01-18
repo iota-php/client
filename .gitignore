@@ -1,12 +1,3 @@
 .idea
 vendor
 composer.lock
-node_modules
-.docker/php-cs-fixer.phar
-composer.phar
-.php_cs.cache
-nodesource_setup.sh
-ccurl
-build
-npm-debug.log
-.proc
