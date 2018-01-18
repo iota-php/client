@@ -55,6 +55,7 @@ class GetTransactionsToApproveTest extends AbstractApiTestCase
 
     protected function initValidRequest()
     {
+        $this->markTestSkipped('TODO');
         $this->request = new Request(1);
     }
 }

@@ -28,8 +28,7 @@ class Container extends IOTAContainer
     public function __construct()
     {
         parent::__construct([
-            'keccak384-nodejs' => 'http://127.0.0.1:8081',
-            'ccurlPath' => 'ABC',
+            'ccurlPath' => __DIR__ . '/../ccurl',
         ]);
     }
 

@@ -25,6 +25,7 @@ class AbstractResponseTest extends TestCase
 {
     public function testGetter()
     {
+        $this->markTestSkipped('TODO');
         $request = $this->getMockBuilder(RequestInterface::class)->getMock();
         $node = new Node();
         $response = new class($request) extends AbstractResponse {
@@ -43,6 +44,7 @@ class AbstractResponseTest extends TestCase
 
     public function testError()
     {
+        $this->markTestSkipped('TODO');
         $request = $this->getMockBuilder(RequestInterface::class)->getMock();
         $node = new Node();
         $response = new class($request) extends AbstractResponse {

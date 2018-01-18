@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Base\Types\Test;
+namespace Techworker\IOTA\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
 use Techworker\IOTA\Type\TransactionHash;

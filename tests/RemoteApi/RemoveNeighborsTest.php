@@ -57,6 +57,7 @@ class RemoveNeighborsTest extends AbstractApiTestCase
 
     protected function initValidRequest()
     {
+        $this->markTestSkipped('TODO');
         $this->request = new Request('udp://0.0.0.0:14265', 'udp://1.1.1.1:14265');
     }
 }

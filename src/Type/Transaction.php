@@ -189,32 +189,32 @@ class Transaction extends Trytes
             $valueTrits[] = 0;
         }
 
-        $timestampTrits = TritsUtil::fromInt($this->timestamp, 27);
+        $timestampTrits = TritsUtil::fromInt((string)$this->timestamp, 27);
         while (\count($timestampTrits) < 27) {
             $timestampTrits[] = 0;
         }
 
-        $currentIndexTrits = TritsUtil::fromInt($this->currentIndex, 27);
+        $currentIndexTrits = TritsUtil::fromInt((string)$this->currentIndex, 27);
         while (\count($currentIndexTrits) < 27) {
             $currentIndexTrits[] = 0;
         }
 
-        $lastIndexTrits = TritsUtil::fromInt($this->lastIndex, 27);
+        $lastIndexTrits = TritsUtil::fromInt((string)$this->lastIndex, 27);
         while (\count($lastIndexTrits) < 27) {
             $lastIndexTrits[] = 0;
         }
 
-        $attachmentTimestampTrits = TritsUtil::fromInt($this->attachmentTimestamp, 27);
+        $attachmentTimestampTrits = TritsUtil::fromInt((string)$this->attachmentTimestamp, 27);
         while (\count($attachmentTimestampTrits) < 27) {
             $attachmentTimestampTrits[] = 0;
         }
 
-        $attachmentTimestampLowerBoundTrits = TritsUtil::fromInt($this->attachmentTimestampLowerBound, 27);
+        $attachmentTimestampLowerBoundTrits = TritsUtil::fromInt((string)$this->attachmentTimestampLowerBound, 27);
         while (\count($attachmentTimestampLowerBoundTrits) < 27) {
             $attachmentTimestampLowerBoundTrits[] = 0;
         }
 
-        $attachmentTimestampUpperBoundTrits = TritsUtil::fromInt($this->attachmentTimestampUpperBound, 27);
+        $attachmentTimestampUpperBoundTrits = TritsUtil::fromInt((string)$this->attachmentTimestampUpperBound, 27);
         while (\count($attachmentTimestampUpperBoundTrits) < 27) {
             $attachmentTimestampUpperBoundTrits[] = 0;
         }
@@ -654,7 +654,7 @@ class Transaction extends Trytes
         $hash = [];
         $curl->squeeze($hash, 0, 243);
 
-        $this->transactionHash = new TransactionHash(TritsUtil::toTrytes($hash));
+        $this->transactionHash = new TransactionHash((string)TritsUtil::toTrytes($hash));
         $this->signatureMessageFragment = new SignatureMessageFragment(
             substr($this->trytes, 0, 2187)
         );

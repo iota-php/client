@@ -46,6 +46,7 @@ class InterruptAttachingToTangleTest extends AbstractApiTestCase
 
     protected function initValidRequest()
     {
+        $this->markTestSkipped('TODO');
         $this->request = new Request();
     }
 }
