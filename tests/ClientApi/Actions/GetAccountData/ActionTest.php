@@ -14,7 +14,8 @@ declare(strict_types=1);
 namespace Techworker\IOTA\Tests\ClientApi\Actions\GetAccountData;
 
 use Techworker\IOTA\ClientApi\Actions\GetAccountData;
-use Techworker\IOTA\ClientApi\Actions\GetNewAddress;
+use Techworker\IOTA\ClientApi\Actions\GetNewAddress as GetNewAddressResult;
+use Techworker\IOTA\ClientApi\Actions\GetNewAddress\Action as GetNewAddressAction;
 use Techworker\IOTA\Tests\ClientApi\Actions\AbstractActionTest;
 use Techworker\IOTA\Tests\DummyData;
 use Techworker\IOTA\Type\SecurityLevel;
@@ -80,8 +81,9 @@ class ActionTest extends AbstractActionTest
     public function testExecute()
     {
         $this->markTestSkipped('TODO');
-        $naResponse = new GetNewAddress\Result();
-        $action = new GetAccountData\Action(
+        $naResponse = new GetNewAddressResult();
+        $action = new GetNewAddressAction(
+
             DummyData::getNode(),
             $this->caMocks->getNewAddressFactory(),
             $this->caMocks->getBundlesFromAddressesFactory(),

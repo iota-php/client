@@ -55,7 +55,7 @@ class Action extends AbstractAction
     }
 
     /**
-     * @param Trytes[] $transactions
+     * @param Transaction[] $transactions
      *
      * @return Action
      */

@@ -25,7 +25,7 @@ class Result extends AbstractResult
     protected $states;
 
     /**
-     * @return \bool[]
+     * @return bool[]
      */
     public function getStates(): array
     {
@@ -33,7 +33,7 @@ class Result extends AbstractResult
     }
 
     /**
-     * @param \bool[] $states
+     * @param bool[] $states
      *
      * @return Result
      */

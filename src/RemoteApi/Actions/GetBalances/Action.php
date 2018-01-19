@@ -72,7 +72,10 @@ class Action extends AbstractAction
      */
     public function addAddress(Address $address): self
     {
-        $this->addresses[] = $address->removeChecksum();
+        // @todo refactor it
+        /** @var Address $address */
+        $address = $address->removeChecksum();
+        $this->addresses[] = $address;
 
         return $this;
     }

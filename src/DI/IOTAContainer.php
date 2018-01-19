@@ -168,7 +168,7 @@ class IOTAContainer implements ContainerInterface
         };
 
         // the keccak 384 implementation
-        $this->entries[Keccak384Interface::class] = function () use ($options) {
+        $this->entries[Keccak384Interface::class] = function () {
             //return new NodeJS($options['keccak384-nodejs']);
             return new Korn();
         };

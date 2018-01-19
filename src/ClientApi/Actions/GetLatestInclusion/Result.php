@@ -29,7 +29,7 @@ class Result extends AbstractResult
     /**
      * Gets the list of addresses.
      *
-     * @return Address[]
+     * @return bool[]
      */
     public function getStates(): array
     {

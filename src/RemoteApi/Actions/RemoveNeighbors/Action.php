@@ -52,7 +52,7 @@ class Action extends AbstractAction
     /**
      * Overwrites all neighbor uris.
      *
-     * @param \string[] $neighborUris
+     * @param string[] $neighborUris
      *
      * @throws \InvalidArgumentException
      *
@@ -92,7 +92,7 @@ class Action extends AbstractAction
     /**
      * Gets the list of neighbor uris.
      *
-     * @return \string[]
+     * @return string[]
      */
     public function getNeighborUris(): array
     {

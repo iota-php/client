@@ -14,9 +14,8 @@ declare(strict_types=1);
 namespace Techworker\IOTA\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Techworker\IOTA\Cryptography\Hashing\Curl;
+
 use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
-use Techworker\IOTA\Cryptography\Hashing\Kerl;
 use Techworker\IOTA\Tests\Container;
 use Techworker\IOTA\Type\Transaction;
 
