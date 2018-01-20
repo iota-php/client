@@ -12,17 +12,22 @@ to do the following.
 ```php
 <?php
 
-use IOTA\IOTA;
+use IOTA\Client;
 use IOTA\Node;
 use IOTA\DI\IOTAContainer;
+use IOTA\RemoteApi\RemoteApi;
+use IOTA\ClientApi\ClientApi;
 
 $options = [
     'ccurlPath' => '/srv/ccurl'
 ];
 
 // initializes a new IOTA instance with the built in container and one iota node
-$iota = new IOTA(
-    new IOTAContainer($options), 
+$container = new IOTAContainer($options);
+
+$iota = new Client(
+    $container->get(RemoteApi::class),
+    $container->get(ClientApi::class),
     [new Node('http://node01.iotatoken.nl:14265')]
 );
 ```

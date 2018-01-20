@@ -15,6 +15,8 @@ namespace IOTA\Tests\ClientApi\Actions;
 
 use PHPUnit\Framework\TestCase;
 use IOTA\Client;
+use IOTA\RemoteApi\RemoteApi;
+use IOTA\ClientApi\ClientApi;
 use IOTA\Node;
 use IOTA\Tests\ClientApiMocks;
 use IOTA\Tests\Container;
@@ -66,7 +68,11 @@ abstract class AbstractActionTest extends TestCase
     {
         DummyData::init();
         $this->container = new Container();
-        $this->iota = new Client($this->container, [DummyData::getNode()]);
+        $this->iota = new Client(
+            $this->prophesize(RemoteApi::class)->reveal(),
+            $this->prophesize(ClientApi::class)->reveal(),
+            [DummyData::getNode()]
+        );
     }
 
     /**
