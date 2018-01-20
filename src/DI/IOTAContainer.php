@@ -40,6 +40,7 @@ use Techworker\IOTA\Cryptography\Keccak384\Korn;
 use Techworker\IOTA\Cryptography\Keccak384\NodeJS;
 use Techworker\IOTA\Cryptography\POW\CCurl;
 use Techworker\IOTA\Cryptography\POW\PowInterface;
+use Techworker\IOTA\IOTA;
 use Techworker\IOTA\RemoteApi\Commands\AddNeighbors;
 use Techworker\IOTA\RemoteApi\Commands\AttachToTangle;
 use Techworker\IOTA\RemoteApi\Commands\BroadcastTransactions;
@@ -209,6 +210,10 @@ class IOTAContainer implements ContainerInterface
 
         $this->entries[BroadcastBundle\ActionFactory::class] = function () {
             return new BroadcastBundle\ActionFactory($this);
+        };
+
+        $this->entries[IOTA::class] = function () use ($options) {
+            return new IOTA($this->get(RemoteApi::class), $this->get(ClientApi::class), $options['nodes']);
         };
     }
 

@@ -34,7 +34,7 @@ class IOTATest extends TestCase
             'mynode' => new Node('http://myNode'),
         ];
 
-        $iota = new IOTA(new Container(), $nodes);
+        $iota = $this->getIotaInstance($nodes);
 
         static::assertCount(3, $iota->getNodes());
 
@@ -51,20 +51,19 @@ class IOTATest extends TestCase
     {
         $this->expectException(\Exception::class);
 
-        $nodes = [];
-        $iota = new IOTA(new Container(), $nodes);
+        $iota = $this->getIotaInstance();
         $iota->getNode('-1');
     }
 
-    public function testGetRemoteApi()
+    /**
+     * @param Node[] $nodes
+     *
+     * @return IOTA
+     */
+    private function getIotaInstance(array $nodes = []): IOTA
     {
-        $iota = new IOTA(new Container(), []);
-        static::assertInstanceOf(RemoteApi::class, $iota->getRemoteApi());
-    }
-
-    public function testGetClientApi()
-    {
-        $iota = new IOTA(new Container(), []);
-        static::assertInstanceOf(ClientApi::class, $iota->getClientApi());
+        return new IOTA(
+            $this->prophesize(RemoteApi::class)->reveal(), $this->prophesize(ClientApi::class)->reveal(), $nodes
+        );
     }
 }

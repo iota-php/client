@@ -11,7 +11,7 @@ use Techworker\IOTA\Type\Address;
 $iota = include __DIR__.'/bootstrap.php';
 
 /** @var GetBalances\Response $balanceInfos */
-$balanceInfos = $iota->getRemoteApi()->getBalances([new Address($_GET['a'])]);
+$balanceInfos = $iota->getRemoteApi()->getBalances($iota->getNode(), [new Address($_GET['a'])]);
 if ($balanceInfos->isError()) {
     die(print_r($balanceInfos));
 }
