@@ -18,8 +18,8 @@ use Techworker\IOTA\ClientApi\AbstractResult;
 use Techworker\IOTA\ClientApi\Actions\StoreAndBroadcast;
 use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\AttachToTangle;
-use Techworker\IOTA\RemoteApi\Commands\GetTransactionsToApprove;
+use Techworker\IOTA\RemoteApi\Actions\AttachToTangle;
+use Techworker\IOTA\RemoteApi\Actions\GetTransactionsToApprove;
 use Techworker\IOTA\Type\Milestone;
 use Techworker\IOTA\Type\Transaction;
 use Techworker\IOTA\Type\Trytes;
@@ -31,8 +31,8 @@ use Techworker\IOTA\Util\SerializeUtil;
  */
 class Action extends AbstractAction
 {
-    use GetTransactionsToApprove\RequestTrait,
-        AttachToTangle\RequestTrait,
+    use GetTransactionsToApprove\ActionTrait,
+        AttachToTangle\ActionTrait,
         StoreAndBroadcast\ActionTrait;
 
     /**
@@ -68,15 +68,15 @@ class Action extends AbstractAction
      * Action constructor.
      *
      * @param Node                                    $node
-     * @param GetTransactionsToApprove\RequestFactory $getTransactionsToApproveFactory
-     * @param AttachToTangle\RequestFactory           $attachToTangleFactory
+     * @param GetTransactionsToApprove\ActionFactory $getTransactionsToApproveFactory
+     * @param AttachToTangle\ActionFactory           $attachToTangleFactory
      * @param StoreAndBroadcast\ActionFactory         $storeAndBroadcastFactory
      * @param CurlFactory                             $curlFactory
      */
     public function __construct(
         Node $node,
-        GetTransactionsToApprove\RequestFactory $getTransactionsToApproveFactory,
-        AttachToTangle\RequestFactory $attachToTangleFactory,
+        GetTransactionsToApprove\ActionFactory $getTransactionsToApproveFactory,
+        AttachToTangle\ActionFactory $attachToTangleFactory,
         StoreAndBroadcast\ActionFactory $storeAndBroadcastFactory,
         CurlFactory $curlFactory
     ) {

@@ -13,32 +13,33 @@ declare(strict_types=1);
 
 namespace Techworker\IOTA\Tests\RemoteApi;
 
+use Http\Client\HttpClient;
+use Http\Discovery\MessageFactoryDiscovery;
 use PHPUnit\Framework\TestCase;
-use Techworker\IOTA\RemoteApi\RequestInterface;
+use Http\Mock\Client;
+use Techworker\IOTA\RemoteApi\ActionInterface;
+use Techworker\IOTA\RemoteApi\NodeApiClient;
 
 abstract class AbstractApiTestCase extends TestCase
 {
     /**
-     * The http client that works with fixtures instead of doing real requests.
-     *
-     * @var FixtureHttpClient
-     */
-    protected $httpClient;
-
-    /**
      * A valid and instantiated request object.
      *
-     * @var RequestInterface
+     * @var ActionInterface
      */
-    protected $request;
+    protected $action;
 
     /**
      * Initializes the http client.
      */
     public function setUp(): void
     {
-        $this->httpClient = new FixtureHttpClient();
-        $this->initValidRequest();
+        $this->initValidAction();
+    }
+
+    public function getNodeApiClient(Client $client)
+    {
+        return new NodeApiClient($client, $client, MessageFactoryDiscovery::find());
     }
 
     abstract public function testRequestSerialization();
@@ -83,5 +84,5 @@ abstract class AbstractApiTestCase extends TestCase
         return $tryte;
     }
 
-    abstract protected function initValidRequest();
+    abstract protected function initValidAction();
 }

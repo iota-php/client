@@ -18,7 +18,7 @@ use Techworker\IOTA\ClientApi\AbstractResult;
 use Techworker\IOTA\ClientApi\Actions\SendTransfer;
 use Techworker\IOTA\Exception;
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\IsTailConsistent;
+use Techworker\IOTA\RemoteApi\Actions\IsTailConsistent;
 use Techworker\IOTA\Type\Milestone;
 use Techworker\IOTA\Type\Seed;
 use Techworker\IOTA\Type\TransactionHash;
@@ -29,7 +29,7 @@ use Techworker\IOTA\Type\Transfer;
  */
 class Action extends AbstractAction
 {
-    use IsTailConsistent\RequestTrait,
+    use IsTailConsistent\ActionTrait,
         SendTransfer\ActionTrait;
 
     /**
@@ -71,12 +71,12 @@ class Action extends AbstractAction
      * Action constructor.
      *
      * @param Node                            $node
-     * @param IsTailConsistent\RequestFactory $isTailConsistentFactory
+     * @param IsTailConsistent\ActionFactory $isTailConsistentFactory
      * @param SendTransfer\ActionFactory      $sendTransferFactory
      */
     public function __construct(
         Node $node,
-        IsTailConsistent\RequestFactory $isTailConsistentFactory,
+        IsTailConsistent\ActionFactory $isTailConsistentFactory,
         SendTransfer\ActionFactory $sendTransferFactory
     ) {
         parent::__construct($node);

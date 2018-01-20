@@ -17,7 +17,7 @@ use Techworker\IOTA\ClientApi\AbstractAction;
 use Techworker\IOTA\ClientApi\Actions\GetBundlesFromAddresses;
 use Techworker\IOTA\ClientApi\Actions\GetNewAddress;
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\GetBalances;
+use Techworker\IOTA\RemoteApi\Actions\GetBalances;
 use Techworker\IOTA\Type\AccountData;
 use Techworker\IOTA\Type\Input;
 use Techworker\IOTA\Type\Iota;
@@ -32,7 +32,7 @@ class Action extends AbstractAction
 {
     use GetNewAddress\ActionTrait,
         GetBundlesFromAddresses\ActionTrait,
-        GetBalances\RequestTrait;
+        GetBalances\ActionTrait;
 
     /**
      * The seed.
@@ -61,13 +61,13 @@ class Action extends AbstractAction
      * @param Node                                  $node
      * @param GetNewAddress\ActionFactory           $getNewAddressFactory
      * @param GetBundlesFromAddresses\ActionFactory $getBundlesFromAddressesFactory
-     * @param GetBalances\RequestFactory            $getBalancesFactory
+     * @param GetBalances\ActionFactory            $getBalancesFactory
      */
     public function __construct(
         Node $node,
                                 GetNewAddress\ActionFactory $getNewAddressFactory,
                                 GetBundlesFromAddresses\ActionFactory $getBundlesFromAddressesFactory,
-                                GetBalances\RequestFactory $getBalancesFactory
+                                GetBalances\ActionFactory $getBalancesFactory
     ) {
         parent::__construct($node);
         $this->setGetNewAddressFactory($getNewAddressFactory);

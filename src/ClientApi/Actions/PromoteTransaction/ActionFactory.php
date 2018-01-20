@@ -17,7 +17,7 @@ use Techworker\IOTA\AbstractFactory;
 use Techworker\IOTA\ClientApi\Actions\SendTransfer;
 use Techworker\IOTA\ClientApi\FactoryInterface;
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\IsTailConsistent;
+use Techworker\IOTA\RemoteApi\Actions\IsTailConsistent;
 
 /**
  * Class ActionFactory.
@@ -37,7 +37,7 @@ class ActionFactory extends AbstractFactory implements FactoryInterface
     {
         return new Action(
             $node,
-            $this->container->get(IsTailConsistent\RequestFactory::class),
+            $this->container->get(IsTailConsistent\ActionFactory::class),
             $this->container->get(SendTransfer\ActionFactory::class)
         );
     }

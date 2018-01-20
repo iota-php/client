@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Techworker\IOTA\Tests\RemoteApi;
 
-use Techworker\IOTA\RemoteApi\Commands\GetBalances\Request;
-use Techworker\IOTA\RemoteApi\Commands\GetBalances\Response;
+use Techworker\IOTA\RemoteApi\Actions\GetBalances\Action;
+use Techworker\IOTA\RemoteApi\Actions\GetBalances\Result;
 use Techworker\IOTA\Type\Address;
 use Techworker\IOTA\Type\Milestone;
 
@@ -33,14 +33,14 @@ class GetBalancesTest extends AbstractApiTestCase
             ],
             'threshold' => 99,
         ];
-        static::assertEquals($expected, $this->request->jsonSerialize());
+        static::assertEquals($expected, $this->action->jsonSerialize());
     }
 
     public function testRequestInvalidAddresses()
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $request = new Request(['abc']);
+        $request = new Action(['abc']);
     }
 
     public function testResponse()
@@ -49,7 +49,7 @@ class GetBalancesTest extends AbstractApiTestCase
         $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
-        $response = $this->request->execute();
+        $response = $this->action->execute();
 
         static::assertEquals([114544444], $response->getBalances());
         static::assertInstanceOf(Milestone::class, $response->getMilestone());
@@ -66,10 +66,10 @@ class GetBalancesTest extends AbstractApiTestCase
         ];
     }
 
-    protected function initValidRequest()
+    protected function initValidAction()
     {
         $this->markTestSkipped('TODO');
-        $this->request = new Request([
+        $this->action = new Action([
             new Address($this->generateStaticTryte(81, 0)),
             new Address($this->generateStaticTryte(81, 1)),
         ], 99);

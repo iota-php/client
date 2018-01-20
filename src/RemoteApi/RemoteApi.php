@@ -13,21 +13,21 @@ declare(strict_types=1);
 
 namespace Techworker\IOTA\RemoteApi;
 
-use Techworker\IOTA\RemoteApi\Commands\AddNeighbors;
-use Techworker\IOTA\RemoteApi\Commands\AttachToTangle;
-use Techworker\IOTA\RemoteApi\Commands\BroadcastTransactions;
-use Techworker\IOTA\RemoteApi\Commands\FindTransactions;
-use Techworker\IOTA\RemoteApi\Commands\GetBalances;
-use Techworker\IOTA\RemoteApi\Commands\GetInclusionStates;
-use Techworker\IOTA\RemoteApi\Commands\GetNeighbors;
-use Techworker\IOTA\RemoteApi\Commands\GetNodeInfo;
-use Techworker\IOTA\RemoteApi\Commands\GetTips;
-use Techworker\IOTA\RemoteApi\Commands\GetTransactionsToApprove;
-use Techworker\IOTA\RemoteApi\Commands\GetTrytes;
-use Techworker\IOTA\RemoteApi\Commands\InterruptAttachingToTangle;
-use Techworker\IOTA\RemoteApi\Commands\IsTailConsistent;
-use Techworker\IOTA\RemoteApi\Commands\RemoveNeighbors;
-use Techworker\IOTA\RemoteApi\Commands\StoreTransactions;
+use Techworker\IOTA\RemoteApi\Actions\AddNeighbors;
+use Techworker\IOTA\RemoteApi\Actions\AttachToTangle;
+use Techworker\IOTA\RemoteApi\Actions\BroadcastTransactions;
+use Techworker\IOTA\RemoteApi\Actions\FindTransactions;
+use Techworker\IOTA\RemoteApi\Actions\GetBalances;
+use Techworker\IOTA\RemoteApi\Actions\GetInclusionStates;
+use Techworker\IOTA\RemoteApi\Actions\GetNeighbors;
+use Techworker\IOTA\RemoteApi\Actions\GetNodeInfo;
+use Techworker\IOTA\RemoteApi\Actions\GetTips;
+use Techworker\IOTA\RemoteApi\Actions\GetTransactionsToApprove;
+use Techworker\IOTA\RemoteApi\Actions\GetTrytes;
+use Techworker\IOTA\RemoteApi\Actions\InterruptAttachingToTangle;
+use Techworker\IOTA\RemoteApi\Actions\IsTailConsistent;
+use Techworker\IOTA\RemoteApi\Actions\RemoveNeighbors;
+use Techworker\IOTA\RemoteApi\Actions\StoreTransactions;
 
 /**
  * Class RemoteApi.
@@ -36,74 +36,74 @@ use Techworker\IOTA\RemoteApi\Commands\StoreTransactions;
  */
 class RemoteApi
 {
-    use AddNeighbors\RequestTrait,
-        AttachToTangle\RequestTrait,
-        BroadcastTransactions\RequestTrait,
-        FindTransactions\RequestTrait,
-        GetBalances\RequestTrait,
-        GetInclusionStates\RequestTrait,
-        GetNeighbors\RequestTrait,
-        GetNodeInfo\RequestTrait,
-        GetTips\RequestTrait,
-        GetTransactionsToApprove\RequestTrait,
-        GetTrytes\RequestTrait,
-        InterruptAttachingToTangle\RequestTrait,
-        IsTailConsistent\RequestTrait,
-        RemoveNeighbors\RequestTrait,
-        StoreTransactions\RequestTrait
+    use AddNeighbors\ActionTrait,
+        AttachToTangle\ActionTrait,
+        BroadcastTransactions\ActionTrait,
+        FindTransactions\ActionTrait,
+        GetBalances\ActionTrait,
+        GetInclusionStates\ActionTrait,
+        GetNeighbors\ActionTrait,
+        GetNodeInfo\ActionTrait,
+        GetTips\ActionTrait,
+        GetTransactionsToApprove\ActionTrait,
+        GetTrytes\ActionTrait,
+        InterruptAttachingToTangle\ActionTrait,
+        IsTailConsistent\ActionTrait,
+        RemoveNeighbors\ActionTrait,
+        StoreTransactions\ActionTrait
     {
-        AddNeighbors\RequestTrait::addNeighbors as public;
-        AttachToTangle\RequestTrait::attachToTangle as public;
-        BroadcastTransactions\RequestTrait::broadcastTransactions as public;
-        FindTransactions\RequestTrait::findTransactions as public;
-        GetBalances\RequestTrait::getBalances as public;
-        GetInclusionStates\RequestTrait::getInclusionStates as public;
-        GetNeighbors\RequestTrait::getNeighbors as public;
-        GetNodeInfo\RequestTrait::getNodeInfo as public;
-        GetTips\RequestTrait::getTips as public;
-        GetTransactionsToApprove\RequestTrait::getTransactionsToApprove as public;
-        GetTrytes\RequestTrait::getTrytes as public;
-        InterruptAttachingToTangle\RequestTrait::interruptAttachingToTangle as public;
-        IsTailConsistent\RequestTrait::isTailConsistent as public;
-        RemoveNeighbors\RequestTrait::removeNeighbors as public;
-        StoreTransactions\RequestTrait::storeTransactions as public;
+        AddNeighbors\ActionTrait::addNeighbors as public;
+        AttachToTangle\ActionTrait::attachToTangle as public;
+        BroadcastTransactions\ActionTrait::broadcastTransactions as public;
+        FindTransactions\ActionTrait::findTransactions as public;
+        GetBalances\ActionTrait::getBalances as public;
+        GetInclusionStates\ActionTrait::getInclusionStates as public;
+        GetNeighbors\ActionTrait::getNeighbors as public;
+        GetNodeInfo\ActionTrait::getNodeInfo as public;
+        GetTips\ActionTrait::getTips as public;
+        GetTransactionsToApprove\ActionTrait::getTransactionsToApprove as public;
+        GetTrytes\ActionTrait::getTrytes as public;
+        InterruptAttachingToTangle\ActionTrait::interruptAttachingToTangle as public;
+        IsTailConsistent\ActionTrait::isTailConsistent as public;
+        RemoveNeighbors\ActionTrait::removeNeighbors as public;
+        StoreTransactions\ActionTrait::storeTransactions as public;
     }
 
     /**
      * RemoteApi constructor.
      *
-     * @param AddNeighbors\RequestFactory               $addNeighborsFactory
-     * @param AttachToTangle\RequestFactory             $attachToTangleFactory
-     * @param BroadcastTransactions\RequestFactory      $broadcastTransactionsFactory
-     * @param FindTransactions\RequestFactory           $findTransactionsFactory
-     * @param GetBalances\RequestFactory                $getBalancesFactory
-     * @param GetInclusionStates\RequestFactory         $getInclusionStatesFactory
-     * @param GetNeighbors\RequestFactory               $getNeighborsFactory
-     * @param GetNodeInfo\RequestFactory                $getNodeInfoFactory
-     * @param GetTips\RequestFactory                    $getTipsFactory
-     * @param GetTransactionsToApprove\RequestFactory   $getTransactionsToApproveFactory
-     * @param GetTrytes\RequestFactory                  $getTrytesFactory
-     * @param InterruptAttachingToTangle\RequestFactory $interruptAttachingToTangleFactory
-     * @param IsTailConsistent\RequestFactory           $isTailConsistentFactory
-     * @param RemoveNeighbors\RequestFactory            $removeNeighborsFactory
-     * @param StoreTransactions\RequestFactory          $storeTransactionsFactory
+     * @param AddNeighbors\ActionFactory               $addNeighborsFactory
+     * @param AttachToTangle\ActionFactory             $attachToTangleFactory
+     * @param BroadcastTransactions\ActionFactory      $broadcastTransactionsFactory
+     * @param FindTransactions\ActionFactory           $findTransactionsFactory
+     * @param GetBalances\ActionFactory                $getBalancesFactory
+     * @param GetInclusionStates\ActionFactory         $getInclusionStatesFactory
+     * @param GetNeighbors\ActionFactory               $getNeighborsFactory
+     * @param GetNodeInfo\ActionFactory                $getNodeInfoFactory
+     * @param GetTips\ActionFactory                    $getTipsFactory
+     * @param GetTransactionsToApprove\ActionFactory   $getTransactionsToApproveFactory
+     * @param GetTrytes\ActionFactory                  $getTrytesFactory
+     * @param InterruptAttachingToTangle\ActionFactory $interruptAttachingToTangleFactory
+     * @param IsTailConsistent\ActionFactory           $isTailConsistentFactory
+     * @param RemoveNeighbors\ActionFactory            $removeNeighborsFactory
+     * @param StoreTransactions\ActionFactory          $storeTransactionsFactory
      */
     public function __construct(
-        AddNeighbors\RequestFactory $addNeighborsFactory,
-        AttachToTangle\RequestFactory $attachToTangleFactory,
-        BroadcastTransactions\RequestFactory $broadcastTransactionsFactory,
-        FindTransactions\RequestFactory $findTransactionsFactory,
-        GetBalances\RequestFactory $getBalancesFactory,
-        GetInclusionStates\RequestFactory $getInclusionStatesFactory,
-        GetNeighbors\RequestFactory $getNeighborsFactory,
-        GetNodeInfo\RequestFactory $getNodeInfoFactory,
-        GetTips\RequestFactory $getTipsFactory,
-        GetTransactionsToApprove\RequestFactory $getTransactionsToApproveFactory,
-        GetTrytes\RequestFactory $getTrytesFactory,
-        InterruptAttachingToTangle\RequestFactory $interruptAttachingToTangleFactory,
-        IsTailConsistent\RequestFactory $isTailConsistentFactory,
-        RemoveNeighbors\RequestFactory $removeNeighborsFactory,
-        StoreTransactions\RequestFactory $storeTransactionsFactory
+        AddNeighbors\ActionFactory $addNeighborsFactory,
+        AttachToTangle\ActionFactory $attachToTangleFactory,
+        BroadcastTransactions\ActionFactory $broadcastTransactionsFactory,
+        FindTransactions\ActionFactory $findTransactionsFactory,
+        GetBalances\ActionFactory $getBalancesFactory,
+        GetInclusionStates\ActionFactory $getInclusionStatesFactory,
+        GetNeighbors\ActionFactory $getNeighborsFactory,
+        GetNodeInfo\ActionFactory $getNodeInfoFactory,
+        GetTips\ActionFactory $getTipsFactory,
+        GetTransactionsToApprove\ActionFactory $getTransactionsToApproveFactory,
+        GetTrytes\ActionFactory $getTrytesFactory,
+        InterruptAttachingToTangle\ActionFactory $interruptAttachingToTangleFactory,
+        IsTailConsistent\ActionFactory $isTailConsistentFactory,
+        RemoveNeighbors\ActionFactory $removeNeighborsFactory,
+        StoreTransactions\ActionFactory $storeTransactionsFactory
     ) {
         $this->setAddNeighborsFactory($addNeighborsFactory);
         $this->setAttachToTangleFactory($attachToTangleFactory);

@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Techworker\IOTA\Tests;
 
+use Http\Client\HttpAsyncClient;
+use Http\Client\HttpClient;
+use Http\Mock\Client;
 use Techworker\IOTA\DI\IOTAContainer;
 
 /**
@@ -30,6 +33,13 @@ class Container extends IOTAContainer
         parent::__construct([
             'ccurlPath' => __DIR__ . '/../ccurl',
         ]);
+
+        $this->set(HttpClient::class, function() {
+            return new Client();
+        });
+        $this->set(HttpAsyncClient::class, function() {
+            return new Client();
+        });
     }
 
     public function set(string $class, callable $callable)

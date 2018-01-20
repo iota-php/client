@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Techworker\IOTA\Tests\RemoteApi;
 
-use Techworker\IOTA\RemoteApi\Commands\GetTips\Request;
-use Techworker\IOTA\RemoteApi\Commands\GetTips\Response;
+use Techworker\IOTA\RemoteApi\Actions\GetTips\Action;
+use Techworker\IOTA\RemoteApi\Actions\GetTips\Result;
 use Techworker\IOTA\Type\Tip;
 
 /**
@@ -27,7 +27,7 @@ class GetTipsTest extends AbstractApiTestCase
         $expected = [
             'command' => 'getTips',
         ];
-        static::assertEquals($expected, $this->request->jsonSerialize());
+        static::assertEquals($expected, $this->action->jsonSerialize());
     }
 
     public function testResponse()
@@ -36,7 +36,7 @@ class GetTipsTest extends AbstractApiTestCase
         $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
-        $response = $this->request->execute();
+        $response = $this->action->execute();
 
         static::assertCount(2, $response->getHashes());
         static::assertInstanceOf(Tip::class, $response->getHashes()[0]);
@@ -52,9 +52,9 @@ class GetTipsTest extends AbstractApiTestCase
         ];
     }
 
-    protected function initValidRequest()
+    protected function initValidAction()
     {
         $this->markTestSkipped('TODO');
-        $this->request = new Request($this->httpClient, new Node());
+        $this->action = new Action($this->httpClient, new Node());
     }
 }

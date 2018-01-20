@@ -16,8 +16,8 @@ namespace Techworker\IOTA\ClientApi\Actions\GetLatestInclusion;
 use Techworker\IOTA\AbstractFactory;
 use Techworker\IOTA\ClientApi\FactoryInterface;
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\GetInclusionStates;
-use Techworker\IOTA\RemoteApi\Commands\GetNodeInfo;
+use Techworker\IOTA\RemoteApi\Actions\GetInclusionStates;
+use Techworker\IOTA\RemoteApi\Actions\GetNodeInfo;
 
 /**
  * Class ActionFactory.
@@ -37,8 +37,8 @@ class ActionFactory extends AbstractFactory implements FactoryInterface
     {
         return new Action(
             $node,
-            $this->container->get(GetNodeInfo\RequestFactory::class),
-            $this->container->get(GetInclusionStates\RequestFactory::class)
+            $this->container->get(GetNodeInfo\ActionFactory::class),
+            $this->container->get(GetInclusionStates\ActionFactory::class)
         );
     }
 }

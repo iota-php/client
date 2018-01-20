@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Techworker\IOTA\Tests\RemoteApi;
 
-use Techworker\IOTA\RemoteApi\Commands\GetTransactionsToApprove\Request;
-use Techworker\IOTA\RemoteApi\Commands\GetTransactionsToApprove\Response;
+use Techworker\IOTA\RemoteApi\Actions\GetTransactionsToApprove\Action;
+use Techworker\IOTA\RemoteApi\Actions\GetTransactionsToApprove\Result;
 use Techworker\IOTA\Type\TransactionHash;
 
 /**
@@ -28,7 +28,7 @@ class GetTransactionsToApproveTest extends AbstractApiTestCase
             'command' => 'getTransactionsToApprove',
             'depth' => 1,
         ];
-        static::assertEquals($expected, $this->request->jsonSerialize());
+        static::assertEquals($expected, $this->action->jsonSerialize());
     }
 
     public function testResponse()
@@ -37,7 +37,7 @@ class GetTransactionsToApproveTest extends AbstractApiTestCase
         $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
-        $response = $this->request->execute();
+        $response = $this->action->execute();
 
         static::assertInstanceOf(TransactionHash::class, $response->getTrunkTransaction());
         static::assertInstanceOf(TransactionHash::class, $response->getBranchTransaction());
@@ -53,9 +53,9 @@ class GetTransactionsToApproveTest extends AbstractApiTestCase
         ];
     }
 
-    protected function initValidRequest()
+    protected function initValidAction()
     {
         $this->markTestSkipped('TODO');
-        $this->request = new Request(1);
+        $this->action = new Action(1);
     }
 }

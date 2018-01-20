@@ -18,7 +18,7 @@ use Techworker\IOTA\ClientApi\AbstractResult;
 use Techworker\IOTA\ClientApi\Actions\GetBundle;
 use Techworker\IOTA\ClientApi\VoidResult;
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\BroadcastTransactions;
+use Techworker\IOTA\RemoteApi\Actions\BroadcastTransactions;
 use Techworker\IOTA\Type\TransactionHash;
 
 /**
@@ -29,7 +29,7 @@ use Techworker\IOTA\Type\TransactionHash;
 class Action extends AbstractAction
 {
     use GetBundle\ActionTrait,
-        BroadcastTransactions\RequestTrait;
+        BroadcastTransactions\ActionTrait;
 
     /**
      * The tail transaction hash.
@@ -43,12 +43,12 @@ class Action extends AbstractAction
      *
      * @param Node                                 $node
      * @param GetBundle\ActionFactory              $getBundleFactory
-     * @param BroadcastTransactions\RequestFactory $broadcastTransactionsFactory
+     * @param BroadcastTransactions\ActionFactory $broadcastTransactionsFactory
      */
     public function __construct(
         Node $node,
                                 GetBundle\ActionFactory $getBundleFactory,
-                                BroadcastTransactions\RequestFactory $broadcastTransactionsFactory
+                                BroadcastTransactions\ActionFactory $broadcastTransactionsFactory
     ) {
         $this->setGetBundleFactory($getBundleFactory);
         $this->setBroadcastTransactionsFactory($broadcastTransactionsFactory);

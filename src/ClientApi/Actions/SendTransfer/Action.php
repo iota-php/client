@@ -23,7 +23,7 @@ use Techworker\IOTA\Cryptography\HMAC;
 use Techworker\IOTA\Cryptography\Signing;
 use Techworker\IOTA\Exception;
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\GetBalances;
+use Techworker\IOTA\RemoteApi\Actions\GetBalances;
 use Techworker\IOTA\Type\Address;
 use Techworker\IOTA\Type\Bundle;
 use Techworker\IOTA\Type\HMACKey;
@@ -49,7 +49,7 @@ class Action extends AbstractAction
     use GetNewAddress\ActionTrait,
         GetInputs\ActionTrait,
         SendTrytes\ActionTrait,
-        GetBalances\RequestTrait;
+        GetBalances\ActionTrait;
 
     /**
      * The seed used to generate addresses.
@@ -170,7 +170,7 @@ class Action extends AbstractAction
      * @param Node                        $node
      * @param GetNewAddress\ActionFactory $getNewAddressFactory
      * @param GetInputs\ActionFactory     $getInputsFactory
-     * @param GetBalances\RequestFactory  $getBalancesFactory
+     * @param GetBalances\ActionFactory  $getBalancesFactory
      * @param SendTrytes\ActionFactory    $sendTrytesFactory
      * @param KerlFactory                 $kerlFactory
      * @param CurlFactory                 $curlFactory
@@ -180,7 +180,7 @@ class Action extends AbstractAction
         Node $node,
                                 GetNewAddress\ActionFactory $getNewAddressFactory,
                                 GetInputs\ActionFactory $getInputsFactory,
-                                GetBalances\RequestFactory $getBalancesFactory,
+                                GetBalances\ActionFactory $getBalancesFactory,
                                 SendTrytes\ActionFactory $sendTrytesFactory,
                                 KerlFactory $kerlFactory,
                                 CurlFactory $curlFactory,

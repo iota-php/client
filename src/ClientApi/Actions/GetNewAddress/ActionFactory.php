@@ -16,7 +16,7 @@ namespace Techworker\IOTA\ClientApi\Actions\GetNewAddress;
 use Techworker\IOTA\AbstractFactory;
 use Techworker\IOTA\ClientApi\FactoryInterface;
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\FindTransactions;
+use Techworker\IOTA\RemoteApi\Actions\FindTransactions;
 use Techworker\IOTA\Util\AddressUtil;
 
 /**
@@ -38,7 +38,7 @@ class ActionFactory extends AbstractFactory implements FactoryInterface
         return new Action(
             $node,
             $this->container->get(AddressUtil::class),
-            $this->container->get(FindTransactions\RequestFactory::class)
+            $this->container->get(FindTransactions\ActionFactory::class)
         );
     }
 }

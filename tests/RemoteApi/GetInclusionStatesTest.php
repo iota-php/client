@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Techworker\IOTA\Tests\RemoteApi;
 
-use Techworker\IOTA\RemoteApi\Commands\GetInclusionStates\Request;
-use Techworker\IOTA\RemoteApi\Commands\GetInclusionStates\Response;
+use Techworker\IOTA\RemoteApi\Actions\GetInclusionStates\Action;
+use Techworker\IOTA\RemoteApi\Actions\GetInclusionStates\Result;
 use Techworker\IOTA\Type\Tip;
 use Techworker\IOTA\Type\TransactionHash;
 
@@ -36,21 +36,21 @@ class GetInclusionStatesTest extends AbstractApiTestCase
                 $this->generateStaticTryte(3, 1),
             ],
         ];
-        static::assertEquals($expected, $this->request->jsonSerialize());
+        static::assertEquals($expected, $this->action->jsonSerialize());
     }
 
     public function testRequestInvalidTransaction()
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $request = new Request(['abc'], []);
+        $request = new Action(['abc'], []);
     }
 
     public function testRequestInvalidTip()
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $request = new Request([], ['abc']);
+        $request = new Action([], ['abc']);
     }
 
     public function testResponse()
@@ -59,7 +59,7 @@ class GetInclusionStatesTest extends AbstractApiTestCase
         $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
-        $response = $this->request->execute();
+        $response = $this->action->execute();
 
         static::assertTrue($response->getStates()[0]);
         static::assertFalse($response->getStates()[1]);
@@ -72,10 +72,10 @@ class GetInclusionStatesTest extends AbstractApiTestCase
         ];
     }
 
-    protected function initValidRequest()
+    protected function initValidAction()
     {
         $this->markTestSkipped('TODO');
-        $this->request = new Request([
+        $this->action = new Action([
             new TransactionHash($this->generateStaticTryte(81, 0)),
             new TransactionHash($this->generateStaticTryte(81, 1)),
         ], [

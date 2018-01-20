@@ -19,7 +19,7 @@ use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
 use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
 use Techworker\IOTA\Exception;
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\GetTrytes;
+use Techworker\IOTA\RemoteApi\Actions\GetTrytes;
 use Techworker\IOTA\Type\Bundle;
 use Techworker\IOTA\Type\BundleHash;
 use Techworker\IOTA\Type\Transaction;
@@ -30,7 +30,7 @@ use Techworker\IOTA\Type\TransactionHash;
  */
 class Action extends AbstractAction
 {
-    use GetTrytes\RequestTrait;
+    use GetTrytes\ActionTrait;
 
     /**
      * @var TransactionHash
@@ -62,11 +62,11 @@ class Action extends AbstractAction
      * Action constructor.
      *
      * @param Node                     $node
-     * @param GetTrytes\RequestFactory $getTrytesFactory
+     * @param GetTrytes\ActionFactory $getTrytesFactory
      * @param KerlFactory              $kerlFactory
      * @param CurlFactory              $curlFactory
      */
-    public function __construct(Node $node, GetTrytes\RequestFactory $getTrytesFactory, KerlFactory $kerlFactory, CurlFactory $curlFactory)
+    public function __construct(Node $node, GetTrytes\ActionFactory $getTrytesFactory, KerlFactory $kerlFactory, CurlFactory $curlFactory)
     {
         $this->kerlFactory = $kerlFactory;
         $this->curlFactory = $curlFactory;

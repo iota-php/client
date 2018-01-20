@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Techworker\IOTA\Tests\RemoteApi;
 
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\GetNeighbors\Request;
-use Techworker\IOTA\RemoteApi\Commands\GetNeighbors\Response;
+use Techworker\IOTA\RemoteApi\Actions\GetNeighbors\Action;
+use Techworker\IOTA\RemoteApi\Actions\GetNeighbors\Result;
 use Techworker\IOTA\Type\Neighbor;
 
 /**
@@ -28,7 +28,7 @@ class GetNeighborsTest extends AbstractApiTestCase
         $expected = [
             'command' => 'getNeighbors',
         ];
-        static::assertEquals($expected, $this->request->jsonSerialize());
+        static::assertEquals($expected, $this->action->jsonSerialize());
     }
 
     public function testResponse()
@@ -37,7 +37,7 @@ class GetNeighborsTest extends AbstractApiTestCase
         $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
-        $response = $this->request->execute();
+        $response = $this->action->execute();
 
         static::assertInstanceOf(Neighbor::class, $response->getNeighbors()[0]);
         static::assertInstanceOf(Neighbor::class, $response->getNeighbors()[1]);
@@ -68,9 +68,9 @@ class GetNeighborsTest extends AbstractApiTestCase
         ];
     }
 
-    protected function initValidRequest()
+    protected function initValidAction()
     {
         $this->markTestSkipped('TODO');
-        $this->request = new Request($this->httpClient, new Node());
+        $this->action = new Action($this->httpClient, new Node());
     }
 }

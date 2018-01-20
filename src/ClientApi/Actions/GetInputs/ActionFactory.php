@@ -18,7 +18,7 @@ use Techworker\IOTA\ClientApi\Actions\GetAddresses;
 use Techworker\IOTA\ClientApi\Actions\GetNewAddress;
 use Techworker\IOTA\ClientApi\FactoryInterface;
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\GetBalances;
+use Techworker\IOTA\RemoteApi\Actions\GetBalances;
 
 /**
  * Class ActionFactory.
@@ -40,7 +40,7 @@ class ActionFactory extends AbstractFactory implements FactoryInterface
             $node,
             $this->container->get(GetAddresses\ActionFactory::class),
             $this->container->get(GetNewAddress\ActionFactory::class),
-            $this->container->get(GetBalances\RequestFactory::class)
+            $this->container->get(GetBalances\ActionFactory::class)
         );
     }
 }

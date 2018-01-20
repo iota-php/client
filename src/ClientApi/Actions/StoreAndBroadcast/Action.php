@@ -16,8 +16,8 @@ namespace Techworker\IOTA\ClientApi\Actions\StoreAndBroadcast;
 use Techworker\IOTA\ClientApi\AbstractAction;
 use Techworker\IOTA\ClientApi\VoidResult;
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\BroadcastTransactions;
-use Techworker\IOTA\RemoteApi\Commands\StoreTransactions;
+use Techworker\IOTA\RemoteApi\Actions\BroadcastTransactions;
+use Techworker\IOTA\RemoteApi\Actions\StoreTransactions;
 use Techworker\IOTA\Type\Transaction;
 use Techworker\IOTA\Type\Trytes;
 use Techworker\IOTA\Util\SerializeUtil;
@@ -27,8 +27,8 @@ use Techworker\IOTA\Util\SerializeUtil;
  */
 class Action extends AbstractAction
 {
-    use StoreTransactions\RequestTrait,
-        BroadcastTransactions\RequestTrait;
+    use StoreTransactions\ActionTrait,
+        BroadcastTransactions\ActionTrait;
 
     /**
      * Trytes from an attach process.
@@ -41,13 +41,13 @@ class Action extends AbstractAction
      * Action constructor.
      *
      * @param Node                                 $node
-     * @param StoreTransactions\RequestFactory     $storeTransactionsFactory
-     * @param BroadcastTransactions\RequestFactory $broadcastTransactionsFactory
+     * @param StoreTransactions\ActionFactory     $storeTransactionsFactory
+     * @param BroadcastTransactions\ActionFactory $broadcastTransactionsFactory
      */
     public function __construct(
         Node $node,
-                                StoreTransactions\RequestFactory $storeTransactionsFactory,
-                                BroadcastTransactions\RequestFactory $broadcastTransactionsFactory
+                                StoreTransactions\ActionFactory $storeTransactionsFactory,
+                                BroadcastTransactions\ActionFactory $broadcastTransactionsFactory
     ) {
         parent::__construct($node);
         $this->setStoreTransactionsFactory($storeTransactionsFactory);
