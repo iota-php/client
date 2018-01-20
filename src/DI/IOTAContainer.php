@@ -20,6 +20,7 @@ use Http\Discovery\HttpAsyncClientDiscovery;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\MessageFactory;
+use IOTA\Client;
 use Psr\Container\ContainerInterface;
 use IOTA\ClientApi\Actions\BroadcastBundle;
 use IOTA\ClientApi\Actions\FindTransactionObjects;
@@ -247,6 +248,10 @@ class IOTAContainer implements ContainerInterface
 
         $this->entries[BroadcastBundle\ActionFactory::class] = function () {
             return new BroadcastBundle\ActionFactory($this);
+        };
+
+        $this->entries[Client::class] = function () use ($options) {
+            return new Client($this->get(RemoteApi::class), $this->get(ClientApi::class), $options['nodes']);
         };
     }
 
