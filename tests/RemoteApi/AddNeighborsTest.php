@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Techworker\IOTA\Tests\RemoteApi;
 
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\AddNeighbors\Request;
-use Techworker\IOTA\RemoteApi\Commands\AddNeighbors\Response;
+use Techworker\IOTA\RemoteApi\Actions\AddNeighbors\Action;
+use Techworker\IOTA\RemoteApi\Actions\AddNeighbors\Result;
 
 /**
  * @coversNothing
@@ -24,19 +24,19 @@ class AddNeighborsTest extends AbstractApiTestCase
 {
     public function testRequestSerialization()
     {
-        $this->request->setNeighborUris(['udp://0.0.0.0:14265', 'udp://1.1.1.1:14265']);
+        $this->action->setNeighborUris(['udp://0.0.0.0:14265', 'udp://1.1.1.1:14265']);
         $expected = [
             'command' => 'addNeighbors',
             'uris' => ['udp://0.0.0.0:14265', 'udp://1.1.1.1:14265'],
         ];
-        static::assertEquals($expected, $this->request->jsonSerialize());
+        static::assertEquals($expected, $this->action->jsonSerialize());
     }
 
     public function testRequestInvalidUri()
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $request = new Request($this->httpClient, new Node());
+        $request = new Action($this->httpClient, new Node());
         $request->setNeighborUris(['abc']);
     }
 
@@ -46,7 +46,7 @@ class AddNeighborsTest extends AbstractApiTestCase
         $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
-        $request = new Request($this->httpClient, new Node());
+        $request = new Action($this->httpClient, new Node());
         $request->addNeighborUri('udp://0.0.0.0:14265');
 
         $response = $request->execute();
@@ -61,9 +61,9 @@ class AddNeighborsTest extends AbstractApiTestCase
         ];
     }
 
-    protected function initValidRequest()
+    protected function initValidAction()
     {
         $this->markTestSkipped('TODO');
-        $this->request = new Request($this->httpClient, new Node());
+        $this->action = new Action($this->httpClient, new Node());
     }
 }

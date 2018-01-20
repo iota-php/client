@@ -18,8 +18,8 @@ use Techworker\IOTA\ClientApi\Actions\StoreAndBroadcast;
 use Techworker\IOTA\ClientApi\FactoryInterface;
 use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\AttachToTangle;
-use Techworker\IOTA\RemoteApi\Commands\GetTransactionsToApprove;
+use Techworker\IOTA\RemoteApi\Actions\AttachToTangle;
+use Techworker\IOTA\RemoteApi\Actions\GetTransactionsToApprove;
 
 /**
  * Class ActionFactory.
@@ -39,8 +39,8 @@ class ActionFactory extends AbstractFactory implements FactoryInterface
     {
         return new Action(
             $node,
-            $this->container->get(GetTransactionsToApprove\RequestFactory::class),
-            $this->container->get(AttachToTangle\RequestFactory::class),
+            $this->container->get(GetTransactionsToApprove\ActionFactory::class),
+            $this->container->get(AttachToTangle\ActionFactory::class),
             $this->container->get(StoreAndBroadcast\ActionFactory::class),
             $this->container->get(CurlFactory::class)
         );

@@ -16,8 +16,8 @@ namespace Techworker\IOTA\ClientApi\Actions\GetLatestInclusion;
 use Techworker\IOTA\ClientApi\AbstractAction;
 use Techworker\IOTA\ClientApi\AbstractResult;
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\GetInclusionStates;
-use Techworker\IOTA\RemoteApi\Commands\GetNodeInfo;
+use Techworker\IOTA\RemoteApi\Actions\GetInclusionStates;
+use Techworker\IOTA\RemoteApi\Actions\GetNodeInfo;
 use Techworker\IOTA\Type\TransactionHash;
 use Techworker\IOTA\Util\SerializeUtil;
 
@@ -26,8 +26,8 @@ use Techworker\IOTA\Util\SerializeUtil;
  */
 class Action extends AbstractAction
 {
-    use GetNodeInfo\RequestTrait,
-        GetInclusionStates\RequestTrait;
+    use GetNodeInfo\ActionTrait,
+        GetInclusionStates\ActionTrait;
 
     /**
      * A list of transaction hashes to get the inclusion state for.
@@ -40,13 +40,13 @@ class Action extends AbstractAction
      * Action constructor.
      *
      * @param Node                              $node
-     * @param GetNodeInfo\RequestFactory        $getNodeInfoFactory
-     * @param GetInclusionStates\RequestFactory $getInclusionStatesFactory
+     * @param GetNodeInfo\ActionFactory        $getNodeInfoFactory
+     * @param GetInclusionStates\ActionFactory $getInclusionStatesFactory
      */
     public function __construct(
         Node $node,
-                                GetNodeInfo\RequestFactory $getNodeInfoFactory,
-                                GetInclusionStates\RequestFactory $getInclusionStatesFactory
+                                GetNodeInfo\ActionFactory $getNodeInfoFactory,
+                                GetInclusionStates\ActionFactory $getInclusionStatesFactory
     ) {
         parent::__construct($node);
 

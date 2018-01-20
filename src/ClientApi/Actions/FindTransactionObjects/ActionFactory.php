@@ -17,7 +17,7 @@ use Techworker\IOTA\AbstractFactory;
 use Techworker\IOTA\ClientApi\Actions\GetTransactionObjects;
 use Techworker\IOTA\ClientApi\FactoryInterface;
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\FindTransactions;
+use Techworker\IOTA\RemoteApi\Actions\FindTransactions;
 
 /**
  * Class ActionFactory.
@@ -37,7 +37,7 @@ class ActionFactory extends AbstractFactory implements FactoryInterface
     {
         return new Action(
             $node,
-            $this->container->get(FindTransactions\RequestFactory::class),
+            $this->container->get(FindTransactions\ActionFactory::class),
             $this->container->get(GetTransactionObjects\ActionFactory::class)
         );
     }

@@ -14,20 +14,20 @@ declare(strict_types=1);
 namespace Techworker\IOTA\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Techworker\IOTA\RemoteApi\Commands\AddNeighbors;
-use Techworker\IOTA\RemoteApi\Commands\AttachToTangle;
-use Techworker\IOTA\RemoteApi\Commands\BroadcastTransactions;
-use Techworker\IOTA\RemoteApi\Commands\FindTransactions;
-use Techworker\IOTA\RemoteApi\Commands\GetBalances;
-use Techworker\IOTA\RemoteApi\Commands\GetInclusionStates;
-use Techworker\IOTA\RemoteApi\Commands\GetNeighbors;
-use Techworker\IOTA\RemoteApi\Commands\GetNodeInfo;
-use Techworker\IOTA\RemoteApi\Commands\GetTips;
-use Techworker\IOTA\RemoteApi\Commands\GetTransactionsToApprove;
-use Techworker\IOTA\RemoteApi\Commands\GetTrytes;
-use Techworker\IOTA\RemoteApi\Commands\InterruptAttachingToTangle;
-use Techworker\IOTA\RemoteApi\Commands\RemoveNeighbors;
-use Techworker\IOTA\RemoteApi\Commands\StoreTransactions;
+use Techworker\IOTA\RemoteApi\Actions\AddNeighbors;
+use Techworker\IOTA\RemoteApi\Actions\AttachToTangle;
+use Techworker\IOTA\RemoteApi\Actions\BroadcastTransactions;
+use Techworker\IOTA\RemoteApi\Actions\FindTransactions;
+use Techworker\IOTA\RemoteApi\Actions\GetBalances;
+use Techworker\IOTA\RemoteApi\Actions\GetInclusionStates;
+use Techworker\IOTA\RemoteApi\Actions\GetNeighbors;
+use Techworker\IOTA\RemoteApi\Actions\GetNodeInfo;
+use Techworker\IOTA\RemoteApi\Actions\GetTips;
+use Techworker\IOTA\RemoteApi\Actions\GetTransactionsToApprove;
+use Techworker\IOTA\RemoteApi\Actions\GetTrytes;
+use Techworker\IOTA\RemoteApi\Actions\InterruptAttachingToTangle;
+use Techworker\IOTA\RemoteApi\Actions\RemoveNeighbors;
+use Techworker\IOTA\RemoteApi\Actions\StoreTransactions;
 use Techworker\IOTA\Type\TransactionHash;
 
 /**

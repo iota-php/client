@@ -22,7 +22,7 @@ use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
 use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
 use Techworker\IOTA\Cryptography\HMAC;
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\GetBalances;
+use Techworker\IOTA\RemoteApi\Actions\GetBalances;
 
 /**
  * Class ActionFactory.
@@ -44,7 +44,7 @@ class ActionFactory extends AbstractFactory implements FactoryInterface
             $node,
             $this->container->get(GetNewAddress\ActionFactory::class),
             $this->container->get(GetInputs\ActionFactory::class),
-            $this->container->get(GetBalances\RequestFactory::class),
+            $this->container->get(GetBalances\ActionFactory::class),
             $this->container->get(SendTrytes\ActionFactory::class),
             $this->container->get(KerlFactory::class),
             $this->container->get(CurlFactory::class),

@@ -17,7 +17,7 @@ use Techworker\IOTA\ClientApi\AbstractAction;
 use Techworker\IOTA\ClientApi\AbstractResult;
 use Techworker\IOTA\ClientApi\Actions\GetTransactionObjects;
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\FindTransactions;
+use Techworker\IOTA\RemoteApi\Actions\FindTransactions;
 use Techworker\IOTA\Type\Address;
 use Techworker\IOTA\Type\Approvee;
 use Techworker\IOTA\Type\BundleHash;
@@ -30,7 +30,7 @@ use Techworker\IOTA\Util\SerializeUtil;
  */
 class Action extends AbstractAction
 {
-    use FindTransactions\RequestTrait,
+    use FindTransactions\ActionTrait,
         GetTransactionObjects\ActionTrait;
 
     /**
@@ -65,12 +65,12 @@ class Action extends AbstractAction
      * Action constructor.
      *
      * @param Node                                $node
-     * @param FindTransactions\RequestFactory     $findTransactionsFactory
+     * @param FindTransactions\ActionFactory     $findTransactionsFactory
      * @param GetTransactionObjects\ActionFactory $getTransactionObjectsFactory
      */
     public function __construct(
         Node $node,
-                                FindTransactions\RequestFactory $findTransactionsFactory,
+                                FindTransactions\ActionFactory $findTransactionsFactory,
                                 GetTransactionObjects\ActionFactory $getTransactionObjectsFactory
     ) {
         parent::__construct($node);

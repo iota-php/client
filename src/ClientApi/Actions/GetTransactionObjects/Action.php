@@ -17,7 +17,7 @@ use Techworker\IOTA\ClientApi\AbstractAction;
 use Techworker\IOTA\ClientApi\AbstractResult;
 use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\GetTrytes;
+use Techworker\IOTA\RemoteApi\Actions\GetTrytes;
 use Techworker\IOTA\Type\Transaction;
 use Techworker\IOTA\Type\TransactionHash;
 use Techworker\IOTA\Util\SerializeUtil;
@@ -27,7 +27,7 @@ use Techworker\IOTA\Util\SerializeUtil;
  */
 class Action extends AbstractAction
 {
-    use GetTrytes\RequestTrait;
+    use GetTrytes\ActionTrait;
 
     /**
      * The list of transaction hashes to collect.
@@ -47,10 +47,10 @@ class Action extends AbstractAction
      * Action constructor.
      *
      * @param Node                     $node
-     * @param GetTrytes\RequestFactory $getTrytesFactory
+     * @param GetTrytes\ActionFactory $getTrytesFactory
      * @param CurlFactory              $curlFactory
      */
-    public function __construct(Node $node, GetTrytes\RequestFactory $getTrytesFactory, CurlFactory $curlFactory)
+    public function __construct(Node $node, GetTrytes\ActionFactory $getTrytesFactory, CurlFactory $curlFactory)
     {
         parent::__construct($node);
         $this->setGetTrytesFactory($getTrytesFactory);

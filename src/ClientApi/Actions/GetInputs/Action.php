@@ -17,7 +17,7 @@ use Techworker\IOTA\ClientApi\AbstractAction;
 use Techworker\IOTA\ClientApi\Actions\GetAddresses;
 use Techworker\IOTA\ClientApi\Actions\GetNewAddress;
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\GetBalances;
+use Techworker\IOTA\RemoteApi\Actions\GetBalances;
 use Techworker\IOTA\Type\Input;
 use Techworker\IOTA\Type\Iota;
 use Techworker\IOTA\Type\SecurityLevel;
@@ -31,7 +31,7 @@ class Action extends AbstractAction
 {
     use GetAddresses\ActionTrait,
         GetNewAddress\ActionTrait,
-        GetBalances\RequestTrait;
+        GetBalances\ActionTrait;
 
     /**
      * @var Seed
@@ -69,13 +69,13 @@ class Action extends AbstractAction
      * @param Node                        $node
      * @param GetAddresses\ActionFactory  $getAddressesFactory
      * @param GetNewAddress\ActionFactory $getNewAddressFactory
-     * @param GetBalances\RequestFactory  $getBalancesFactory
+     * @param GetBalances\ActionFactory  $getBalancesFactory
      */
     public function __construct(
         Node $node,
                                 GetAddresses\ActionFactory $getAddressesFactory,
                                 GetNewAddress\ActionFactory $getNewAddressFactory,
-                                GetBalances\RequestFactory $getBalancesFactory
+                                GetBalances\ActionFactory $getBalancesFactory
     ) {
         parent::__construct($node);
         $this->security = SecurityLevel::LEVEL_2();

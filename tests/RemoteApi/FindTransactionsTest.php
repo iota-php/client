@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Techworker\IOTA\Tests\RemoteApi;
 
-use Techworker\IOTA\RemoteApi\Commands\FindTransactions\Request;
-use Techworker\IOTA\RemoteApi\Commands\FindTransactions\Response;
+use Techworker\IOTA\RemoteApi\Actions\FindTransactions\Action;
+use Techworker\IOTA\RemoteApi\Actions\FindTransactions\Result;
 use Techworker\IOTA\Type\Address;
 use Techworker\IOTA\Type\Approvee;
 use Techworker\IOTA\Type\BundleHash;
@@ -35,7 +35,7 @@ class FindTransactionsTest extends AbstractApiTestCase
             'tags' => [$this->generateStaticTryte(3, 4), $this->generateStaticTryte(3, 5)],
             'approvees' => [$this->generateStaticTryte(3, 6), $this->generateStaticTryte(3, 7)],
         ];
-        static::assertEquals($expected, $this->request->jsonSerialize());
+        static::assertEquals($expected, $this->action->jsonSerialize());
     }
 
     public function testRequestSerializationOnlyBundles()
@@ -44,7 +44,7 @@ class FindTransactionsTest extends AbstractApiTestCase
             'command' => 'findTransactions',
             'bundles' => [$this->generateStaticTryte(81, 0)],
         ];
-        $request = new Request(
+        $request = new Action(
             [new BundleHash($this->generateStaticTryte(81, 0))]
         );
         static::assertEquals($expected, $request->jsonSerialize());
@@ -56,7 +56,7 @@ class FindTransactionsTest extends AbstractApiTestCase
             'command' => 'findTransactions',
             'addresses' => [$this->generateStaticTryte(81, 0)],
         ];
-        $request = new Request(
+        $request = new Action(
             [],
             [new Address($this->generateStaticTryte(81, 0))]
         );
@@ -70,7 +70,7 @@ class FindTransactionsTest extends AbstractApiTestCase
             'tags' => [$this->generateStaticTryte(81, 0)],
         ];
 
-        $request = new Request(
+        $request = new Action(
             [],
             [],
             [new Tag($this->generateStaticTryte(81, 0))]
@@ -84,7 +84,7 @@ class FindTransactionsTest extends AbstractApiTestCase
             'command' => 'findTransactions',
             'approvees' => [$this->generateStaticTryte(81, 0)],
         ];
-        $request = new Request(
+        $request = new Action(
             [],
             [],
             [],
@@ -97,28 +97,28 @@ class FindTransactionsTest extends AbstractApiTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        new Request(['test']);
+        new Action(['test']);
     }
 
     public function testRequestInvalidAddress()
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        new Request([], ['test']);
+        new Action([], ['test']);
     }
 
     public function testRequestInvalidTags()
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        new Request([], [], ['test']);
+        new Action([], [], ['test']);
     }
 
     public function testRequestInvalidApprovees()
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        new Request([], [], [], ['test']);
+        new Action([], [], [], ['test']);
     }
 
     public function testResponse()
@@ -128,7 +128,7 @@ class FindTransactionsTest extends AbstractApiTestCase
         $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
-        $response = $this->httpClient->commandRequest($this->request, new Node());
+        $response = $this->httpClient->commandRequest($this->action, new Node());
 
         static::assertCount(2, $response->getTransactionHashes());
         static::assertInstanceOf(TransactionHash::class, $response->getTransactionHashes()[0]);
@@ -144,7 +144,7 @@ class FindTransactionsTest extends AbstractApiTestCase
         ];
     }
 
-    protected function initValidRequest()
+    protected function initValidAction()
     {
         $this->markTestSkipped('TODO');
         $bundles = [
@@ -164,7 +164,7 @@ class FindTransactionsTest extends AbstractApiTestCase
             new Approvee($this->generateStaticTryte(3, 7)),
         ];
 
-        $this->request = new Request(
+        $this->action = new Action(
             $bundles,
             $addresses,
             $tags,

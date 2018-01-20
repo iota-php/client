@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Techworker\IOTA\Tests\RemoteApi;
 
-use Techworker\IOTA\RemoteApi\Commands\BroadcastTransactions\Request;
-use Techworker\IOTA\RemoteApi\Commands\BroadcastTransactions\Response;
+use Techworker\IOTA\RemoteApi\Actions\BroadcastTransactions\Action;
+use Techworker\IOTA\RemoteApi\Actions\BroadcastTransactions\Result;
 use Techworker\IOTA\Type\Trytes;
 
 /**
@@ -31,7 +31,7 @@ class BroadcastTransactionsTest extends AbstractApiTestCase
                 $this->generateStaticTryte(3, 1),
             ],
         ];
-        static::assertEquals($expected, $this->request->jsonSerialize());
+        static::assertEquals($expected, $this->action->jsonSerialize());
     }
 
     public function testResponse()
@@ -40,7 +40,7 @@ class BroadcastTransactionsTest extends AbstractApiTestCase
         $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
-        $response = $this->request->execute();
+        $response = $this->action->execute();
 
         static::assertInstanceOf(Response::class, $response);
     }
@@ -50,10 +50,10 @@ class BroadcastTransactionsTest extends AbstractApiTestCase
         return [];
     }
 
-    protected function initValidRequest()
+    protected function initValidAction()
     {
         $this->markTestSkipped('TODO');
-        $this->request = new Request(
+        $this->action = new Action(
             new Trytes($this->generateStaticTryte(3, 0)),
             new Trytes($this->generateStaticTryte(3, 1))
         );

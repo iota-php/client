@@ -13,6 +13,13 @@ declare(strict_types=1);
 
 namespace Techworker\IOTA\DI;
 
+use Http\Client\Common\PluginClient;
+use Http\Client\HttpAsyncClient;
+use Http\Client\HttpClient;
+use Http\Discovery\HttpAsyncClientDiscovery;
+use Http\Discovery\HttpClientDiscovery;
+use Http\Discovery\MessageFactoryDiscovery;
+use Http\Message\MessageFactory;
 use Psr\Container\ContainerInterface;
 use Techworker\IOTA\ClientApi\Actions\BroadcastBundle;
 use Techworker\IOTA\ClientApi\Actions\FindTransactionObjects;
@@ -37,26 +44,24 @@ use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
 use Techworker\IOTA\Cryptography\HMAC;
 use Techworker\IOTA\Cryptography\Keccak384\Keccak384Interface;
 use Techworker\IOTA\Cryptography\Keccak384\Korn;
-use Techworker\IOTA\Cryptography\Keccak384\NodeJS;
 use Techworker\IOTA\Cryptography\POW\CCurl;
 use Techworker\IOTA\Cryptography\POW\PowInterface;
-use Techworker\IOTA\RemoteApi\Commands\AddNeighbors;
-use Techworker\IOTA\RemoteApi\Commands\AttachToTangle;
-use Techworker\IOTA\RemoteApi\Commands\BroadcastTransactions;
-use Techworker\IOTA\RemoteApi\Commands\FindTransactions;
-use Techworker\IOTA\RemoteApi\Commands\GetBalances;
-use Techworker\IOTA\RemoteApi\Commands\GetInclusionStates;
-use Techworker\IOTA\RemoteApi\Commands\GetNeighbors;
-use Techworker\IOTA\RemoteApi\Commands\GetNodeInfo;
-use Techworker\IOTA\RemoteApi\Commands\GetTips;
-use Techworker\IOTA\RemoteApi\Commands\GetTransactionsToApprove;
-use Techworker\IOTA\RemoteApi\Commands\GetTrytes;
-use Techworker\IOTA\RemoteApi\Commands\InterruptAttachingToTangle;
-use Techworker\IOTA\RemoteApi\Commands\IsTailConsistent;
-use Techworker\IOTA\RemoteApi\Commands\RemoveNeighbors;
-use Techworker\IOTA\RemoteApi\Commands\StoreTransactions;
-use Techworker\IOTA\RemoteApi\HttpClient\GuzzleClient;
-use Techworker\IOTA\RemoteApi\HttpClient\HttpClientInterface;
+use Techworker\IOTA\RemoteApi\Actions\AddNeighbors;
+use Techworker\IOTA\RemoteApi\Actions\AttachToTangle;
+use Techworker\IOTA\RemoteApi\Actions\BroadcastTransactions;
+use Techworker\IOTA\RemoteApi\Actions\FindTransactions;
+use Techworker\IOTA\RemoteApi\Actions\GetBalances;
+use Techworker\IOTA\RemoteApi\Actions\GetInclusionStates;
+use Techworker\IOTA\RemoteApi\Actions\GetNeighbors;
+use Techworker\IOTA\RemoteApi\Actions\GetNodeInfo;
+use Techworker\IOTA\RemoteApi\Actions\GetTips;
+use Techworker\IOTA\RemoteApi\Actions\GetTransactionsToApprove;
+use Techworker\IOTA\RemoteApi\Actions\GetTrytes;
+use Techworker\IOTA\RemoteApi\Actions\InterruptAttachingToTangle;
+use Techworker\IOTA\RemoteApi\Actions\IsTailConsistent;
+use Techworker\IOTA\RemoteApi\Actions\RemoveNeighbors;
+use Techworker\IOTA\RemoteApi\Actions\StoreTransactions;
+use Techworker\IOTA\RemoteApi\NodeApiClient;
 use Techworker\IOTA\RemoteApi\RemoteApi;
 use Techworker\IOTA\Type\HMACKey;
 use Techworker\IOTA\Util\AddressUtil;
@@ -84,21 +89,21 @@ class IOTAContainer implements ContainerInterface
     public function __construct(array $options)
     {
         $factories = [
-            AddNeighbors\RequestFactory::class,
-            AttachToTangle\RequestFactory::class,
-            BroadcastTransactions\RequestFactory::class,
-            FindTransactions\RequestFactory::class,
-            GetBalances\RequestFactory::class,
-            GetInclusionStates\RequestFactory::class,
-            GetNeighbors\RequestFactory::class,
-            GetNodeInfo\RequestFactory::class,
-            GetTips\RequestFactory::class,
-            GetTransactionsToApprove\RequestFactory::class,
-            GetTrytes\RequestFactory::class,
-            InterruptAttachingToTangle\RequestFactory::class,
-            IsTailConsistent\RequestFactory::class,
-            RemoveNeighbors\RequestFactory::class,
-            StoreTransactions\RequestFactory::class,
+            AddNeighbors\ActionFactory::class,
+            AttachToTangle\ActionFactory::class,
+            BroadcastTransactions\ActionFactory::class,
+            FindTransactions\ActionFactory::class,
+            GetBalances\ActionFactory::class,
+            GetInclusionStates\ActionFactory::class,
+            GetNeighbors\ActionFactory::class,
+            GetNodeInfo\ActionFactory::class,
+            GetTips\ActionFactory::class,
+            GetTransactionsToApprove\ActionFactory::class,
+            GetTrytes\ActionFactory::class,
+            InterruptAttachingToTangle\ActionFactory::class,
+            IsTailConsistent\ActionFactory::class,
+            RemoveNeighbors\ActionFactory::class,
+            StoreTransactions\ActionFactory::class,
             BroadcastBundle\ActionFactory::class,
             FindTransactionObjects\ActionFactory::class,
             GetAccountData\ActionFactory::class,
@@ -124,9 +129,42 @@ class IOTAContainer implements ContainerInterface
             };
         }
 
-        // the http client used.
-        $this->entries[HttpClientInterface::class] = function () {
-            return new GuzzleClient();
+        // httplug
+        $this->entries[MessageFactory::class] = function() use($options) : MessageFactory {
+            if(isset($options['http'][MessageFactory::class])) {
+                return $options['http'][MessageFactory::class];
+            }
+            return MessageFactoryDiscovery::find();
+        };
+
+        $this->entries[HttpAsyncClient::class] = function() use($options) : HttpAsyncClient {
+            if(isset($options['http'][HttpAsyncClient::class])) {
+                return $options[HttpAsyncClient::class];
+            }
+            return new PluginClient(
+                HttpAsyncClientDiscovery::find(),
+                $options['http']['plugins'] ?? [],
+                $options['http']['options'] ?? []
+            );
+        };
+
+        $this->entries[HttpClient::class] = function() use($options) : HttpClient {
+            if(isset($options['http'][HttpClient::class])) {
+                return $options[HttpClient::class];
+            }
+            return new PluginClient(
+                HttpClientDiscovery::find(),
+                $options['http']['plugins'] ?? [],
+                $options['http']['options'] ?? []
+            );
+        };
+
+        $this->entries[NodeApiClient::class] = function() : NodeApiClient{
+            return new NodeApiClient(
+                $this->get(HttpClient::class),
+                $this->get(HttpAsyncClient::class),
+                $this->get(MessageFactory::class)
+            );
         };
 
         // the keccak 384 implementation
@@ -189,21 +227,21 @@ class IOTAContainer implements ContainerInterface
 
         $this->entries[RemoteApi::class] = function () {
             return new RemoteApi(
-                $this->get(AddNeighbors\RequestFactory::class),
-                $this->get(AttachToTangle\RequestFactory::class),
-                $this->get(BroadcastTransactions\RequestFactory::class),
-                $this->get(FindTransactions\RequestFactory::class),
-                $this->get(GetBalances\RequestFactory::class),
-                $this->get(GetInclusionStates\RequestFactory::class),
-                $this->get(GetNeighbors\RequestFactory::class),
-                $this->get(GetNodeInfo\RequestFactory::class),
-                $this->get(GetTips\RequestFactory::class),
-                $this->get(GetTransactionsToApprove\RequestFactory::class),
-                $this->get(GetTrytes\RequestFactory::class),
-                $this->get(InterruptAttachingToTangle\RequestFactory::class),
-                $this->get(IsTailConsistent\RequestFactory::class),
-                $this->get(RemoveNeighbors\RequestFactory::class),
-                $this->get(StoreTransactions\RequestFactory::class)
+                $this->get(AddNeighbors\ActionFactory::class),
+                $this->get(AttachToTangle\ActionFactory::class),
+                $this->get(BroadcastTransactions\ActionFactory::class),
+                $this->get(FindTransactions\ActionFactory::class),
+                $this->get(GetBalances\ActionFactory::class),
+                $this->get(GetInclusionStates\ActionFactory::class),
+                $this->get(GetNeighbors\ActionFactory::class),
+                $this->get(GetNodeInfo\ActionFactory::class),
+                $this->get(GetTips\ActionFactory::class),
+                $this->get(GetTransactionsToApprove\ActionFactory::class),
+                $this->get(GetTrytes\ActionFactory::class),
+                $this->get(InterruptAttachingToTangle\ActionFactory::class),
+                $this->get(IsTailConsistent\ActionFactory::class),
+                $this->get(RemoveNeighbors\ActionFactory::class),
+                $this->get(StoreTransactions\ActionFactory::class)
             );
         };
 

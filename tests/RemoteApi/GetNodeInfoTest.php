@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Techworker\IOTA\Tests\RemoteApi;
 
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\GetNodeInfo\Request;
-use Techworker\IOTA\RemoteApi\Commands\GetNodeInfo\Response;
+use Techworker\IOTA\RemoteApi\Actions\GetNodeInfo\Action;
+use Techworker\IOTA\RemoteApi\Actions\GetNodeInfo\Result;
 
 /**
  * @coversNothing
@@ -27,7 +27,7 @@ class GetNodeInfoTest extends AbstractApiTestCase
         $expected = [
             'command' => 'getNodeInfo',
         ];
-        static::assertEquals($expected, $this->request->jsonSerialize());
+        static::assertEquals($expected, $this->action->jsonSerialize());
     }
 
     public function testResponse()
@@ -36,7 +36,7 @@ class GetNodeInfoTest extends AbstractApiTestCase
         $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
-        $response = $this->request->execute();
+        $response = $this->action->execute();
 
         static::assertInstanceOf(Response::class, $response);
         static::assertEquals('IRI', $response->getAppName());
@@ -77,9 +77,9 @@ class GetNodeInfoTest extends AbstractApiTestCase
         ];
     }
 
-    protected function initValidRequest()
+    protected function initValidAction()
     {
         $this->markTestSkipped('TODO');
-        $this->request = new Request($this->httpClient, new Node());
+        $this->action = new Action($this->httpClient, new Node());
     }
 }

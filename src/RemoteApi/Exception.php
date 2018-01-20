@@ -23,19 +23,20 @@ class Exception extends \DomainException
     /**
      * The response that led to the exception.
      *
-     * @var AbstractResponse
+     * @var AbstractResult
      */
     protected $response;
 
     /**
      * Exception constructor.
      *
-     * @param AbstractResponse $response
+     * @param AbstractResult $response
      */
-    public function __construct(AbstractResponse $response)
+    public function __construct(AbstractResult $response)
     {
         $this->response = $response;
         $raw = $response->getRawData();
+        // TODO: maybe add error code
         $message = $raw['message'] ?? 'Unknown api error';
         if (isset($raw['error'])) {
             $message = $this->code.': '.$raw['error'];

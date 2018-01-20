@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Techworker\IOTA\Tests\RemoteApi;
 
-use Techworker\IOTA\RemoteApi\Commands\GetTrytes\Request;
-use Techworker\IOTA\RemoteApi\Commands\GetTrytes\Response;
+use Techworker\IOTA\RemoteApi\Actions\GetTrytes\Action;
+use Techworker\IOTA\RemoteApi\Actions\GetTrytes\Result;
 use Techworker\IOTA\Type\TransactionHash;
 use Techworker\IOTA\Type\Trytes;
 
@@ -32,7 +32,7 @@ class GetTrytesTest extends AbstractApiTestCase
                 $this->generateStaticTryte(81, 1),
             ],
         ];
-        static::assertEquals($expected, $this->request->jsonSerialize());
+        static::assertEquals($expected, $this->action->jsonSerialize());
     }
 
     public function testResponse()
@@ -41,7 +41,7 @@ class GetTrytesTest extends AbstractApiTestCase
         $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
-        $response = $this->request->execute();
+        $response = $this->action->execute();
 
         static::assertCount(2, $response->getTransactions());
         static::assertInstanceOf(Trytes::class, $response->getTransactions()[0]);
@@ -57,10 +57,10 @@ class GetTrytesTest extends AbstractApiTestCase
         ];
     }
 
-    protected function initValidRequest()
+    protected function initValidAction()
     {
         $this->markTestSkipped('TODO');
-        $this->request = new Request(
+        $this->action = new Action(
             new TransactionHash($this->generateStaticTryte(81, 0)),
             new TransactionHash($this->generateStaticTryte(81, 1))
         );

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Techworker\IOTA\Tests\RemoteApi;
 
-use Techworker\IOTA\RemoteApi\Commands\RemoveNeighbors\Request;
-use Techworker\IOTA\RemoteApi\Commands\RemoveNeighbors\Response;
+use Techworker\IOTA\RemoteApi\Actions\RemoveNeighbors\Action;
+use Techworker\IOTA\RemoteApi\Actions\RemoveNeighbors\Result;
 
 /**
  * @coversNothing
@@ -27,14 +27,14 @@ class RemoveNeighborsTest extends AbstractApiTestCase
             'command' => 'removeNeighbors',
             'uris' => ['udp://0.0.0.0:14265', 'udp://1.1.1.1:14265'],
         ];
-        static::assertEquals($expected, $this->request->jsonSerialize());
+        static::assertEquals($expected, $this->action->jsonSerialize());
     }
 
     public function testRequestInvalidUri()
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $request = new Request('abc');
+        $request = new Action('abc');
     }
 
     public function testResponse()
@@ -43,7 +43,7 @@ class RemoveNeighborsTest extends AbstractApiTestCase
         $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
-        $response = $this->request->execute();
+        $response = $this->action->execute();
 
         static::assertEquals(10, $response->getRemovedNeighbors());
     }
@@ -55,9 +55,9 @@ class RemoveNeighborsTest extends AbstractApiTestCase
         ];
     }
 
-    protected function initValidRequest()
+    protected function initValidAction()
     {
         $this->markTestSkipped('TODO');
-        $this->request = new Request('udp://0.0.0.0:14265', 'udp://1.1.1.1:14265');
+        $this->action = new Action('udp://0.0.0.0:14265', 'udp://1.1.1.1:14265');
     }
 }

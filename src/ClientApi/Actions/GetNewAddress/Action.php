@@ -16,7 +16,7 @@ namespace Techworker\IOTA\ClientApi\Actions\GetNewAddress;
 use Techworker\IOTA\ClientApi\AbstractAction;
 use Techworker\IOTA\ClientApi\AbstractResult;
 use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Commands\FindTransactions;
+use Techworker\IOTA\RemoteApi\Actions\FindTransactions;
 use Techworker\IOTA\Trace;
 use Techworker\IOTA\Type\Address;
 use Techworker\IOTA\Type\SecurityLevel;
@@ -30,7 +30,7 @@ use Techworker\IOTA\Util\AddressUtil;
  */
 class Action extends AbstractAction
 {
-    use FindTransactions\RequestTrait;
+    use FindTransactions\ActionTrait;
 
     /**
      * The seed to derive the addresses from.
@@ -72,12 +72,12 @@ class Action extends AbstractAction
      *
      * @param Node                            $node
      * @param AddressUtil                     $addressUtil
-     * @param FindTransactions\RequestFactory $findTransactionsFactory
+     * @param FindTransactions\ActionFactory $findTransactionsFactory
      */
     public function __construct(
         Node $node,
                                 AddressUtil $addressUtil,
-                                FindTransactions\RequestFactory $findTransactionsFactory
+                                FindTransactions\ActionFactory $findTransactionsFactory
     ) {
         parent::__construct($node);
         $this->addressUtil = $addressUtil;

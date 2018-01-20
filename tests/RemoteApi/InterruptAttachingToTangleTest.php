@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Techworker\IOTA\Tests\RemoteApi;
 
-use Techworker\IOTA\RemoteApi\Commands\InterruptAttachingToTangle\Request;
-use Techworker\IOTA\RemoteApi\Commands\InterruptAttachingToTangle\Response;
+use Techworker\IOTA\RemoteApi\Actions\InterruptAttachingToTangle\Action;
+use Techworker\IOTA\RemoteApi\Actions\InterruptAttachingToTangle\Result;
 
 /**
  * @coversNothing
@@ -26,7 +26,7 @@ class InterruptAttachingToTangleTest extends AbstractApiTestCase
         $expected = [
             'command' => 'interruptAttachingToTangle',
         ];
-        static::assertEquals($expected, $this->request->jsonSerialize());
+        static::assertEquals($expected, $this->action->jsonSerialize());
     }
 
     public function testResponse()
@@ -35,7 +35,7 @@ class InterruptAttachingToTangleTest extends AbstractApiTestCase
         $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
 
         /** @var Response $response */
-        $response = $this->request->execute();
+        $response = $this->action->execute();
         static::assertInstanceOf(Response::class, $response);
     }
 
@@ -44,9 +44,9 @@ class InterruptAttachingToTangleTest extends AbstractApiTestCase
         return [];
     }
 
-    protected function initValidRequest()
+    protected function initValidAction()
     {
         $this->markTestSkipped('TODO');
-        $this->request = new Request();
+        $this->action = new Action();
     }
 }
