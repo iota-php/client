@@ -1,5 +1,7 @@
 # IOTA-PHP
 
+[![Build Status](https://travis-ci.org/Techworker/iota-php.svg?branch=master)](https://travis-ci.org/Techworker/iota-php)
+
 This project is an unofficial IOTA client library implementation in PHP.
 
 To getting started with IOTA follow this link https://learn.iota.org/
