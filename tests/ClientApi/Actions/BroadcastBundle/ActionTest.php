@@ -25,8 +25,6 @@ class ActionTest extends AbstractActionTest
 {
     public function testSetter()
     {
-
-        $this->markTestSkipped('TODO');
         $action = new BroadcastBundle\Action(
             DummyData::getNode(),
             $this->caMocks->getBundleFactory(),

@@ -41,14 +41,14 @@ class Action extends AbstractAction
     /**
      * Action constructor.
      *
-     * @param Node                                 $node
-     * @param GetBundle\ActionFactory              $getBundleFactory
+     * @param Node $node
+     * @param GetBundle\ActionFactory $getBundleFactory
      * @param BroadcastTransactions\RequestFactory $broadcastTransactionsFactory
      */
     public function __construct(
         Node $node,
-                                GetBundle\ActionFactory $getBundleFactory,
-                                BroadcastTransactions\RequestFactory $broadcastTransactionsFactory
+        GetBundle\ActionFactory $getBundleFactory,
+        BroadcastTransactions\RequestFactory $broadcastTransactionsFactory
     ) {
         $this->setGetBundleFactory($getBundleFactory);
         $this->setBroadcastTransactionsFactory($broadcastTransactionsFactory);
@@ -111,8 +111,11 @@ class Action extends AbstractAction
      */
     public function serialize(): array
     {
-        return array_merge(parent::serialize(), [
-            'tailTransactionHash' => $this->tailTransactionHash->serialize(),
-        ]);
+        return array_merge(
+            parent::serialize(),
+            [
+                'tailTransactionHash' => $this->tailTransactionHash->serialize(),
+            ]
+        );
     }
 }
