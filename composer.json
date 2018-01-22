@@ -31,7 +31,6 @@
         "ext-gmp": "*",
         "psr/container": "^1.0",
         "kornrunner/keccak": "^1.0",
-        "psr/http-message": "^1.0",
         "php-http/client-implementation": "^1.0",
         "php-http/async-client-implementation": "^1.0",
         "php-http/httplug": "^1.0",
@@ -45,8 +44,7 @@
         "nikic/php-parser": "^3.1",
         "phpdocumentor/reflection-docblock": "^4.2",
         "php-http/mock-client": "^1.0",
-        "php-http/message": "^1.0",
-        "guzzlehttp/psr7": "^1.0"
+        "php-http/message": "^1.0"
     },
     "autoload": {
         "psr-4": {
