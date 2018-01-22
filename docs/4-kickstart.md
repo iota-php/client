@@ -15,14 +15,19 @@ to do the following.
 use Techworker\IOTA\IOTA;
 use Techworker\IOTA\Node;
 use Techworker\IOTA\DI\IOTAContainer;
+use Techworker\IOTA\RemoteApi\RemoteApi;
+use Techworker\IOTA\ClientApi\ClientApi;
 
 $options = [
     'ccurlPath' => '/srv/ccurl'
 ];
 
 // initializes a new IOTA instance with the built in container and one iota node
+$container = new IOTAContainer($options);
+
 $iota = new IOTA(
-    new IOTAContainer($options), 
+    $container->get(RemoteApi::class),
+    $container->get(ClientApi::class),
     [new Node('http://node01.iotatoken.nl:14265')]
 );
 ```

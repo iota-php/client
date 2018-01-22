@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Techworker\IOTA;
 
-use Psr\Container\ContainerInterface;
 use Techworker\IOTA\ClientApi\ClientApi;
-use Techworker\IOTA\DI\IOTAContainer;
 use Techworker\IOTA\RemoteApi\RemoteApi;
 
 /**
@@ -30,73 +28,48 @@ class IOTA
      *
      * @var RemoteApi
      */
-    protected $remoteApi;
+    private $remoteApi;
 
     /**
      * Client api instance.
      *
      * @var ClientApi
      */
-    protected $clientApi;
-
-    /**
-     * The container that holds the factories.
-     *
-     * @var IOTAContainer
-     */
-    protected $container;
+    private $clientApi;
 
     /**
      * A list of remote nodes.
      *
      * @var Node[]
      */
-    protected $nodes;
+    private $nodes;
 
     /**
      * The last used node.
      *
      * @var Node
      */
-    protected $lastUsedNode;
+    private $lastUsedNode;
 
     /**
-     * IOTA constructor.
-     *
-     * @param ContainerInterface $container
-     * @param Node[]             $nodes
+     * @param RemoteApi $remoteApi
+     * @param ClientApi $clientApi
+     * @param Node[]    $nodes
      */
-    public function __construct(ContainerInterface $container, array $nodes = [])
+    public function __construct(RemoteApi $remoteApi, ClientApi $clientApi, array $nodes = [])
     {
-        $this->container = $container;
+        $this->remoteApi = $remoteApi;
+        $this->clientApi = $clientApi;
         $this->nodes = $nodes;
     }
 
-    /**
-     * Gets the remote api instance.
-     *
-     * @return RemoteApi
-     */
     public function getRemoteApi(): RemoteApi
     {
-        if (null === $this->remoteApi) {
-            $this->remoteApi = $this->container->get(RemoteApi::class);
-        }
-
         return $this->remoteApi;
     }
 
-    /**
-     * Gets the client api instance.
-     *
-     * @return ClientApi
-     */
     public function getClientApi(): ClientApi
     {
-        if (null === $this->clientApi) {
-            $this->clientApi = $this->container->get(ClientApi::class);
-        }
-
         return $this->clientApi;
     }
 

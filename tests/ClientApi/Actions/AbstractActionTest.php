@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace Techworker\IOTA\Tests\ClientApi\Actions;
 
 use PHPUnit\Framework\TestCase;
+use Techworker\IOTA\ClientApi\ClientApi;
 use Techworker\IOTA\IOTA;
 use Techworker\IOTA\Node;
+use Techworker\IOTA\RemoteApi\RemoteApi;
 use Techworker\IOTA\Tests\ClientApiMocks;
 use Techworker\IOTA\Tests\Container;
 use Techworker\IOTA\Tests\DummyData;
@@ -66,7 +68,11 @@ abstract class AbstractActionTest extends TestCase
     {
         DummyData::init();
         $this->container = new Container();
-        $this->iota = new IOTA($this->container, [DummyData::getNode()]);
+        $this->iota = new IOTA(
+            $this->prophesize(RemoteApi::class)->reveal(),
+            $this->prophesize(ClientApi::class)->reveal(),
+            [DummyData::getNode()]
+        );
     }
 
     /**

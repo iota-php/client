@@ -11,9 +11,11 @@
 
 namespace Techworker\IOTA\Examples\Spammer;
 
+use Techworker\IOTA\ClientApi\ClientApi;
 use Techworker\IOTA\DI\IOTAContainer;
 use Techworker\IOTA\IOTA;
 use Techworker\IOTA\Node;
+use Techworker\IOTA\RemoteApi\RemoteApi;
 use Techworker\IOTA\Type\Address;
 use Techworker\IOTA\Type\Seed;
 use Techworker\IOTA\Type\Tag;
@@ -39,10 +41,9 @@ $nodes = [
     new Node('http://node05.iotatoken.nl:16265'),
 ];
 
-$iota = new IOTA(
-    new IOTAContainer($options),
-    $nodes
-);
+$container = new IOTAContainer($options);
+
+$iota = new IOTA($container->get(RemoteApi::class), $container->get(ClientApi::class), $nodes);
 
 $seed = '';
 for ($i = 0; $i < 81; ++$i) {

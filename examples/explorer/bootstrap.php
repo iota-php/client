@@ -16,9 +16,11 @@ ini_set('display_errors', 1);
 set_time_limit(0);
 require_once __DIR__.'/../../vendor/autoload.php';
 
+use Techworker\IOTA\ClientApi\ClientApi;
 use Techworker\IOTA\DI\IOTAContainer;
 use Techworker\IOTA\IOTA;
 use Techworker\IOTA\Node;
+use Techworker\IOTA\RemoteApi\RemoteApi;
 
 $nodes = [
     new Node('http://service.iotasupport.com:14265'),
@@ -29,4 +31,6 @@ $options = [
     'ccurlPath' => __DIR__.'/../../ccurl',
 ];
 
-return new IOTA(new IOTAContainer($options), $nodes);
+$container = new IOTAContainer($options);
+
+return new IOTA($container->get(RemoteApi::class), $container->get(ClientApi::class), $nodes);
