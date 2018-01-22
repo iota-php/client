@@ -119,7 +119,7 @@ class Action extends AbstractAction
      *
      * @throws Exception
      *
-     * @return Result
+     * @return Result|AbstractResult
      */
     public function execute(): Result
     {
