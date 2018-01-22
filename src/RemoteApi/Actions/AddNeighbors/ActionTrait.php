@@ -62,6 +62,6 @@ trait ActionTrait
         $request = $this->addNeighborsFactory->factory($node);
         $request->setNeighborUris($neighborUris);
 
-        return $request->execute()->throwOnError();
+        return $request->execute();
     }
 }

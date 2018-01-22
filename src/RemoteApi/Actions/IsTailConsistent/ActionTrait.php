@@ -63,6 +63,6 @@ trait ActionTrait
         $request = $this->isTailConsistentFactory->factory($node);
         $request->setTailTransactionHash($tailTransactionHash);
 
-        return $request->execute()->throwOnError();
+        return $request->execute();
     }
 }

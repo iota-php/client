@@ -60,6 +60,6 @@ trait ActionTrait
     {
         $request = $this->interruptAttachingToTangleFactory->factory($node);
 
-        return $request->execute()->throwOnError();
+        return $request->execute();
     }
 }

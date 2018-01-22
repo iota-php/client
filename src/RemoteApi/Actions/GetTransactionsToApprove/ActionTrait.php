@@ -78,6 +78,6 @@ trait ActionTrait
             $request->setReference($reference);
         }
 
-        return $request->execute()->throwOnError();
+        return $request->execute();
     }
 }
