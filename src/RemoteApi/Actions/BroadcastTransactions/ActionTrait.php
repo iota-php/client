@@ -65,6 +65,6 @@ trait ActionTrait
         $request = $this->broadcastTransactionsFactory->factory($node);
         $request->setTransactions($transactions);
 
-        return $request->execute()->throwOnError();
+        return $request->execute();
     }
 }

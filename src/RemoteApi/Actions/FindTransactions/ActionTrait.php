@@ -79,6 +79,6 @@ trait ActionTrait
         $request->setTags($tags);
         $request->setApprovees($approvees);
 
-        return $request->execute()->throwOnError();
+        return $request->execute();
     }
 }

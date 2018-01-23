@@ -60,6 +60,6 @@ trait ActionTrait
     {
         $request = $this->getTipsFactory->factory($node);
 
-        return $request->execute()->throwOnError();
+        return $request->execute();
     }
 }

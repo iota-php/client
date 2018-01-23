@@ -63,6 +63,6 @@ trait ActionTrait
         $request = $this->getTrytesFactory->factory($node);
         $request->setTransactionHashes($transactionHashes);
 
-        return $request->execute()->throwOnError();
+        return $request->execute();
     }
 }

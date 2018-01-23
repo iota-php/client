@@ -69,6 +69,6 @@ trait ActionTrait
         $request->setTransactionHashes($transactionHashes);
         $request->setTips($tips);
 
-        return $request->execute()->throwOnError();
+        return $request->execute();
     }
 }

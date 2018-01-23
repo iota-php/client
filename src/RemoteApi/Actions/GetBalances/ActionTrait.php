@@ -68,6 +68,6 @@ trait ActionTrait
         $request->setAddresses($addresses);
         $request->setThreshold($threshold);
 
-        return $request->execute()->throwOnError();
+        return $request->execute();
     }
 }

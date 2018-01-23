@@ -79,6 +79,6 @@ trait ActionTrait
         $request->setBranchTransactionHash($branchTransactionHash);
         $request->setMinWeightMagnitude($minWeightMagnitude);
 
-        return $request->execute()->throwOnError();
+        return $request->execute();
     }
 }

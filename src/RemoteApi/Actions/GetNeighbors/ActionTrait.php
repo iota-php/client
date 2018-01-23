@@ -60,6 +60,6 @@ trait ActionTrait
     {
         $request = $this->getNeighborsFactory->factory($node);
 
-        return $request->execute()->throwOnError();
+        return $request->execute();
     }
 }
