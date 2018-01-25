@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Tests\Util;
+namespace IOTA\Tests\Util;
 
 use PHPUnit\Framework\TestCase;
-use Techworker\IOTA\Type\Address;
-use Techworker\IOTA\Type\Trytes;
-use Techworker\IOTA\Util\TrytesUtil;
-use Techworker\IOTA\Util\TryteUtil;
+use IOTA\Type\Address;
+use IOTA\Type\Trytes;
+use IOTA\Util\TrytesUtil;
+use IOTA\Util\TryteUtil;
 
 /**
  * @coversNothing

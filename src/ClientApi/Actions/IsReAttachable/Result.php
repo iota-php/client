@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\IsReAttachable;
+namespace IOTA\ClientApi\Actions\IsReAttachable;
 
-use Techworker\IOTA\ClientApi\AbstractResult;
+use IOTA\ClientApi\AbstractResult;
 
 class Result extends AbstractResult
 {

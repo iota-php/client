@@ -11,20 +11,20 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Tests;
+namespace IOTA\Tests;
 
-use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
-use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\Type\Address;
-use Techworker\IOTA\Type\Approvee;
-use Techworker\IOTA\Type\Bundle;
-use Techworker\IOTA\Type\BundleHash;
-use Techworker\IOTA\Type\Seed;
-use Techworker\IOTA\Type\Tag;
-use Techworker\IOTA\Type\Transaction;
-use Techworker\IOTA\Type\TransactionHash;
-use Techworker\IOTA\Type\Trytes;
+use IOTA\Cryptography\Hashing\CurlFactory;
+use IOTA\Cryptography\Hashing\KerlFactory;
+use IOTA\Node;
+use IOTA\Type\Address;
+use IOTA\Type\Approvee;
+use IOTA\Type\Bundle;
+use IOTA\Type\BundleHash;
+use IOTA\Type\Seed;
+use IOTA\Type\Tag;
+use IOTA\Type\Transaction;
+use IOTA\Type\TransactionHash;
+use IOTA\Type\Trytes;
 
 /**
  * Class DummyData.

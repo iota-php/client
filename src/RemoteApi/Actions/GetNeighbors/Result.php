@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\RemoteApi\Actions\GetNeighbors;
+namespace IOTA\RemoteApi\Actions\GetNeighbors;
 
-use Techworker\IOTA\RemoteApi\AbstractResult;
-use Techworker\IOTA\Type\Neighbor;
+use IOTA\RemoteApi\AbstractResult;
+use IOTA\Type\Neighbor;
 
 /**
  * Class Response.

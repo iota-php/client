@@ -11,18 +11,18 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\FindTransactionObjects;
+namespace IOTA\ClientApi\Actions\FindTransactionObjects;
 
-use Techworker\IOTA\ClientApi\AbstractAction;
-use Techworker\IOTA\ClientApi\AbstractResult;
-use Techworker\IOTA\ClientApi\Actions\GetTransactionObjects;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Actions\FindTransactions;
-use Techworker\IOTA\Type\Address;
-use Techworker\IOTA\Type\Approvee;
-use Techworker\IOTA\Type\BundleHash;
-use Techworker\IOTA\Type\Tag;
-use Techworker\IOTA\Util\SerializeUtil;
+use IOTA\ClientApi\AbstractAction;
+use IOTA\ClientApi\AbstractResult;
+use IOTA\ClientApi\Actions\GetTransactionObjects;
+use IOTA\Node;
+use IOTA\RemoteApi\Actions\FindTransactions;
+use IOTA\Type\Address;
+use IOTA\Type\Approvee;
+use IOTA\Type\BundleHash;
+use IOTA\Type\Tag;
+use IOTA\Util\SerializeUtil;
 
 /**
  * This action will search for the given addresses/bundles/tags/approvees

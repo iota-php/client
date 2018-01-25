@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\GetBundle;
+namespace IOTA\ClientApi\Actions\GetBundle;
 
-use Techworker\IOTA\ClientApi\AbstractResult;
-use Techworker\IOTA\Type\Bundle;
+use IOTA\ClientApi\AbstractResult;
+use IOTA\Type\Bundle;
 
 /**
  * Class Result.

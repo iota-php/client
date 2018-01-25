@@ -11,14 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Cryptography;
+namespace IOTA\Cryptography;
 
-use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
-use Techworker\IOTA\Type\Bundle;
-use Techworker\IOTA\Type\HMACKey;
-use Techworker\IOTA\Type\SignatureMessageFragment;
-use Techworker\IOTA\Util\TritsUtil;
-use Techworker\IOTA\Util\TrytesUtil;
+use IOTA\Cryptography\Hashing\CurlFactory;
+use IOTA\Type\Bundle;
+use IOTA\Type\HMACKey;
+use IOTA\Type\SignatureMessageFragment;
+use IOTA\Util\TritsUtil;
+use IOTA\Util\TrytesUtil;
 
 class HMAC
 {

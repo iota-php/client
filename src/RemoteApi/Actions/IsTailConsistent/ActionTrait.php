@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\RemoteApi\Actions\IsTailConsistent;
+namespace IOTA\RemoteApi\Actions\IsTailConsistent;
 
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\AbstractResult;
-use Techworker\IOTA\RemoteApi\Exception;
-use Techworker\IOTA\Type\TransactionHash;
+use IOTA\Node;
+use IOTA\RemoteApi\AbstractResult;
+use IOTA\RemoteApi\Exception;
+use IOTA\Type\TransactionHash;
 
 /**
  * Trait RequestTrait.

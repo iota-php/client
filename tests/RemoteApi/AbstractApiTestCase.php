@@ -11,14 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Tests\RemoteApi;
+namespace IOTA\Tests\RemoteApi;
 
 use Http\Client\HttpClient;
 use Http\Discovery\MessageFactoryDiscovery;
 use PHPUnit\Framework\TestCase;
 use Http\Mock\Client;
-use Techworker\IOTA\RemoteApi\ActionInterface;
-use Techworker\IOTA\RemoteApi\NodeApiClient;
+use IOTA\RemoteApi\ActionInterface;
+use IOTA\RemoteApi\NodeApiClient;
 
 abstract class AbstractApiTestCase extends TestCase
 {

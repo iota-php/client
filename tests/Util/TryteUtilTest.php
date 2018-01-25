@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Tests\Util;
+namespace IOTA\Tests\Util;
 
 use PHPUnit\Framework\TestCase;
-use Techworker\IOTA\Util\TryteUtil;
+use IOTA\Util\TryteUtil;
 
 /**
  * Class TryteUtilTest.

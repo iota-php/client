@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Cryptography\Keccak384;
+namespace IOTA\Cryptography\Keccak384;
 
 use kornrunner\Keccak;
 

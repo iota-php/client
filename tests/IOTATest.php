@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Tests;
+namespace IOTA\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Techworker\IOTA\ClientApi\ClientApi;
-use Techworker\IOTA\IOTA;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\RemoteApi;
+use IOTA\ClientApi\ClientApi;
+use IOTA\Client;
+use IOTA\Node;
+use IOTA\RemoteApi\RemoteApi;
 
 /**
  * Class IOTATest.
@@ -34,7 +34,7 @@ class IOTATest extends TestCase
             'mynode' => new Node('http://myNode'),
         ];
 
-        $iota = new IOTA(new Container(), $nodes);
+        $iota = new Client(new Container(), $nodes);
 
         static::assertCount(3, $iota->getNodes());
 
@@ -52,19 +52,19 @@ class IOTATest extends TestCase
         $this->expectException(\Exception::class);
 
         $nodes = [];
-        $iota = new IOTA(new Container(), $nodes);
+        $iota = new Client(new Container(), $nodes);
         $iota->getNode('-1');
     }
 
     public function testGetRemoteApi()
     {
-        $iota = new IOTA(new Container(), []);
+        $iota = new Client(new Container(), []);
         static::assertInstanceOf(RemoteApi::class, $iota->getRemoteApi());
     }
 
     public function testGetClientApi()
     {
-        $iota = new IOTA(new Container(), []);
+        $iota = new Client(new Container(), []);
         static::assertInstanceOf(ClientApi::class, $iota->getClientApi());
     }
 }

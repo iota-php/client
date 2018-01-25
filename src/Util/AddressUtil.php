@@ -11,14 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Util;
+namespace IOTA\Util;
 
-use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
-use Techworker\IOTA\Cryptography\Signing;
-use Techworker\IOTA\Type\Address;
-use Techworker\IOTA\Type\SecurityLevel;
-use Techworker\IOTA\Type\Seed;
-use Techworker\IOTA\Type\Trytes;
+use IOTA\Cryptography\Hashing\KerlFactory;
+use IOTA\Cryptography\Signing;
+use IOTA\Type\Address;
+use IOTA\Type\SecurityLevel;
+use IOTA\Type\Seed;
+use IOTA\Type\Trytes;
 
 /**
  * Class AddressUtil.

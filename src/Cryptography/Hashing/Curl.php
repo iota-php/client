@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Cryptography\Hashing;
+namespace IOTA\Cryptography\Hashing;
 
-use Techworker\IOTA\Exception;
+use IOTA\Exception;
 
 /**
  * Class Curl.

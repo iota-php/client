@@ -69,8 +69,8 @@ The IOTA instance is the central point of initialization of the library. While y
 To initialize a new IOTA instance and start with your IOTA project you’ll have to do the following.
 
 
-    use Techworker\IOTA;
-    use Techworker\IOTA\DI\IOTAContainer;
+    use IOTA;
+    use IOTA\DI\IOTAContainer;
     
     $options = [
         'ccurlPath' => '/srv/ccurl'
@@ -213,7 +213,7 @@ If you have a working IOTA instance, you can start to call the official node API
     function addNeighbors(
         Node $node, 
         string[] $neighborUris
-    ) : Techworker\IOTA\RemoteApi\Commands\AddNeighbors\Response
+    ) : IOTA\RemoteApi\Commands\AddNeighbors\Response
 
 
 - **Node $node**
@@ -241,7 +241,7 @@ Use the --neighbors parameter in your node configuration to permanently add neig
         TransactionHash $trunkTransaction,
         TransactionHash $branchTransaction,
         int $minWeightMagnitude
-    ): Techworker\IOTA\RemoteApi\Commands\AttachToTangle\Response
+    ): IOTA\RemoteApi\Commands\AttachToTangle\Response
 
 
 - **Node $node**

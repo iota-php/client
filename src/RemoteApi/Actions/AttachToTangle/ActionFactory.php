@@ -11,14 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\RemoteApi\Actions\AttachToTangle;
+namespace IOTA\RemoteApi\Actions\AttachToTangle;
 
-use Techworker\IOTA\AbstractFactory;
-use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
-use Techworker\IOTA\Cryptography\POW\PowInterface;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\ActionFactoryInterface;
-use Techworker\IOTA\RemoteApi\NodeApiClient;
+use IOTA\AbstractFactory;
+use IOTA\Cryptography\Hashing\CurlFactory;
+use IOTA\Cryptography\POW\PowInterface;
+use IOTA\Node;
+use IOTA\RemoteApi\ActionFactoryInterface;
+use IOTA\RemoteApi\NodeApiClient;
 
 /**
  * Class RequestFactory.

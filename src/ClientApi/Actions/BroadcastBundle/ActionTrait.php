@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\BroadcastBundle;
+namespace IOTA\ClientApi\Actions\BroadcastBundle;
 
-use Techworker\IOTA\ClientApi\VoidResult;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\Type\TransactionHash;
+use IOTA\ClientApi\VoidResult;
+use IOTA\Node;
+use IOTA\Type\TransactionHash;
 
 /**
  * Takes a tail transaction hash as input, gets the bundle associated with the

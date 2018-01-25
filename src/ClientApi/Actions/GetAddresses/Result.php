@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\GetAddresses;
+namespace IOTA\ClientApi\Actions\GetAddresses;
 
-use Techworker\IOTA\ClientApi\AbstractResult;
-use Techworker\IOTA\Type\Address;
-use Techworker\IOTA\Util\SerializeUtil;
+use IOTA\ClientApi\AbstractResult;
+use IOTA\Type\Address;
+use IOTA\Util\SerializeUtil;
 
 class Result extends AbstractResult
 {

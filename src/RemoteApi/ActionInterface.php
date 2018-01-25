@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\RemoteApi;
+namespace IOTA\RemoteApi;
 
-use Techworker\IOTA\SerializeInterface;
+use IOTA\SerializeInterface;
 
 /**
  * Interface RequestInterface.

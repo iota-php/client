@@ -12,11 +12,11 @@ declare(strict_types=1);
  */
 
 
-namespace Techworker\IOTA\Tests\Type;
+namespace IOTA\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Techworker\IOTA\Type\Trytes;
-use Techworker\IOTA\Util\TryteUtil;
+use IOTA\Type\Trytes;
+use IOTA\Util\TryteUtil;
 
 /**
  * @coversNothing

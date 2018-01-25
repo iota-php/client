@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Tests;
+namespace IOTA\Tests;
 
 use Http\Client\HttpAsyncClient;
 use Http\Client\HttpClient;
 use Http\Mock\Client;
-use Techworker\IOTA\DI\IOTAContainer;
+use IOTA\DI\IOTAContainer;
 
 /**
  * Class Container.

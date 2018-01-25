@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Util;
+namespace IOTA\Util;
 
-use Techworker\IOTA\Exception;
-use Techworker\IOTA\Type\Trytes;
+use IOTA\Exception;
+use IOTA\Type\Trytes;
 
 class TrytesUtil
 {

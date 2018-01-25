@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Cryptography;
+namespace IOTA\Cryptography;
 
-use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
-use Techworker\IOTA\Type\SecurityLevel;
-use Techworker\IOTA\Type\Seed;
-use Techworker\IOTA\Util\TritsUtil;
+use IOTA\Cryptography\Hashing\KerlFactory;
+use IOTA\Type\SecurityLevel;
+use IOTA\Type\Seed;
+use IOTA\Util\TritsUtil;
 
 /**
  * Class MultiSig.
@@ -45,7 +45,7 @@ class MultiSig
      * @param int           $index
      * @param SecurityLevel $security
      *
-     * @return \Techworker\IOTA\Type\Trytes
+     * @return \IOTA\Type\Trytes
      */
     public function getDigest(Seed $seed, int $index, SecurityLevel $security)
     {

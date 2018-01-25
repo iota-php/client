@@ -11,35 +11,35 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\SendTransfer;
+namespace IOTA\ClientApi\Actions\SendTransfer;
 
-use Techworker\IOTA\ClientApi\AbstractAction;
-use Techworker\IOTA\ClientApi\Actions\GetInputs;
-use Techworker\IOTA\ClientApi\Actions\GetNewAddress;
-use Techworker\IOTA\ClientApi\Actions\SendTrytes;
-use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
-use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
-use Techworker\IOTA\Cryptography\HMAC;
-use Techworker\IOTA\Cryptography\Signing;
-use Techworker\IOTA\Exception;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Actions\GetBalances;
-use Techworker\IOTA\Type\Address;
-use Techworker\IOTA\Type\Bundle;
-use Techworker\IOTA\Type\HMACKey;
-use Techworker\IOTA\Type\Input;
-use Techworker\IOTA\Type\Iota;
-use Techworker\IOTA\Type\Milestone;
-use Techworker\IOTA\Type\SecurityLevel;
-use Techworker\IOTA\Type\Seed;
-use Techworker\IOTA\Type\SignatureMessageFragment;
-use Techworker\IOTA\Type\Tag;
-use Techworker\IOTA\Type\Transaction;
-use Techworker\IOTA\Type\Transfer;
-use Techworker\IOTA\Type\Trytes;
-use Techworker\IOTA\Util\SerializeUtil;
-use Techworker\IOTA\Util\TritsUtil;
-use Techworker\IOTA\Util\TrytesUtil;
+use IOTA\ClientApi\AbstractAction;
+use IOTA\ClientApi\Actions\GetInputs;
+use IOTA\ClientApi\Actions\GetNewAddress;
+use IOTA\ClientApi\Actions\SendTrytes;
+use IOTA\Cryptography\Hashing\CurlFactory;
+use IOTA\Cryptography\Hashing\KerlFactory;
+use IOTA\Cryptography\HMAC;
+use IOTA\Cryptography\Signing;
+use IOTA\Exception;
+use IOTA\Node;
+use IOTA\RemoteApi\Actions\GetBalances;
+use IOTA\Type\Address;
+use IOTA\Type\Bundle;
+use IOTA\Type\HMACKey;
+use IOTA\Type\Input;
+use IOTA\Type\Iota;
+use IOTA\Type\Milestone;
+use IOTA\Type\SecurityLevel;
+use IOTA\Type\Seed;
+use IOTA\Type\SignatureMessageFragment;
+use IOTA\Type\Tag;
+use IOTA\Type\Transaction;
+use IOTA\Type\Transfer;
+use IOTA\Type\Trytes;
+use IOTA\Util\SerializeUtil;
+use IOTA\Util\TritsUtil;
+use IOTA\Util\TrytesUtil;
 
 /**
  * Class Action.

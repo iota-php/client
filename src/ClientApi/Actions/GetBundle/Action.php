@@ -11,19 +11,19 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\GetBundle;
+namespace IOTA\ClientApi\Actions\GetBundle;
 
-use Techworker\IOTA\ClientApi\AbstractAction;
-use Techworker\IOTA\ClientApi\AbstractResult;
-use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
-use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
-use Techworker\IOTA\Exception;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Actions\GetTrytes;
-use Techworker\IOTA\Type\Bundle;
-use Techworker\IOTA\Type\BundleHash;
-use Techworker\IOTA\Type\Transaction;
-use Techworker\IOTA\Type\TransactionHash;
+use IOTA\ClientApi\AbstractAction;
+use IOTA\ClientApi\AbstractResult;
+use IOTA\Cryptography\Hashing\CurlFactory;
+use IOTA\Cryptography\Hashing\KerlFactory;
+use IOTA\Exception;
+use IOTA\Node;
+use IOTA\RemoteApi\Actions\GetTrytes;
+use IOTA\Type\Bundle;
+use IOTA\Type\BundleHash;
+use IOTA\Type\Transaction;
+use IOTA\Type\TransactionHash;
 
 /**
  * Replays a transfer by doing Proof of Work again.

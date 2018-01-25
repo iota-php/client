@@ -11,14 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Tests\Cryptography;
+namespace IOTA\Tests\Cryptography;
 
 use PHPUnit\Framework\TestCase;
-use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
-use Techworker\IOTA\Tests\Container;
-use Techworker\IOTA\Type\Trytes;
-use Techworker\IOTA\Util\TritsUtil;
-use Techworker\IOTA\Util\TrytesUtil;
+use IOTA\Cryptography\Hashing\KerlFactory;
+use IOTA\Tests\Container;
+use IOTA\Type\Trytes;
+use IOTA\Util\TritsUtil;
+use IOTA\Util\TrytesUtil;
 
 /**
  * @coversNothing

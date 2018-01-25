@@ -11,25 +11,25 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi;
+namespace IOTA\ClientApi;
 
-use Techworker\IOTA\ClientApi\Actions\BroadcastBundle;
-use Techworker\IOTA\ClientApi\Actions\FindTransactionObjects;
-use Techworker\IOTA\ClientApi\Actions\GetAccountData;
-use Techworker\IOTA\ClientApi\Actions\GetAddresses;
-use Techworker\IOTA\ClientApi\Actions\GetBundle;
-use Techworker\IOTA\ClientApi\Actions\GetBundlesFromAddresses;
-use Techworker\IOTA\ClientApi\Actions\GetInputs;
-use Techworker\IOTA\ClientApi\Actions\GetLatestInclusion;
-use Techworker\IOTA\ClientApi\Actions\GetNewAddress;
-use Techworker\IOTA\ClientApi\Actions\GetTransactionObjects;
-use Techworker\IOTA\ClientApi\Actions\GetTransfers;
-use Techworker\IOTA\ClientApi\Actions\IsReAttachable;
-use Techworker\IOTA\ClientApi\Actions\PromoteTransaction;
-use Techworker\IOTA\ClientApi\Actions\ReplayBundle;
-use Techworker\IOTA\ClientApi\Actions\SendTransfer;
-use Techworker\IOTA\ClientApi\Actions\SendTrytes;
-use Techworker\IOTA\ClientApi\Actions\StoreAndBroadcast;
+use IOTA\ClientApi\Actions\BroadcastBundle;
+use IOTA\ClientApi\Actions\FindTransactionObjects;
+use IOTA\ClientApi\Actions\GetAccountData;
+use IOTA\ClientApi\Actions\GetAddresses;
+use IOTA\ClientApi\Actions\GetBundle;
+use IOTA\ClientApi\Actions\GetBundlesFromAddresses;
+use IOTA\ClientApi\Actions\GetInputs;
+use IOTA\ClientApi\Actions\GetLatestInclusion;
+use IOTA\ClientApi\Actions\GetNewAddress;
+use IOTA\ClientApi\Actions\GetTransactionObjects;
+use IOTA\ClientApi\Actions\GetTransfers;
+use IOTA\ClientApi\Actions\IsReAttachable;
+use IOTA\ClientApi\Actions\PromoteTransaction;
+use IOTA\ClientApi\Actions\ReplayBundle;
+use IOTA\ClientApi\Actions\SendTransfer;
+use IOTA\ClientApi\Actions\SendTrytes;
+use IOTA\ClientApi\Actions\StoreAndBroadcast;
 
 /**
  * Class ClientApi.

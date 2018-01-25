@@ -11,15 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\GetLatestInclusion;
+namespace IOTA\ClientApi\Actions\GetLatestInclusion;
 
-use Techworker\IOTA\ClientApi\AbstractAction;
-use Techworker\IOTA\ClientApi\AbstractResult;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Actions\GetInclusionStates;
-use Techworker\IOTA\RemoteApi\Actions\GetNodeInfo;
-use Techworker\IOTA\Type\TransactionHash;
-use Techworker\IOTA\Util\SerializeUtil;
+use IOTA\ClientApi\AbstractAction;
+use IOTA\ClientApi\AbstractResult;
+use IOTA\Node;
+use IOTA\RemoteApi\Actions\GetInclusionStates;
+use IOTA\RemoteApi\Actions\GetNodeInfo;
+use IOTA\Type\TransactionHash;
+use IOTA\Util\SerializeUtil;
 
 /**
  * Gets the latest inclusion state for the given transaction hashes.

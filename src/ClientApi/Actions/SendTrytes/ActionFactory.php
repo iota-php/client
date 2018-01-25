@@ -11,15 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\SendTrytes;
+namespace IOTA\ClientApi\Actions\SendTrytes;
 
-use Techworker\IOTA\AbstractFactory;
-use Techworker\IOTA\ClientApi\Actions\StoreAndBroadcast;
-use Techworker\IOTA\ClientApi\FactoryInterface;
-use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Actions\AttachToTangle;
-use Techworker\IOTA\RemoteApi\Actions\GetTransactionsToApprove;
+use IOTA\AbstractFactory;
+use IOTA\ClientApi\Actions\StoreAndBroadcast;
+use IOTA\ClientApi\FactoryInterface;
+use IOTA\Cryptography\Hashing\CurlFactory;
+use IOTA\Node;
+use IOTA\RemoteApi\Actions\AttachToTangle;
+use IOTA\RemoteApi\Actions\GetTransactionsToApprove;
 
 /**
  * Class ActionFactory.

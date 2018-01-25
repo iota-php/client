@@ -11,14 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\IsReAttachable;
+namespace IOTA\ClientApi\Actions\IsReAttachable;
 
-use Techworker\IOTA\ClientApi\AbstractAction;
-use Techworker\IOTA\ClientApi\Actions\FindTransactionObjects;
-use Techworker\IOTA\ClientApi\Actions\GetLatestInclusion;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\Type\Address;
-use Techworker\IOTA\Util\SerializeUtil;
+use IOTA\ClientApi\AbstractAction;
+use IOTA\ClientApi\Actions\FindTransactionObjects;
+use IOTA\ClientApi\Actions\GetLatestInclusion;
+use IOTA\Node;
+use IOTA\Type\Address;
+use IOTA\Util\SerializeUtil;
 
 /**
  * Gets a defined number of addresses for the given seed starting at a

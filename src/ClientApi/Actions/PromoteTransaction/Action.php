@@ -11,18 +11,18 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\PromoteTransaction;
+namespace IOTA\ClientApi\Actions\PromoteTransaction;
 
-use Techworker\IOTA\ClientApi\AbstractAction;
-use Techworker\IOTA\ClientApi\AbstractResult;
-use Techworker\IOTA\ClientApi\Actions\SendTransfer;
-use Techworker\IOTA\Exception;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Actions\IsTailConsistent;
-use Techworker\IOTA\Type\Milestone;
-use Techworker\IOTA\Type\Seed;
-use Techworker\IOTA\Type\TransactionHash;
-use Techworker\IOTA\Type\Transfer;
+use IOTA\ClientApi\AbstractAction;
+use IOTA\ClientApi\AbstractResult;
+use IOTA\ClientApi\Actions\SendTransfer;
+use IOTA\Exception;
+use IOTA\Node;
+use IOTA\RemoteApi\Actions\IsTailConsistent;
+use IOTA\Type\Milestone;
+use IOTA\Type\Seed;
+use IOTA\Type\TransactionHash;
+use IOTA\Type\Transfer;
 
 /**
  * TODO.

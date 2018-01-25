@@ -11,18 +11,18 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\RemoteApi\Actions\AttachToTangle;
+namespace IOTA\RemoteApi\Actions\AttachToTangle;
 
-use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
-use Techworker\IOTA\Cryptography\POW\PowInterface;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\AbstractAction;
-use Techworker\IOTA\RemoteApi\AbstractResult;
-use Techworker\IOTA\RemoteApi\Exception;
-use Techworker\IOTA\RemoteApi\NodeApiClient;
-use Techworker\IOTA\Type\Transaction;
-use Techworker\IOTA\Type\TransactionHash;
-use Techworker\IOTA\Util\SerializeUtil;
+use IOTA\Cryptography\Hashing\CurlFactory;
+use IOTA\Cryptography\POW\PowInterface;
+use IOTA\Node;
+use IOTA\RemoteApi\AbstractAction;
+use IOTA\RemoteApi\AbstractResult;
+use IOTA\RemoteApi\Exception;
+use IOTA\RemoteApi\NodeApiClient;
+use IOTA\Type\Transaction;
+use IOTA\Type\TransactionHash;
+use IOTA\Util\SerializeUtil;
 
 /**
  * Class Request.
@@ -235,7 +235,7 @@ class Action extends AbstractAction
      * Executes the request.
      *
      * @throws Exception
-     * @throws \Techworker\IOTA\Exception
+     * @throws \IOTA\Exception
      * @throws \InvalidArgumentException
      *
      * @return AbstractResult|Result
@@ -277,7 +277,7 @@ class Action extends AbstractAction
      * Loops all transactions and does the pow and adjusts the nonce in each
      * transaction.
      *
-     * @throws \Techworker\IOTA\Exception
+     * @throws \IOTA\Exception
      * @throws \InvalidArgumentException
      *
      * @return array
@@ -299,7 +299,7 @@ class Action extends AbstractAction
      *
      * @param Transaction $transaction
      *
-     * @throws \Techworker\IOTA\Exception
+     * @throws \IOTA\Exception
      * @throws \InvalidArgumentException
      *
      * @return Transaction
@@ -316,7 +316,7 @@ class Action extends AbstractAction
         if (null === $this->previousTxHash) {
             // Check if last transaction in the bundle
             if ($transaction->getLastIndex() !== $transaction->getCurrentIndex()) {
-                throw new \Techworker\IOTA\Exception(
+                throw new \IOTA\Exception(
                     'Wrong bundle order. The bundle should be ordered in descending order from currentIndex'
                 );
             }

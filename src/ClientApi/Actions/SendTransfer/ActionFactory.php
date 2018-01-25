@@ -11,18 +11,18 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\SendTransfer;
+namespace IOTA\ClientApi\Actions\SendTransfer;
 
-use Techworker\IOTA\AbstractFactory;
-use Techworker\IOTA\ClientApi\Actions\GetInputs;
-use Techworker\IOTA\ClientApi\Actions\GetNewAddress;
-use Techworker\IOTA\ClientApi\Actions\SendTrytes;
-use Techworker\IOTA\ClientApi\FactoryInterface;
-use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
-use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
-use Techworker\IOTA\Cryptography\HMAC;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Actions\GetBalances;
+use IOTA\AbstractFactory;
+use IOTA\ClientApi\Actions\GetInputs;
+use IOTA\ClientApi\Actions\GetNewAddress;
+use IOTA\ClientApi\Actions\SendTrytes;
+use IOTA\ClientApi\FactoryInterface;
+use IOTA\Cryptography\Hashing\CurlFactory;
+use IOTA\Cryptography\Hashing\KerlFactory;
+use IOTA\Cryptography\HMAC;
+use IOTA\Node;
+use IOTA\RemoteApi\Actions\GetBalances;
 
 /**
  * Class ActionFactory.

@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\GetAccountData;
+namespace IOTA\ClientApi\Actions\GetAccountData;
 
-use Techworker\IOTA\ClientApi\AbstractResult;
-use Techworker\IOTA\Type\AccountData;
+use IOTA\ClientApi\AbstractResult;
+use IOTA\Type\AccountData;
 
 class Result extends AbstractResult
 {

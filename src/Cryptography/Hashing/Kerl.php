@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Cryptography\Hashing;
+namespace IOTA\Cryptography\Hashing;
 
-use Techworker\IOTA\Cryptography\Keccak384\Keccak384Interface;
-use Techworker\IOTA\Util\TritsUtil;
+use IOTA\Cryptography\Keccak384\Keccak384Interface;
+use IOTA\Util\TritsUtil;
 
 /**
  * Class Kerl.

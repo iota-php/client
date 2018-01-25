@@ -11,36 +11,36 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\PromoteTransaction;
+namespace IOTA\ClientApi\Actions\PromoteTransaction;
 
-use Techworker\IOTA\ClientApi\AbstractResult;
+use IOTA\ClientApi\AbstractResult;
 
 class Result extends AbstractResult
 {
     /**
      * The sendTransfer result.
      *
-     * @todo not sure about that, but cross extending isn't better, in this case extending from \Techworker\IOTA\ClientApi\Actions\SendTrytes\Result
+     * @todo not sure about that, but cross extending isn't better, in this case extending from \IOTA\ClientApi\Actions\SendTrytes\Result
      *       did that before somewhere..
      *
-     * @var \Techworker\IOTA\ClientApi\Actions\SendTransfer\Result
+     * @var \IOTA\ClientApi\Actions\SendTransfer\Result
      */
     protected $sendTransferResult;
 
     /**
-     * @return \Techworker\IOTA\ClientApi\Actions\SendTransfer\Result
+     * @return \IOTA\ClientApi\Actions\SendTransfer\Result
      */
-    public function getSendTransferResult(): \Techworker\IOTA\ClientApi\Actions\SendTransfer\Result
+    public function getSendTransferResult(): \IOTA\ClientApi\Actions\SendTransfer\Result
     {
         return $this->sendTransferResult;
     }
 
     /**
-     * @param \Techworker\IOTA\ClientApi\Actions\SendTransfer\Result $sendTransferResult
+     * @param \IOTA\ClientApi\Actions\SendTransfer\Result $sendTransferResult
      *
      * @return Result
      */
-    public function setSendTransferResult(\Techworker\IOTA\ClientApi\Actions\SendTransfer\Result $sendTransferResult): self
+    public function setSendTransferResult(\IOTA\ClientApi\Actions\SendTransfer\Result $sendTransferResult): self
     {
         $this->sendTransferResult = $sendTransferResult;
 

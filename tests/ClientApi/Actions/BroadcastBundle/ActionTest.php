@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Tests\ClientApi\Actions\BroadcastBundle;
+namespace IOTA\Tests\ClientApi\Actions\BroadcastBundle;
 
-use Techworker\IOTA\ClientApi\Actions\BroadcastBundle;
-use Techworker\IOTA\ClientApi\VoidResult;
-use Techworker\IOTA\Tests\ClientApi\Actions\AbstractActionTest;
-use Techworker\IOTA\Tests\DummyData;
+use IOTA\ClientApi\Actions\BroadcastBundle;
+use IOTA\ClientApi\VoidResult;
+use IOTA\Tests\ClientApi\Actions\AbstractActionTest;
+use IOTA\Tests\DummyData;
 
 /**
  * @coversNothing

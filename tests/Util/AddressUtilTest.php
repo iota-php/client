@@ -11,16 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Tests\Util;
+namespace IOTA\Tests\Util;
 
 use PHPUnit\Framework\TestCase;
-use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
-use Techworker\IOTA\Tests\Container;
-use Techworker\IOTA\Type\Address;
-use Techworker\IOTA\Type\SecurityLevel;
-use Techworker\IOTA\Type\Seed;
-use Techworker\IOTA\Util\AddressUtil;
-use Techworker\IOTA\Util\CheckSumUtil;
+use IOTA\Cryptography\Hashing\KerlFactory;
+use IOTA\Tests\Container;
+use IOTA\Type\Address;
+use IOTA\Type\SecurityLevel;
+use IOTA\Type\Seed;
+use IOTA\Util\AddressUtil;
+use IOTA\Util\CheckSumUtil;
 
 /**
  * Class AddressUtilTest.

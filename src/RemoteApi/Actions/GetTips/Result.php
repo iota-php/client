@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\RemoteApi\Actions\GetTips;
+namespace IOTA\RemoteApi\Actions\GetTips;
 
-use Techworker\IOTA\RemoteApi\AbstractResult;
-use Techworker\IOTA\Type\Tip;
-use Techworker\IOTA\Util\SerializeUtil;
+use IOTA\RemoteApi\AbstractResult;
+use IOTA\Type\Tip;
+use IOTA\Util\SerializeUtil;
 
 /**
  * Class Response.

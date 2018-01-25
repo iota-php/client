@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\ReplayBundle;
+namespace IOTA\ClientApi\Actions\ReplayBundle;
 
-use Techworker\IOTA\AbstractFactory;
-use Techworker\IOTA\ClientApi\Actions\GetBundle;
-use Techworker\IOTA\ClientApi\Actions\SendTrytes;
-use Techworker\IOTA\ClientApi\FactoryInterface;
-use Techworker\IOTA\Node;
+use IOTA\AbstractFactory;
+use IOTA\ClientApi\Actions\GetBundle;
+use IOTA\ClientApi\Actions\SendTrytes;
+use IOTA\ClientApi\FactoryInterface;
+use IOTA\Node;
 
 /**
  * Class ActionFactory.

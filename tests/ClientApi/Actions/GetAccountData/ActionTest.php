@@ -11,14 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Tests\ClientApi\Actions\GetAccountData;
+namespace IOTA\Tests\ClientApi\Actions\GetAccountData;
 
-use Techworker\IOTA\ClientApi\Actions\GetAccountData;
-use Techworker\IOTA\ClientApi\Actions\GetNewAddress as GetNewAddressResult;
-use Techworker\IOTA\ClientApi\Actions\GetNewAddress\Action as GetNewAddressAction;
-use Techworker\IOTA\Tests\ClientApi\Actions\AbstractActionTest;
-use Techworker\IOTA\Tests\DummyData;
-use Techworker\IOTA\Type\SecurityLevel;
+use IOTA\ClientApi\Actions\GetAccountData;
+use IOTA\ClientApi\Actions\GetNewAddress as GetNewAddressResult;
+use IOTA\ClientApi\Actions\GetNewAddress\Action as GetNewAddressAction;
+use IOTA\Tests\ClientApi\Actions\AbstractActionTest;
+use IOTA\Tests\DummyData;
+use IOTA\Type\SecurityLevel;
 
 /**
  * @coversNothing
@@ -83,7 +83,6 @@ class ActionTest extends AbstractActionTest
         $this->markTestSkipped('TODO');
         $naResponse = new GetNewAddressResult();
         $action = new GetNewAddressAction(
-
             DummyData::getNode(),
             $this->caMocks->getNewAddressFactory(),
             $this->caMocks->getBundlesFromAddressesFactory(),

@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\FindTransactionObjects;
+namespace IOTA\ClientApi\Actions\FindTransactionObjects;
 
-use Techworker\IOTA\AbstractFactory;
-use Techworker\IOTA\ClientApi\Actions\GetTransactionObjects;
-use Techworker\IOTA\ClientApi\FactoryInterface;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Actions\FindTransactions;
+use IOTA\AbstractFactory;
+use IOTA\ClientApi\Actions\GetTransactionObjects;
+use IOTA\ClientApi\FactoryInterface;
+use IOTA\Node;
+use IOTA\RemoteApi\Actions\FindTransactions;
 
 /**
  * Class ActionFactory.

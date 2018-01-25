@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Cryptography\POW;
+namespace IOTA\Cryptography\POW;
 
-use Techworker\IOTA\Type\Transaction;
+use IOTA\Type\Transaction;
 
 /**
  * Interface PowInterface.

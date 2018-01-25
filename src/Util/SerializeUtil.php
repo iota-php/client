@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Util;
+namespace IOTA\Util;
 
-use Techworker\IOTA\SerializeInterface;
+use IOTA\SerializeInterface;
 
 /**
  * Class TritsUtil.

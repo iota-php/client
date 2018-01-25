@@ -11,14 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\ReplayBundle;
+namespace IOTA\ClientApi\Actions\ReplayBundle;
 
-use Techworker\IOTA\ClientApi\AbstractAction;
-use Techworker\IOTA\ClientApi\AbstractResult;
-use Techworker\IOTA\ClientApi\Actions\GetBundle;
-use Techworker\IOTA\ClientApi\Actions\SendTrytes;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\Type\TransactionHash;
+use IOTA\ClientApi\AbstractAction;
+use IOTA\ClientApi\AbstractResult;
+use IOTA\ClientApi\Actions\GetBundle;
+use IOTA\ClientApi\Actions\SendTrytes;
+use IOTA\Node;
+use IOTA\Type\TransactionHash;
 
 /**
  * Replays a transfer by doing Proof of Work again.

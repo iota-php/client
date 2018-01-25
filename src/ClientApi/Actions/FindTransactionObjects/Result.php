@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\FindTransactionObjects;
+namespace IOTA\ClientApi\Actions\FindTransactionObjects;
 
-use Techworker\IOTA\ClientApi\AbstractResult;
-use Techworker\IOTA\Type\Transaction;
-use Techworker\IOTA\Util\SerializeUtil;
+use IOTA\ClientApi\AbstractResult;
+use IOTA\Type\Transaction;
+use IOTA\Util\SerializeUtil;
 
 /**
  * Contains the found transactions.

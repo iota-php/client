@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Tests\RemoteApi;
+namespace IOTA\Tests\RemoteApi;
 
 use PHPUnit\Framework\TestCase;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\AbstractResult;
-use Techworker\IOTA\RemoteApi\ActionInterface;
+use IOTA\Node;
+use IOTA\RemoteApi\AbstractResult;
+use IOTA\RemoteApi\ActionInterface;
 
 /**
  * @coversNothing

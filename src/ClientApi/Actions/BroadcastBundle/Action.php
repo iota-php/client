@@ -11,15 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\BroadcastBundle;
+namespace IOTA\ClientApi\Actions\BroadcastBundle;
 
-use Techworker\IOTA\ClientApi\AbstractAction;
-use Techworker\IOTA\ClientApi\AbstractResult;
-use Techworker\IOTA\ClientApi\Actions\GetBundle;
-use Techworker\IOTA\ClientApi\VoidResult;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Actions\BroadcastTransactions;
-use Techworker\IOTA\Type\TransactionHash;
+use IOTA\ClientApi\AbstractAction;
+use IOTA\ClientApi\AbstractResult;
+use IOTA\ClientApi\Actions\GetBundle;
+use IOTA\ClientApi\VoidResult;
+use IOTA\Node;
+use IOTA\RemoteApi\Actions\BroadcastTransactions;
+use IOTA\Type\TransactionHash;
 
 /**
  * This action takes a tail transaction hash (currentIndex = 0), gets the
