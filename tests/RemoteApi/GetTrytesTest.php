@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Tests\RemoteApi;
+namespace IOTA\Tests\RemoteApi;
 
-use Techworker\IOTA\RemoteApi\Actions\GetTrytes\Action;
-use Techworker\IOTA\RemoteApi\Actions\GetTrytes\Result;
-use Techworker\IOTA\Type\TransactionHash;
-use Techworker\IOTA\Type\Trytes;
+use IOTA\RemoteApi\Actions\GetTrytes\Action;
+use IOTA\RemoteApi\Actions\GetTrytes\Result;
+use IOTA\Type\TransactionHash;
+use IOTA\Type\Trytes;
 
 /**
  * @coversNothing

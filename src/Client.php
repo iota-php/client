@@ -11,19 +11,19 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA;
+namespace IOTA;
 
 use Psr\Container\ContainerInterface;
-use Techworker\IOTA\ClientApi\ClientApi;
-use Techworker\IOTA\DI\IOTAContainer;
-use Techworker\IOTA\RemoteApi\RemoteApi;
+use IOTA\ClientApi\ClientApi;
+use IOTA\DI\IOTAContainer;
+use IOTA\RemoteApi\RemoteApi;
 
 /**
- * Class IOTA.
+ * Class Client.
  *
  * Root class to get access to the libraries functionalities.
  */
-class IOTA
+class Client
 {
     /**
      * Latest api instance for a node.

@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\RemoteApi\Actions\StoreTransactions;
+namespace IOTA\RemoteApi\Actions\StoreTransactions;
 
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\AbstractResult;
-use Techworker\IOTA\RemoteApi\Exception;
-use Techworker\IOTA\Type\Transaction;
+use IOTA\Node;
+use IOTA\RemoteApi\AbstractResult;
+use IOTA\RemoteApi\Exception;
+use IOTA\Type\Transaction;
 
 /**
  * Trait RequestTrait.

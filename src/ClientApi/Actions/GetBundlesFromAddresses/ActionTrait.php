@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\GetBundlesFromAddresses;
+namespace IOTA\ClientApi\Actions\GetBundlesFromAddresses;
 
-use Techworker\IOTA\Node;
+use IOTA\Node;
 
 /**
  * Replays a transfer by doing Proof of Work again.

@@ -11,20 +11,20 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Tests\RemoteApi;
+namespace IOTA\Tests\RemoteApi;
 
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Mock\Client;
 use PHPUnit\Framework\TestCase;
-use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
-use Techworker\IOTA\Cryptography\POW\PowInterface;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Actions\AttachToTangle\Action;
-use Techworker\IOTA\RemoteApi\Actions\AttachToTangle\Result;
-use Techworker\IOTA\RemoteApi\NodeApiClient;
-use Techworker\IOTA\Tests\Container;
-use Techworker\IOTA\Tests\DummyData;
-use Techworker\IOTA\Type\Trytes;
+use IOTA\Cryptography\Hashing\CurlFactory;
+use IOTA\Cryptography\POW\PowInterface;
+use IOTA\Node;
+use IOTA\RemoteApi\Actions\AttachToTangle\Action;
+use IOTA\RemoteApi\Actions\AttachToTangle\Result;
+use IOTA\RemoteApi\NodeApiClient;
+use IOTA\Tests\Container;
+use IOTA\Tests\DummyData;
+use IOTA\Type\Trytes;
 
 /**
  * @coversNothing

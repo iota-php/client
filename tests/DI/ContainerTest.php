@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Tests;
+namespace IOTA\Tests;
 
 use PHPUnit\Framework\TestCase;
 
@@ -35,7 +35,7 @@ class ContainerTest extends TestCase
 
     public function testGetException()
     {
-        $this->expectException(\Techworker\IOTA\DI\NotFoundException::class);
+        $this->expectException(\IOTA\DI\NotFoundException::class);
 
         $container = new Container();
         $container->get('ABC');

@@ -11,16 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\RemoteApi\Actions\GetTrytes;
+namespace IOTA\RemoteApi\Actions\GetTrytes;
 
-use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\AbstractAction;
-use Techworker\IOTA\RemoteApi\AbstractResult;
-use Techworker\IOTA\RemoteApi\Exception;
-use Techworker\IOTA\RemoteApi\NodeApiClient;
-use Techworker\IOTA\Type\TransactionHash;
-use Techworker\IOTA\Util\SerializeUtil;
+use IOTA\Cryptography\Hashing\CurlFactory;
+use IOTA\Node;
+use IOTA\RemoteApi\AbstractAction;
+use IOTA\RemoteApi\AbstractResult;
+use IOTA\RemoteApi\Exception;
+use IOTA\RemoteApi\NodeApiClient;
+use IOTA\Type\TransactionHash;
+use IOTA\Util\SerializeUtil;
 
 /**
  * Class Action.

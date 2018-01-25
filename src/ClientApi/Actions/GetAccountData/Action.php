@@ -11,18 +11,18 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\GetAccountData;
+namespace IOTA\ClientApi\Actions\GetAccountData;
 
-use Techworker\IOTA\ClientApi\AbstractAction;
-use Techworker\IOTA\ClientApi\Actions\GetBundlesFromAddresses;
-use Techworker\IOTA\ClientApi\Actions\GetNewAddress;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Actions\GetBalances;
-use Techworker\IOTA\Type\AccountData;
-use Techworker\IOTA\Type\Input;
-use Techworker\IOTA\Type\Iota;
-use Techworker\IOTA\Type\SecurityLevel;
-use Techworker\IOTA\Type\Seed;
+use IOTA\ClientApi\AbstractAction;
+use IOTA\ClientApi\Actions\GetBundlesFromAddresses;
+use IOTA\ClientApi\Actions\GetNewAddress;
+use IOTA\Node;
+use IOTA\RemoteApi\Actions\GetBalances;
+use IOTA\Type\AccountData;
+use IOTA\Type\Input;
+use IOTA\Type\Iota;
+use IOTA\Type\SecurityLevel;
+use IOTA\Type\Seed;
 
 /**
  * Gets a defined number of addresses for the given seed starting at a

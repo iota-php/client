@@ -11,19 +11,19 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\SendTrytes;
+namespace IOTA\ClientApi\Actions\SendTrytes;
 
-use Techworker\IOTA\ClientApi\AbstractAction;
-use Techworker\IOTA\ClientApi\AbstractResult;
-use Techworker\IOTA\ClientApi\Actions\StoreAndBroadcast;
-use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Actions\AttachToTangle;
-use Techworker\IOTA\RemoteApi\Actions\GetTransactionsToApprove;
-use Techworker\IOTA\Type\Milestone;
-use Techworker\IOTA\Type\Transaction;
-use Techworker\IOTA\Type\Trytes;
-use Techworker\IOTA\Util\SerializeUtil;
+use IOTA\ClientApi\AbstractAction;
+use IOTA\ClientApi\AbstractResult;
+use IOTA\ClientApi\Actions\StoreAndBroadcast;
+use IOTA\Cryptography\Hashing\CurlFactory;
+use IOTA\Node;
+use IOTA\RemoteApi\Actions\AttachToTangle;
+use IOTA\RemoteApi\Actions\GetTransactionsToApprove;
+use IOTA\Type\Milestone;
+use IOTA\Type\Transaction;
+use IOTA\Type\Trytes;
+use IOTA\Util\SerializeUtil;
 
 /**
  * Sends the given trytes (transactions) and returns the list of

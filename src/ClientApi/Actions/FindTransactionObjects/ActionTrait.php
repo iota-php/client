@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\FindTransactionObjects;
+namespace IOTA\ClientApi\Actions\FindTransactionObjects;
 
-use Techworker\IOTA\Node;
-use Techworker\IOTA\Type\Address;
-use Techworker\IOTA\Type\Approvee;
-use Techworker\IOTA\Type\BundleHash;
-use Techworker\IOTA\Type\Tag;
+use IOTA\Node;
+use IOTA\Type\Address;
+use IOTA\Type\Approvee;
+use IOTA\Type\BundleHash;
+use IOTA\Type\Tag;
 
 /**
  * Replays a transfer by doing Proof of Work again.

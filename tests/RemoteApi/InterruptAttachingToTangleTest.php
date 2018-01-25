@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Tests\RemoteApi;
+namespace IOTA\Tests\RemoteApi;
 
-use Techworker\IOTA\RemoteApi\Actions\InterruptAttachingToTangle\Action;
-use Techworker\IOTA\RemoteApi\Actions\InterruptAttachingToTangle\Result;
+use IOTA\RemoteApi\Actions\InterruptAttachingToTangle\Action;
+use IOTA\RemoteApi\Actions\InterruptAttachingToTangle\Result;
 
 /**
  * @coversNothing

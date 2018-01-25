@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\RemoteApi;
+namespace IOTA\RemoteApi;
 
-use Techworker\IOTA\SerializeInterface;
-use Techworker\IOTA\Trace;
+use IOTA\SerializeInterface;
+use IOTA\Trace;
 
 /**
  * Class AbstractResponse.

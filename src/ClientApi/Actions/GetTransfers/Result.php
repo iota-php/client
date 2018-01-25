@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\GetTransfers;
+namespace IOTA\ClientApi\Actions\GetTransfers;
 
-class Result extends \Techworker\IOTA\ClientApi\Actions\GetBundlesFromAddresses\Result
+class Result extends \IOTA\ClientApi\Actions\GetBundlesFromAddresses\Result
 {
     // TODO: change this..
-    public function fromResult(\Techworker\IOTA\ClientApi\Actions\GetBundlesFromAddresses\Result $result)
+    public function fromResult(\IOTA\ClientApi\Actions\GetBundlesFromAddresses\Result $result)
     {
         $this->bundles = $result->bundles;
     }

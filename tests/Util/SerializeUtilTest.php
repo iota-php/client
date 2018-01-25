@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Tests\Util;
+namespace IOTA\Tests\Util;
 
 use PHPUnit\Framework\TestCase;
-use Techworker\IOTA\SerializeInterface;
-use Techworker\IOTA\Util\SerializeUtil;
+use IOTA\SerializeInterface;
+use IOTA\Util\SerializeUtil;
 
 /**
  * Class SerializeUtilTest.

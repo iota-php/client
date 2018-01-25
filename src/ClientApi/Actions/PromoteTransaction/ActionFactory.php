@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\PromoteTransaction;
+namespace IOTA\ClientApi\Actions\PromoteTransaction;
 
-use Techworker\IOTA\AbstractFactory;
-use Techworker\IOTA\ClientApi\Actions\SendTransfer;
-use Techworker\IOTA\ClientApi\FactoryInterface;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Actions\IsTailConsistent;
+use IOTA\AbstractFactory;
+use IOTA\ClientApi\Actions\SendTransfer;
+use IOTA\ClientApi\FactoryInterface;
+use IOTA\Node;
+use IOTA\RemoteApi\Actions\IsTailConsistent;
 
 /**
  * Class ActionFactory.

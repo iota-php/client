@@ -11,14 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\GetInputs;
+namespace IOTA\ClientApi\Actions\GetInputs;
 
-use Techworker\IOTA\AbstractFactory;
-use Techworker\IOTA\ClientApi\Actions\GetAddresses;
-use Techworker\IOTA\ClientApi\Actions\GetNewAddress;
-use Techworker\IOTA\ClientApi\FactoryInterface;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Actions\GetBalances;
+use IOTA\AbstractFactory;
+use IOTA\ClientApi\Actions\GetAddresses;
+use IOTA\ClientApi\Actions\GetNewAddress;
+use IOTA\ClientApi\FactoryInterface;
+use IOTA\Node;
+use IOTA\RemoteApi\Actions\GetBalances;
 
 /**
  * Class ActionFactory.

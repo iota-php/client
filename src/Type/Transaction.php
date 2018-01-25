@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Type;
+namespace IOTA\Type;
 
-use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
-use Techworker\IOTA\Util\TritsUtil;
-use Techworker\IOTA\Util\TrytesUtil;
+use IOTA\Cryptography\Hashing\CurlFactory;
+use IOTA\Util\TritsUtil;
+use IOTA\Util\TrytesUtil;
 
 /**
  * Class Transaction.

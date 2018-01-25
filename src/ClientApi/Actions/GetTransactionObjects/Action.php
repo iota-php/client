@@ -11,16 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\GetTransactionObjects;
+namespace IOTA\ClientApi\Actions\GetTransactionObjects;
 
-use Techworker\IOTA\ClientApi\AbstractAction;
-use Techworker\IOTA\ClientApi\AbstractResult;
-use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Actions\GetTrytes;
-use Techworker\IOTA\Type\Transaction;
-use Techworker\IOTA\Type\TransactionHash;
-use Techworker\IOTA\Util\SerializeUtil;
+use IOTA\ClientApi\AbstractAction;
+use IOTA\ClientApi\AbstractResult;
+use IOTA\Cryptography\Hashing\CurlFactory;
+use IOTA\Node;
+use IOTA\RemoteApi\Actions\GetTrytes;
+use IOTA\Type\Transaction;
+use IOTA\Type\TransactionHash;
+use IOTA\Util\SerializeUtil;
 
 /**
  * Collects all transaction objects for the given transaction hashes.

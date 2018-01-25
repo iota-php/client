@@ -11,13 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Tests\Type;
+namespace IOTA\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-
-use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
-use Techworker\IOTA\Tests\Container;
-use Techworker\IOTA\Type\Transaction;
+use IOTA\Cryptography\Hashing\CurlFactory;
+use IOTA\Tests\Container;
+use IOTA\Type\Transaction;
 
 /**
  * @coversNothing

@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\GetTransfers;
+namespace IOTA\ClientApi\Actions\GetTransfers;
 
-use Techworker\IOTA\ClientApi\Actions\GetBundlesFromAddresses;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\Type\SecurityLevel;
-use Techworker\IOTA\Type\Seed;
+use IOTA\ClientApi\Actions\GetBundlesFromAddresses;
+use IOTA\Node;
+use IOTA\Type\SecurityLevel;
+use IOTA\Type\Seed;
 
 /**
  * Replays a transfer by doing Proof of Work again.

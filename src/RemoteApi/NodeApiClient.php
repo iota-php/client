@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\RemoteApi;
+namespace IOTA\RemoteApi;
 
 use Http\Client\HttpAsyncClient;
 use Http\Client\HttpClient;
@@ -21,7 +21,7 @@ use Psr\Http\Message\RequestInterface;
 
 /**
  * Class NodeCommandClient
- * @package Techworker\IOTA\RemoteApi
+ * @package IOTA\RemoteApi
  */
 class NodeApiClient
 {

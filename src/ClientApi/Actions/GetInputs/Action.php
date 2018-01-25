@@ -11,18 +11,18 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\GetInputs;
+namespace IOTA\ClientApi\Actions\GetInputs;
 
-use Techworker\IOTA\ClientApi\AbstractAction;
-use Techworker\IOTA\ClientApi\Actions\GetAddresses;
-use Techworker\IOTA\ClientApi\Actions\GetNewAddress;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\Actions\GetBalances;
-use Techworker\IOTA\Type\Input;
-use Techworker\IOTA\Type\Iota;
-use Techworker\IOTA\Type\SecurityLevel;
-use Techworker\IOTA\Type\Seed;
-use Techworker\IOTA\Util\AddressUtil;
+use IOTA\ClientApi\AbstractAction;
+use IOTA\ClientApi\Actions\GetAddresses;
+use IOTA\ClientApi\Actions\GetNewAddress;
+use IOTA\Node;
+use IOTA\RemoteApi\Actions\GetBalances;
+use IOTA\Type\Input;
+use IOTA\Type\Iota;
+use IOTA\Type\SecurityLevel;
+use IOTA\Type\Seed;
+use IOTA\Util\AddressUtil;
 
 /**
  * Replays a transfer by doing Proof of Work again.

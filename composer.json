@@ -1,14 +1,18 @@
 {
-    "name": "techworker/iota-php",
+    "name": "iota-php/client",
     "type": "library",
     "description": "IOTA client library implementation in PHP.",
     "keywords": ["iota", "tangle", "ledger", "crypto"],
-    "homepage": "https://github.com/Techworker/iota-php",
+    "homepage": "https://github.com/iota-php/client",
     "license": "MIT",
     "authors": [
         {
             "name": "Benjamin Ansbach",
             "email": "benjaminansbach@gmail.com"
+        },
+        {
+            "name": "Robin Lehrmann",
+            "email": "robin.lehrmann@developer.nrw"
         }
     ],
     "repositories": [
@@ -48,12 +52,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Techworker\\IOTA\\": "src/"
+            "IOTA\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Techworker\\IOTA\\Tests\\": "tests"
+            "IOTA\\Tests\\": "tests"
         }
     }
 }

@@ -12,9 +12,9 @@ to do the following.
 ```php
 <?php
 
-use Techworker\IOTA\IOTA;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\DI\IOTAContainer;
+use IOTA\IOTA;
+use IOTA\Node;
+use IOTA\DI\IOTAContainer;
 
 $options = [
     'ccurlPath' => '/srv/ccurl'

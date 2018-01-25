@@ -11,16 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\RemoteApi\Actions\FindTransactions;
+namespace IOTA\RemoteApi\Actions\FindTransactions;
 
-use Techworker\IOTA\RemoteApi\AbstractAction;
-use Techworker\IOTA\RemoteApi\AbstractResult;
-use Techworker\IOTA\RemoteApi\Exception;
-use Techworker\IOTA\Type\Address;
-use Techworker\IOTA\Type\Approvee;
-use Techworker\IOTA\Type\BundleHash;
-use Techworker\IOTA\Type\Tag;
-use Techworker\IOTA\Util\SerializeUtil;
+use IOTA\RemoteApi\AbstractAction;
+use IOTA\RemoteApi\AbstractResult;
+use IOTA\RemoteApi\Exception;
+use IOTA\Type\Address;
+use IOTA\Type\Approvee;
+use IOTA\Type\BundleHash;
+use IOTA\Type\Tag;
+use IOTA\Util\SerializeUtil;
 
 /**
  * Class Action.

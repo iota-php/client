@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\GetInputs;
+namespace IOTA\ClientApi\Actions\GetInputs;
 
-use Techworker\IOTA\ClientApi\AbstractResult;
-use Techworker\IOTA\Type\Input;
-use Techworker\IOTA\Type\Iota;
-use Techworker\IOTA\Util\SerializeUtil;
+use IOTA\ClientApi\AbstractResult;
+use IOTA\Type\Input;
+use IOTA\Type\Iota;
+use IOTA\Util\SerializeUtil;
 
 /**
  * Replays a transfer by doing Proof of Work again.

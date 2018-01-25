@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\RemoteApi\Actions\GetTrytes;
+namespace IOTA\RemoteApi\Actions\GetTrytes;
 
-use Techworker\IOTA\AbstractFactory;
-use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\ActionFactoryInterface;
-use Techworker\IOTA\RemoteApi\NodeApiClient;
+use IOTA\AbstractFactory;
+use IOTA\Cryptography\Hashing\CurlFactory;
+use IOTA\Node;
+use IOTA\RemoteApi\ActionFactoryInterface;
+use IOTA\RemoteApi\NodeApiClient;
 
 /**
  * Class RequestFactory.

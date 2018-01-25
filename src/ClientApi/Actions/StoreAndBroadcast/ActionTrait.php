@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\StoreAndBroadcast;
+namespace IOTA\ClientApi\Actions\StoreAndBroadcast;
 
-use Techworker\IOTA\ClientApi\VoidResult;
-use Techworker\IOTA\Node;
-use Techworker\IOTA\Type\Transaction;
+use IOTA\ClientApi\VoidResult;
+use IOTA\Node;
+use IOTA\Type\Transaction;
 
 /**
  * Replays a transfer by doing Proof of Work again.

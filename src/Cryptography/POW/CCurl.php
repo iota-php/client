@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Cryptography\POW;
+namespace IOTA\Cryptography\POW;
 
-use Techworker\IOTA\Exception;
-use Techworker\IOTA\Type\Transaction;
+use IOTA\Exception;
+use IOTA\Type\Transaction;
 
 /**
  * Class CCurl.
@@ -35,7 +35,7 @@ class CCurl implements PowInterface
      *
      * @param string $pathToCcurl
      *
-     * @throws \Techworker\IOTA\Exception
+     * @throws \IOTA\Exception
      */
     public function __construct(string $pathToCcurl)
     {
@@ -67,7 +67,7 @@ class CCurl implements PowInterface
     /**
      * check if ccurl-cli exists and if it is executable.
      *
-     * @throws \Techworker\IOTA\Exception
+     * @throws \IOTA\Exception
      */
     protected function checkPath()
     {

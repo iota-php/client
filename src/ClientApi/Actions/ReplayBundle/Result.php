@@ -11,20 +11,20 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\ReplayBundle;
+namespace IOTA\ClientApi\Actions\ReplayBundle;
 
-use Techworker\IOTA\ClientApi\AbstractResult;
-use Techworker\IOTA\Type\Bundle;
+use IOTA\ClientApi\AbstractResult;
+use IOTA\Type\Bundle;
 
 class Result extends AbstractResult
 {
     /**
      * The sendTrytes result.
      *
-     * @todo not sure about that, but cross extending isn't better, in this case extending from \Techworker\IOTA\ClientApi\Actions\SendTrytes\Result
+     * @todo not sure about that, but cross extending isn't better, in this case extending from \IOTA\ClientApi\Actions\SendTrytes\Result
      *       did that before somewhere..
      *
-     * @var \Techworker\IOTA\ClientApi\Actions\SendTrytes\Result
+     * @var \IOTA\ClientApi\Actions\SendTrytes\Result
      */
     protected $sendTrytesResult;
 
@@ -36,19 +36,19 @@ class Result extends AbstractResult
     protected $bundle;
 
     /**
-     * @return \Techworker\IOTA\ClientApi\Actions\SendTrytes\Result
+     * @return \IOTA\ClientApi\Actions\SendTrytes\Result
      */
-    public function getSendTrytesResult(): \Techworker\IOTA\ClientApi\Actions\SendTrytes\Result
+    public function getSendTrytesResult(): \IOTA\ClientApi\Actions\SendTrytes\Result
     {
         return $this->sendTrytesResult;
     }
 
     /**
-     * @param \Techworker\IOTA\ClientApi\Actions\SendTrytes\Result $sendTrytesResult
+     * @param \IOTA\ClientApi\Actions\SendTrytes\Result $sendTrytesResult
      *
      * @return Result
      */
-    public function setSendTrytesResult(\Techworker\IOTA\ClientApi\Actions\SendTrytes\Result $sendTrytesResult): self
+    public function setSendTrytesResult(\IOTA\ClientApi\Actions\SendTrytes\Result $sendTrytesResult): self
     {
         $this->sendTrytesResult = $sendTrytesResult;
 

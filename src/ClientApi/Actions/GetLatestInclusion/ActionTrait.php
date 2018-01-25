@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\GetLatestInclusion;
+namespace IOTA\ClientApi\Actions\GetLatestInclusion;
 
-use Techworker\IOTA\Node;
-use Techworker\IOTA\Type\TransactionHash;
+use IOTA\Node;
+use IOTA\Type\TransactionHash;
 
 /**
  * Replays a transfer by doing Proof of Work again.

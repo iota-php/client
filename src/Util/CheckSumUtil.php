@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Util;
+namespace IOTA\Util;
 
-use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
-use Techworker\IOTA\Exception;
-use Techworker\IOTA\Type\CheckSummableInterface;
-use Techworker\IOTA\Type\Trytes;
+use IOTA\Cryptography\Hashing\KerlFactory;
+use IOTA\Exception;
+use IOTA\Type\CheckSummableInterface;
+use IOTA\Type\Trytes;
 
 /**
  * Class ChecksumUtil.

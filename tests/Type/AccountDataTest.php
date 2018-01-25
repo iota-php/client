@@ -11,18 +11,18 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Tests;
+namespace IOTA\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Techworker\IOTA\Cryptography\Hashing\CurlFactory;
-use Techworker\IOTA\Cryptography\Hashing\KerlFactory;
-use Techworker\IOTA\Type\AccountData;
-use Techworker\IOTA\Type\Address;
-use Techworker\IOTA\Type\Bundle;
-use Techworker\IOTA\Type\BundleHash;
-use Techworker\IOTA\Type\Input;
-use Techworker\IOTA\Type\Iota;
-use Techworker\IOTA\Type\SecurityLevel;
+use IOTA\Cryptography\Hashing\CurlFactory;
+use IOTA\Cryptography\Hashing\KerlFactory;
+use IOTA\Type\AccountData;
+use IOTA\Type\Address;
+use IOTA\Type\Bundle;
+use IOTA\Type\BundleHash;
+use IOTA\Type\Input;
+use IOTA\Type\Iota;
+use IOTA\Type\SecurityLevel;
 
 /**
  * @coversNothing

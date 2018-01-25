@@ -11,14 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\ClientApi\Actions\SendTransfer;
+namespace IOTA\ClientApi\Actions\SendTransfer;
 
-use Techworker\IOTA\Node;
-use Techworker\IOTA\Type\Address;
-use Techworker\IOTA\Type\HMACKey;
-use Techworker\IOTA\Type\Milestone;
-use Techworker\IOTA\Type\SecurityLevel;
-use Techworker\IOTA\Type\Seed;
+use IOTA\Node;
+use IOTA\Type\Address;
+use IOTA\Type\HMACKey;
+use IOTA\Type\Milestone;
+use IOTA\Type\SecurityLevel;
+use IOTA\Type\Seed;
 
 /**
  * Replays a transfer by doing Proof of Work again.

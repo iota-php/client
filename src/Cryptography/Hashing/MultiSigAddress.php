@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\Cryptography\Hashing;
+namespace IOTA\Cryptography\Hashing;
 
-use Techworker\IOTA\Type\Address;
-use Techworker\IOTA\Type\Trytes;
-use Techworker\IOTA\Util\TritsUtil;
-use Techworker\IOTA\Util\TrytesUtil;
+use IOTA\Type\Address;
+use IOTA\Type\Trytes;
+use IOTA\Util\TritsUtil;
+use IOTA\Util\TrytesUtil;
 
 /**
  * Class MultiSigAddress.

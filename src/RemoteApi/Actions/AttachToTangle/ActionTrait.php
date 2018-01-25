@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Techworker\IOTA\RemoteApi\Actions\AttachToTangle;
+namespace IOTA\RemoteApi\Actions\AttachToTangle;
 
-use Techworker\IOTA\Node;
-use Techworker\IOTA\RemoteApi\AbstractResult;
-use Techworker\IOTA\RemoteApi\Exception;
-use Techworker\IOTA\Type\Transaction;
-use Techworker\IOTA\Type\TransactionHash;
+use IOTA\Node;
+use IOTA\RemoteApi\AbstractResult;
+use IOTA\RemoteApi\Exception;
+use IOTA\Type\Transaction;
+use IOTA\Type\TransactionHash;
 
 /**
  * Trait RequestTrait.
@@ -58,7 +58,7 @@ trait ActionTrait
      * @param TransactionHash $branchTransactionHash
      * @param int             $minWeightMagnitude
      *
-     * @throws \Techworker\IOTA\Exception
+     * @throws \IOTA\Exception
      * @throws Exception
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
