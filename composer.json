@@ -48,12 +48,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Techworker\\IOTA\\": "src/"
+            "Techworker\\IOTA\\": ""
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Techworker\\IOTA\\Tests\\": "tests"
+            "Techworker\\IOTA\\Tests\\": "Tests"
         }
     }
 }
