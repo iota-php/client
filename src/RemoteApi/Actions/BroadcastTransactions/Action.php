@@ -40,7 +40,7 @@ class Action extends AbstractAction
     /**
      * Overwrites all transactions.
      *
-     * @param Trytes[] $transactions
+     * @param Transaction[] $transactions
      *
      * @return Action
      */

@@ -187,7 +187,7 @@ class Action extends AbstractAction
     /**
      * Sets the list of approvees.
      *
-     * @param \string[] $approvees
+     * @param Approvee[] $approvees
      *
      * @return Action
      */

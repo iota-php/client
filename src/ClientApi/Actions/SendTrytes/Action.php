@@ -36,9 +36,9 @@ class Action extends AbstractAction
         StoreAndBroadcast\ActionTrait;
 
     /**
-     * Trytes from an attach process.
+     * Transactions from an attach process.
      *
-     * @var Trytes[]
+     * @var Transaction[]
      */
     protected $transactions;
 

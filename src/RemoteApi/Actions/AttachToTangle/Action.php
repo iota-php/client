@@ -76,7 +76,7 @@ class Action extends AbstractAction
     /**
      * Little state helper.
      *
-     * @var TransactionHash
+     * @var TransactionHash|null
      */
     protected $previousTxHash;
 
@@ -308,7 +308,7 @@ class Action extends AbstractAction
     {
         $transaction->setAttachmentTimestamp(time() * 1000);
         $transaction->setAttachmentTimestampLowerBound(0);
-        $transaction->setAttachmentTimestampUpperBound((3 ** 27 - 1) / 2);
+        $transaction->setAttachmentTimestampUpperBound((int)((3 ** 27 - 1) / 2));
 
         // If this is the first transaction to be processed make sure that it's
         // the last in the bundle and then assign it the supplied trunk and

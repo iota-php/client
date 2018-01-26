@@ -21,7 +21,6 @@ if (isAjax()) {
         }
         $addChecksum = isset($_POST['addChecksum']);
         $security = \Techworker\IOTA\Type\SecurityLevel::fromValue($_POST['security']);
-
         $result = $iota->getClientApi()->getAddresses(
             $node,
             $seed,

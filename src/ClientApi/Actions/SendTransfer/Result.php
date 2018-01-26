@@ -22,7 +22,7 @@ class Result extends AbstractResult
     /**
      * The bundle.
      *
-     * @var Bundle
+     * @var Bundle|array
      */
     protected $bundle = [];
 

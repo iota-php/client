@@ -42,7 +42,7 @@ class IOTA
     /**
      * The container that holds the factories.
      *
-     * @var IOTAContainer
+     * @var ContainerInterface|IOTAContainer
      */
     protected $container;
 

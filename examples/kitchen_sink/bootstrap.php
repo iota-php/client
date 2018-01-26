@@ -30,7 +30,7 @@ $nodes = [
 ];
 
 $options = [
-    'ccurlPath' => __DIR__.'/../../ccurl'
+    'ccurlPath' => __DIR__.'/../../ccurl',
 ];
 
 return new IOTA(new IOTAContainer($options), $nodes);

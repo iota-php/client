@@ -70,9 +70,9 @@ class Action extends AbstractAction
     /**
      * Action constructor.
      *
-     * @param Node                            $node
+     * @param Node                           $node
      * @param IsTailConsistent\ActionFactory $isTailConsistentFactory
-     * @param SendTransfer\ActionFactory      $sendTransferFactory
+     * @param SendTransfer\ActionFactory     $sendTransferFactory
      */
     public function __construct(
         Node $node,
@@ -169,11 +169,10 @@ class Action extends AbstractAction
 
         $sendTransferResult = $this->sendTransfer(
             $this->node,
-            new Seed((string) $this->transfer->getRecipientAddress()->removeChecksum()),
+            new Seed((string)$this->transfer->getRecipientAddress()->removeChecksum()),
             [$this->transfer],
             $this->minWeightMagnitude,
             $this->depth,
-            true,
             null,
             [],
             null,
@@ -189,12 +188,15 @@ class Action extends AbstractAction
 
     public function serialize(): array
     {
-        return array_merge(parent::serialize(), [
-            'tailTransactionHash' => $this->tailTransactionHash->serialize(),
-            'depth' => $this->depth,
-            'minWeightMagnitude' => $this->minWeightMagnitude,
-            'transfer' => $this->transfer->serialize(),
-            'reference' => $this->reference->serialize(),
-        ]);
+        return array_merge(
+            parent::serialize(),
+            [
+                'tailTransactionHash' => $this->tailTransactionHash->serialize(),
+                'depth' => $this->depth,
+                'minWeightMagnitude' => $this->minWeightMagnitude,
+                'transfer' => $this->transfer->serialize(),
+                'reference' => $this->reference->serialize(),
+            ]
+        );
     }
 }
