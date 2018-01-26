@@ -39,7 +39,7 @@ phpcbf:                                                                         
 	-$(PHPCBF_CMD) --standard=phpcs.xml
 
 phpstan:
-	-$(PHPSTAN_CMD)
+	-$(PHPSTAN_CMD) analyse -l 5 --autoload-file=vendor/autoload.php src
 
 # report targets
 phpunit-report: reports                                                         ## run phpunit and create reports

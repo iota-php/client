@@ -10,7 +10,6 @@ production.**
 However, I encourage you to try it out and find bugs or suggest improvements. 
 Apart from that, happy feeless money transferring and welcome to the future!
 
-
 See /docs folder for more information.
 
 Donation? To this address please:
