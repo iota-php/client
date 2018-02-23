@@ -31,7 +31,7 @@ class Container extends IOTAContainer
     public function __construct()
     {
         parent::__construct([
-            'ccurlPath' => __DIR__ . '/../ccurl',
+            'ccurlPath' => __DIR__ . '/ccurl',
         ]);
 
         $this->set(HttpClient::class, function() {
