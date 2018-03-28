@@ -39,7 +39,8 @@
         "php-http/async-client-implementation": "^1.0",
         "php-http/httplug": "^1.0",
         "php-http/message-factory": "^1.0",
-        "php-http/discovery": "^1.0"
+        "php-http/discovery": "^1.0",
+        "php-http/guzzle6-adapter": "^1.1"
     },
     "require-dev": {
         "twig/twig": "^2.0",
