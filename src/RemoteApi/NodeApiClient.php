@@ -46,14 +46,15 @@ class NodeApiClient
     /**
      * NodeApiClient constructor.
      *
-     * @param HttpClient $httpClient
+     * @param HttpClient      $httpClient
      * @param HttpAsyncClient $httpAsyncClient
-     * @param MessageFactory $messageFactory
+     * @param MessageFactory  $messageFactory
      */
-    public function __construct(HttpClient $httpClient,
-                                HttpAsyncClient $httpAsyncClient,
-                                MessageFactory $messageFactory)
-    {
+    public function __construct(
+        HttpClient $httpClient,
+        HttpAsyncClient $httpAsyncClient,
+        MessageFactory $messageFactory
+    ) {
         $this->httpClient = $httpClient;
         $this->httpAsyncClient = $httpAsyncClient;
         $this->messageFactory = $messageFactory;
@@ -65,7 +66,7 @@ class NodeApiClient
      * @param AbstractAction $action
      * @return RequestInterface
      */
-    protected function buildRequest(AbstractAction $action) : RequestInterface
+    protected function buildRequest(AbstractAction $action): RequestInterface
     {
         $body = json_encode($action);
         $headers = [
@@ -74,7 +75,8 @@ class NodeApiClient
             'X-IOTA-API-Version' => $action->getNode()->getApiVersion(),
         ];
 
-        return $this->messageFactory->createRequest('POST',
+        return $this->messageFactory->createRequest(
+            'POST',
             $action->getNode()->getCommandsEndpoint(),
             $headers,
             $body
@@ -87,13 +89,14 @@ class NodeApiClient
      * @param AbstractAction $action
      * @return array
      */
-    public function send(AbstractAction $action) : array
+    public function send(AbstractAction $action): array
     {
         $request = $this->buildRequest($action);
         $response = $this->httpClient->sendRequest($request);
+
         return [
             'code' => $response->getStatusCode(),
-            'raw' => (string) $response->getBody(),
+            'raw' => (string)$response->getBody(),
         ];
     }
 
@@ -104,9 +107,10 @@ class NodeApiClient
      * @param AbstractAction $action
      * @return Promise
      */
-    public function sendAsync(AbstractAction $action) : Promise
+    public function sendAsync(AbstractAction $action): Promise
     {
         $request = $this->buildRequest($action);
+
         return $this->httpAsyncClient->sendAsyncRequest($request);
     }
 }
