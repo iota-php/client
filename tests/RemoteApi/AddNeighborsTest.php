@@ -17,9 +17,6 @@ use IOTA\Node;
 use IOTA\RemoteApi\Actions\AddNeighbors\Action;
 use IOTA\RemoteApi\Actions\AddNeighbors\Result;
 
-/**
- * @coversNothing
- */
 class AddNeighborsTest extends AbstractApiTestCase
 {
     public function testRequestSerialization()

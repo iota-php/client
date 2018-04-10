@@ -19,9 +19,6 @@ use IOTA\Type\Trytes;
 use IOTA\Util\TrytesUtil;
 use IOTA\Util\TryteUtil;
 
-/**
- * @coversNothing
- */
 class TrytesUtilTest extends TestCase
 {
     public function testNullHashTrytes()

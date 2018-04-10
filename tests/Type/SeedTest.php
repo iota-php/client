@@ -16,9 +16,6 @@ namespace IOTA\Tests\Type;
 use PHPUnit\Framework\TestCase;
 use IOTA\Type\Seed;
 
-/**
- * @coversNothing
- */
 class SeedTest extends TestCase
 {
     public function testValidCreation()

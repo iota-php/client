@@ -16,9 +16,6 @@ namespace IOTA\Tests\Type;
 use PHPUnit\Framework\TestCase;
 use IOTA\Type\Milestone;
 
-/**
- * @coversNothing
- */
 class MilestoneTest extends TestCase
 {
     public function testValidCreation()

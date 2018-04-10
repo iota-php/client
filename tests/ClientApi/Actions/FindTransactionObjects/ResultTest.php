@@ -17,9 +17,6 @@ use IOTA\ClientApi\Actions\FindTransactionObjects;
 use IOTA\Tests\ClientApi\Actions\AbstractActionTest;
 use IOTA\Tests\DummyData;
 
-/**
- * @coversNothing
- */
 class ResultTest extends AbstractActionTest
 {
     public function testSetter()

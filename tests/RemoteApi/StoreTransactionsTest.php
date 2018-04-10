@@ -17,9 +17,6 @@ use IOTA\RemoteApi\Actions\StoreTransactions\Action;
 use IOTA\RemoteApi\Actions\StoreTransactions\Result;
 use IOTA\Type\Trytes;
 
-/**
- * @coversNothing
- */
 class StoreTransactionsTest extends AbstractApiTestCase
 {
     public function testRequestSerialization()

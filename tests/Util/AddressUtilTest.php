@@ -24,8 +24,6 @@ use IOTA\Util\CheckSumUtil;
 
 /**
  * Class AddressUtilTest.
- *
- * @coversNothing
  */
 class AddressUtilTest extends TestCase
 {

@@ -20,9 +20,6 @@ use IOTA\Tests\ClientApi\Actions\AbstractActionTest;
 use IOTA\Tests\DummyData;
 use IOTA\Type\SecurityLevel;
 
-/**
- * @coversNothing
- */
 class ActionTest extends AbstractActionTest
 {
     public function testSetter()

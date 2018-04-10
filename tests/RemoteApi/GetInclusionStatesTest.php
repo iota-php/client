@@ -18,9 +18,6 @@ use IOTA\RemoteApi\Actions\GetInclusionStates\Result;
 use IOTA\Type\Tip;
 use IOTA\Type\TransactionHash;
 
-/**
- * @coversNothing
- */
 class GetInclusionStatesTest extends AbstractApiTestCase
 {
     public function testRequestSerialization()

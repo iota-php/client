@@ -17,9 +17,6 @@ use IOTA\RemoteApi\Actions\GetTransactionsToApprove\Action;
 use IOTA\RemoteApi\Actions\GetTransactionsToApprove\Result;
 use IOTA\Type\TransactionHash;
 
-/**
- * @coversNothing
- */
 class GetTransactionsToApproveTest extends AbstractApiTestCase
 {
     public function testRequestSerialization()

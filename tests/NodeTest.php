@@ -18,8 +18,6 @@ use IOTA\Node;
 
 /**
  * Class NodeTest.
- *
- * @coversNothing
  */
 class NodeTest extends TestCase
 {

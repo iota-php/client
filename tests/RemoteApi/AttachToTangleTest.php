@@ -26,9 +26,6 @@ use IOTA\Tests\Container;
 use IOTA\Tests\DummyData;
 use IOTA\Type\Trytes;
 
-/**
- * @coversNothing
- */
 class AttachToTangleTest extends TestCase
 {
     public function testAction()

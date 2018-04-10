@@ -21,8 +21,6 @@ use IOTA\RemoteApi\RemoteApi;
 
 /**
  * Class IOTATest.
- *
- * @coversNothing
  */
 class IOTATest extends TestCase
 {

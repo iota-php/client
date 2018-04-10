@@ -16,9 +16,6 @@ namespace IOTA\Tests\Util;
 use PHPUnit\Framework\TestCase;
 use IOTA\Util\ValidatorUtil;
 
-/**
- * @coversNothing
- */
 class ValidatorUtilTest extends TestCase
 {
     public function testIsArrayOf()

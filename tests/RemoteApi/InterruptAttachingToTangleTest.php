@@ -16,9 +16,6 @@ namespace IOTA\Tests\RemoteApi;
 use IOTA\RemoteApi\Actions\InterruptAttachingToTangle\Action;
 use IOTA\RemoteApi\Actions\InterruptAttachingToTangle\Result;
 
-/**
- * @coversNothing
- */
 class InterruptAttachingToTangleTest extends AbstractApiTestCase
 {
     public function testRequestSerialization()

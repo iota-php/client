@@ -20,9 +20,6 @@ use IOTA\Type\Trytes;
 use IOTA\Util\TritsUtil;
 use IOTA\Util\TrytesUtil;
 
-/**
- * @coversNothing
- */
 class KerlTest extends TestCase
 {
     public function dataGenerateTrytesAndHashes()

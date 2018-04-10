@@ -19,8 +19,6 @@ use IOTA\Util\SerializeUtil;
 
 /**
  * Class SerializeUtilTest.
- *
- * @coversNothing
  */
 class SerializeUtilTest extends TestCase
 {
