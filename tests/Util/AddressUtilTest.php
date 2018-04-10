@@ -67,22 +67,4 @@ class AddressUtilTest extends TestCase
         static::assertEquals($expectedAddress, (string) $address);
         static::assertEquals($expectedAddress.$checksum, (string) $addressWithChecksum);
     }
-
-    /**
-     * @dataProvider addressDataProvider
-     *
-     * @param mixed $seed
-     * @param mixed $index
-     * @param mixed $securityLevel
-     * @param mixed $address
-     * @param mixed $checksum
-     */
-    public function testGenerateChecksum($seed, $index, $securityLevel, $address, $checksum)
-    {
-        $container = new Container();
-        $util = new AddressUtil($container->get(KerlFactory::class), $container->get(CheckSumUtil::class));
-        $address = new Address($address);
-        $checksum = $util->getChecksum($address);
-        static::assertEquals($checksum, (string) $checksum);
-    }
 }
