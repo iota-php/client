@@ -13,6 +13,11 @@ declare(strict_types=1);
 
 namespace IOTA;
 
+/**
+ * Class Exception
+ *
+ * Basic exception.
+ */
 class Exception extends \Exception
 {
 }
