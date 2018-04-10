@@ -63,11 +63,21 @@ class Client
         $this->nodes = $nodes;
     }
 
+    /**
+     * Gets the remote API implementation.
+     *
+     * @return RemoteApi
+     */
     public function getRemoteApi(): RemoteApi
     {
         return $this->remoteApi;
     }
 
+    /**
+     * Gets the client API implementation.
+     *
+     * @return ClientApi
+     */
     public function getClientApi(): ClientApi
     {
         return $this->clientApi;
