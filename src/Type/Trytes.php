@@ -69,7 +69,6 @@ class Trytes implements \IteratorAggregate, \Countable, SerializeInterface
     {
         // split up into chars and add them as a new Tryte.
         $chars = str_split($this->trytes);
-
         return new \ArrayIterator($chars);
     }
 
