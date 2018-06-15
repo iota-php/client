@@ -13,19 +13,10 @@ matrix:
         - php: 7.2
     fast_finish: true
 
-before_install:
-    # Disable XDebug speed up test execution. (Ignore failures if platform does not had the extension installed)
-    - phpenv config-rm xdebug.ini || return 0
-    - echo "memory_limit=2G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini || return 0
-    - wget https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar -O phpcs
-    - wget https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar -O phpcbf
-    - wget http://get.sensiolabs.org/security-checker.phar -O security-checker
-    - wget https://github.com/phpstan/phpstan/releases/download/0.8.4/phpstan.phar -O phpstan
-
 install:
-    - travis_retry composer self-update
-    - travis_retry composer install
-    - composer info -i
+    - wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.12.1/php-cs-fixer.phar -O php-cs-fixer
+    - wget http://get.sensiolabs.org/security-checker.phar -O security-checker
+    - wget https://github.com/phpstan/phpstan/releases/download/0.9.2/phpstan.phar -O phpstan
 
 script:
   - make dev-check

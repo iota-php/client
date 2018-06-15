@@ -1,7 +1,6 @@
 # commands
 COMPOSER_CMD=composer
-PHPCBF_CMD=phpcbf
-PHPCS_CMD=phpcs
+PHPCS_CMD=php-cs-fixer
 PHPUNIT_CMD=phpunit
 PHPSTAN_CMD=phpstan
 SECURITY_CHECKER_CMD=security-checker
@@ -15,7 +14,7 @@ help:                                                                           
 # targets for the developers
 dev-init: composer-install                                                      ## Run all build scripts and import
 dev-update: dev-init                                                            ## alias for "dev-init"
-dev-check: linters phpunit phpcs phpcbf phpstan
+dev-check: linters phpunit phpcsfixer phpstan
 
 # dev environment
 composer-install:                                                               ## the good old composer install
@@ -32,11 +31,8 @@ security-checker:                                                               
 	$(SECURITY_CHECKER_CMD) security:check composer.lock
 
 # Cody analysis targets
-phpcs:                                                                          ## run php code style checker
-	$(PHPCS_CMD) --standard=phpcs.xml $(OPTIONS)
-
-phpcbf:                                                                         ## run php code style auto-fixer
-	-$(PHPCBF_CMD) --standard=phpcs.xml
+phpcsfixer:                                                                     ## run php code style checker
+	$(PHPCS_CMD) fix --diff --dry-run $(OPTIONS)
 
 phpstan:
 	-$(PHPSTAN_CMD) analyse -l 5 --autoload-file=vendor/autoload.php src
@@ -58,4 +54,4 @@ tarball:                                                                        
 
 .PHONY: help
 .PHONY: composer-install
-.PHONY: linters phpunit security-checker phpcs phpcbf tarball
+.PHONY: linters phpunit security-checker phpcsfixer tarball
