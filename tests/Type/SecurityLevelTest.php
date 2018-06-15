@@ -16,9 +16,6 @@ namespace IOTA\Tests\Type;
 use PHPUnit\Framework\TestCase;
 use IOTA\Type\SecurityLevel;
 
-/**
- * @coversNothing
- */
 class SecurityLevelTest extends TestCase
 {
     public function testInit()

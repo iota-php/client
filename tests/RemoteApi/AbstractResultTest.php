@@ -18,9 +18,6 @@ use IOTA\Node;
 use IOTA\RemoteApi\AbstractResult;
 use IOTA\RemoteApi\ActionInterface;
 
-/**
- * @coversNothing
- */
 class AbstractResponseTest extends TestCase
 {
     public function testGetter()

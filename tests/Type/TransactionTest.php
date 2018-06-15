@@ -18,9 +18,6 @@ use IOTA\Cryptography\Hashing\CurlFactory;
 use IOTA\Tests\Container;
 use IOTA\Type\Transaction;
 
-/**
- * @coversNothing
- */
 class TransactionTest extends TestCase
 {
     public function testValidCreation()

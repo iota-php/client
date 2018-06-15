@@ -26,9 +26,6 @@ use IOTA\Tests\Container;
 use IOTA\Tests\DummyData;
 use IOTA\Type\Trytes;
 
-/**
- * @coversNothing
- */
 class AttachToTangleTest extends TestCase
 {
     public function testAction()
@@ -52,7 +49,7 @@ class AttachToTangleTest extends TestCase
 
         // create new action
         $action = new Action(
-            $container->get(PowInterface::class),
+            $this->createMock(PowInterface::class),
             $nodeApiClient,
             $container->get(CurlFactory::class),
             new Node('', true) // pow = true!

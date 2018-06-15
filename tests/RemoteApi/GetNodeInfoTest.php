@@ -17,9 +17,6 @@ use IOTA\Node;
 use IOTA\RemoteApi\Actions\GetNodeInfo\Action;
 use IOTA\RemoteApi\Actions\GetNodeInfo\Result;
 
-/**
- * @coversNothing
- */
 class GetNodeInfoTest extends AbstractApiTestCase
 {
     public function testRequestSerialization()

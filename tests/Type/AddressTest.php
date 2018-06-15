@@ -17,9 +17,6 @@ use PHPUnit\Framework\TestCase;
 use IOTA\Type\Address;
 use IOTA\Type\Trytes;
 
-/**
- * @coversNothing
- */
 class AddressTest extends TestCase
 {
     public function testValidCreation()

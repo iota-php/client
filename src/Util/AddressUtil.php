@@ -54,27 +54,6 @@ class AddressUtil
     }
 
     /**
-     * Calculates and returns the checksum of the given address.
-     *
-     * @param Address $address
-     *
-     * @return Trytes
-     */
-    public function getChecksum(Address $address): Trytes
-    {
-        $kerl = $this->kerlFactory->factory();
-        $kerl->reset();
-        $addressTrits = TrytesUtil::toTrits($address);
-        $checksumTrits = [];
-
-        $kerl->absorb($addressTrits, 0, \count($addressTrits));
-        $kerl->squeeze($checksumTrits, 0, $kerl->hashLength());
-
-        // last 9 trytes (27 trits) as checksum
-        return TritsUtil::toTrytes(\array_slice($checksumTrits, 243 - 27, 27));
-    }
-
-    /**
      * Returns a new Address instance for the given data.
      *
      * @param Seed          $seed

@@ -18,9 +18,6 @@ use IOTA\RemoteApi\Actions\GetBalances\Result;
 use IOTA\Type\Address;
 use IOTA\Type\Milestone;
 
-/**
- * @coversNothing
- */
 class GetBalancesTest extends AbstractApiTestCase
 {
     public function testRequestSerialization()

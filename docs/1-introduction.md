@@ -28,59 +28,71 @@ another implementation.
 ## Installation
 
 **Composer**
-The library is not on packagist yet until we tag the very first version, so you have to manually add the repository.
 
+Add a reference to the iota-php/client package in your composer.json file:
 
-    {
-        "repositories": [
-            {
-                "type": "vcs",
-                "url": "https://github.com/techworker/iota-php"
-            }
-        ],
-        "require": {
-            "techworker/iota-php": "dev-master"
-        }
+```json
+{
+    "require": {
+        "iota-php/client": "dev-master"
     }
-
-Then run `composer update` to install the dependency.
+}
+```
 
 **Proof of work**
-Proof of Work can be done locally if the node does not provide access to the `attachToTangle` command endpoint (which would do the POW for you). Currently we are using the ccurl implementation but it is easy to switch to another implementation if you have one.
+Proof of Work can be done locally if the node does not provide access to the 
+`attachToTangle` command endpoint (which would do the POW for you). Currently we 
+are using the ccurl implementation but it is easy to switch to another 
+implementation if you have one.
 
-You have to compile ccurl by yourself by following the instructions here: https://github.com/iotaledger/ccurl
+You have to compile ccurl by yourself by following the instructions here: 
+https://github.com/iotaledger/ccurl - the path to the executable will be needed
+later on when working with the library.
 
 ## Example projects
 
-The best way to kickstart the development is to have a look at the examples provided with the library or, of course, the tests. See the respective `/examples`  and `/tests` folder. 
+The best way to kickstart the development is to have a look at the examples 
+provided here: https://github.com/iota-php/examples
 
-The example projects are **NOT** meant to run as a real application, just examples on how to use the library. They are **not secure** in any way and should only be tested in a **development environment** and with test seeds. Their only purpose is to showcase the library’s functionality.
+The example projects are **NOT** meant to run as a real application, just 
+examples on how to use the library. They are **not secure** in any way and 
+should only be tested in a **development environment** and with test seeds. 
+Their only purpose is to showcase the library’s functionality.
 
 ## Learn IOTA
 
-While this documentation will cover some basics, you might find more information on these pages:
+While this documentation will cover some basics of IOTA, it will not serve as
+a tutorial for IOTA itself.
 
-- TODO
+There are numerous resources out there which will help you, the best starting 
+point is the discord chat.
+
 ## Initialization
 
 **The IOTA instance**
-The IOTA instance is the central point of initialization of the library. While you can use much of the functionality without it, it will serve as convenient entry point for the library’s functionality.
 
-To initialize a new IOTA instance and start with your IOTA project you’ll have to do the following.
+The IOTA instance is the central point of initialization of the library. While 
+you can use much of the functionality without it, it will serve as convenient 
+entry point for the library’s functionality.
 
+To initialize a new IOTA instance and start with your IOTA project you’ll have 
+to do the following.
 
-    use IOTA;
-    use IOTA\DI\IOTAContainer;
-    
-    $options = [
-        'ccurlPath' => '/srv/ccurl'
-    ];
-    
-    // initializes a new IOTA instance with the built in container and one iota node
-    $iota = new IOTA(
-        new IOTAContainer($options), 
-        [new Node('http://node01.iotatoken.nl:14265')]
-    );
+```php
+<?php
+
+use IOTA\DI\IOTAContainer;
+
+$options = [
+    'ccurlPath' => '/srv/ccurl'
+];
+
+// initializes a new IOTA instance with the built in container and one iota node
+$iota = new Techworker\IOTA\IOTA(
+    new IOTAContainer($options), 
+    [new Node('http://node01.iotatoken.nl:14265')]
+);
+```
 
 Now you can use the IOTA instance to get access to the client and remote api. 
 

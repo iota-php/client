@@ -114,7 +114,7 @@ class Action extends AbstractAction
     public function execute(): Result
     {
         $response = new Result($this);
-        $srvResponse = $this->nodeApiClient->sendRequest($this);
+        $srvResponse = $this->nodeApiClient->send($this);
         $response->initialize($srvResponse['code'], $srvResponse['raw']);
 
         return $response->finish()->throwOnError();

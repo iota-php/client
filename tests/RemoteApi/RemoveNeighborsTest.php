@@ -16,9 +16,6 @@ namespace IOTA\Tests\RemoteApi;
 use IOTA\RemoteApi\Actions\RemoveNeighbors\Action;
 use IOTA\RemoteApi\Actions\RemoveNeighbors\Result;
 
-/**
- * @coversNothing
- */
 class RemoveNeighborsTest extends AbstractApiTestCase
 {
     public function testRequestSerialization()

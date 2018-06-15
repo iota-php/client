@@ -17,9 +17,6 @@ use IOTA\RemoteApi\Actions\GetTips\Action;
 use IOTA\RemoteApi\Actions\GetTips\Result;
 use IOTA\Type\Tip;
 
-/**
- * @coversNothing
- */
 class GetTipsTest extends AbstractApiTestCase
 {
     public function testRequestSerialization()

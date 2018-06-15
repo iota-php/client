@@ -16,9 +16,6 @@ namespace IOTA\Tests\Type;
 use PHPUnit\Framework\TestCase;
 use IOTA\Type\TransactionHash;
 
-/**
- * @coversNothing
- */
 class TransactionHashTest extends TestCase
 {
     public function testValidCreation()

@@ -17,9 +17,6 @@ use IOTA\ClientApi\Actions\BroadcastBundle;
 use IOTA\Tests\ClientApi\Actions\AbstractActionTest;
 use IOTA\Tests\DummyData;
 
-/**
- * @coversNothing
- */
 class FactoryTest extends AbstractActionTest
 {
     public function testFactory()

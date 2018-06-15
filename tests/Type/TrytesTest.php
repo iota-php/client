@@ -18,9 +18,6 @@ use PHPUnit\Framework\TestCase;
 use IOTA\Type\Trytes;
 use IOTA\Util\TryteUtil;
 
-/**
- * @coversNothing
- */
 class TrytesTest extends TestCase
 {
     public function testConstruct()
@@ -91,4 +88,6 @@ class TrytesTest extends TestCase
         static::assertArrayHasKey('trytes', $s);
         static::assertEquals('ABC', $s['trytes']);
     }
+
+
 }

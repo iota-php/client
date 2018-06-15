@@ -16,9 +16,6 @@ namespace IOTA\Tests\Type;
 use PHPUnit\Framework\TestCase;
 use IOTA\Type\Iota;
 
-/**
- * @coversNothing
- */
 class IotaTest extends TestCase
 {
     protected $testData = [

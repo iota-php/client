@@ -18,8 +18,6 @@ use IOTA\Util\TryteUtil;
 
 /**
  * Class TryteUtilTest.
- *
- * @coversNothing
  */
 class TryteUtilTest extends TestCase
 {

@@ -15,9 +15,6 @@ namespace IOTA\Tests;
 
 use PHPUnit\Framework\TestCase;
 
-/**
- * @coversNothing
- */
 class ContainerTest extends TestCase
 {
     public function testInstances()

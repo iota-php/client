@@ -15,55 +15,43 @@ namespace IOTA\Tests\RemoteApi;
 
 use IOTA\Node;
 use IOTA\RemoteApi\Actions\AddNeighbors\Action;
-use IOTA\RemoteApi\Actions\AddNeighbors\Result;
+use IOTA\RemoteApi\NodeApiClient;
+use PHPUnit\Framework\TestCase;
 
-/**
- * @coversNothing
- */
-class AddNeighborsTest extends AbstractApiTestCase
+class AddNeighborsTest extends TestCase
 {
     public function testRequestSerialization()
     {
-        $this->action->setNeighborUris(['udp://0.0.0.0:14265', 'udp://1.1.1.1:14265']);
+        $action = new Action($this->createMock(NodeApiClient::class), new Node);
+        $action->setNeighborUris(['udp://0.0.0.0:14265', 'udp://1.1.1.1:14265']);
         $expected = [
             'command' => 'addNeighbors',
             'uris' => ['udp://0.0.0.0:14265', 'udp://1.1.1.1:14265'],
         ];
-        static::assertEquals($expected, $this->action->jsonSerialize());
+        static::assertEquals($expected, $action->jsonSerialize());
     }
 
     public function testRequestInvalidUri()
     {
+        $action = new Action($this->createMock(NodeApiClient::class), new Node);
         $this->expectException(\InvalidArgumentException::class);
-
-        $request = new Action($this->httpClient, new Node());
-        $request->setNeighborUris(['abc']);
+        $action->setNeighborUris(['abc']);
     }
 
     public function testResponse()
     {
-        $fixture = $this->loadFixture(__DIR__.'/fixtures/AddNeighbors.json');
-        $this->httpClient->setResponseFromFixture(200, $fixture['raw']);
+        $fixture = file_get_contents(__DIR__.'/fixtures/AddNeighbors.json');
 
-        /** @var Response $response */
-        $request = new Action($this->httpClient, new Node());
-        $request->addNeighborUri('udp://0.0.0.0:14265');
+        $client = $this->createMock(NodeApiClient::class);
+        $client->expects($this->once())->method('send')->willReturn([
+            'code' => 200,
+            'raw' => $fixture
+        ]);
+        $action = new Action($client, new Node);
+        $action->addNeighborUri('udp://0.0.0.0:14265');
 
-        $response = $request->execute();
-
+        $response = $action->execute();
         static::assertEquals(10, $response->getAddedNeighbors());
     }
 
-    public function provideResponseMissing()
-    {
-        return [
-            [__DIR__.'/fixtures/AddNeighbors.json', 'addedNeighbors'],
-        ];
-    }
-
-    protected function initValidAction()
-    {
-        $this->markTestSkipped('TODO');
-        $this->action = new Action($this->httpClient, new Node());
-    }
 }

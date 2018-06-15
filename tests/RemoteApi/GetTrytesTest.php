@@ -18,9 +18,6 @@ use IOTA\RemoteApi\Actions\GetTrytes\Result;
 use IOTA\Type\TransactionHash;
 use IOTA\Type\Trytes;
 
-/**
- * @coversNothing
- */
 class GetTrytesTest extends AbstractApiTestCase
 {
     public function testRequestSerialization()

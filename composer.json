@@ -39,17 +39,14 @@
         "php-http/async-client-implementation": "^1.0",
         "php-http/httplug": "^1.0",
         "php-http/message-factory": "^1.0",
-        "php-http/discovery": "^1.0",
-        "php-http/guzzle6-adapter": "^1.1"
+        "php-http/discovery": "^1.0"
     },
     "require-dev": {
-        "twig/twig": "^2.0",
         "phpunit/phpunit": "^6.3",
         "iotaledger/kerl": "dev-master as 1.0",
-        "nikic/php-parser": "^3.1",
-        "phpdocumentor/reflection-docblock": "^4.2",
         "php-http/mock-client": "^1.0",
-        "php-http/message": "^1.0"
+        "php-http/message": "^1.6",
+        "guzzlehttp/psr7": "^1.4"
     },
     "autoload": {
         "psr-4": {

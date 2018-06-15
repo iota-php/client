@@ -19,8 +19,6 @@ use IOTA\Trace;
 
 /**
  * Class TraceTest.
- *
- * @coversNothing
  */
 class TraceTest extends TestCase
 {

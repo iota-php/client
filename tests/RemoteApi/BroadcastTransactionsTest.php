@@ -17,9 +17,6 @@ use IOTA\RemoteApi\Actions\BroadcastTransactions\Action;
 use IOTA\RemoteApi\Actions\BroadcastTransactions\Result;
 use IOTA\Type\Trytes;
 
-/**
- * @coversNothing
- */
 class BroadcastTransactionsTest extends AbstractApiTestCase
 {
     public function testRequestSerialization()

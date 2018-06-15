@@ -21,9 +21,6 @@ use IOTA\Type\BundleHash;
 use IOTA\Type\Tag;
 use IOTA\Type\TransactionHash;
 
-/**
- * @coversNothing
- */
 class FindTransactionsTest extends AbstractApiTestCase
 {
     public function testRequestSerialization()

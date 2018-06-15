@@ -24,9 +24,6 @@ use IOTA\Type\Input;
 use IOTA\Type\Iota;
 use IOTA\Type\SecurityLevel;
 
-/**
- * @coversNothing
- */
 class AccountDataTest extends TestCase
 {
     public function testConstruct()
