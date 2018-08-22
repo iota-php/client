@@ -239,15 +239,15 @@ class AccountData implements SerializeInterface
     public function serialize(): array
     {
         return [
-            'addresses' => array_map(function (Address $address) {
+            'addresses' => \array_map(function (Address $address) {
                 return $address->serialize();
             }, $this->addresses),
             'balance' => $this->balance->getAmount(),
             'latestUnusedAddress' => (string) $this->latestUnusedAddress,
-            'bundles' => array_map(function (Bundle $bundle) {
+            'bundles' => \array_map(function (Bundle $bundle) {
                 return $bundle->serialize();
             }, $this->bundles),
-            'inputs' => array_map(function (Input $input) {
+            'inputs' => \array_map(function (Input $input) {
                 return $input->serialize();
             }, $this->inputs),
         ];

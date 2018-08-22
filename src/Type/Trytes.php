@@ -42,7 +42,7 @@ class Trytes implements \IteratorAggregate, \Countable, SerializeInterface
             return;
         }
 
-        if (0 !== preg_match('/[^A-Z9]/', $trytes)) {
+        if (0 !== \preg_match('/[^A-Z9]/', $trytes)) {
             throw new \InvalidArgumentException('Invalid trytes.');
         }
 
@@ -68,7 +68,7 @@ class Trytes implements \IteratorAggregate, \Countable, SerializeInterface
     public function getIterator(): \ArrayIterator
     {
         // split up into chars and add them as a new Tryte.
-        $chars = str_split($this->trytes);
+        $chars = \str_split($this->trytes);
         return new \ArrayIterator($chars);
     }
 

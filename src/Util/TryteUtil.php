@@ -62,7 +62,7 @@ class TryteUtil
     public static function fromTrits(int $t1, int $t2, int $t3): string
     {
         // 9 will be casted to int...
-        return (string) array_search([$t1, $t2, $t3], self::TRYTE_TO_TRITS_MAP, true);
+        return (string) \array_search([$t1, $t2, $t3], self::TRYTE_TO_TRITS_MAP, true);
     }
 
     /**

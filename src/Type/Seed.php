@@ -38,7 +38,7 @@ class Seed extends Trytes implements CheckSummableInterface
         if (null !== $seed) {
             $length = \strlen($seed);
             if (81 !== $length && 84 !== $length) {
-                throw new \InvalidArgumentException(sprintf(
+                throw new \InvalidArgumentException(\sprintf(
                     'A seed must be 81/84 (+checksum) trytes long: %s',
                     $seed
                 ));
@@ -46,9 +46,9 @@ class Seed extends Trytes implements CheckSummableInterface
 
             // extract the checksum and save separately
             if (84 === $length) {
-                $checkSum = substr($seed, 81, 3);
+                $checkSum = \substr($seed, 81, 3);
                 /** @noinspection CallableParameterUseCaseInTypeContextInspection */
-                $seed = substr($seed, 0, 81);
+                $seed = \substr($seed, 0, 81);
                 $this->checkSum = new Trytes($checkSum);
             }
         }
