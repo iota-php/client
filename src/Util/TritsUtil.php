@@ -208,12 +208,12 @@ class TritsUtil
     {
         $result = [];
 
-        $is_negative = gmp_cmp($bigInt, 0) < 0;
+        $isNegative = gmp_cmp($bigInt, 0) < 0;
         $quotient = gmp_abs($bigInt);
 
         // fuck me! python "//" is not a comment :-D
         $MAX = gmp_div(gmp_sub($base, 1), 2);
-        if ($is_negative) {
+        if ($isNegative) {
             $MAX = gmp_div($base, 2);
         }
 
@@ -225,7 +225,7 @@ class TritsUtil
                 $quotient = gmp_add($quotient, 1);
                 $remainder = gmp_sub($remainder, $base);
             }
-            if ($is_negative) {
+            if ($isNegative) {
                 $remainder = gmp_mul($remainder, -1);
             }
 
