@@ -185,38 +185,38 @@ class Transaction extends Trytes
     {
         // TODO: is the padding even necessary?
         $valueTrits = TritsUtil::fromInt($this->value->getAmount(), 81);
-        while (\count($valueTrits) < 81) {
-            $valueTrits[] = 0;
+        if (\count($valueTrits) < 81) {
+            array_merge($valueTrits, array_fill(count($valueTrits), 81 - count($valueTrits), 0));
         }
 
-        $timestampTrits = TritsUtil::fromInt((string)$this->timestamp, 27);
-        while (\count($timestampTrits) < 27) {
-            $timestampTrits[] = 0;
+        $timestampTrits = TritsUtil::fromInt((string) $this->timestamp, 27);
+        if (\count($timestampTrits) < 27) {
+            array_merge($timestampTrits, array_fill(count($timestampTrits), 27 - count($timestampTrits), 0));
         }
 
-        $currentIndexTrits = TritsUtil::fromInt((string)$this->currentIndex, 27);
-        while (\count($currentIndexTrits) < 27) {
-            $currentIndexTrits[] = 0;
+        $currentIndexTrits = TritsUtil::fromInt((string) $this->currentIndex, 27);
+        if (\count($currentIndexTrits) < 27) {
+            array_merge($currentIndexTrits, array_fill(count($currentIndexTrits), 27 - count($currentIndexTrits), 0));
         }
 
-        $lastIndexTrits = TritsUtil::fromInt((string)$this->lastIndex, 27);
-        while (\count($lastIndexTrits) < 27) {
-            $lastIndexTrits[] = 0;
+        $lastIndexTrits = TritsUtil::fromInt((string) $this->lastIndex, 27);
+        if (\count($lastIndexTrits) < 27) {
+            array_merge($lastIndexTrits, array_fill(count($lastIndexTrits), 27 - count($lastIndexTrits), 0));
         }
 
-        $attachmentTimestampTrits = TritsUtil::fromInt((string)$this->attachmentTimestamp, 27);
-        while (\count($attachmentTimestampTrits) < 27) {
-            $attachmentTimestampTrits[] = 0;
+        $attachmentTimestampTrits = TritsUtil::fromInt((string) $this->attachmentTimestamp, 27);
+        if (\count($attachmentTimestampTrits) < 27) {
+            array_merge($attachmentTimestampTrits, array_fill(count($attachmentTimestampTrits), 27 - count($attachmentTimestampTrits), 0));
         }
 
-        $attachmentTimestampLowerBoundTrits = TritsUtil::fromInt((string)$this->attachmentTimestampLowerBound, 27);
-        while (\count($attachmentTimestampLowerBoundTrits) < 27) {
-            $attachmentTimestampLowerBoundTrits[] = 0;
+        $attachmentTimestampLowerBoundTrits = TritsUtil::fromInt((string) $this->attachmentTimestampLowerBound, 27);
+        if (\count($attachmentTimestampLowerBoundTrits) < 27) {
+            array_merge($attachmentTimestampLowerBoundTrits, array_fill(count($attachmentTimestampLowerBoundTrits), 27 - count($attachmentTimestampLowerBoundTrits), 0));
         }
 
-        $attachmentTimestampUpperBoundTrits = TritsUtil::fromInt((string)$this->attachmentTimestampUpperBound, 27);
+        $attachmentTimestampUpperBoundTrits = TritsUtil::fromInt((string) $this->attachmentTimestampUpperBound, 27);
         while (\count($attachmentTimestampUpperBoundTrits) < 27) {
-            $attachmentTimestampUpperBoundTrits[] = 0;
+            array_merge($attachmentTimestampUpperBoundTrits, array_fill(count($attachmentTimestampUpperBoundTrits), 27 - count($attachmentTimestampUpperBoundTrits), 0));
         }
 
         $this->setTag($this->getTag() ?? $this->obsoleteTag);
