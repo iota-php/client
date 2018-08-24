@@ -104,7 +104,7 @@ class TrytesUtil
     {
         // If input length is odd, return null
         if (1 === $inputTrytes->count() % 2) {
-            throw Exception('Unable to derive the ascii value of the given trytes as the number of trytes is not even');
+            throw new \InvalidArgumentException('Unable to derive the ascii value of the given trytes as the number of trytes is not even');
         }
 
         $tryteValues = '9ABCDEFGHIJKLMNOPQRSTUVWXYZ';
