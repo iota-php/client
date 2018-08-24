@@ -393,7 +393,6 @@ class Action extends AbstractAction
         return array_merge(
             parent::serialize(),
             [
-                'seed' => $this->seed->serialize(),
                 'depth' => $this->depth,
                 'minWeightMagnitude' => $this->minWeightMagnitude,
                 'transfers' => SerializeUtil::serializeArray($this->transfers),
