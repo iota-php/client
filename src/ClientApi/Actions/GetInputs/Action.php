@@ -186,7 +186,6 @@ class Action extends AbstractAction
     public function serialize(): array
     {
         return array_merge(parent::serialize(), [
-            'seed' => $this->seed->serialize(),
             'startIndex' => $this->startIndex,
             'endIndex' => $this->endIndex,
             'threshold' => $this->threshold->serialize(),

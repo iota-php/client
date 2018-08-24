@@ -185,38 +185,38 @@ class Transaction extends Trytes
     {
         // TODO: is the padding even necessary?
         $valueTrits = TritsUtil::fromInt($this->value->getAmount(), 81);
-        while (\count($valueTrits) < 81) {
-            $valueTrits[] = 0;
+        if (\count($valueTrits) < 81) {
+            $valueTrits = \array_pad($valueTrits, 81, 0);
         }
 
-        $timestampTrits = TritsUtil::fromInt((string)$this->timestamp, 27);
-        while (\count($timestampTrits) < 27) {
-            $timestampTrits[] = 0;
+        $timestampTrits = TritsUtil::fromInt((string) $this->timestamp, 27);
+        if (\count($timestampTrits) < 27) {
+            $timestampTrits = \array_pad($timestampTrits, 27, 0);
         }
 
-        $currentIndexTrits = TritsUtil::fromInt((string)$this->currentIndex, 27);
-        while (\count($currentIndexTrits) < 27) {
-            $currentIndexTrits[] = 0;
+        $currentIndexTrits = TritsUtil::fromInt((string) $this->currentIndex, 27);
+        if (\count($currentIndexTrits) < 27) {
+            $currentIndexTrits = \array_pad($currentIndexTrits, 27, 0);
         }
 
-        $lastIndexTrits = TritsUtil::fromInt((string)$this->lastIndex, 27);
-        while (\count($lastIndexTrits) < 27) {
-            $lastIndexTrits[] = 0;
+        $lastIndexTrits = TritsUtil::fromInt((string) $this->lastIndex, 27);
+        if (\count($lastIndexTrits) < 27) {
+            $lastIndexTrits = \array_pad($lastIndexTrits, 27, 0);
         }
 
-        $attachmentTimestampTrits = TritsUtil::fromInt((string)$this->attachmentTimestamp, 27);
-        while (\count($attachmentTimestampTrits) < 27) {
-            $attachmentTimestampTrits[] = 0;
+        $attachmentTimestampTrits = TritsUtil::fromInt((string) $this->attachmentTimestamp, 27);
+        if (\count($attachmentTimestampTrits) < 27) {
+            $attachmentTimestampTrits = \array_pad($attachmentTimestampTrits, 27, 0);
         }
 
-        $attachmentTimestampLowerBoundTrits = TritsUtil::fromInt((string)$this->attachmentTimestampLowerBound, 27);
-        while (\count($attachmentTimestampLowerBoundTrits) < 27) {
-            $attachmentTimestampLowerBoundTrits[] = 0;
+        $attachmentTimestampLowerBoundTrits = TritsUtil::fromInt((string) $this->attachmentTimestampLowerBound, 27);
+        if (\count($attachmentTimestampLowerBoundTrits) < 27) {
+            $attachmentTimestampLowerBoundTrits = \array_pad($attachmentTimestampLowerBoundTrits, 27, 0);
         }
 
-        $attachmentTimestampUpperBoundTrits = TritsUtil::fromInt((string)$this->attachmentTimestampUpperBound, 27);
+        $attachmentTimestampUpperBoundTrits = TritsUtil::fromInt((string) $this->attachmentTimestampUpperBound, 27);
         while (\count($attachmentTimestampUpperBoundTrits) < 27) {
-            $attachmentTimestampUpperBoundTrits[] = 0;
+            $attachmentTimestampUpperBoundTrits = \array_pad($attachmentTimestampUpperBoundTrits, 27, 0);
         }
 
         $this->setTag($this->getTag() ?? $this->obsoleteTag);
