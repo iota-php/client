@@ -71,28 +71,6 @@ class TritsUtil
     public static function fromInt(string $int, int $hashLength): array
     {
         $trits = [];
-        if (\is_int($int)) {
-            $absoluteValue = \abs($int);
-            while ($absoluteValue > 0) {
-                $remainder = $absoluteValue % 3;
-                $absoluteValue = \floor($absoluteValue / 3);
-
-                if ($remainder > 1) {
-                    $remainder = -1;
-                    ++$absoluteValue;
-                }
-
-                $trits[] = $remainder;
-            }
-            if ($int < 0) {
-                $length = \count($trits);
-                for ($i = 0; $i < $length; ++$i) {
-                    $trits[$i] = -$trits[$i];
-                }
-            }
-
-            return $trits;
-        }
 
         return self::convertBigintToBase($int, 3, $hashLength);
     }
