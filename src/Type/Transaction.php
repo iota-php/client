@@ -656,39 +656,39 @@ class Transaction extends Trytes
 
         $this->transactionHash = new TransactionHash((string)TritsUtil::toTrytes($hash));
         $this->signatureMessageFragment = new SignatureMessageFragment(
-            substr($this->trytes, 0, 2187)
+            \substr($this->trytes, 0, 2187)
         );
 
         // Info: I kept the numbers from the iota.js lib so its simpler to
         // compare any changes.
-        $this->address = new Address(substr($this->trytes, 2187, 2268 - 2187));
+        $this->address = new Address(\substr($this->trytes, 2187, 2268 - 2187));
         $this->value = new Iota(TritsUtil::toInt(\array_slice($trits, 6804, 6837 - 6804)));
-        $this->obsoleteTag = new Tag(substr($this->trytes, 2295, 2322 - 2295));
-        $this->timestamp = gmp_intval(TritsUtil::toInt(\array_slice($trits, 6966, 6993 - 6966)));
-        $this->currentIndex = gmp_intval(TritsUtil::toInt(\array_slice($trits, 6993, 7020 - 6993)));
-        $this->lastIndex = gmp_intval(TritsUtil::toInt(\array_slice($trits, 7020, 7047 - 7020)));
+        $this->obsoleteTag = new Tag(\substr($this->trytes, 2295, 2322 - 2295));
+        $this->timestamp = \gmp_intval(TritsUtil::toInt(\array_slice($trits, 6966, 6993 - 6966)));
+        $this->currentIndex = \gmp_intval(TritsUtil::toInt(\array_slice($trits, 6993, 7020 - 6993)));
+        $this->lastIndex = \gmp_intval(TritsUtil::toInt(\array_slice($trits, 7020, 7047 - 7020)));
 
         $this->bundleHash = new BundleHash(
-            substr($this->trytes, 2349, 2430 - 2349)
+            \substr($this->trytes, 2349, 2430 - 2349)
         );
 
         $this->trunkTransactionHash = new TransactionHash(
-            substr($this->trytes, 2430, 2511 - 2430)
+            \substr($this->trytes, 2430, 2511 - 2430)
         );
 
         $this->branchTransactionHash = new TransactionHash(
-            substr($this->trytes, 2511, 2592 - 2511)
+            \substr($this->trytes, 2511, 2592 - 2511)
         );
 
         $this->tag = new Tag(
-            substr($this->trytes, 2592, 2619 - 2592)
+            \substr($this->trytes, 2592, 2619 - 2592)
         );
-        $this->attachmentTimestamp = gmp_intval(TritsUtil::toInt(\array_slice($trits, 7857, 7884 - 7857)));
-        $this->attachmentTimestampLowerBound = gmp_intval(TritsUtil::toInt(\array_slice($trits, 7884, 7911 - 7884)));
-        $this->attachmentTimestampUpperBound = gmp_intval(TritsUtil::toInt(\array_slice($trits, 7911, 7938 - 7911)));
+        $this->attachmentTimestamp = \gmp_intval(TritsUtil::toInt(\array_slice($trits, 7857, 7884 - 7857)));
+        $this->attachmentTimestampLowerBound = \gmp_intval(TritsUtil::toInt(\array_slice($trits, 7884, 7911 - 7884)));
+        $this->attachmentTimestampUpperBound = \gmp_intval(TritsUtil::toInt(\array_slice($trits, 7911, 7938 - 7911)));
 
         $this->nonce = new Trytes(
-            substr($this->trytes, 2646, 2673 - 2646)
+            \substr($this->trytes, 2646, 2673 - 2646)
         );
     }
 }

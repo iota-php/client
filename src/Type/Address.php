@@ -42,7 +42,7 @@ class Address extends Trytes implements CheckSummableInterface
         if (null !== $address) {
             $length = \strlen($address);
             if (81 !== $length && 90 !== $length) {
-                throw new \InvalidArgumentException(sprintf(
+                throw new \InvalidArgumentException(\sprintf(
                     'An address must be 81/90 (+checksum) trytes long: %s',
                     $address
                 ));
@@ -50,9 +50,9 @@ class Address extends Trytes implements CheckSummableInterface
 
             // extract the checksum and save separately
             if (90 === $length) {
-                $checkSum = substr($address, 81, 9);
+                $checkSum = \substr($address, 81, 9);
                 /** @noinspection CallableParameterUseCaseInTypeContextInspection */
-                $address = substr($address, 0, 81);
+                $address = \substr($address, 0, 81);
                 $this->checkSum = new Trytes($checkSum);
             }
         }
@@ -102,7 +102,7 @@ class Address extends Trytes implements CheckSummableInterface
      */
     public function serialize(): array
     {
-        return array_merge(parent::serialize(), [
+        return \array_merge(parent::serialize(), [
             'checkSum' => $this->hasChecksum() ? (string) $this->checkSum : null,
             'index' => $this->index,
         ]);

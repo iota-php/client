@@ -95,7 +95,7 @@ class Client
     public function getNode($key = null): Node
     {
         if (null === $key) {
-            $key = array_rand($this->nodes);
+            $key = \array_rand($this->nodes);
         }
 
         if (!isset($this->nodes[$key])) {

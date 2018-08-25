@@ -29,7 +29,7 @@ class ValidatorUtil
      */
     public static function isNeighborUri(string $neighborUri): bool
     {
-        return false !== filter_var($neighborUri, FILTER_VALIDATE_URL);
+        return false !== \filter_var($neighborUri, FILTER_VALIDATE_URL);
     }
 
     /**

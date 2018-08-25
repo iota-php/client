@@ -28,7 +28,7 @@ class Tag extends Trytes
     public function __construct(string $trytes = null)
     {
         if (null !== $trytes) {
-            $trytes = str_pad($trytes, 27, '9');
+            $trytes = \str_pad($trytes, 27, '9');
         }
         parent::__construct($trytes);
     }

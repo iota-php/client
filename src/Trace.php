@@ -86,7 +86,7 @@ class Trace implements SerializeInterface
      */
     public function start(): self
     {
-        $this->timeStart = microtime(true);
+        $this->timeStart = \microtime(true);
 
         return $this;
     }
@@ -98,7 +98,7 @@ class Trace implements SerializeInterface
      */
     public function stop(): self
     {
-        $this->timeEnd = microtime(true);
+        $this->timeEnd = \microtime(true);
         $this->duration = $this->timeEnd - $this->timeStart;
 
         return $this;
@@ -138,7 +138,7 @@ class Trace implements SerializeInterface
     {
         $data = [
             'ident' => $this->ident,
-            'duration' => round($this->duration, 4),
+            'duration' => \round($this->duration, 4),
         ];
         if (null !== $this->root) {
             $data['root'] = $this->root->serialize();

@@ -212,10 +212,10 @@ class Bundle implements SerializeInterface
      */
     public function addSignatureMessageFragments(array $signatureFragments)
     {
-        $emptySignatureFragment = new SignatureMessageFragment(str_repeat('9', 2187));
-        $emptyHash = new TransactionHash(str_repeat('9', 81));
-        $emptyTag = new Tag(str_repeat('9', 27));
-        $emptyTimestamp = TritsUtil::toInt(TrytesUtil::toTrits(new Trytes(str_repeat('9', 9))));
+        $emptySignatureFragment = new SignatureMessageFragment(\str_repeat('9', 2187));
+        $emptyHash = new TransactionHash(\str_repeat('9', 81));
+        $emptyTag = new Tag(\str_repeat('9', 27));
+        $emptyTimestamp = TritsUtil::toInt(TrytesUtil::toTrits(new Trytes(\str_repeat('9', 9))));
 
         foreach ($this->getTransactions() as $i => $transaction) {
             // Fill empty signatureMessageFragment
@@ -241,7 +241,7 @@ class Bundle implements SerializeInterface
     {
         return [
             'hash' => $this->bundleHash->serialize(),
-            'transactions' => array_map(function (Transaction $transaction) {
+            'transactions' => \array_map(function (Transaction $transaction) {
                 return $transaction->serialize();
             }, $this->transactions),
         ];

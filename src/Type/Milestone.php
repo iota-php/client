@@ -40,7 +40,7 @@ class Milestone extends Tip implements SerializeInterface
     public function __construct(string $milestone, int $index)
     {
         if (81 !== \strlen($milestone)) {
-            throw new \InvalidArgumentException(sprintf(
+            throw new \InvalidArgumentException(\sprintf(
                 'A milestone must be 81 chars long: %s',
                 $milestone
             ));
@@ -67,7 +67,7 @@ class Milestone extends Tip implements SerializeInterface
      */
     public function serialize(): array
     {
-        return array_merge(parent::serialize(), [
+        return \array_merge(parent::serialize(), [
             'index' => $this->index,
         ]);
     }

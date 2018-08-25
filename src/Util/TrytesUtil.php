@@ -83,7 +83,7 @@ class TrytesUtil
             $firstValue = $asciiValue % 27;
             $secondValue = ($asciiValue - $firstValue) / 27;
 
-            $trytesValue = $TRYTE_VALUES[$firstValue].$TRYTE_VALUES[$secondValue];
+            $trytesValue = $TRYTE_VALUES[$firstValue] . $TRYTE_VALUES[$secondValue];
 
             $trytes .= $trytesValue;
         }
@@ -104,18 +104,15 @@ class TrytesUtil
     {
         // If input length is odd, return null
         if (1 === $inputTrytes->count() % 2) {
-            // TODO: we can do better than that
-            return '';
-
-            throw new Exception('not even.');
+            throw new \InvalidArgumentException('Unable to derive the ascii value of the given trytes as the number of trytes is not even');
         }
 
         $tryteValues = '9ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $trytesString = (string) $inputTrytes;
         $result = '';
         for ($i = 0; $i < $inputTrytes->count(); $i += 2) {
-            $firstValue = strpos($tryteValues, $trytesString[$i] ?? 'ÄH');
-            $secondValue = strpos($tryteValues, $trytesString[$i + 1] ?? 'ÄH');
+            $firstValue = \strpos($tryteValues, $trytesString[$i] ?? 'ÄH');
+            $secondValue = \strpos($tryteValues, $trytesString[$i + 1] ?? 'ÄH');
             $decimalValue = $firstValue + $secondValue * 27;
             $result .= \chr($decimalValue);
         }
@@ -130,7 +127,7 @@ class TrytesUtil
      */
     public static function nullHashTrytes(): Trytes
     {
-        return new Trytes(str_repeat('9', 243));
+        return new Trytes(\str_repeat('9', 243));
     }
 
     /**

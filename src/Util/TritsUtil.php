@@ -123,18 +123,18 @@ class TritsUtil
                 }
             }
 
-            $bytes = array_map(function ($x) {
+            $bytes = \array_map(function ($x) {
                 return ~$x;
             }, $bytes);
         }
 
         $result = 0;
-        $rev = array_reverse($bytes, false);
+        $rev = \array_reverse($bytes, false);
         foreach ($rev as $pos => $x) {
-            $result = gmp_add($result, gmp_mul(gmp_and($x, 0xFF), gmp_pow(2, $pos * 8)));
+            $result = \gmp_add($result, \gmp_mul(\gmp_and($x, 0xFF), \gmp_pow(2, $pos * 8)));
         }
 
-        return gmp_strval(gmp_mul($result, $sig));
+        return \gmp_strval(\gmp_mul($result, $sig));
     }
 
     /**
@@ -148,16 +148,16 @@ class TritsUtil
     {
         $bytesArrayTemp = [];
         for ($pos = 0; $pos < 48; ++$pos) {
-            $bytesArrayTemp[] = (int) (gmp_abs($bigInt) >> $pos * 8) % (1 << 8);
+            $bytesArrayTemp[] = (int) (\gmp_abs($bigInt) >> $pos * 8) % (1 << 8);
         }
 
-        $bytesArray = array_map(function ($x) {
+        $bytesArray = \array_map(function ($x) {
             return ($x <= 0x7F) ? $x : $x - 0x100;
-        }, array_reverse($bytesArrayTemp));
+        }, \array_reverse($bytesArrayTemp));
 
-        if (gmp_cmp($bigInt, 0) < 0) {
+        if (\gmp_cmp($bigInt, 0) < 0) {
             // 1-compliment
-            $bytesArray = array_map(function ($x) {
+            $bytesArray = \array_map(function ($x) {
                 return ~$x;
             }, $bytesArray);
 
@@ -186,28 +186,28 @@ class TritsUtil
     {
         $result = [];
 
-        $isNegative = gmp_cmp($bigInt, 0) < 0;
-        $quotient = gmp_abs($bigInt);
+        $isNegative = \gmp_cmp($bigInt, 0) < 0;
+        $quotient = \gmp_abs($bigInt);
 
         // fuck me! python "//" is not a comment :-D
-        $MAX = gmp_div(gmp_sub($base, 1), 2);
+        $MAX = \gmp_div(\gmp_sub($base, 1), 2);
         if ($isNegative) {
-            $MAX = gmp_div($base, 2);
+            $MAX = \gmp_div($base, 2);
         }
 
         for ($i = 0; $i < $length; ++$i) {
-            list($quotient, $remainder) = gmp_div_qr($quotient, $base);
+            list($quotient, $remainder) = \gmp_div_qr($quotient, $base);
 
-            if (gmp_cmp($remainder, $MAX) > 0) {
+            if (\gmp_cmp($remainder, $MAX) > 0) {
                 // Lend 1 to the next place so we can make this digit negative.
-                $quotient = gmp_add($quotient, 1);
-                $remainder = gmp_sub($remainder, $base);
+                $quotient = \gmp_add($quotient, 1);
+                $remainder = \gmp_sub($remainder, $base);
             }
             if ($isNegative) {
-                $remainder = gmp_mul($remainder, -1);
+                $remainder = \gmp_mul($remainder, -1);
             }
 
-            $result[] = gmp_intval($remainder);
+            $result[] = \gmp_intval($remainder);
         }
 
         return $result;

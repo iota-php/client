@@ -76,7 +76,7 @@ class Node implements SerializeInterface
      */
     public function getCommandsEndpoint(): string
     {
-        return sprintf('%s/commands', $this->host);
+        return \sprintf('%s/commands', $this->host);
     }
 
     /**

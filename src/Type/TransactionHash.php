@@ -30,7 +30,7 @@ class TransactionHash extends Trytes
     public function __construct(string $transaction = null)
     {
         if (null !== $transaction && 81 !== \strlen($transaction)) {
-            throw new \InvalidArgumentException(sprintf(
+            throw new \InvalidArgumentException(\sprintf(
                 'A transaction must be 81 chars long: %s',
                 $transaction
             ));
