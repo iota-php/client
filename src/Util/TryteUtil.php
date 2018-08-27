@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace IOTA\Util;
 
+use InvalidArgumentException;
+
 class TryteUtil
 {
     /**
@@ -74,6 +76,10 @@ class TryteUtil
      */
     public static function toTrits(string $tryte): array
     {
+        if (!isset(self::TRYTE_TO_TRITS_MAP[$tryte])) {
+            throw new InvalidArgumentException('The key ' . $tryte . ' is not existed.');
+        }
+
         return self::TRYTE_TO_TRITS_MAP[$tryte];
     }
 }
