@@ -15,6 +15,7 @@ namespace IOTA\Tests\Util;
 
 use PHPUnit\Framework\TestCase;
 use IOTA\Util\TryteUtil;
+use InvalidArgumentException;
 
 /**
  * Class TryteUtilTest.
@@ -26,6 +27,13 @@ class TryteUtilTest extends TestCase
         foreach (TryteUtil::TRYTE_TO_TRITS_MAP as $tryte => $expectedTrits) {
             static::assertEquals($expectedTrits, TryteUtil::toTrits((string) $tryte));
         }
+    }
+
+    public function testToTritsWithNonExistedKeyShouldThrowExcpeption()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        TryteUtil::toTrits('non_existed_key');
     }
 
     public function testFromTrits()
