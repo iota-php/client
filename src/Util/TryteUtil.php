@@ -77,7 +77,7 @@ class TryteUtil
     public static function toTrits(string $tryte): array
     {
         if (!isset(self::TRYTE_TO_TRITS_MAP[$tryte])) {
-            throw new InvalidArgumentException('The key ' . $tryte . ' is not existed.');
+            throw new InvalidArgumentException('Invalid tryte: ' . $tryte);
         }
 
         return self::TRYTE_TO_TRITS_MAP[$tryte];
