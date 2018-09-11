@@ -36,4 +36,24 @@ class ValidatorUtilTest extends TestCase
         static::assertTrue(ValidatorUtil::isNeighborUri('udp://8.8.8.8'));
         static::assertFalse(ValidatorUtil::isNeighborUri('abc'));
     }
+
+    public function testIsArrayOfHashesWithValidHashedArrays()
+    {
+        $hashedArrays = [
+            'JALLWDUOSTSJVL9EEHKW9YQFPBVBJAGLNKRVGSQZCGHQWEMIIILJMTHVAGVDXJVZMBAMOZTSBQNRVNLLSJMPIVGPNE',
+            'ABCDWDUOSTSJVL9EEHKW9YQFPBVBJAGLNKRVGSQZCGHQWEMIIILJMTHVAGVDXJVZMBAMOZTSBQRVNLLSJ'
+        ];
+
+        static::assertTrue(ValidatorUtil::isArrayOfHashes($hashedArrays));
+    }
+
+    public function testIsArrayOfHashesWithInvalidHashedArrays()
+    {
+        $hashedArrays = [
+            'JALLWDUOSTSJVL9EEHKW9YQFPBVBJAGLNKRVGSQZCGHQWEMIIILJMTHVAGVDXJVZMBAMOZTSBQNRVNLLSJMPIVGPNE',
+            'fdsafBCDWDUOSTSJEEHKW9YQFPBVBJAGLNKRVGSQZCGHQWEMIIILJMTHVAGVDXJVZMBAMOZTSBQRVNLLSJ'
+        ];
+
+        static::assertFalse(ValidatorUtil::isArrayOfHashes($hashedArrays));
+    }
 }
