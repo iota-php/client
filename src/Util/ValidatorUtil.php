@@ -51,4 +51,41 @@ class ValidatorUtil
 
         return true;
     }
+
+    /**
+     * Checks if input is list of correct trytes
+     *
+     * @param array $hashedArrays
+     *
+     * @return bool
+     */
+    public static function isArrayOfHashes(array $hashedArrays)
+    {
+        foreach ($hashedArrays as $hash) {
+            if (strlen($hash) === 90) {
+                if (!self::isTrytes($hash, 90)) {
+                    return false;
+                }
+            } else {
+                if (!self::isTrytes($hash, 81)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Checks if input is correct trytes consisting of A-Z9
+     *
+     * @param string $trytes
+     * @param mixed $length
+     *
+     * @return bool
+     */
+    public static function isTrytes(string $trytes, $length = '0,')
+    {
+        return preg_match('/^[9A-Z]{' . $length . '}$/', $trytes) !== 0 ? true : false;
+    }
 }
