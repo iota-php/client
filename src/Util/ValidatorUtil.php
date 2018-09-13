@@ -63,7 +63,7 @@ class ValidatorUtil
     {
         foreach ($hashedArrays as $hash) {
             $length = strlen($hash);
-            if (($length === 90 || $length !== 90) && !self::isTrytes($hash, $length)) {
+            if (!(($length === 90 || $length === 81) && self::isTrytes($hash, $length))) {
                 return false;
             }
         }
