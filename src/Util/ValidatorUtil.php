@@ -72,6 +72,24 @@ class ValidatorUtil
     }
 
     /**
+     * Checks if input is list of correct trytes
+     *
+     * @param array $trytesArray
+     *
+     * @return bool
+     */
+    public static function isArrayOfTrytes(array $trytesArray)
+    {
+        foreach ($trytesArray as $tryteValue) {
+            if (!self::isTrytes($tryteValue, '2673,')) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Checks if input is correct trytes consisting of A-Z9
      *
      * @param string $trytes
