@@ -40,7 +40,6 @@ class CCurl implements PowInterface
     public function __construct(string $pathToCcurl)
     {
         $this->pathToCcurl = $pathToCcurl;
-        $this->checkPath();
     }
 
     /**
@@ -53,6 +52,7 @@ class CCurl implements PowInterface
      */
     public function execute(int $minWeightMagnitude, Transaction $transaction): string
     {
+        $this->checkPath();
         $command = '%s/ccurl-cli %d %s 2>&1';
         $command = sprintf(
             $command,
